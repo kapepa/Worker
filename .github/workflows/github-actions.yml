@@ -21,3 +21,9 @@ jobs:
       - name: app build
         working-directory: ./app
         run: npm run build
+      - name: server install
+        working-directory: ./server
+        run: npm install
+      - name: server build
+        working-directory: ./server
+        run: npm run build
