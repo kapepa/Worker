@@ -16,9 +16,9 @@ jobs:
         with:
           node-version: '18'
       - name: app install
-        working-direction: ./app
-        npm: npm install
+        working-directory: ./app
+        run: npm install
       - name: app build
-        working-direction: ./app
+        working-directory: ./app
         npm: run build
 
