@@ -1,3 +1,4 @@
+// type ClassNamesType = {[key: string]: boolean} | string;
 type ClassNamesType = {[key: string]: boolean} | string;
 
 export function ClassNames (props: ClassNamesType): string {

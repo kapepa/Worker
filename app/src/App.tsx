@@ -32,7 +32,7 @@ function App() {
   const {theme, toggleTheme} = useTheme()
 
   return (
-    <div className={`${ClassNames( "app",  )}`}>
+    <div className={`app ${theme}`}>
       <button onClick={toggleTheme}>Theme</button>
       <RouterProvider router={router} />
     </div>
