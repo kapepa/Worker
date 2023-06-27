@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {lazy} from 'react';
 import './App.css';
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import useTheme from "./contexts/Theme/useTheme";
+import {ClassNames} from "./utils/ClassNames";
+
+const Home = lazy(() => import("./pages/Home/Home"));
+const Error = lazy(() => import("./pages/Error/Error"));
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element:
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Home />
+      </React.Suspense>,
+    errorElement:
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Error />
+      </React.Suspense>
+  },
+  {
+    path: "*",
+    element:
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Error />
+      </React.Suspense>
+  }
+]);
 
 function App() {
+  const {theme, toggleTheme} = useTheme()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`${ClassNames( "app",  )}`}>
+      <button onClick={toggleTheme}>Theme</button>
+      <RouterProvider router={router} />
     </div>
   );
 }
