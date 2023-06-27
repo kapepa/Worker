@@ -22,8 +22,8 @@ jobs:
         working-directory: ./app
         run: npm run build
       - name: server install
-        working-directory: ./server
+        working-directory: ./api
         run: npm install
       - name: server build
-        working-directory: ./server
+        working-directory: ./api
         run: npm run build
