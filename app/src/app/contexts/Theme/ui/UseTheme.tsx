@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import {ThemeContext, ThemeEnum} from "./ThemeContext";
+import {ThemeContext, ThemeEnum} from "../lib/ThemeContext";
 
 interface UseThemeInterface {
   theme: ThemeEnum,
   toggleTheme: () => void;
 }
 
-const useTheme = (): UseThemeInterface => {
+const UseTheme = (): UseThemeInterface => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const toggleTheme = () => {
@@ -18,4 +18,4 @@ const useTheme = (): UseThemeInterface => {
   return { theme, toggleTheme };
 }
 
-export default useTheme;
+export default UseTheme;
