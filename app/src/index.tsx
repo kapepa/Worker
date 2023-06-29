@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles/index.scss';
+import './app/styles/index.scss';
 import reportWebVitals from './reportWebVitals';
-import App from "./App";
-import ThemeProvider from "./contexts/Theme/ThemeProvider";
+import App from "./app/App";
+import {ThemeProvider} from "./app/contexts/Theme";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
