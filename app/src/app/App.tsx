@@ -5,11 +5,10 @@ import {UseTheme} from "./contexts/Theme";
 import {Router} from "./providers/Routes";
 
 function App() {
-  const {theme, toggleTheme} = UseTheme();
+  const {theme} = UseTheme();
 
   return (
     <div className={`${ClassNames( "app", theme)}`}>
-      <button onClick={toggleTheme}>Theme</button>
       <Router/>
     </div>
   );

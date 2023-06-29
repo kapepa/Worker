@@ -7,6 +7,7 @@ declare namespace classNamesNamespace {
 
 export function ClassNames (...props: classNamesNamespace.ArgumentArray): string {
   const filterClass = (item: classNamesNamespace.Argument) => {
+
     if(typeof item === "string") return true;
     if(!!item) {
       const [bol] = Object.values(item);
