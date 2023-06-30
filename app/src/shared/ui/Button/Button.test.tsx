@@ -4,6 +4,6 @@ import Button from "./Button";
 
 test('renders learn react link', () => {
   render(<Button />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByTestId("button");
   expect(linkElement).toBeInTheDocument();
 });

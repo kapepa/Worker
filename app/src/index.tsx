@@ -4,6 +4,7 @@ import './app/styles/index.scss';
 import reportWebVitals from './reportWebVitals';
 import App from "./app/App";
 import {ThemeProvider} from "./app/contexts/Theme";
+import "./widgets/LangSwitcher/i18n";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

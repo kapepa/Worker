@@ -20,6 +20,7 @@ const Button: FC<ButtonProps> = (
     <button
       className={ClassNames(className, "button", `button--${theme}`)}
       {...otherProps}
+      data-testid="button"
     >
       {children}
     </button>
