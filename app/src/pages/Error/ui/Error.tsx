@@ -7,7 +7,7 @@ function Error () {
   const { t } = useTranslation("error");
 
   return (
-    <div className="error">
+    <div className="error" data-testid="error">
       <Navbar/>
       <div className="content-page">
         <Sidebar className=""/>
@@ -17,6 +17,6 @@ function Error () {
       </div>
     </div>
   )
-}
+};
 
 export default Error;

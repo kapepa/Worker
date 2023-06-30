@@ -9,7 +9,7 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = ({className}) => {
   return (
-    <div className={ClassNames( "navbar", className)}>
+    <div data-testid="navbar" className={ClassNames( "navbar", className)} >
       <div>
 
       </div>
@@ -19,6 +19,6 @@ const Navbar: FC<NavbarProps> = ({className}) => {
       </nav>
     </div>
   )
-}
+};
 
 export default Navbar;

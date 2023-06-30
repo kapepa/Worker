@@ -8,7 +8,7 @@ const About: FC = () => {
   const { t } = useTranslation("about");
 
   return (
-    <div>
+    <div role="about">
       <Navbar/>
       <div className="content-page">
         <Sidebar className=""/>
@@ -18,6 +18,6 @@ const About: FC = () => {
       </div>
     </div>
   )
-}
+};
 
 export default About;

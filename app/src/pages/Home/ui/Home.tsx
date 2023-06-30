@@ -7,7 +7,7 @@ function Home() {
   const { t } = useTranslation("home");
 
   return (
-    <div className="home">
+    <div className="home" data-testid="home">
       <Navbar/>
       <div className="content-page">
         <Sidebar className=""/>

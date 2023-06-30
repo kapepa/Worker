@@ -16,14 +16,17 @@ const LangSwitcher: FC<LangSwitcherProps> = ({classNames, ...otherProps}) => {
   }
 
   return (
-    <Button
-      onClick={changeLanguage}
-      theme={ThemeButtonEnum.CLEAR}
-      className={ClassNames(classNames,)}
-      {...otherProps}
-    >
-      {t("translate")}
-    </Button>
+    <>
+      <Button
+        onClick={changeLanguage}
+        // theme={ThemeButtonEnum.CLEAR}
+        className={ClassNames(classNames,)}
+        {...otherProps}
+      >
+        {t("translate")}
+      </Button>
+      adasdas
+    </>
   )
 }
 
