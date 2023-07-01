@@ -16,7 +16,7 @@ const HomePage = Loadable(lazy(() => import("../../../../pages/Home")));
 const AboutPage = Loadable(lazy(() => import("../../../../pages/About")));
 const ErrorPage = Loadable(lazy(() => import("../../../../pages/Error")));
 
-const router = createBrowserRouter([
+const routers = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
@@ -33,5 +33,7 @@ const router = createBrowserRouter([
 
 
 export function Router() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={routers} />
 }
+
+export {routers}

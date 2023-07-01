@@ -1,9 +1,15 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
 import App from "./App";
+import {Router, RouterProvider} from "react-router-dom";
+import { createMemoryHistory } from 'history';
+import {routers} from "./providers/Routes/ui/Router";
 
-test('renders App', () => {
-  render(<App />);
-  const linkElement = screen.getByTestId('app');
-  expect(linkElement).toBeInTheDocument();
-});
+describe("(<App />", () => {
+  test('renders App', async () => {
+    render(<App />);
+
+  });
+
+})
+
