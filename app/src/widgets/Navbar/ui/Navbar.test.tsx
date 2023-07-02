@@ -14,5 +14,4 @@ test('renders learn react link', () => {
   const {debug} = render(<Navbar  />);
   const linkElement = screen.getByTestId("navbar");
   expect(linkElement).toBeInTheDocument();
-  debug()
 });
