@@ -1,14 +1,20 @@
 import React from 'react';
-import {render, screen, waitFor} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import App from "./App";
-import {Router, RouterProvider} from "react-router-dom";
-import { createMemoryHistory } from 'history';
-import {routers} from "./providers/Routes/ui/Router";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 describe("(<App />", () => {
-  test('renders App', async () => {
-    render(<App />);
 
+  test('renders App', async () => {
+    const {  } = render(<App />, { wrapper:  () => (
+        <RouterProvider
+          router={createBrowserRouter([
+            {  path: "/", element: <div>HomePage</div> }
+          ])}
+        />)
+    });
+
+    expect(screen.getByText("HomePage")).toBeInTheDocument();
   });
 
 })

@@ -31,7 +31,6 @@ const routers = createBrowserRouter([
   },
 ]);
 
-
 export function Router() {
   return <RouterProvider router={routers} />
 }

@@ -14,7 +14,7 @@ const Sidebar: FC<SidebarProps> = ({className}) => {
   const onToggle = () => setCollapsed(prev => !prev);
 
   return (
-    <aside className={ClassNames(className, "sidebar", {"sidebar--open" : collapsed} )}>
+    <aside className={ClassNames(className, "sidebar", {"sidebar--open" : collapsed} )} data-testid="sidebar">
       <Button onClick={onToggle}>Toggle</Button>
       <div className="sidebar__switchers">
         <ThemeSwitcher/>
