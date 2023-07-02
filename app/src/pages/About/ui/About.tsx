@@ -8,7 +8,7 @@ const About: FC = () => {
   const { t } = useTranslation("about");
 
   return (
-    <div role="about">
+    <div data-testid="about">
       <Navbar/>
       <div className="content-page">
         <Sidebar className=""/>

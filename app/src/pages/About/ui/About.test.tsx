@@ -16,6 +16,6 @@ jest.mock('react-i18next', () => ({
 
 test('renders About', () => {
   render(<About />);
-  const linkElement = screen.getByRole('about');
+  const linkElement = screen.getByTestId('about');
   expect(linkElement).toBeInTheDocument();
 });
