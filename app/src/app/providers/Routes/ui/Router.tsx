@@ -1,11 +1,12 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import React, {ElementType, lazy, Suspense} from "react";
+import PageLoader from "../../../../widgets/PageLoader";
 
 const Loadable = (Component: ElementType) =>
   function fn(props: any) {
     return (
       <Suspense
-        fallback={<div>Loading...</div>}
+        fallback={<PageLoader/>}
       >
         <Component {...props} />
       </Suspense>
@@ -13,6 +14,13 @@ const Loadable = (Component: ElementType) =>
   };
 
 const HomePage = Loadable(lazy(() => import("../../../../pages/Home")));
+// const HomePage = Loadable(lazy(() => {
+//   return new Promise<{default: any}>((resolve) => {
+//     setTimeout(() => {
+//       resolve(import("../../../../pages/Home"))
+//     },5000)
+//   })
+// }));
 const AboutPage = Loadable(lazy(() => import("../../../../pages/About")));
 const ErrorPage = Loadable(lazy(() => import("../../../../pages/Error")));
 
