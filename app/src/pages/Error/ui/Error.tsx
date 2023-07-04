@@ -11,7 +11,7 @@ function Error () {
       <Navbar/>
       <div className="content-page">
         <Sidebar className=""/>
-        <main>
+        <main className="content-main error__main">
           {t("error page 404")}
         </main>
       </div>

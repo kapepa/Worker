@@ -14,7 +14,7 @@ jest.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (str: string): string => str })
 }));
 
-test('renders Error', () => {
+test('renders ErrorPage', () => {
   render(<Error />);
   const linkElement = screen.getByTestId("error");
   expect(linkElement).toBeInTheDocument();

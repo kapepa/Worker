@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import App from "./app/App";
 import {ThemeProvider} from "./app/contexts/Theme";
 import "./widgets/LangSwitcher/i18n";
+import ErrorBoundary from "./app/providers/ErrorBoundary";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,9 +13,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <App/>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <App/>
+      </ThemeProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 

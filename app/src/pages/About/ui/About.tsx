@@ -12,7 +12,7 @@ const About: FC = () => {
       <Navbar/>
       <div className="content-page">
         <Sidebar className=""/>
-        <main>
+        <main className="content-main ">
           {t("about page")}
         </main>
       </div>
