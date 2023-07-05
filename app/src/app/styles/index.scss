@@ -26,3 +26,10 @@ body{
   padding: 20px;
   display: flex;
 }
+
+iframe#webpack-dev-server-client-overlay{
+  display: none;
+}
+.sb-main-padded.sb-show-main{
+  padding: 0;
+}

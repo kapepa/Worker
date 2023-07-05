@@ -1,21 +1,18 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Error from "./Error";
+import RenderWithTranslation from "../../../shared/test/renderWithTranslation";
 
 jest.mock("../../../widgets/Navbar", () => jest.fn(() => {
   return <div role="navbar"/>
 }))
 
-jest.mock("../../../widgets/Sidebar", () => jest.fn(() => {
-  return <div role="sidebar"/>
-}))
+describe("<Error />", () => {
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: (str: string): string => str })
-}));
+  test('renders ErrorPage', () => {
+    RenderWithTranslation(<Error />);
+    const linkElement = screen.getByTestId("error");
+    expect(linkElement).toBeInTheDocument();
+  });
 
-test('renders ErrorPage', () => {
-  render(<Error />);
-  const linkElement = screen.getByTestId("error");
-  expect(linkElement).toBeInTheDocument();
-});
+})

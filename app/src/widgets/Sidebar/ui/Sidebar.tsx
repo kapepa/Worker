@@ -15,7 +15,7 @@ const Sidebar: FC<SidebarProps> = ({className}) => {
 
   return (
     <aside className={ClassNames(className, "sidebar", {"sidebar--open" : collapsed} )} data-testid="sidebar">
-      <Button onClick={onToggle}>Toggle</Button>
+      <Button onClick={onToggle} role="toggle">Toggle</Button>
       <div className="sidebar__switchers">
         <ThemeSwitcher/>
         <LangSwitcher/>
