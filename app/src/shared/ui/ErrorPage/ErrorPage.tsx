@@ -12,7 +12,7 @@ const ErrorPage: FC = () => {
 
   return(
     <div className="error-page" data-testid="error">
-      <p className="error-page__desc">{t("error-boundary")}</p>
+      <p className="error-page__desc">{t("refresh-page")}</p>
       <Button theme={ThemeButtonEnum.CLEAR} onClick={reloadPage}>
         {t("refresh-page")}
       </Button>

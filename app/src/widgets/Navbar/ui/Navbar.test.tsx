@@ -10,8 +10,13 @@ jest.mock("../../../shared/ui/AppLink/AppLink", () => ({
   })
 }))
 
-test('renders learn react link', () => {
-  const {debug} = render(<Navbar  />);
-  const linkElement = screen.getByTestId("navbar");
-  expect(linkElement).toBeInTheDocument();
-});
+describe("<Navbar />", () => {
+
+  test('renders learn react link', () => {
+    render(<Navbar />);
+    const linkElement = screen.getByTestId("navbar");
+    expect(linkElement).toBeInTheDocument();
+  });
+
+})
+
