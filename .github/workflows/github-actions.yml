@@ -13,6 +13,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - name: app loki
+        working-directory: ./app
+        run: npx loki init
       - name: app install
         working-directory: ./app
         run: npm install
