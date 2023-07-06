@@ -13,9 +13,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: app storybook init
-        working-directory: ./app
-        run: npm run storybook:init 
       - name: app install
         working-directory: ./app
         run: npm install
