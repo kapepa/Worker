@@ -39,11 +39,12 @@
     "dev": "concurrently \"npm run start\" \"npm run server\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "loki": "loki",
+    "loki": "npx loki",
     "loki:test": "loki test",
     "loki:appprove": "loki approve",
     "test:unit": "react-scripts test --watchAll=false",
-    "test:loki": "loki test"
+    "test:loki": "loki test",
+    "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static"
   },
   "eslintConfig": {
     "extends": [
