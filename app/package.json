@@ -38,12 +38,13 @@
     "server": "npm --prefix ../api npm run start:dev",
     "dev": "concurrently \"npm run start\" \"npm run server\"",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "npx storybook build",
+    "build-storybook": "storybook build",
     "loki": "npx loki",
     "loki:test": "loki test",
     "loki:appprove": "loki approve",
     "test:unit": "react-scripts test --watchAll=false",
     "test:loki": "loki test",
+    "test:build-storybook": "storybook build -s ./static",
     "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static"
   },
   "eslintConfig": {

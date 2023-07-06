@@ -1,0 +1,9 @@
+.error__main{display:flex;justify-content:center;align-items:center;font:var(--font-l);flex:1 1 auto}
+.navbar{width:100%;height:var(--navbar-height);background-color:var(--bg-color-inverted);display:flex;justify-content:space-between;align-items:center;padding:20px}.navbar__nav{display:flex;-webkit-column-gap:20px;column-gap:20px}
+.AppLink{color:var(--primary-color)}.primary{color:var(--primary-color)}.secondary{color:var(--primary-color-inverted)}.red{color:red}
+.sidebar{height:calc(100vh - var(--navbar-height));width:var(--sidebar-width);background:var(--bg-color-inverted);position:relative;transition:width .3s linear}.sidebar--open{width:var(--sidebar-width-collapsed)}.sidebar__switchers{position:absolute;bottom:20px;display:flex;justify-content:center;width:100%;flex-direction:column;align-items:center;row-gap:20px}
+
+.button{cursor:pointer;color:var(--primary-color-inverted)}.button--clear{border:none;background:none;outline:none}.button--outline{padding:10px 15px;border:1px solid var(--primary-color);color:var(--primary-color);background:none}
+
+
+/*# sourceMappingURL=pages-Error-ui-Error-stories.6d72d7b2.chunk.css.map*/

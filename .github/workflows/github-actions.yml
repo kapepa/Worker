@@ -24,7 +24,7 @@ jobs:
         run: npm run test:unit
       - name: app build storybook
         working-directory: ./app
-        run: npm run build-storybook
+        run: npm run test:build-storybook
       - name: app screenshot testing
         working-directory: ./app
         run: npm run test:ui:ci
