@@ -1,5 +1,5 @@
 import type { Decorator, Preview } from "@storybook/react";
-import  "../src/app/styles/index.scss";
+import "../src/app/styles/index.scss";
 // import ThemeDecorator from "../src/shared/config/ThemeDecorator/ThemeDecorator"
 // import { ThemeEnum } from "../src/app/contexts/Theme/lib/ThemeContext";
 

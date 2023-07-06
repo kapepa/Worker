@@ -2,11 +2,9 @@ name: github-actions
 run-name: GitHub Actions
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 jobs:
   init:
     runs-on: ubuntu-latest
@@ -21,9 +19,12 @@ jobs:
       - name: app build
         working-directory: ./app
         run: npm run build
-      - name: server install
+      - name: app build
+        working-directory: ./app
+        run: npm run unit:test-all
+      - name: api install
         working-directory: ./api
         run: npm install
-      - name: server build
+      - name: api build
         working-directory: ./api
         run: npm run build
