@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@storybook/manager-webpack5": "^6.5.0-rc.1"
+  }
+}
