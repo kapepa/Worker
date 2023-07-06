@@ -1,5 +1,6 @@
 import type { Decorator, Preview } from "@storybook/react";
 import "../src/app/styles/index.scss";
+import 'loki/configure-react';
 // import ThemeDecorator from "../src/shared/config/ThemeDecorator/ThemeDecorator"
 // import { ThemeEnum } from "../src/app/contexts/Theme/lib/ThemeContext";
 
