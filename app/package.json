@@ -38,7 +38,7 @@
     "server": "npm --prefix ../api npm run start:dev",
     "dev": "concurrently \"npm run start\" \"npm run server\"",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "npx storybook build",
     "loki": "npx loki",
     "loki:test": "loki test",
     "loki:appprove": "loki approve",
