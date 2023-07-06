@@ -21,7 +21,7 @@ jobs:
         run: npm run build
       - name: app build
         working-directory: ./app
-        run: npm run unit:test-all
+        run: npm run test:unit
       - name: api install
         working-directory: ./api
         run: npm install
