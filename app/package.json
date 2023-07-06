@@ -16,7 +16,7 @@
     "i18next": "^23.2.6",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.2.1",
-    "loki": "^0.31.2",
+    "loki": "^0.31.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-overlay": "^6.0.11",
@@ -66,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-docs": "^7.0.26",
     "@storybook/addon-essentials": "^7.0.25",
     "@storybook/addon-interactions": "^7.0.25",
     "@storybook/addon-links": "^7.0.25",
@@ -74,7 +75,6 @@
     "@storybook/react": "^7.0.25",
     "@storybook/react-webpack5": "^7.0.25",
     "@storybook/testing-library": "^0.0.14-next.2",
-    "@storybook/addon-docs": "^7.0.26",
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint-plugin-storybook": "^0.6.12",
     "prop-types": "^15.8.1",
