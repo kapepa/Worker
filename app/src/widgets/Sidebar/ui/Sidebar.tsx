@@ -3,7 +3,7 @@ import "./Sidebar.scss";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import ThemeSwitcher from "../../../shared/ui/ThemeSwitcher/ThemeSwitcher";
 import LangSwitcher from "../../LangSwitcher";
-import Button from "../../../shared/ui/Button/Button";
+import Button, { SizeButton, ThemeButtonEnum } from "../../../shared/ui/Button/Button";
 
 interface SidebarProps {
   className?: string,
@@ -15,10 +15,20 @@ const Sidebar: FC<SidebarProps> = ({className}) => {
 
   return (
     <aside className={ClassNames(className, "sidebar", {"sidebar--open" : collapsed} )} data-testid="sidebar">
-      <Button onClick={onToggle} role="toggle">Toggle</Button>
       <div className="sidebar__switchers">
         <ThemeSwitcher/>
-        <LangSwitcher/>
+        <LangSwitcher isShort={collapsed}/>
+        <div className="sidebar__squeeze">
+          <Button 
+            onClick={onToggle} 
+            role="toggle" 
+            theme={ThemeButtonEnum.BACKGROUND_INVERTED}
+            size={SizeButton.M}
+            className="sidebar__toggle"
+          >
+            <div className={ClassNames("sidebar__angle", {"sidebar__angle--rotate": collapsed})} />
+          </Button>
+        </div>
       </div>
     </aside>
   )

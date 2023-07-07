@@ -1,7 +1,6 @@
-import type { Decorator, Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react";
 import "../src/app/styles/index.scss";
-// import ThemeDecorator from "../src/shared/config/ThemeDecorator/ThemeDecorator"
-// import { ThemeEnum } from "../src/app/contexts/Theme/lib/ThemeContext";
+import I18nDecorator from "../src/shared/config/i18nDecorator/i18nDecorator";
 
 const preview: Preview = {
   parameters: {
@@ -13,7 +12,7 @@ const preview: Preview = {
       },
     },
   },
-  // decorators: [ThemeDecorator(ThemeEnum.DARK)],
+  decorators: [I18nDecorator]
 };
 
 export default preview;

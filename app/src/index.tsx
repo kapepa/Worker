@@ -4,7 +4,7 @@ import './app/styles/index.scss';
 import reportWebVitals from './reportWebVitals';
 import App from "./app/App";
 import {ThemeProvider} from "./app/contexts/Theme";
-import "./widgets/LangSwitcher/i18n";
+import "./i18n";
 import ErrorBoundary from "./app/providers/ErrorBoundary";
 
 const root = ReactDOM.createRoot(

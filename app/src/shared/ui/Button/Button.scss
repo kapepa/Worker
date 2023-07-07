@@ -1,16 +1,33 @@
 .button{
   cursor: pointer;
   color: var(--primary-color-inverted);
+  border: none;
+  padding: 10px;
   &--clear{
     border: none;
     background: none;
     outline: none;
   }
   &--outline{
-    padding: 10px 15px;
     border: 1px solid var(--primary-color) ;
     color: var(--primary-color);
     background: none;
-
+  }
+  &--background{
+    color: var(--primary-color);
+    background-color: var(--bg-colo);
+  }
+  &--background_inverted{
+    color: var(--primary-color-inverted);
+    background-color: var(--bg-color-inverted);
+  }
+  &--medium{
+    font: var(--font-m);
+  }
+  &--large{
+    font: var(--font-l);
+  }
+  &--extra-large{
+    font: var(--font-xl);
   }
 }

@@ -1,5 +1,6 @@
 {
-  "translate": "Переводить",
+  "translate": "Russian",
+  "translate-short": "Ru",
   "error-boundary": "Извините.. произошла ошибка.",
   "refresh-page": "Обновите страницу."
 }
