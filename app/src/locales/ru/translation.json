@@ -2,5 +2,9 @@
   "translate": "Russian",
   "translate-short": "Ru",
   "error-boundary": "Извините.. произошла ошибка.",
-  "refresh-page": "Обновите страницу."
+  "refresh-page": "Обновите страницу.",
+  "nav": {
+    "home": "Домой",
+    "about": "О нас"
+  }
 }

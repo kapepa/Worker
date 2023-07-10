@@ -1,5 +1,5 @@
 import "./Home.scss";
-import Navbar from "../../../widgets/Navbar";
+import Panel from "../../../widgets/Panel";
 import Sidebar from "../../../widgets/Sidebar";
 import {useTranslation} from "react-i18next";
 
@@ -8,7 +8,7 @@ function Home() {
 
   return (
     <div className="home" data-testid="home">
-      <Navbar/>
+      <Panel/>
       <div className="content-page">
         <Sidebar className=""/>
         <main className="content-main home__main">

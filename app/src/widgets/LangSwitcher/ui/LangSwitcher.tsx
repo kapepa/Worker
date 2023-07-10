@@ -20,7 +20,7 @@ const LangSwitcher: FC<LangSwitcherProps> = ({ classNames, isShort = false, ...o
     <>
       <Button
         onClick={changeLanguage}
-        theme={ThemeButtonEnum.BACKGROUND}
+        theme={ThemeButtonEnum.BACKGROUND_INVERTED}
         className={ClassNames(classNames,"test")}
         {...otherProps}
       >

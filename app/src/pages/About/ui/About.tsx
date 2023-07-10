@@ -1,6 +1,6 @@
 import {FC} from "react";
 import "./About.scss";
-import Navbar from "../../../widgets/Navbar";
+import Panel from "../../../widgets/Panel";
 import {useTranslation} from "react-i18next";
 import Sidebar from "../../../widgets/Sidebar";
 
@@ -9,7 +9,7 @@ const About: FC = () => {
 
   return (
     <div data-testid="about">
-      <Navbar/>
+      <Panel/>
       <div className="content-page">
         <Sidebar className=""/>
         <main className="content-main ">

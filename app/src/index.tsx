@@ -6,6 +6,7 @@ import App from "./app/App";
 import {ThemeProvider} from "./app/contexts/Theme";
 import "./i18n";
 import ErrorBoundary from "./app/providers/ErrorBoundary";
+import { SideProvider } from './app/contexts/Side';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +16,9 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <ThemeProvider>
-        <App/>
+        <SideProvider>
+          <App/>
+        </SideProvider>
       </ThemeProvider>
     </ErrorBoundary>
   </React.StrictMode>
