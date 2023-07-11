@@ -8,7 +8,7 @@ export interface ComponerRenderOption {
   route?: string,
 }
 
-const componentRender = (component: ReactNode, option: ComponerRenderOption = {}) => {
+const ComponentRender = (component: ReactNode, option: ComponerRenderOption = {}) => {
   const { route = "/" } = option;
 
   return render(
@@ -20,4 +20,4 @@ const componentRender = (component: ReactNode, option: ComponerRenderOption = {}
   )
 }
 
-export default componentRender;
+export default ComponentRender;
