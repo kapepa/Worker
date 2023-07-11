@@ -1,0 +1,54 @@
+.x-close{
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  &::before, &::after{
+    content: "";
+    width: 4px;
+    top: 0;
+    right: 50%;
+    bottom: 0;
+    position: absolute;
+    //background-color: var(--bg-color);
+    border-radius: 2px;
+  }
+  &::before{
+    transform: translateX(50%) rotate(45deg);
+  }
+  &::after{
+    transform: translateX(50%) rotate(135deg);
+  }
+  &--bg-color{
+    &::before, &::after{
+      background-color: var(--bg-color);
+    }
+  }
+  &--bg-color-inverted{
+    &::before, &::after {
+      background-color: var(--bg-color-inverted);
+    }
+  }
+  &--primary-color{
+    &::before, &::after {
+      background-color: var(--primary-color);
+    }
+  }
+  &--secondary-color{
+    &::before, &::after {
+      background-color: var(--secondary-color);
+    }
+  }
+  &--primary-color-inverted{
+    &::before, &::after {
+      background-color: var(--primary-color-inverted);
+    }
+  }
+  &--secondary-color-inverted{
+    &::before, &::after {
+      background-color: var(--secondary-color-inverted);
+    }
+  }
+}

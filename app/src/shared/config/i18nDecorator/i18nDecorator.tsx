@@ -7,6 +7,7 @@ const I18nDecorator: Decorator = (Story) => (
 	<Suspense fallback="Loading localization…">
 		<I18nextProvider i18n={i18n}>
 			<Story />
+			<div id="modals-container"/>
 		</I18nextProvider>
 	</Suspense>
   );
