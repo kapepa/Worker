@@ -16,21 +16,28 @@ jobs:
       - name: app install
         working-directory: ./app
         run: npm install
+        if: always()
       - name: app build
         working-directory: ./app
         run: npm run build
+        if: always()
       - name: app unit test
         working-directory: ./app
         run: npm run test:unit
+        if: always()
       - name: app build storybook
         working-directory: ./app
         run: npm run test:build-storybook
+        if: always()
       - name: app screenshot testing
         working-directory: ./app
         run: npm run test:ui:ci
+        if: always()
       - name: api install
         working-directory: ./api
         run: npm install
+        if: always()
       - name: api build
         working-directory: ./api
         run: npm run build
+        if: always()
