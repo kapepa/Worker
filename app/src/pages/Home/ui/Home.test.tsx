@@ -10,7 +10,7 @@ jest.mock("../../../widgets/Navbar", () => jest.fn(() => {
 describe("<Home />", () => {
 
   test('renders Home', () => {
-    RenderWithTranslation(<Home />);
+    const {debug} = RenderWithTranslation(<Home />);
     const linkElement = screen.getByTestId("home");
     expect(linkElement).toBeInTheDocument();
   });

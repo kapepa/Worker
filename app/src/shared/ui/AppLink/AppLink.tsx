@@ -16,7 +16,7 @@ interface AppLinkProps extends LinkProps {
 }
 
 const AppLink: FC<AppLinkProps> = ({to, children, theme = AppLinkTheme.PRIMARY,  className = undefined, ...otherProps}) => {
-  return <NavLink className={ClassNames(`AppLink`, theme)} to={to} {...otherProps} data-testid="nav-link">{children}</NavLink>
+  return <NavLink className={ClassNames(`AppLink`, theme, className)} to={to} {...otherProps} data-testid="nav-link">{children}</NavLink>
 }
 
 export default AppLink;

@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { ThemeEnum } from "../../../app/contexts/Theme/lib/ThemeContext";
 import { Decorator } from "@storybook/react";
 

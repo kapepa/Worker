@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Navbar from "./Navbar";
 
@@ -9,6 +8,10 @@ jest.mock("../../../shared/ui/AppLink/AppLink", () => ({
     return <a href={to} role="link">{children}</a>
   })
 }))
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ t: (key: string) => key }),
+}));
 
 describe("<Navbar />", () => {
 

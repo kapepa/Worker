@@ -1,17 +1,23 @@
 import React from 'react';
 import './App.css';
 import {ClassNames} from "../shared/lib/ClassNames";
-import {UseTheme} from "./contexts/Theme";
-import {Router} from "./providers/Routes";
+import { UseTheme } from "./contexts/Theme";
+import ModalsLayout from "./layout/ModalsLayout/ModalsLayout";
 // import {BugBtn} from "./providers/ErrorBoundary";
 
-function App() {
+interface AppProps {
+  children: React.ReactNode
+}
+
+function App({children}: AppProps) {
   const {theme} = UseTheme();
 
   return (
     <div className={`${ClassNames( "app", theme)}`} data-testid="app">
       {/*<BugBtn/>*/}
-      <Router/>
+      <ModalsLayout>
+        {children}
+      </ModalsLayout>
     </div>
   );
 }

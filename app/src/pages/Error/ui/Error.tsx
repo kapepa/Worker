@@ -1,5 +1,5 @@
 import "./Error.scss";
-import Navbar from "../../../widgets/Navbar";
+import Panel from "../../../widgets/Panel";
 import {useTranslation} from "react-i18next";
 import Sidebar from "../../../widgets/Sidebar";
 
@@ -8,7 +8,7 @@ function Error () {
 
   return (
     <div className="error" data-testid="error">
-      <Navbar/>
+      <Panel/>
       <div className="content-page">
         <Sidebar className=""/>
         <main className="content-main error__main">

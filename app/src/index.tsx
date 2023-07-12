@@ -4,8 +4,10 @@ import './app/styles/index.scss';
 import reportWebVitals from './reportWebVitals';
 import App from "./app/App";
 import {ThemeProvider} from "./app/contexts/Theme";
-import "./widgets/LangSwitcher/i18n";
+import "./i18n";
 import ErrorBoundary from "./app/providers/ErrorBoundary";
+import { SideProvider } from './app/contexts/Side';
+import {Router} from "./app/providers/Routes";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +17,9 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <ThemeProvider>
-        <App/>
+        <SideProvider>
+          <App><Router/></App>
+        </SideProvider>
       </ThemeProvider>
     </ErrorBoundary>
   </React.StrictMode>

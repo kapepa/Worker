@@ -6,9 +6,10 @@ import Button, {ThemeButtonEnum} from "../../../shared/ui/Button/Button";
 
 interface LangSwitcherProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
   classNames?: string,
+  isShort?: boolean,
 }
 
-const LangSwitcher: FC<LangSwitcherProps> = ({classNames, ...otherProps}) => {
+const LangSwitcher: FC<LangSwitcherProps> = ({ classNames, isShort = false, ...otherProps }) => {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = async () => {
@@ -19,14 +20,15 @@ const LangSwitcher: FC<LangSwitcherProps> = ({classNames, ...otherProps}) => {
     <>
       <Button
         onClick={changeLanguage}
-        theme={ThemeButtonEnum.CLEAR}
+        theme={ThemeButtonEnum.BACKGROUND_INVERTED}
         className={ClassNames(classNames,"test")}
         {...otherProps}
       >
-        {t("translate")}
+        { isShort ? t("translate-short") : t("translate") }
       </Button>
     </>
   )
 }
+
 
 export default LangSwitcher;

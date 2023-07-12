@@ -1,0 +1,11 @@
+{
+  "translate": "Englis",
+  "translate-short": "En",
+  "error-boundary": "Sorry.. there was an error.",
+  "refresh-page": "Refresh the page.",
+  "nav": {
+    "home": "Home",
+    "about": "About"
+  },
+  "sign_in": "Sign in"
+}

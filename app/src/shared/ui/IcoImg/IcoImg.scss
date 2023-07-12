@@ -1,0 +1,18 @@
+.ico-img{
+  display: flex;
+  align-items: center;
+  &__fill{
+    &--primary-color{
+      fill: var(--primary-color);
+    }
+    &--secondary-color{
+      fill: var(--secondary-color);
+    }
+    &--primary-color-inverted{
+      fill: var(--primary-color-inverted);
+    }
+    &--secondary-color-inverted{
+      fill: var(--secondary-color-inverted);
+    }
+  }
+}

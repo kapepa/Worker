@@ -2,6 +2,11 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import React, {ElementType, lazy, Suspense} from "react";
 import PageLoader from "../../../../widgets/PageLoader";
 
+export enum RouterPath {
+  HOME = "/",
+  ABOUT = "/about",
+}
+
 const Loadable = (Component: ElementType) =>
   function fn(props: any) {
     return (
@@ -16,9 +21,7 @@ const Loadable = (Component: ElementType) =>
 const HomePage = Loadable(lazy(() => import("../../../../pages/Home")));
 // const HomePage = Loadable(lazy(() => {
 //   return new Promise<{default: any}>((resolve) => {
-//     setTimeout(() => {
-//       resolve(import("../../../../pages/Home"))
-//     },5000)
+//     setTimeout(() => { resolve(import("../../../../pages/Home")) },5000)
 //   })
 // }));
 const AboutPage = Loadable(lazy(() => import("../../../../pages/About")));
@@ -26,11 +29,11 @@ const ErrorPage = Loadable(lazy(() => import("../../../../pages/Error")));
 
 const routers = createBrowserRouter([
   {
-    path: "/",
+    path: RouterPath.HOME,
     element: <HomePage />,
   },
   {
-    path: "/about",
+    path: RouterPath.ABOUT,
     element: <AboutPage />,
   },
   {
