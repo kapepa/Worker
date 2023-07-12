@@ -1,4 +1,4 @@
-import {FC, ReactNode, RefObject, useEffect, useRef} from "react";
+import {FC, ReactNode, useEffect, useRef} from "react";
 import {createPortal} from "react-dom";
 
 interface PortalModalProps {
@@ -8,13 +8,13 @@ interface PortalModalProps {
 const PortalModal: FC<PortalModalProps> = ({ children }) => {
   const refEl = useRef<HTMLElement | null>(null);
 
-  const findModals: Promise<HTMLElement | null> = Promise.resolve(document.getElementById("modals-container"))
+  const findModals: Promise<HTMLElement | null> = Promise.resolve(document.getElementById("modals-container"));
 
   useEffect(() => {
     findModals.then((el) => refEl.current = el)
-  },[])
+  }, [findModals])
 
-  return <>{ refEl.current && createPortal(children, refEl.current)}</>
+  return <>{ refEl.current && createPortal(children, refEl.current)}</>;
 }
 
 export default PortalModal;
