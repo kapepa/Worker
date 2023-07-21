@@ -7,5 +7,7 @@
     "home": "Home",
     "about": "About"
   },
-  "sign_in": "Sign in"
+  "sign_in": "Sign in",
+  "decrease": "Decrease",
+  "increase": "Increase"
 }
