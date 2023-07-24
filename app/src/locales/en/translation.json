@@ -9,5 +9,18 @@
   },
   "sign_in": "Sign in",
   "decrease": "Decrease",
-  "increase": "Increase"
+  "increase": "Increase",
+  "login-form": {
+    "login": "Login",
+    "send": "Send",
+    "placeholder-user": "Your name",
+    "placeholder-password": "Your password",
+    "label": {
+      "name": "Name",
+      "password": "Password"
+    }
+  },
+  "form-error": {
+    "required": "Required"
+  }
 }

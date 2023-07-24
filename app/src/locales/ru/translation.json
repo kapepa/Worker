@@ -9,5 +9,18 @@
   },
   "sign_in": "Войти",
   "decrease": "Снижаться",
-  "increase": "Увеличивать"
+  "increase": "Увеличивать",
+  "login-form": {
+    "login": "Авторизоваться",
+    "send": "Отправлять",
+    "placeholder-user": "Ваше имя",
+    "placeholder-password": "Ваш пароль",
+    "label": {
+      "name": "Имя",
+      "password": "Пароль"
+    }
+  },
+  "form-error": {
+    "required": "Необходимый"
+  }
 }

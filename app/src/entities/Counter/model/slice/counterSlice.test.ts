@@ -1,4 +1,4 @@
-import CounterReducer, {CounterActions} from "./counterSlice";
+import {CounterActions, CounterReducer} from "./counterSlice";
 import {DeepPartial} from "@reduxjs/toolkit";
 import {CounterState} from "../types";
 

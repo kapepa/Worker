@@ -23,7 +23,4 @@ export const CounterSlice = createSlice({
 })
 
 export const CounterActions = CounterSlice.actions;
-
-const CounterReducer = CounterSlice.reducer;
-
-export default CounterReducer;
+export const CounterReducer = CounterSlice.reducer;
