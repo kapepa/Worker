@@ -47,7 +47,8 @@
     "test:unit": "react-scripts test --watchAll=false",
     "test:loki": "npx loki test",
     "test:build-storybook": "storybook build",
-    "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static"
+    "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static",
+    "json:server": "node ./json-server/server.js"
   },
   "eslintConfig": {
     "extends": [
@@ -83,6 +84,7 @@
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.12",
+    "json-server": "^0.17.3",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.25",
     "webpack": "^5.88.1"
