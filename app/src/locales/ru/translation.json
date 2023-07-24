@@ -7,5 +7,20 @@
     "home": "Домой",
     "about": "О нас"
   },
-  "sign_in": "Войти"
+  "sign_in": "Войти",
+  "decrease": "Снижаться",
+  "increase": "Увеличивать",
+  "login-form": {
+    "login": "Авторизоваться",
+    "send": "Отправлять",
+    "placeholder-user": "Ваше имя",
+    "placeholder-password": "Ваш пароль",
+    "label": {
+      "name": "Имя",
+      "password": "Пароль"
+    }
+  },
+  "form-error": {
+    "required": "Необходимый"
+  }
 }

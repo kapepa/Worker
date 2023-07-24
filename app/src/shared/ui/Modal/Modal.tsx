@@ -5,13 +5,13 @@ import XClose from "../XClose/XClose";
 import PortalModal from "../PortalModal/PortalModal";
 
 interface ModalProps {
+  className?: string;
   children: ReactNode,
   isOpen: boolean,
   onClose: () => void,
 }
 
-const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
-
+const Modal: FC<ModalProps> = ({ className, children, isOpen, onClose }) => {
   const closeHandler = useCallback((e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     const target = (e.target as HTMLDivElement );
     if( target.classList.contains("modal__overlay") || target.classList.contains("modal__x-close") ) onClose();
@@ -33,7 +33,7 @@ const Modal: FC<ModalProps> = ({ children, isOpen, onClose }) => {
 
   return (
     <PortalModal>
-      <div className={ClassNames("modal", mods)} data-testid="modal">
+      <div className={ClassNames(className, "modal", mods)} data-testid="modal">
         <div onClick={closeHandler} className="modal__overlay">
           <div className="modal__content" >
             { children }

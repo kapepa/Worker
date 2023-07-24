@@ -6,8 +6,9 @@ import App from "./app/App";
 import {ThemeProvider} from "./app/contexts/Theme";
 import "./i18n";
 import ErrorBoundary from "./app/providers/ErrorBoundary";
-import { SideProvider } from './app/contexts/Side';
+import {SideProvider} from './app/contexts/Side';
 import {Router} from "./app/providers/Routes";
+import {StoreProvider} from "./app/providers/Store";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,11 +17,15 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <ThemeProvider>
-        <SideProvider>
-          <App><Router/></App>
-        </SideProvider>
-      </ThemeProvider>
+      <StoreProvider>
+        <ThemeProvider>
+          <SideProvider>
+            <App>
+              <Router/>
+            </App>
+          </SideProvider>
+        </ThemeProvider>
+      </StoreProvider>
     </ErrorBoundary>
   </React.StrictMode>
 );

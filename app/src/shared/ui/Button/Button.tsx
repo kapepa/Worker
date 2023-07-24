@@ -7,6 +7,7 @@ export enum ThemeButtonEnum {
   OUTLINE = "outline",
   BACKGROUND = "background",
   BACKGROUND_INVERTED = "background_inverted",
+  OUTLINE_INVERTED = "outline_inverted",
 }
 
 export enum SizeButton {
@@ -29,9 +30,9 @@ const Button: FC<ButtonProps> = (
 
   return (
     <button
+      data-testid="button"
       className={ClassNames(className, "button", `button--${theme}`, `button--${size}`)}
       {...otherProps}
-      data-testid="button"
     >
       {children}
     </button>

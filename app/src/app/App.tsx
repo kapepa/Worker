@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import {ClassNames} from "../shared/lib/ClassNames";
-import { UseTheme } from "./contexts/Theme";
 import ModalsLayout from "./layout/ModalsLayout/ModalsLayout";
+// import { UseTheme } from "./contexts/Theme";
+// import {ClassNames} from "../shared/lib/ClassNames";
 // import {BugBtn} from "./providers/ErrorBoundary";
 
 interface AppProps {
@@ -10,10 +10,13 @@ interface AppProps {
 }
 
 function App({children}: AppProps) {
-  const {theme} = UseTheme();
+  // const {theme} = UseTheme();
 
   return (
-    <div className={`${ClassNames( "app", theme)}`} data-testid="app">
+    <div
+      // className={`${ClassNames( "app", theme)}`}
+      data-testid="app"
+    >
       {/*<BugBtn/>*/}
       <ModalsLayout>
         {children}

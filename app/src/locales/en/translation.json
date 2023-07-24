@@ -7,5 +7,20 @@
     "home": "Home",
     "about": "About"
   },
-  "sign_in": "Sign in"
+  "sign_in": "Sign in",
+  "decrease": "Decrease",
+  "increase": "Increase",
+  "login-form": {
+    "login": "Login",
+    "send": "Send",
+    "placeholder-user": "Your name",
+    "placeholder-password": "Your password",
+    "label": {
+      "name": "Name",
+      "password": "Password"
+    }
+  },
+  "form-error": {
+    "required": "Required"
+  }
 }

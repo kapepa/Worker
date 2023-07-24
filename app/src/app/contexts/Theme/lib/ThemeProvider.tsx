@@ -8,15 +8,17 @@ interface ThemeProviderInterface {
 const defaultTheme = window.localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as ThemeEnum;
 
 const ThemeProvider: FC<ThemeProviderInterface> = ({children}) => {
+  const body = document.body;
   const [theme, setTheme] = useState<ThemeEnum>(defaultTheme || ThemeEnum.NORMAL);
 
   const defaultProps = useMemo<ThemeContextProvider>(() => {
+    body.className = "app " + theme;
     return {theme, setTheme};
-  }, [theme]);
+  }, [theme, body]);
 
   return <ThemeContext.Provider value={defaultProps}>
     {children}
   </ThemeContext.Provider>
-}
+};
 
 export default ThemeProvider;
