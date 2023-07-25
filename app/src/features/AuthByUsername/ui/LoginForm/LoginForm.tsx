@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useRef} from "react";
 import "./LoginForm.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {useTranslation} from "react-i18next";
@@ -16,18 +16,26 @@ export interface IFormValuesLogin {
 }
 
 const LoginForm: FC<LoginFormProps> = ({className}) => {
+  const refForm = useRef<HTMLFormElement>(null);
   const {t} = useTranslation();
-  const { register, handleSubmit, getFieldState, formState: { errors } } = useForm<IFormValuesLogin>();
+  const { reset, register, handleSubmit, getFieldState, formState: { errors } } = useForm<IFormValuesLogin>({
+    defaultValues: {name: "", password: ""},
+  });
+
   const onSubmit: SubmitHandler<IFormValuesLogin> = data => {
-    if(!errors){
-      console.log(data)
+    if(!errors) return;
+    console.log(data)
+
+    if(!!refForm.current) {
+      reset();
+      refForm.current.reset();
     }
   };
 
   return (
-    <div className={ClassNames(className, "login-form__wrapper")} data-testid="login-form">
+    <div className={ClassNames(className, "login-form__wrapper")}>
       <h4 className="login-form__h">{t("login-form.login")}</h4>
-      <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+      <form ref={refForm} onSubmit={handleSubmit(onSubmit)} className="login-form" data-testid="form">
         <Input
           placeholder={t("login-form.placeholder-user")}
           label={"name"}
@@ -39,6 +47,8 @@ const LoginForm: FC<LoginFormProps> = ({className}) => {
           minLength={4}
           theme={BgInputEnum.WHITE_BG}
           color={ColorInputEnum.WHITE_COLOR}
+          className="login-form__input"
+          role="name"
         />
         <Input
           placeholder={t("login-form.placeholder-password")}
@@ -51,9 +61,15 @@ const LoginForm: FC<LoginFormProps> = ({className}) => {
           minLength={4}
           theme={BgInputEnum.WHITE_BG}
           color={ColorInputEnum.WHITE_COLOR}
+          className="login-form__input"
+          role="password"
         />
         <div className="login-form__basement">
-          <Button theme={ThemeButtonEnum.OUTLINE_INVERTED} type="submit">{t("login-form.send")}</Button>
+          <Button
+            className="login-form__btn"
+            theme={ThemeButtonEnum.OUTLINE_INVERTED} type="submit"
+            role="submit"
+          >{t("login-form.send")}</Button>
         </div>
       </form>
     </div>

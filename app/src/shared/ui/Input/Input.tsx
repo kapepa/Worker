@@ -1,4 +1,4 @@
-import {FC, InputHTMLAttributes, memo} from "react";
+import {FC, InputHTMLAttributes} from "react";
 import "./Input.scss";
 import {ClassNames} from "../../lib/ClassNames";
 import {IFormValuesLogin} from "../../../features/AuthByUsername";
@@ -16,13 +16,12 @@ export enum ColorInputEnum {
   WHITE_COLOR_INVERTED = "white-color-inverted",
 }
 
-
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string,
-  register: UseFormRegister<IFormValuesLogin>,
-  label: Path<IFormValuesLogin>,
-  getFieldState: UseFormGetFieldState<IFormValuesLogin>
-  required: boolean,
+  register?: UseFormRegister<IFormValuesLogin>,
+  label?: Path<IFormValuesLogin>,
+  getFieldState?: UseFormGetFieldState<IFormValuesLogin>
+  required?: boolean,
   maxLength?: number,
   minLength?: number,
   theme: BgInputEnum,
@@ -35,15 +34,16 @@ const Input: FC<InputProps> = (
   const {t} = useTranslation();
 
   return (
-    <div className={ClassNames("input__wrapper", `input__wrapper--${color}`)} data-testid="input">
-      <label className="input__label">{t(`login-form.label.${label}`)}</label>
+    <div className={ClassNames("input__wrapper", `input__wrapper--${color}`)}>
+      { !!label && <label className="input__label" >{t(`login-form.label.${label}`)}</label> }
       <input
-        className={ClassNames(className, "input", `input--${theme}`)}
-        {...register(label, { required, maxLength, minLength })}
+        data-testid="input"
+        className={ClassNames("input", `input--${theme}`, className)}
+        {...(!!label && !!register) ? register(label, { required, maxLength, minLength }) : {}}
         {...otherProps}
       />
       {
-        getFieldState(label).error &&
+        (getFieldState && label && getFieldState(label).error) &&
         <span className="input__alert">{t(`form-error.${getFieldState(label).error?.type as string}`)}</span>
       }
     </div>
