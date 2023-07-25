@@ -1,6 +1,5 @@
 import {render, screen} from "@testing-library/react";
 import PortalModal from "./PortalModal";
-import Loader from "../Loader/Loader";
 import React from "react";
 
 const wrapperRender = ({children}: any) => {
