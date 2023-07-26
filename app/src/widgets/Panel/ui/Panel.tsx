@@ -18,6 +18,7 @@ const Panel: FC<PanelProps> = ({classNames}) => {
 	}, [open])
 
 	const onOpenModal = useCallback(() => {
+		console.log("open")
 		if(!open) setOpen( true );
 	},[open])
 

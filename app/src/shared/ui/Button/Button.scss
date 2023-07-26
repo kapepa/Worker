@@ -35,4 +35,7 @@
   &--extra-large{
     font: var(--font-xl);
   }
+  &--disabled{
+    opacity: .5;
+  }
 }

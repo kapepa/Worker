@@ -1,13 +1,14 @@
 import {fireEvent, screen, render, waitFor, act} from '@testing-library/react';
 import ComponentRender from "../../../../shared/test/componentRender";
-import {IFormValuesLogin, LoginForm} from "./LoginForm";
+import {LoginForm} from "./LoginForm";
 import userEvent from '@testing-library/user-event';
+import {LoginTypes} from "../../model/types/loginTypes";
 
 jest.mock('react-hook-form', () => ({
   ...jest.requireActual('react-hook-form'),
   useForm: () => ({
     ...jest.requireActual('react-hook-form').useForm(),
-    handleSubmit: (callback: any) => callback({ name: "Name", password: "Password" } as  IFormValuesLogin),
+    handleSubmit: (callback: any) => callback({ username: "Name", password: "Password" } as  LoginTypes),
   }),
 }));
 

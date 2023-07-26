@@ -1,5 +1,9 @@
 import {LoginModal} from "./ui/LoginModal/LoginModal";
-import {IFormValuesLogin} from "./ui/LoginForm/LoginForm";
+import {LoginTypes} from "./model/types/loginTypes";
+import {AuthActions, AuthReducer} from "./model/slice/authSlice";
+import {AuthState} from "./model/types/AuthState";
+import {GetAuth} from "./model/selectors/getAuth/getAuth";
+import {GetLogin} from "./model/selectors/getLogin/getLogin";
 
-export {LoginModal};
-export type {IFormValuesLogin};
+export {LoginModal, AuthActions, AuthReducer};
+export type {LoginTypes, AuthState, GetAuth, GetLogin};
