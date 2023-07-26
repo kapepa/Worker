@@ -1,10 +1,10 @@
 import {FC, InputHTMLAttributes} from "react";
 import "./Input.scss";
 import {ClassNames} from "../../lib/ClassNames";
-import {IFormValuesLogin} from "../../../features/AuthByUsername";
 import {Path, UseFormRegister} from "react-hook-form";
 import {UseFormGetFieldState} from "react-hook-form/dist/types/form";
 import {useTranslation} from "react-i18next";
+import {LoginTypes} from "../../../features/AuthByUsername";
 
 export enum BgInputEnum {
   WHITE_BG = "white",
@@ -18,14 +18,14 @@ export enum ColorInputEnum {
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string,
-  register?: UseFormRegister<IFormValuesLogin>,
-  label?: Path<IFormValuesLogin>,
-  getFieldState?: UseFormGetFieldState<IFormValuesLogin>
+  register?: UseFormRegister<LoginTypes>,
+  label?: Path<LoginTypes>,
+  getFieldState?: UseFormGetFieldState<LoginTypes>
   required?: boolean,
   maxLength?: number,
   minLength?: number,
   theme: BgInputEnum,
-  color: ColorInputEnum
+  color: ColorInputEnum,
 }
 
 const Input: FC<InputProps> = (

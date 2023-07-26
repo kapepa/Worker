@@ -1,0 +1,10 @@
+.text{
+  &__title{
+    font: var(--font-l);
+    color: var(--primary-color);
+  }
+  &__p{
+    font: var(--font-m);
+    color: var(--secondary-color);
+  }
+}

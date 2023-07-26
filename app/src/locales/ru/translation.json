@@ -16,7 +16,7 @@
     "placeholder-user": "Ваше имя",
     "placeholder-password": "Ваш пароль",
     "label": {
-      "name": "Имя",
+      "username": "Имя",
       "password": "Пароль"
     }
   },
