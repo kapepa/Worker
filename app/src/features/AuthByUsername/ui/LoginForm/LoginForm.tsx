@@ -1,4 +1,4 @@
-import {FC, useRef, memo, useCallback, ChangeEvent} from "react";
+import {ChangeEvent, FC, memo, useCallback, useRef} from "react";
 import "./LoginForm.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {useTranslation} from "react-i18next";
@@ -12,17 +12,19 @@ import {GetLogin} from "../../model/selectors/getLogin/getLogin";
 import {LoginByUser} from "../../model/services/loginByUser/loginByUser";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {GetAuth} from "../../model/selectors/getAuth/getAuth";
+import {Text, TextTheme} from "../../../../shared/ui/Text/Text";
 
 interface LoginFormProps {
   className?: string,
+  onClose: () => void,
 }
 
-const LoginForm: FC<LoginFormProps> = memo(({className}) => {
+const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
   const refForm = useRef<HTMLFormElement>(null);
   const dispatch = useDispatch<AppDispatch>();
   const { loading, error } = useSelector(GetAuth);
   const { username, password } = useSelector(GetLogin);
-  const { setUsername, setPassword } = AuthActions;
+  const { setUsername, setPassword, cleanLogin } = AuthActions;
   const { t } = useTranslation();
   const { reset, register, handleSubmit, getFieldState, formState: { errors } } = useForm<LoginTypes>({
     defaultValues: {username, password},
@@ -32,14 +34,18 @@ const LoginForm: FC<LoginFormProps> = memo(({className}) => {
     if(!!refForm.current) {
       reset();
       refForm.current.reset();
+      dispatch(cleanLogin());
     }
   }
 
   const onSubmit: SubmitHandler<LoginTypes> = (data:LoginTypes) => {
     if(!errors) return;
     dispatch(LoginByUser(data))
-      .then(() => {
-        resetForm();
+      .then((attr) => {
+        if(attr.meta.requestStatus === "fulfilled"){
+          resetForm();
+          onClose()
+        };
       });
   };
 
@@ -52,10 +58,10 @@ const LoginForm: FC<LoginFormProps> = memo(({className}) => {
 
   return (
     <div className={ClassNames(className, "login-form__wrapper")}>
-      {!!error && <div>Error</div>}
+      {/*<Text className="login-form__h" title={t("login-form.login")} theme={TextTheme.PRIMARY}/>*/}
       <h4 className="login-form__h">{t("login-form.login")}</h4>
       <form ref={refForm} onSubmit={handleSubmit(onSubmit)} className="login-form" data-testid="form">
-        {}
+        {!!error && <Text className="login-form__error" text={t(`login-form.error.${error}`)} theme={TextTheme.ERROR}/>}
         <Input
           onChange={onChangeLogin}
           placeholder={t("login-form.placeholder-user")}

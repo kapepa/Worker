@@ -17,12 +17,12 @@ describe("<LoginForm/>", () => {
   const mockPass: string = "Password";
 
   test("should be to have modal login", () => {
-    ComponentRender(<LoginForm/>)
+    ComponentRender(<LoginForm onClose={() => {}} />)
     expect(screen.getByText(/Login/i)).toBeInTheDocument();
   })
 
   test("should be to have modal login", async () => {
-    const { getByRole } = render(<LoginForm/>);
+    const { getByRole } = render(<LoginForm onClose={() => {}} />);
     const name = await getByRole("name");
     const pass = await getByRole("password");
 
@@ -34,7 +34,7 @@ describe("<LoginForm/>", () => {
   })
 
   test("should be submit form", async () => {
-    const { getByRole, getByTestId } = render(<LoginForm/>);
+    const { getByRole, getByTestId } = render(<LoginForm onClose={() => {}} />);
     const name = await getByRole("name") as HTMLInputElement;
     const pass = await getByRole("password") as HTMLInputElement;
 

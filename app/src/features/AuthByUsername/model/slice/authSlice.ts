@@ -2,14 +2,14 @@ import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {AuthState} from "../types/AuthState";
 import {LoginByUser} from "../services/loginByUser/loginByUser";
-import {LoginTypes} from "../types/loginTypes";
 
 const initialState: AuthState = {
   loading: false,
   login: {
-    username: "",
-    password: "",
+    username: "admin",
+    password: "123456",
   },
+  token: undefined,
   error: undefined,
 }
 
@@ -19,11 +19,15 @@ export const AuthSlice = createSlice({
   reducers: {
     setUsername(state, action: PayloadAction<string>) {
       state.login.username = action.payload;
-      return state;
     },
     setPassword(state, action: PayloadAction<string>) {
       state.login.password = action.payload;
-      return state;
+    },
+    cleanLogin(state) {
+      state.login = {username: "", password: ""};
+    },
+    cleanToken(state) {
+      state.token = undefined;
     }
   },
   extraReducers: (builder) => {
@@ -32,8 +36,8 @@ export const AuthSlice = createSlice({
         state.error = undefined;
         state.loading = true;
       })
-      .addCase(LoginByUser.fulfilled, (state, action: PayloadAction<LoginTypes>) => {
-        state.login = action.payload;
+      .addCase(LoginByUser.fulfilled, (state, action: PayloadAction<string>) => {
+        state.token = action.payload;
         state.loading = false;
       })
       .addCase(LoginByUser.rejected, (state, action) => {

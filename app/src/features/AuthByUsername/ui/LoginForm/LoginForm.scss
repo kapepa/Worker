@@ -4,6 +4,8 @@
   row-gap: 5px;
   width: 100%;
   max-width: 800px;
+  position: relative;
+  padding-top: 20px;
   &__wrapper{
     padding: 30px;
     display: flex;
@@ -26,5 +28,13 @@
   &__btn{
     width: 100%;
     max-width: 300px;
+  }
+  &__error{
+    position: absolute;
+    bottom: 100%;
+    transform: translateY(100%);
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 }
