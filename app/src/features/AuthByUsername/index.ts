@@ -5,5 +5,5 @@ import {AuthState} from "./model/types/AuthState";
 import {GetAuth} from "./model/selectors/getAuth/getAuth";
 import {GetLogin} from "./model/selectors/getLogin/getLogin";
 
-export {LoginModal, AuthActions, AuthReducer};
-export type {LoginTypes, AuthState, GetAuth, GetLogin};
+export {LoginModal, AuthActions, AuthReducer, GetAuth, GetLogin};
+export type {LoginTypes, AuthState};

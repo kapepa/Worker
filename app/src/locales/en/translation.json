@@ -8,6 +8,7 @@
     "about": "About"
   },
   "sign_in": "Sign in",
+  "logout": "Logout",
   "decrease": "Decrease",
   "increase": "Increase",
   "login-form": {
@@ -18,6 +19,9 @@
     "label": {
       "username": "Username",
       "password": "Password"
+    },
+    "error": {
+      "error-login": "Your user data is incorrect."
     }
   },
   "form-error": {
