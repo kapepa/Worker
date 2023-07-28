@@ -51,6 +51,7 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
 
   const onChangeLogin = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
+
     if(target.name === "username") dispatch(setUsername(target.value));
     if(target.name === "password") dispatch(setPassword(target.value));
 
