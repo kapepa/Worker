@@ -42,6 +42,15 @@ export const Background_Normal: ButtonStory = {
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
 
+export const Background_Normal_Disabled: ButtonStory = {
+  args: {
+    children: "BACKGROUND",
+    theme: ThemeButtonEnum.BACKGROUND,
+    disabled: true,
+  },
+  decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
+};
+
 export const BackgroundInverted_Normal: ButtonStory = {
   args: {
     children: "BACKGROUND_INVERTED",
@@ -89,3 +98,4 @@ export const Size_Extra_Large: ButtonStory = {
   },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
+

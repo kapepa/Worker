@@ -22,7 +22,7 @@ const Modal: FC<ModalProps> = ({ className, children, isOpen, onClose }) => {
   }
 
   const onEscape = useCallback((e: KeyboardEvent) => {
-      if( isOpen && e.key.toLowerCase() === "escape" ) onClose();
+      if( isOpen && e.key && e.key.toLowerCase() === "escape" ) onClose();
     }, [ isOpen, onClose ]
   );
 

@@ -13,7 +13,7 @@ interface LoginModalProps {
 const LoginModal: FC<LoginModalProps> = ({className, isOpen, onClose}) => {
   return (
     <Modal className={ClassNames(className, "login-modal")} isOpen={isOpen} onClose={onClose} data-testid="login-modal">
-      <LoginForm/>
+      <LoginForm onClose={onClose}/>
     </Modal>
   )
 }

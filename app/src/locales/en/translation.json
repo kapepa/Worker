@@ -8,6 +8,7 @@
     "about": "About"
   },
   "sign_in": "Sign in",
+  "logout": "Logout",
   "decrease": "Decrease",
   "increase": "Increase",
   "login-form": {
@@ -16,8 +17,11 @@
     "placeholder-user": "Your name",
     "placeholder-password": "Your password",
     "label": {
-      "name": "Name",
+      "username": "Username",
       "password": "Password"
+    },
+    "error": {
+      "error-login": "Your user data is incorrect."
     }
   },
   "form-error": {

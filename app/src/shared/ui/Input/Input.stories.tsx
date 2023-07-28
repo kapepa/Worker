@@ -13,7 +13,7 @@ type InputStory = StoryObj<typeof Input>;
 export const WhiteBGInverted: InputStory = {
   args: {
     placeholder:"placeholder",
-    label:"name",
+    label:"username",
     type:"text",
     name:"name",
     theme: BgInputEnum.WHITE_BG_INVERTED,
@@ -25,7 +25,7 @@ export const WhiteBGInverted: InputStory = {
 export const WhiteBG: InputStory = {
   args: {
     placeholder:"placeholder",
-    label:"name",
+    label:"username",
     type:"text",
     name:"name",
     theme: BgInputEnum.WHITE_BG_INVERTED,

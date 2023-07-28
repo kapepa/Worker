@@ -9,6 +9,7 @@ import ErrorBoundary from "./app/providers/ErrorBoundary";
 import {SideProvider} from './app/contexts/Side';
 import {Router} from "./app/providers/Routes";
 import {StoreProvider} from "./app/providers/Store";
+import {TokenProvider} from "./app/contexts/Token";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,9 +21,11 @@ root.render(
       <StoreProvider>
         <ThemeProvider>
           <SideProvider>
-            <App>
-              <Router/>
-            </App>
+            <TokenProvider>
+              <App>
+                <Router/>
+              </App>
+            </TokenProvider>
           </SideProvider>
         </ThemeProvider>
       </StoreProvider>

@@ -8,6 +8,7 @@
     "about": "О нас"
   },
   "sign_in": "Войти",
+  "logout": "Выйти",
   "decrease": "Снижаться",
   "increase": "Увеличивать",
   "login-form": {
@@ -16,8 +17,11 @@
     "placeholder-user": "Ваше имя",
     "placeholder-password": "Ваш пароль",
     "label": {
-      "name": "Имя",
+      "username": "Имя",
       "password": "Пароль"
+    },
+    "error": {
+      "error-login": "Ваши пользовательские данные неверны."
     }
   },
   "form-error": {
