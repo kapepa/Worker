@@ -7,7 +7,7 @@ const LoginByUser = createAsyncThunk<string, LoginTypes, { rejectValue: string }
   async (data: LoginTypes, { rejectWithValue }) => {
     try {
       const response = await Axios.post("/api/auth/login", data)
-      if (!response.data) throw new Error("Error login!");
+      if (!response.data) throw new Error("error-login");
       return response.data;
     } catch (e) {
       return rejectWithValue("error-login");

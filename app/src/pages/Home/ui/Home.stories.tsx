@@ -3,10 +3,11 @@ import Home from "./Home";
 import ThemeDecorator from '../../../shared/config/ThemeDecorator/ThemeDecorator';
 import { ThemeEnum } from '../../../app/contexts/Theme/lib/ThemeContext';
 import RouterDecorator from '../../../shared/config/RouterDecorator/RouterDecorator';
+import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
 
 const meta: Meta<typeof Home> = {
   component: Home,
-  decorators: [RouterDecorator],
+  decorators: [RouterDecorator, StoreDecorator({})],
 };
 
 export default meta;

@@ -13,7 +13,7 @@ export default meta;
 type NavbarStory = StoryObj<typeof Navbar>;
 
 export const NavbarNormal: NavbarStory = {
-	decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
+	decorators: [ThemeDecorator(ThemeEnum.NORMAL), ],
 };
 
 export const NavbarDark: NavbarStory = {

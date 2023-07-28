@@ -6,8 +6,8 @@ import {LoginByUser} from "../services/loginByUser/loginByUser";
 const initialState: AuthState = {
   loading: false,
   login: {
-    username: "admin",
-    password: "123456",
+    username: "",
+    password: "",
   },
   token: undefined,
   error: undefined,

@@ -21,10 +21,10 @@
     position: relative;
     border-radius: 6px;
     &--white-color{
-      color: var(--bg-color);
+      color: var(--bg-color-inverted);
     }
     &--white-color-inverted{
-      color: var(--bg-color-inverted);
+      color: var(--bg-color);
     }
   }
   &__label{

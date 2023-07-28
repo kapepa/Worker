@@ -1,5 +1,4 @@
 import {FC, ReactNode} from "react";
-// import Modal from "../../../shared/ui/Modal/Modal";
 
 interface ModalsLayoutProps {
   children: ReactNode,
