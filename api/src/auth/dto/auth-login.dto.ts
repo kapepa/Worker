@@ -1,11 +1,7 @@
 import {IsEmail, IsNotEmpty, MinLength} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
-export class AuthUsersDto {
-  @IsNotEmpty()
-  @ApiProperty()
-  readonly username: string;
-
+export class AuthLoginDto {
   @IsEmail()
   @ApiProperty()
   readonly email: string;
