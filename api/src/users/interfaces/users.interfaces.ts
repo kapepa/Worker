@@ -1,9 +1,7 @@
-export interface UsersInterfaces {
-  id: string,
-  username: string,
-}
-
-export interface UsersEntityInterfaces extends UsersInterfaces {
-  password: string,
-  isActive: boolean,
+export interface UsersEntityInterfaces {
+  id?: string,
+  username?: string,
+  email?: string
+  password?: string,
+  isActive?: boolean,
 }
