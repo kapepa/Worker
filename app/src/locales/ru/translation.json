@@ -15,10 +15,12 @@
     "login": "Авторизоваться",
     "send": "Отправлять",
     "placeholder-user": "Ваше имя",
+    "placeholder-email": "Ваша почта",
     "placeholder-password": "Ваш пароль",
     "label": {
       "username": "Имя",
-      "password": "Пароль"
+      "password": "Пароль",
+      "email": "Почта"
     },
     "error": {
       "error-login": "Ваши пользовательские данные неверны."

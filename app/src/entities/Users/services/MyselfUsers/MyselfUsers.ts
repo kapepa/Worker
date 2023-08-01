@@ -6,7 +6,7 @@ const MyselfUsers = createAsyncThunk<UsersTypes, undefined, { rejectValue: strin
   'users/MyselfUsers',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await Axios.get("/api/users/myself")
+      const response = await Axios.get("/api/users/profile")
       if (!response.data) throw new Error("error-user");
       return response.data;
     } catch (e) {
