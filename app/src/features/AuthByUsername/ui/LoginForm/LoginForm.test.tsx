@@ -5,8 +5,8 @@ import userEvent from '@testing-library/user-event';
 
 
 describe("<LoginForm/>", () => {
-  const mockName: string = "Name";
-  const mockPass: string = "Password";
+  const mockName: string = "my@email.come";
+  const mockPass: string = "123456";
 
   test("should be to have modal login", () => {
     ComponentRender(<LoginForm onClose={() => {}}/>)
@@ -15,7 +15,7 @@ describe("<LoginForm/>", () => {
 
   test("should be write down value in input", async () => {
     const { getByRole } = ComponentRender(<LoginForm onClose={() => {}} />);
-    const name = await getByRole("name");
+    const name = await getByRole("email");
     const pass = await getByRole("password");
 
     fireEvent.input(name, { target: { value: mockName } });
@@ -27,7 +27,7 @@ describe("<LoginForm/>", () => {
 
   test("should be submit form", async () => {
     const { getByRole, getByTestId } = ComponentRender(<LoginForm onClose={() => {}} />);
-    const name = await getByRole("name") as HTMLInputElement;
+    const name = await getByRole("email") as HTMLInputElement;
     const pass = await getByRole("password") as HTMLInputElement;
 
     await userEvent.type(name, mockName);

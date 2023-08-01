@@ -34,7 +34,7 @@ const Modal: FC<ModalProps> = ({ className, children, isOpen, onClose }) => {
   return (
     <PortalModal>
       <div className={ClassNames(className, "modal", mods)} data-testid="modal">
-        <div onClick={closeHandler} className="modal__overlay">
+        <div onMouseDown={closeHandler} className="modal__overlay">
           <div className="modal__content" >
             { children }
             <XClose cb={closeHandler} color={"BG_COLOR"} className="modal__x-close"/>
