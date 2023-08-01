@@ -15,10 +15,12 @@
     "login": "Login",
     "send": "Send",
     "placeholder-user": "Your name",
+    "placeholder-email": "Your email",
     "placeholder-password": "Your password",
     "label": {
       "username": "Username",
-      "password": "Password"
+      "password": "Password",
+      "email": "Email"
     },
     "error": {
       "error-login": "Your user data is incorrect."

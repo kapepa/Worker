@@ -1,4 +1,4 @@
-import {FC, ReactNode, useCallback, useEffect} from "react";
+import {FC, memo, ReactNode, useCallback, useEffect} from "react";
 import {LOCAL_STORAGE_TOKEN, TokenContext} from "./TokenContext";
 import {useDispatch, useSelector} from "react-redux";
 import {AuthActions, GetAuth} from "../../../../features/AuthByUsername";
@@ -10,7 +10,7 @@ interface TokenProviderProps {
   children: ReactNode,
 }
 
-const TokenProvider: FC<TokenProviderProps> = ({children}) => {
+const TokenProvider: FC<TokenProviderProps> = memo(({children}) => {
   const dispatch = useDispatch<AppDispatch>();
   const { cleanUsers } = UsersActions;
   const { token } = useSelector(GetAuth);
@@ -62,6 +62,6 @@ const TokenProvider: FC<TokenProviderProps> = ({children}) => {
       {children}
     </TokenContext.Provider>
   )
-}
+})
 
 export {TokenProvider};

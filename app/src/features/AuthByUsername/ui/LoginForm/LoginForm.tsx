@@ -23,11 +23,11 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
   const refForm = useRef<HTMLFormElement>(null);
   const dispatch = useDispatch<AppDispatch>();
   const { loading, error } = useSelector(GetAuth);
-  const { username, password } = useSelector(GetLogin);
+  const { email, password } = useSelector(GetLogin);
   const { setUsername, setPassword, cleanLogin } = AuthActions;
   const { t } = useTranslation();
   const { reset, register, handleSubmit, getFieldState, formState: { errors } } = useForm<LoginTypes>({
-    defaultValues: {username, password},
+    defaultValues: {email, password},
   });
 
   const resetForm = () => {
@@ -55,7 +55,7 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
     if(target.name === "username") dispatch(setUsername(target.value));
     if(target.name === "password") dispatch(setPassword(target.value));
 
-  }, [dispatch, setUsername, setPassword])
+  }, [dispatch, setUsername, setPassword]);
 
   return (
     <div className={ClassNames(className, "login-form__wrapper")}>
@@ -65,10 +65,10 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
         {!!error && <Text className="login-form__error" text={t(`login-form.error.${error}`)} theme={TextTheme.ERROR}/>}
         <Input
           onChange={onChangeLogin}
-          placeholder={t("login-form.placeholder-user")}
-          label={"username"}
-          type="text"
-          name="username"
+          placeholder={t("login-form.placeholder-email")}
+          label={"email"}
+          type="email"
+          name="email"
           getFieldState={getFieldState}
           register={register}
           required={true}
@@ -76,7 +76,7 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
           theme={BgInputEnum.WHITE_BG}
           color={ColorInputEnum.WHITE_COLOR}
           className="login-form__input"
-          role="name"
+          role="email"
         />
         <Input
           onChange={onChangeLogin}
