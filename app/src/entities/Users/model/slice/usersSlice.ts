@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {Action, createSlice, Reducer} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {UsersState} from "../types/usersState";
 import {MyselfUsers} from "../../services/MyselfUsers/MyselfUsers";
@@ -35,6 +35,6 @@ export const UsersSlice = createSlice({
 })
 
 const UsersActions = UsersSlice.actions;
-const UsersReducer = UsersSlice.reducer;
+const UsersReducer: Reducer = UsersSlice.reducer;
 
 export {UsersReducer, UsersActions};

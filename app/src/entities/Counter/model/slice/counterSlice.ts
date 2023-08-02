@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice, Reducer} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {CounterState} from "../types";
 
@@ -23,4 +23,4 @@ export const CounterSlice = createSlice({
 })
 
 export const CounterActions = CounterSlice.actions;
-export const CounterReducer = CounterSlice.reducer;
+export const CounterReducer: Reducer = CounterSlice.reducer;

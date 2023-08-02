@@ -1,4 +1,4 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
+import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import {StateSchema} from "./StateSchema";
 import {CounterReducer} from "../../../../entities/Counter";
 import {UsersReducer} from "../../../../entities/Users";
@@ -17,24 +17,27 @@ import {AuthReducer} from "../../../../features/AuthByUsername";
 //   return {...store, preloadedState};
 // }
 //
-// export type RootState = ReturnType<typeof store.getState>
-// export type AppDispatch = typeof store.dispatch
+// export type AppState = ReturnType<typeof store.getState>
+// export type AppDispatch = typeof store.dispatch;
+// export {CreateReduxStore};
 
-const rootReducer = combineReducers<StateSchema>({
+const storeReducers = combineReducers<StateSchema>({
   counter: CounterReducer,
   users: UsersReducer,
   auth: AuthReducer
-})
+});
 
-function CreateReduxStore(preloadedState?: StateSchema) {
-  return configureStore({
-    reducer: rootReducer,
+
+function CreateReduxStore (preloadedState?: StateSchema) {
+  return configureStore<StateSchema>({
+    reducer: storeReducers,
     preloadedState,
     devTools: true,
   });
 }
 
-export type AppState = ReturnType<typeof rootReducer>
+export type AppState = ReturnType<typeof storeReducers>;
 export type AppDispatch = ReturnType<typeof CreateReduxStore>["dispatch"];
 export {CreateReduxStore};
+
 
