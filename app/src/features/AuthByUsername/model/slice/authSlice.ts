@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice, Reducer} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {AuthState} from "../types/AuthState";
 import {LoginByUser} from "../services/loginByUser/loginByUser";
@@ -49,6 +49,6 @@ export const AuthSlice = createSlice({
 })
 
 const AuthActions = AuthSlice.actions;
-const AuthReducer = AuthSlice.reducer;
+const AuthReducer: Reducer = AuthSlice.reducer;
 
 export {AuthActions, AuthReducer};

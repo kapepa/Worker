@@ -20,4 +20,4 @@ const About: FC = () => {
   )
 };
 
-export default About;
+export {About};

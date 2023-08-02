@@ -1,4 +1,4 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import {StoreProvider} from "./StoreProvider";
 import {StateSchema} from "../config/StateSchema";
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import About from "./About";
+import { About } from "./About";
 import ComponentRender from "../../../shared/test/componentRender";
 
 jest.mock("../../../widgets/Navbar", () => jest.fn(() => {

@@ -1,3 +1,4 @@
-import About from "./ui/About";
+import {About} from "./ui/About";
+import {AboutAsync} from "./ui/About.async";
 
-export default About;
+export {About, AboutAsync};
