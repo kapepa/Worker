@@ -4,7 +4,7 @@ import {AuthState} from "../../types/AuthState";
 
 const GetLogin = createSelector(
   GetAuth,
-  (state: AuthState) => state.login,
+  (state: AuthState) => state?.login,
 )
 
 export {GetLogin};

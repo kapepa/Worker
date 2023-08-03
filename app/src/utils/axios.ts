@@ -5,4 +5,4 @@ const Axios = axios.create({
   baseURL: config.api,
 });
 
-export {Axios};
+export default Axios;

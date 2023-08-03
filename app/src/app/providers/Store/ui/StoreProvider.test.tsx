@@ -1,4 +1,4 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import {StoreProvider} from "./StoreProvider";
 import {StateSchema} from "../config/StateSchema";
 
@@ -9,5 +9,12 @@ describe("<StoreProvider/>", () => {
       expect(state.users).toEqual(mockState.users)
     };
     render(<StoreProvider children={<div/>} preloadedState={mockState} getState={getState}/>);
+  })
+
+  test("should be return undefined", () => {
+    const getState = (state: StateSchema) => {
+      expect(state.users.data).toBeUndefined();
+    };
+    render(<StoreProvider children={<div/>} getState={getState}/>);
   })
 })

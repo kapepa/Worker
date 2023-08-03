@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import About from "./About";
+import { About } from "./About";
 import ThemeDecorator from '../../../shared/config/ThemeDecorator/ThemeDecorator';
 import { ThemeEnum } from '../../../app/contexts/Theme/lib/ThemeContext';
 import RouterDecorator from '../../../shared/config/RouterDecorator/RouterDecorator';
