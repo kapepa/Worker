@@ -2,7 +2,7 @@ import {FC, memo, ReactNode, useCallback, useEffect} from "react";
 import {LOCAL_STORAGE_TOKEN, TokenContext} from "./TokenContext";
 import {useDispatch, useSelector} from "react-redux";
 import {AuthActions, GetAuth} from "../../../../features/AuthByUsername";
-import {Axios} from "../../../../utils/axios";
+import Axios from "../../../../utils/axios";
 import {MyselfUsers, UsersActions} from "../../../../entities/Users";
 import {AppDispatch} from "../../../providers/Store/config/store";
 

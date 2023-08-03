@@ -6,6 +6,7 @@ import {LoginByUser} from "../services/loginByUser/loginByUser";
 const initialState: AuthState = {
   loading: false,
   login: {
+    email: "",
     username: "",
     password: "",
   },
@@ -17,6 +18,9 @@ export const AuthSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    setEmail(state, action: PayloadAction<string>) {
+      state.login.email = action.payload;
+    },
     setUsername(state, action: PayloadAction<string>) {
       state.login.username = action.payload;
     },
@@ -24,7 +28,7 @@ export const AuthSlice = createSlice({
       state.login.password = action.payload;
     },
     cleanLogin(state) {
-      state.login = {username: "", password: ""};
+      state.login = {email: "", username: "", password: ""};
     },
     cleanToken(state) {
       state.token = undefined;

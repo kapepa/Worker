@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {LoginTypes} from "../../types/loginTypes";
-import {Axios} from "../../../../../utils/axios";
+import Axios from "../../../../../utils/axios";
 
 const LoginByUser = createAsyncThunk<{access_token: string}, LoginTypes, { rejectValue: string }>(
   'login/LoginByUser',

@@ -10,4 +10,11 @@ describe("<StoreProvider/>", () => {
     };
     render(<StoreProvider children={<div/>} preloadedState={mockState} getState={getState}/>);
   })
+
+  test("should be return undefined", () => {
+    const getState = (state: StateSchema) => {
+      expect(state.users.data).toBeUndefined();
+    };
+    render(<StoreProvider children={<div/>} getState={getState}/>);
+  })
 })

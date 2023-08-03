@@ -24,7 +24,7 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
   const dispatch = useDispatch<AppDispatch>();
   const { loading, error } = useSelector(GetAuth);
   const { email, password } = useSelector(GetLogin);
-  const { setUsername, setPassword, cleanLogin } = AuthActions;
+  const { setEmail, setPassword, cleanLogin } = AuthActions;
   const { t } = useTranslation();
   const { reset, register, handleSubmit, getFieldState, formState: { errors } } = useForm<LoginTypes>({
     defaultValues: {email, password},
@@ -52,10 +52,10 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
   const onChangeLogin = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
 
-    if(target.name === "username") dispatch(setUsername(target.value));
+    if(target.name === "username") dispatch(setEmail(target.value));
     if(target.name === "password") dispatch(setPassword(target.value));
 
-  }, [dispatch, setUsername, setPassword]);
+  }, [dispatch, setEmail, setPassword]);
 
   return (
     <div className={ClassNames(className, "login-form__wrapper")}>
