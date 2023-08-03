@@ -1,4 +1,4 @@
-import {Action, createSlice, Reducer} from '@reduxjs/toolkit'
+import {createSlice, Reducer} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {UsersState} from "../types/usersState";
 import {MyselfUsers} from "../../services/MyselfUsers/MyselfUsers";
