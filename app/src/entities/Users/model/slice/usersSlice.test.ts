@@ -1,12 +1,17 @@
-import {DeepPartial} from "@reduxjs/toolkit";
-import {UsersReducer, UsersState} from "../../../Users";
-import {CounterActions} from "../../../Counter/model/slice/counterSlice";
+import {UsersReducer, UsersActions, UsersState} from "../../../Users";
 
 describe("UsersReducer", () => {
-  // const mockUsers: UsersState = {id: "1", username: "UserMock"}
+  const state: UsersState = {
+    loading: false,
+    data: undefined,
+    error: undefined,
+  }
+  const mockUser = {
+    id: "MyId", email: "mock@email.com", username: "MyName",
+  }
 
   test("default state", () => {
-    // expect(UsersReducer(undefined, CounterActions.increment())).toEqual({ value: 1 })
-    expect(true).toBeTruthy()
+    expect(UsersReducer({...state, data: mockUser}, UsersActions.cleanUsers()))
+      .toEqual(state);
   })
 })
