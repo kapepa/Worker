@@ -1,4 +1,4 @@
-export interface UsersEntityInterfaces {
+export interface ProfileTypes {
   id?: string,
   username?: string,
   firstname?: string,

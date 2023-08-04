@@ -1,4 +1,4 @@
-import {ButtonHTMLAttributes, FC, ReactNode} from "react"
+import {ButtonHTMLAttributes, FC, memo, ReactNode} from "react"
 import "./Button.scss";
 import {ClassNames} from "../../lib/ClassNames";
 
@@ -25,7 +25,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
   disabled?: boolean,
 }
 
-const Button: FC<ButtonProps> = (
+const Button: FC<ButtonProps> = memo((
   {className, theme = ThemeButtonEnum.CLEAR, disabled = false, size = SizeButton.M, children, ...otherProps}
 ) => {
   return (
@@ -38,6 +38,6 @@ const Button: FC<ButtonProps> = (
       {children}
     </button>
   )
-}
+})
 
 export default Button;

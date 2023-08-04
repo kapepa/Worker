@@ -4,7 +4,7 @@ import {StateSchema} from "../config/StateSchema";
 
 describe("<StoreProvider/>", () => {
   test("should be return base state.", () => {
-    const mockState = { users: { loading: false, data: { id: "1", username: "MyName" } } } as StateSchema
+    const mockState = { users: { loading: false, profile: { id: "1", username: "MyName" } } } as StateSchema
     const getState = (state: StateSchema) => {
       expect(state.users).toEqual(mockState.users)
     };
@@ -13,7 +13,7 @@ describe("<StoreProvider/>", () => {
 
   test("should be return undefined", () => {
     const getState = (state: StateSchema) => {
-      expect(state.users.data).toBeUndefined();
+      expect(state.users.profile).toBeUndefined();
     };
     render(<StoreProvider children={<div/>} getState={getState}/>);
   })

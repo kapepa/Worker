@@ -3,7 +3,7 @@ import {UsersState} from "./model/types/usersState";
 import {GetUsers} from "./selectors/getUsers/getUsers";
 import {UsersTypes} from "./model/types/usersTypes";
 import {MyselfUsers} from "./services/MyselfUsers/MyselfUsers";
-import {GetUsersMyself} from "./selectors/getUsersMyself/getUsersMyself";
+import {GetUsersProfile} from "./selectors/getUsersProfile/getUsersProfile";
 
-export {UsersReducer, GetUsers, UsersActions, MyselfUsers, GetUsersMyself};
+export {UsersReducer, GetUsers, UsersActions, MyselfUsers, GetUsersProfile};
 export type {UsersState, UsersTypes};

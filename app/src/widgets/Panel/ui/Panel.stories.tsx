@@ -21,5 +21,5 @@ export const PanelDark: PanelStory = {
 };
 
 export const PanelDarkIsLogin: PanelStory = {
-	decorators: [ThemeDecorator(ThemeEnum.DARK), StoreDecorator({users: {data: {id: "1", username: "MyName"}}})],
+	decorators: [ThemeDecorator(ThemeEnum.DARK), StoreDecorator({users: {profile: {id: "1", username: "MyName"}}})],
 };

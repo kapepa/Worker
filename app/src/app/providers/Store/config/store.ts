@@ -3,6 +3,7 @@ import {StateSchema} from "./StateSchema";
 import {CounterReducer} from "../../../../entities/Counter";
 import {UsersReducer} from "../../../../entities/Users";
 import {AuthReducer} from "../../../../features/AuthByUsername";
+import {ProfileReducer} from "../../../../entities/Profile";
 
 // const store = configureStore<StateSchema>({
 //   reducer: {
@@ -24,7 +25,8 @@ import {AuthReducer} from "../../../../features/AuthByUsername";
 const storeReducers = combineReducers<StateSchema>({
   counter: CounterReducer,
   users: UsersReducer,
-  auth: AuthReducer
+  auth: AuthReducer,
+  profile: ProfileReducer,
 });
 
 
