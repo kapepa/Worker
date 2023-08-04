@@ -5,7 +5,8 @@
   "refresh-page": "Refresh the page.",
   "nav": {
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "profile": "Profile"
   },
   "sign_in": "Sign in",
   "logout": "Logout",

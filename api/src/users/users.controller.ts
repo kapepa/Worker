@@ -1,7 +1,7 @@
 import {Controller, Get, HttpStatus, Req, UseGuards} from '@nestjs/common';
 import {UsersService} from "./users.service";
 import {AuthGuard} from "../auth/guard/auth.guard";
-import {Observable} from "rxjs";
+import {Observable, of, switchMap} from "rxjs";
 import {UsersEntityInterfaces} from "./interfaces/users.interfaces";
 import {ApiForbiddenResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
 
@@ -16,6 +16,15 @@ export class UsersController {
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   getProfile(@Req() req): Observable<UsersEntityInterfaces> {
     return this.usersService.findOne({where: { id: req.user.id }});
+  }
+
+  @Get('/profile-full')
+  getProfileFull(@Req() req){
+    return this.usersService.findOne({where: { id: req.user.id }}).pipe(
+      switchMap((user) => {
+        return of({...user, })
+      })
+    );
   }
 
 }

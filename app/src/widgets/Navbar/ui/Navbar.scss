@@ -7,7 +7,6 @@
   &__link{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     column-gap: 20px;
     flex-wrap: wrap;
@@ -17,6 +16,8 @@
   }
   &__symbol{
     font: var(--font-m);
+    flex: 1 1 auto;
+    text-align: center;
   }
   &__ico{
     max-width: 30px;

@@ -6,7 +6,7 @@ import {UsersTypes} from "../types/usersTypes";
 
 const initialState: UsersState = {
   loading: false,
-  data: undefined,
+  profile: undefined,
   error: undefined,
 }
 
@@ -15,7 +15,7 @@ export const UsersSlice = createSlice({
   initialState,
   reducers: {
     cleanUsers(state) {
-      state.data = undefined;
+      state.profile = undefined;
     }
   },
   extraReducers: (builder) => {
@@ -25,7 +25,7 @@ export const UsersSlice = createSlice({
       })
       .addCase(MyselfUsers.fulfilled, (state, action: PayloadAction<UsersTypes>) => {
         state.loading = false;
-        state.data = action.payload;
+        state.profile = action.payload;
       })
       .addCase(MyselfUsers.rejected, (state, action) => {
         state.loading = false;

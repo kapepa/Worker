@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, memo} from "react";
 import "./XClose.scss";
 import {ClassNames} from "../../lib/ClassNames";
 
@@ -17,8 +17,8 @@ interface XCloseProps{
   color: keyof typeof ColorCloseEnum
 }
 
-const XClose: FC<XCloseProps> = ({cb, className, color = "BG_COLOR" }) => {
+const XClose: FC<XCloseProps> = memo(({cb, className, color = "BG_COLOR" }) => {
   return <button onClick={cb} className={ClassNames("x-close", className, `x-close--${ColorCloseEnum[color]}` )} data-testid="x-close" />
-}
+})
 
 export default XClose;

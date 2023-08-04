@@ -3,7 +3,7 @@ import {UsersReducer, UsersActions, UsersState} from "../../../Users";
 describe("UsersReducer", () => {
   const state: UsersState = {
     loading: false,
-    data: undefined,
+    profile: undefined,
     error: undefined,
   }
   const mockUser = {
@@ -11,7 +11,7 @@ describe("UsersReducer", () => {
   }
 
   test("default state", () => {
-    expect(UsersReducer({...state, data: mockUser}, UsersActions.cleanUsers()))
+    expect(UsersReducer({...state, profile: mockUser}, UsersActions.cleanUsers()))
       .toEqual(state);
   })
 })
