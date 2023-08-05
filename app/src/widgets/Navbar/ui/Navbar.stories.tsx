@@ -3,10 +3,11 @@ import Navbar from "./Navbar";
 import ThemeDecorator from '../../../shared/config/ThemeDecorator/ThemeDecorator';
 import RouterDecorator from '../../../shared/config/RouterDecorator/RouterDecorator';
 import { ThemeEnum } from '../../../app/contexts/Theme/lib/ThemeContext';
+import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
 
 const meta: Meta<typeof Navbar> = {
   component: Navbar,
-  decorators: [RouterDecorator],
+  decorators: [RouterDecorator, StoreDecorator({})],
 };
 
 export default meta;

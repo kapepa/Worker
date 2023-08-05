@@ -2,12 +2,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import React, {ElementType, lazy, Suspense} from "react";
 import PageLoader from "../../../../widgets/PageLoader";
 import App from "../../../App";
-
-enum RouterPath {
-  HOME = "/",
-  PROFILE = "/profile",
-  ABOUT = "/about",
-}
+import {RouterPath} from "../../../../shared/const/Routers";
 
 const Loadable = (Component: ElementType) =>
   function fn(props: any) {
@@ -57,4 +52,4 @@ export function Router() {
   )
 }
 
-export {routers, RouterPath};
+export {routers};

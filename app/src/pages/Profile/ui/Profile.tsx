@@ -1,16 +1,17 @@
 import {FC, useEffect} from "react";
 import "./Profile.scss";
 import {useTranslation} from "react-i18next";
-import {ProfileRequest} from "../../../entities/Profile";
-import {useDispatch} from "react-redux";
+import {GetProfile, ProfileRequest} from "../../../entities/Profile";
+import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../../app/providers/Store/config/store";
 
 const Profile: FC = function () {
   const { t } = useTranslation("profile");
   const dispatch = useDispatch<AppDispatch>();
+  const { data } = useSelector(GetProfile);
 
   useEffect(() => {
-    dispatch(ProfileRequest());
+    if(!data) dispatch(ProfileRequest());
   },[dispatch]);
 
   return (

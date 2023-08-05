@@ -1,3 +1,3 @@
-import {Router, RouterPath} from "./ui/Router";
+import {Router} from "./ui/Router";
 
-export { Router, RouterPath };
+export { Router };
