@@ -1,6 +1,7 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import React, {ElementType, lazy, Suspense} from "react";
 import PageLoader from "../../../../widgets/PageLoader";
+import App from "../../../App";
 
 enum RouterPath {
   HOME = "/",
@@ -27,24 +28,33 @@ const ErrorPage = Loadable(lazy(() => import("../../../../pages/Error")));
 const routers = createBrowserRouter([
   {
     path: RouterPath.HOME,
-    element: <HomePage />,
-  },
-  {
-    path: RouterPath.ABOUT,
-    element: <AboutPage />,
-  },
-  {
-    path: RouterPath.PROFILE,
-    element: <ProfilePage />,
-  },
-  {
-    path: "*",
-    element: <ErrorPage/>
+    element: <App />,
+    errorElement: <ErrorPage/>,
+    children: [
+      {
+        path: RouterPath.HOME,
+        element: <HomePage />,
+      },
+      {
+        path: RouterPath.ABOUT,
+        element: <AboutPage />,
+      },
+      {
+        path: RouterPath.PROFILE,
+        element: <ProfilePage />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage/>
+      },
+    ]
   },
 ]);
 
 export function Router() {
-  return <RouterProvider router={routers} />
+  return (
+    <RouterProvider router={routers} />
+  )
 }
 
 export {routers, RouterPath};

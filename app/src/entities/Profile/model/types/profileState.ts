@@ -1,7 +1,7 @@
 import {ProfileTypes} from "./profileTypes";
 
 export interface ProfileState {
-  loading: false,
+  loading: boolean,
   data: ProfileTypes | undefined,
   error: string | undefined,
 }

@@ -18,13 +18,12 @@ export class UsersController {
     return this.usersService.findOne({where: { id: req.user.id }});
   }
 
+  @UseGuards(AuthGuard)
   @Get('/profile-full')
+  @ApiResponse({ status: 200, description: 'Get full user data'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   getProfileFull(@Req() req){
-    return this.usersService.findOne({where: { id: req.user.id }}).pipe(
-      switchMap((user) => {
-        return of({...user, })
-      })
-    );
+    return this.usersService.findOne({where: { id: req.user.id }});
   }
 
 }
