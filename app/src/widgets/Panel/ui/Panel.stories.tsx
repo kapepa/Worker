@@ -3,10 +3,11 @@ import Panel from "./Panel";
 import ThemeDecorator from '../../../shared/config/ThemeDecorator/ThemeDecorator';
 import { ThemeEnum } from '../../../app/contexts/Theme/lib/ThemeContext';
 import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
+import RouterDecorator from "../../../shared/config/RouterDecorator/RouterDecorator";
 
 const meta: Meta<typeof Panel> = {
   component: Panel,
-	decorators: [StoreDecorator({})],
+	decorators: [RouterDecorator, StoreDecorator({})],
 };
 
 export default meta;

@@ -8,13 +8,7 @@ function Error () {
 
   return (
     <div className="error" data-testid="error">
-      <Panel/>
-      <div className="content-page">
-        <Sidebar className=""/>
-        <main className="content-main error__main">
-          {t("error page 404")}
-        </main>
-      </div>
+      {t("error page 404")}
     </div>
   )
 };

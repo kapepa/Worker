@@ -7,7 +7,7 @@ import {ThemeEnum} from "../../../app/contexts/Theme/lib/ThemeContext";
 
 const meta: Meta<typeof Profile> = {
   component: Profile,
-  decorators: [RouterDecorator, StoreDecorator({})],
+  decorators: [RouterDecorator, StoreDecorator({profile: {data: {id: "MyID", username: "MyName"}}})],
 };
 
 export default meta;

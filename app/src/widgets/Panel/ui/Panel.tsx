@@ -1,4 +1,4 @@
-import {FC, useCallback, useState} from "react";
+import {FC, memo, useCallback, useState} from "react";
 import "./Panel.scss";
 import { ClassNames } from "../../../shared/lib/ClassNames";
 import Button from "../../../shared/ui/Button/Button";
@@ -8,13 +8,13 @@ import {UseToken} from "../../../app/contexts/Token";
 import {useSelector} from "react-redux";
 import {GetUsersProfile} from "../../../entities/Users";
 import AppLink, {AppLinkTheme} from "../../../shared/ui/AppLink/AppLink";
-import {RouterPath} from "../../../app/providers/Routes";
+import {RouterPath} from "../../../shared/const/Routers";
 
 interface PanelProps {
 	classNames?: string,
 }
 
-const Panel: FC<PanelProps> = ({classNames}) => {
+const Panel: FC<PanelProps> = memo(({classNames}) => {
 	const { logout } = UseToken();
 	const userProfile = useSelector(GetUsersProfile);
 	const [open, setOpen] = useState<boolean>(false);
@@ -35,6 +35,6 @@ const Panel: FC<PanelProps> = ({classNames}) => {
 			<LoginModal isOpen={open} onClose={onCloseModal}/>
 		</div>
 	)
-}
+})
 
 export default Panel;
