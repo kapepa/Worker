@@ -1,20 +1,21 @@
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import "./Profile.scss";
-import Panel from "../../../widgets/Panel";
-import Sidebar from "../../../widgets/Sidebar";
 import {useTranslation} from "react-i18next";
+import {ProfileRequest} from "../../../entities/Profile";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../../app/providers/Store/config/store";
 
 const Profile: FC = function () {
-  const { t } = useTranslation("profile")
+  const { t } = useTranslation("profile");
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(ProfileRequest());
+  },[dispatch]);
+
   return (
     <div className="profile" data-testid="profile">
-      <Panel/>
-      <div className="content-page">
-        <Sidebar className=""/>
-        <main className="content-main profile__main">
-          {t("profile page")}
-        </main>
-      </div>
+      {t("profile page")}
     </div>
   )
 }

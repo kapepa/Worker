@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/481.ef5de957.chunk.css","mappings":"AACA","sources":["webpack://app/./src/pages/Home/ui/Home.scss"],"sourcesContent":[".home{\r\n  &__sidebar{\r\n    flex: 1 1 auto;\r\n  }\r\n  &__main{\r\n    flex: 1 1 auto;\r\n  }\r\n}"],"names":[],"sourceRoot":""}

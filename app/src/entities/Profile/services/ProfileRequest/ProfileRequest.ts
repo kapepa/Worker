@@ -6,7 +6,7 @@ const ProfileRequest = createAsyncThunk<ProfileTypes, undefined, { rejectValue: 
   'profile/ProfileRequest',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await Axios.get("/api/users/profile-full")
+      const response = await Axios.get("/api/users/profile-full");
       if (!response.data) throw new Error("error-profile");
       return response.data;
     } catch (e) {

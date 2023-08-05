@@ -19,7 +19,7 @@ const Modal: FC<ModalProps> = ({ className, children, isOpen, onClose }) => {
 
   const mods: Record<string, boolean> = {
     "modal--open": isOpen,
-  }
+  };
 
   const onEscape = useCallback((e: KeyboardEvent) => {
       if( isOpen && e.key && e.key.toLowerCase() === "escape" ) onClose();

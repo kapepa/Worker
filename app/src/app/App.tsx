@@ -1,20 +1,23 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import ModalsLayout from "./layout/ModalsLayout/ModalsLayout";
+import Panel from "../widgets/Panel";
+import Sidebar from "../widgets/Sidebar";
+import { Outlet } from "react-router-dom";
 
-interface AppProps {
-  children: React.ReactNode
-}
-
-function App({children}: AppProps) {
+function App() {
   return (
-    <div
-      data-testid="app"
-    >
-      <ModalsLayout>
-        {children}
-      </ModalsLayout>
-    </div>
+    <ModalsLayout>
+      <div className="app-base" data-testid="app">
+        <Panel/>
+        <div className="content-page">
+          <Sidebar className=""/>
+          <main className="content-main app-base__main">
+            <Outlet/>
+          </main>
+        </div>
+      </div>
+    </ModalsLayout>
   );
 }
 

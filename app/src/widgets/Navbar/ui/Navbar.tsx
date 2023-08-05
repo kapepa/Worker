@@ -19,17 +19,29 @@ const Navbar: FC<NavbarProps> = memo(({className}) => {
   const { open } = UseSide();
 
   return (
-    <div data-testid="navbar" className={ClassNames("navbar", className)} >
+    <div className={ClassNames("navbar", className)} data-testid="navbar">
       <nav className="navbar__nav">
-        <AppLink className={ClassNames("navbar__link", {"navbar__link--squeeze": open})} theme={AppLinkTheme.SECONDARY} to={RouterPath.HOME}>
+        <AppLink
+          className={ClassNames("navbar__link", {"navbar__link--squeeze": open})}
+          theme={AppLinkTheme.SECONDARY} to={RouterPath.HOME}
+          role="link"
+        >
           <IcoImg className="navbar__ico" ico={"HomeIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
           <span className="navbar__symbol">{t("nav.home")}</span>
         </AppLink>
-        <AppLink className={ClassNames("navbar__link", {"navbar__link--squeeze": open})} theme={AppLinkTheme.SECONDARY} to={RouterPath.ABOUT}>
+        <AppLink
+          className={ClassNames("navbar__link", {"navbar__link--squeeze": open})}
+          theme={AppLinkTheme.SECONDARY} to={RouterPath.ABOUT}
+          role="link"
+        >
           <IcoImg className="navbar__ico" ico={"AboutIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
           <span className="navbar__symbol">{t("nav.about")}</span>
         </AppLink>
-        { !!profile && <AppLink className={ClassNames("navbar__link", {"navbar__link--squeeze": open})} theme={AppLinkTheme.SECONDARY} to={RouterPath.PROFILE}>
+        { !!profile && <AppLink
+          className={ClassNames("navbar__link", {"navbar__link--squeeze": open})}
+          theme={AppLinkTheme.SECONDARY} to={RouterPath.PROFILE}
+          role="link"
+        >
           <IcoImg className="navbar__ico" ico={"ProfileIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
           <span className="navbar__symbol">{t("nav.profile")}</span>
         </AppLink> }
