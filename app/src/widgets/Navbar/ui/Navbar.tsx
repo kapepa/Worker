@@ -5,7 +5,7 @@ import AppLink, {AppLinkTheme} from "../../../shared/ui/AppLink/AppLink";
 import { useTranslation } from "react-i18next";
 import IcoImg, { IcoImgColor } from "../../../shared/ui/IcoImg/IcoImg";
 import { UseSide } from "../../../app/contexts/Side";
-import {RouterPath} from "../../../app/providers/Routes";
+import {RouterPath} from "../../../shared/const/Routers";
 import {useSelector} from "react-redux";
 import {GetUsers} from "../../../entities/Users";
 

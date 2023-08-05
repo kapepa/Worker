@@ -5,10 +5,11 @@ import { ThemeEnum } from '../../../app/contexts/Theme/lib/ThemeContext';
 import RouterDecorator from '../../../shared/config/RouterDecorator/RouterDecorator';
 import "../../../shared/assets/icons/main-20-20.svg";
 import "../../../shared/assets/icons/about-20-20.svg";
+import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
 
 const meta: Meta<typeof Sidebar> = {
   component: Sidebar,
-  decorators: [RouterDecorator],
+  decorators: [RouterDecorator, StoreDecorator({})],
 };
 
 export default meta;

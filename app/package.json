@@ -46,7 +46,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "loki": "npx loki",
-    "loki:test": "loki test",
+    "loki:test": "npx loki test",
     "loki:approve": "npx loki approve",
     "test:unit": "react-scripts test --watchAll=false",
     "test:loki": "npx loki test",
