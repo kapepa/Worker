@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './app/styles/index.scss';
 import reportWebVitals from './reportWebVitals';
-import App from "./app/App";
 import {ThemeProvider} from "./app/contexts/Theme";
 import "./i18n";
 import ErrorBoundary from "./app/providers/ErrorBoundary";
@@ -22,9 +21,7 @@ root.render(
         <ThemeProvider>
           <SideProvider>
             <TokenProvider>
-              <App>
-                <Router/>
-              </App>
+              <Router />
             </TokenProvider>
           </SideProvider>
         </ThemeProvider>

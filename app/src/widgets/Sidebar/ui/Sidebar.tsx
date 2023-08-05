@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, memo} from "react";
 import "./Sidebar.scss";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import ThemeSwitcher from "../../../shared/ui/ThemeSwitcher/ThemeSwitcher";
@@ -11,7 +11,7 @@ interface SidebarProps {
   className?: string,
 }
 
-const Sidebar: FC<SidebarProps> = ({className}) => {
+const Sidebar: FC<SidebarProps> = memo(({className}) => {
   const { open, toggleSide } = UseSide();
   const onToggle = () => toggleSide();
 
@@ -35,6 +35,6 @@ const Sidebar: FC<SidebarProps> = ({className}) => {
       </div>
     </aside>
   )
-}
+})
 
 export default Sidebar;

@@ -1,6 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 import {UsersEntityInterfaces} from "../interfaces/users.interfaces";
-import {Exclude} from "class-transformer";
 
 @Entity()
 export class UsersEntity implements UsersEntityInterfaces {
@@ -10,11 +9,26 @@ export class UsersEntity implements UsersEntityInterfaces {
   @Column()
   username: string;
 
+  @Column({ default: "" })
+  firstname: string;
+
+  @Column({ default: "" })
+  lastname: string;
+
   @Column()
   email: string
 
   @Column({ select: false })
   password: string;
+
+  @Column({ default: "" })
+  avatar: string
+
+  @Column({ default: "" })
+  country: string
+
+  @Column({ default: "" })
+  city: string
 
   @Column({ default: false , select: false})
   isActive: boolean;

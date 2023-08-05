@@ -1,7 +1,12 @@
 export interface UsersEntityInterfaces {
   id?: string,
   username?: string,
-  email?: string
+  firstname?: string,
+  lastname?: string,
+  email?: string,
   password?: string,
+  avatar?: string,
+  country?: string,
+  city?: string,
   isActive?: boolean,
 }

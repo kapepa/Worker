@@ -1,9 +1,9 @@
-import React, {FC} from "react";
+import React, {FC, memo} from "react";
 import "./ErrorPage.scss";
 import {useTranslation} from "react-i18next";
 import Button, {ThemeButtonEnum} from "../Button/Button";
 
-const ErrorPage: FC = () => {
+const ErrorPage: FC = memo(() => {
   const { t } = useTranslation();
 
   const reloadPage = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -18,6 +18,6 @@ const ErrorPage: FC = () => {
       </Button>
     </div>
   )
-}
+})
 
 export default ErrorPage;

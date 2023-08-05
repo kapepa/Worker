@@ -1,4 +1,4 @@
-import {FC, InputHTMLAttributes} from "react";
+import {FC, InputHTMLAttributes, memo} from "react";
 import "./Input.scss";
 import {ClassNames} from "../../lib/ClassNames";
 import {Path, UseFormRegister} from "react-hook-form";
@@ -28,7 +28,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   color: ColorInputEnum,
 }
 
-const Input: FC<InputProps> = (
+const Input: FC<InputProps> = memo((
   {className, register, label, getFieldState, required, maxLength, minLength, theme, color, ...otherProps}
 ) => {
   const {t} = useTranslation();
@@ -48,6 +48,6 @@ const Input: FC<InputProps> = (
       }
     </div>
   )
-}
+})
 
 export {Input};

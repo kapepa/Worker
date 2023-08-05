@@ -1,13 +1,15 @@
-import React, { FC } from "react";
+import React, {FC, memo} from "react";
 import "./IcoImg.scss";
 import { ClassNames } from "../../lib/ClassNames";
 
 import { ReactComponent as HomeIco } from "../../assets/icons/main-20-20.svg";
 import { ReactComponent as AboutIco } from "../../assets/icons/about-20-20.svg";
+import { ReactComponent as ProfileIco } from "../../assets/icons/profile-20-20.svg";
 
 enum IcoNameEnum {
   HomeIco,
   AboutIco,
+  ProfileIco,
 }
 
 export enum IcoImgColor {
@@ -26,11 +28,12 @@ interface IcoImgProps {
   color?: IcoImgColor,
 }
 
-const IcoImg: FC<IcoImgProps> = ({ className, ico, img, fill, color, alt="" }) => {
+const IcoImg: FC<IcoImgProps> = memo(({ className, ico, img, fill, color, alt="" }) => {
 
   const icoList: Record<keyof typeof IcoNameEnum, React.FunctionComponent<React.SVGProps<SVGSVGElement> & {title?: string | undefined}> > = {  
     "HomeIco": HomeIco,
     "AboutIco": AboutIco,
+    "ProfileIco": ProfileIco,
   }
   
   if(!!ico) {
@@ -49,6 +52,6 @@ const IcoImg: FC<IcoImgProps> = ({ className, ico, img, fill, color, alt="" }) =
       />
     </div>
   )
-}
+})
 
 export default IcoImg

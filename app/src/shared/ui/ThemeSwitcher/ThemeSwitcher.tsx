@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, memo} from "react";
 import "./ThemeSwitcher.scss";
 import {UseTheme} from "../../../app/contexts/Theme";
 import {ClassNames} from "../../lib/ClassNames";
@@ -11,7 +11,7 @@ interface ThemeSwitcherProps {
   className?: string;
 }
 
-const ThemeSwitcher: FC<ThemeSwitcherProps> = ({className}) => {
+const ThemeSwitcher: FC<ThemeSwitcherProps> = memo(({className}) => {
   const {theme, toggleTheme} = UseTheme();
 
   return (
@@ -24,6 +24,6 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({className}) => {
       {theme === ThemeEnum.DARK && <img src={DarkTheme} alt={'Theme'}/>}
     </Button>
   )
-}
+})
 
 export default ThemeSwitcher;

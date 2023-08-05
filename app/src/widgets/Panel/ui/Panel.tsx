@@ -6,7 +6,9 @@ import {useTranslation} from "react-i18next";
 import {LoginModal} from "../../../features/AuthByUsername";
 import {UseToken} from "../../../app/contexts/Token";
 import {useSelector} from "react-redux";
-import {GetUsersMyself} from "../../../entities/Users";
+import {GetUsersProfile} from "../../../entities/Users";
+import AppLink, {AppLinkTheme} from "../../../shared/ui/AppLink/AppLink";
+import {RouterPath} from "../../../app/providers/Routes";
 
 interface PanelProps {
 	classNames?: string,
@@ -14,7 +16,7 @@ interface PanelProps {
 
 const Panel: FC<PanelProps> = ({classNames}) => {
 	const { logout } = UseToken();
-	const userMyself = useSelector(GetUsersMyself);
+	const userProfile = useSelector(GetUsersProfile);
 	const [open, setOpen] = useState<boolean>(false);
 	const { t } = useTranslation();
 
@@ -28,8 +30,8 @@ const Panel: FC<PanelProps> = ({classNames}) => {
 
 	return (
 		<div data-testid="panel" className={ClassNames(classNames, 'panel')}>
-			<div>{"Logo"}</div>
-			{!!userMyself ? <Button onClick={logout}>{t('logout')}</Button> : <Button onClick={onOpenModal}>{t('sign_in')}</Button>}
+			<AppLink className="panel__login" theme={AppLinkTheme.SECONDARY} to={RouterPath.HOME}>Login</AppLink>
+			{!!userProfile ? <Button onClick={logout}>{t('logout')}</Button> : <Button onClick={onOpenModal}>{t('sign_in')}</Button>}
 			<LoginModal isOpen={open} onClose={onCloseModal}/>
 		</div>
 	)

@@ -1,25 +1,20 @@
-import { render, screen } from '@testing-library/react';
+import {fireEvent, screen} from '@testing-library/react';
 import Navbar from "./Navbar";
-
-jest.mock("../../../shared/ui/AppLink/AppLink", () => ({
-  ...jest.requireActual("../../../shared/ui/AppLink/AppLink"),
-  __esModule: true,
-  default: jest.fn(({children, to, theme}) => {
-    return <a href={to} role="link">{children}</a>
-  })
-}))
-
-jest.mock("react-i18next", () => ({
-  useTranslation: () => ({ t: (key: string) => key }),
-}));
+import ComponentRender from "../../../shared/test/componentRender";
+import {RouterPath} from "../../../app/providers/Routes";
 
 describe("<Navbar />", () => {
 
   test('renders learn react link', () => {
-    render(<Navbar />);
+    ComponentRender(<Navbar />);
     const linkElement = screen.getByTestId("navbar");
     expect(linkElement).toBeInTheDocument();
   });
 
+  test('click on link', () => {
+    ComponentRender(<Navbar />);
+    const linkElements = screen.getAllByRole("link")[0];
+    expect(linkElements).toHaveAttribute('href', RouterPath.HOME);
+  });
 })
 

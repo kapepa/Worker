@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 describe("(<App />", () => {
 
   test('renders App', async () => {
-    render(<App><div/></App>, { wrapper:  () => (
+    render(<App/>, { wrapper:  () => (
         <RouterProvider
           router={createBrowserRouter([
             {  path: "/", element: <div>HomePage</div> }

@@ -1,5 +1,0 @@
-.navbar__nav{display:flex;flex-direction:column;gap:20px}.navbar__link{display:flex;flex-direction:row;justify-content:space-between;align-items:center;-webkit-column-gap:20px;column-gap:20px;flex-wrap:wrap}.navbar__link--squeeze{justify-content:center}.navbar__symbol{font:var(--font-m)}.navbar__ico{max-width:30px}
-.AppLink{color:var(--primary-color)}.primary{color:var(--primary-color)}.secondary{color:var(--primary-color-inverted)}.red{color:red}
-.ico-img{display:flex;align-items:center}.ico-img__fill--primary-color{fill:var(--primary-color)}.ico-img__fill--secondary-color{fill:var(--secondary-color)}.ico-img__fill--primary-color-inverted{fill:var(--primary-color-inverted)}.ico-img__fill--secondary-color-inverted{fill:var(--secondary-color-inverted)}
-
-/*# sourceMappingURL=widgets-Navbar-ui-Navbar-stories.68fbbe4b.chunk.css.map*/
