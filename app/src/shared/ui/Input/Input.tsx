@@ -5,6 +5,7 @@ import {Path, UseFormRegister} from "react-hook-form";
 import {UseFormGetFieldState} from "react-hook-form/dist/types/form";
 import {useTranslation} from "react-i18next";
 import {LoginTypes} from "../../../features/AuthByUsername";
+import {ProfileTypes} from "../../../entities/Profile";
 
 export enum BgInputEnum {
   WHITE_BG = "white",
@@ -18,9 +19,9 @@ export enum ColorInputEnum {
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string,
-  register?: UseFormRegister<LoginTypes>,
-  label?: Path<LoginTypes>,
-  getFieldState?: UseFormGetFieldState<LoginTypes>
+  register?: UseFormRegister<LoginTypes | ProfileTypes>,
+  label?: Path<LoginTypes | ProfileTypes>,
+  getFieldState?: UseFormGetFieldState<LoginTypes | ProfileTypes>,
   required?: boolean,
   maxLength?: number,
   minLength?: number,

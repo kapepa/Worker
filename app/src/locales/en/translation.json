@@ -20,8 +20,13 @@
     "placeholder-password": "Your password",
     "label": {
       "username": "Username",
+      "firstname": "Firstname",
+      "lastname": "Lastname",
+      "email": "Email",
       "password": "Password",
-      "email": "Email"
+      "avatar": "Avatar",
+      "country": "Country",
+      "city": "Сity"
     },
     "error": {
       "error-login": "Your user data is incorrect."
