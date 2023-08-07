@@ -7,8 +7,6 @@ import "./i18n";
 import ErrorBoundary from "./app/providers/ErrorBoundary";
 import {SideProvider} from './app/contexts/Side';
 import {Router} from "./app/providers/Routes";
-import {StoreProvider} from "./app/providers/Store";
-import {TokenProvider} from "./app/contexts/Token";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,15 +15,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <StoreProvider>
-        <ThemeProvider>
-          <SideProvider>
-            <TokenProvider>
-              <Router />
-            </TokenProvider>
-          </SideProvider>
-        </ThemeProvider>
-      </StoreProvider>
+      <ThemeProvider>
+        <SideProvider>
+          <Router />
+        </SideProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   </React.StrictMode>
 );

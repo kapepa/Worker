@@ -1,9 +1,15 @@
-import {configureStore, combineReducers} from '@reduxjs/toolkit';
+import {
+  configureStore,
+  combineReducers,
+} from '@reduxjs/toolkit';
 import {StateSchema} from "./StateSchema";
 import {CounterReducer} from "../../../../entities/Counter";
 import {UsersReducer} from "../../../../entities/Users";
 import {AuthReducer} from "../../../../features/AuthByUsername";
 import {ProfileReducer} from "../../../../entities/Profile";
+import {CurriedGetDefaultMiddleware} from "@reduxjs/toolkit/dist/getDefaultMiddleware";
+import {NavigateFunction} from "react-router/dist/lib/hooks";
+
 
 // const store = configureStore<StateSchema>({
 //   reducer: {
@@ -29,12 +35,16 @@ const storeReducers = combineReducers<StateSchema>({
   profile: ProfileReducer,
 });
 
-
-function CreateReduxStore (preloadedState?: StateSchema) {
-  return configureStore<StateSchema>({
+function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunction) {
+  return configureStore({
     reducer: storeReducers,
     preloadedState,
     devTools: true,
+    middleware: (getDefaultMiddleware: CurriedGetDefaultMiddleware<StateSchema>) => getDefaultMiddleware({
+      thunk: {
+        extraArgument: { navigate },
+      }},
+    )
   });
 }
 

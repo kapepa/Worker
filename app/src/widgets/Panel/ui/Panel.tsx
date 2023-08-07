@@ -9,6 +9,7 @@ import {useSelector} from "react-redux";
 import {GetUsersProfile} from "../../../entities/Users";
 import AppLink, {AppLinkTheme} from "../../../shared/ui/AppLink/AppLink";
 import {RouterPath} from "../../../shared/const/Routers";
+import {useNavigate} from "react-router-dom";
 
 interface PanelProps {
 	classNames?: string,
@@ -16,6 +17,7 @@ interface PanelProps {
 
 const Panel: FC<PanelProps> = memo(({classNames}) => {
 	const { logout } = UseToken();
+	const navigate = useNavigate();
 	const userProfile = useSelector(GetUsersProfile);
 	const [open, setOpen] = useState<boolean>(false);
 	const { t } = useTranslation();
@@ -28,10 +30,15 @@ const Panel: FC<PanelProps> = memo(({classNames}) => {
 		if(!open) setOpen( true );
 	},[open])
 
+	const isLogout = () => {
+		logout();
+		navigate(RouterPath.HOME);
+	}
+
 	return (
 		<div data-testid="panel" className={ClassNames(classNames, 'panel')}>
 			<AppLink className="panel__login" theme={AppLinkTheme.SECONDARY} to={RouterPath.HOME}>Login</AppLink>
-			{!!userProfile ? <Button onClick={logout}>{t('logout')}</Button> : <Button onClick={onOpenModal}>{t('sign_in')}</Button>}
+			{!!userProfile ? <Button onClick={isLogout}>{t('logout')}</Button> : <Button onClick={onOpenModal}>{t('sign_in')}</Button>}
 			<LoginModal isOpen={open} onClose={onCloseModal}/>
 		</div>
 	)

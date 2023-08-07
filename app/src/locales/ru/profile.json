@@ -1,3 +1,8 @@
 {
-  "profile page": "Страница профиля"
+  "profile page": "Страница профиля",
+  "edit": "Редактировать",
+  "placeholder": {
+    "firstname": "Твое имя",
+    "lastname": "Ваша фамилия"
+  }
 }
