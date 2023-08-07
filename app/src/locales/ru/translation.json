@@ -20,8 +20,13 @@
     "placeholder-password": "Ваш пароль",
     "label": {
       "username": "Имя",
+      "firstname": "Фамилия",
+      "lastname": "Фамилия",
+      "email": "Почта",
       "password": "Пароль",
-      "email": "Почта"
+      "avatar": "Аватар",
+      "country": "Страна",
+      "city": "Город"
     },
     "error": {
       "error-login": "Ваши пользовательские данные неверны."

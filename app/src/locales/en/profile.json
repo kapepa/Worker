@@ -1,3 +1,8 @@
 {
-  "profile page": "Profile page"
+  "profile page": "Profile page",
+  "edit": "Edit",
+  "placeholder": {
+    "firstname": "Your firstname",
+    "lastname": "Your lastname"
+  }
 }

@@ -4,7 +4,7 @@ import {ProfileState} from "../../model/types/profileState";
 
 const GetProfileData = createSelector(
   GetProfile,
-  (state: ProfileState) => state.data
+  (state: ProfileState) => state?.data || {}
 );
 
 export {GetProfileData};

@@ -1,0 +1,14 @@
+.profile-card{
+  display: flex;
+  flex-direction: column;
+  &__top{
+
+  }
+  &__basement{
+
+  }
+  &__input{
+    border: 1px solid var(--secondary-color);
+    border-radius: 2px;
+  }
+}

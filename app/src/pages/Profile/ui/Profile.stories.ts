@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from "@storybook/react";
-import {Profile} from "../../Profile";
+import {Profile} from "./Profile";
 import RouterDecorator from "../../../shared/config/RouterDecorator/RouterDecorator";
 import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
 import ThemeDecorator from "../../../shared/config/ThemeDecorator/ThemeDecorator";
