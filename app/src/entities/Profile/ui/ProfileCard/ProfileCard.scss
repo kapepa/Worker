@@ -1,11 +1,17 @@
 .profile-card{
   display: flex;
   flex-direction: column;
-  &__top{
-
+  &--border{
+    border: 2px solid var(--bg-color-inverted);
   }
-  &__basement{
-
+  &--loader, &--error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  &__area{
+    padding: 20px;
   }
   &__input{
     border: 1px solid var(--secondary-color);

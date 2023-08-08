@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import {Text, TextTheme} from "./Text";
+import type {Meta, StoryObj} from '@storybook/react';
+import {Text, TextAlign, TextTheme} from "./Text";
 import ThemeDecorator from '../../../shared/config/ThemeDecorator/ThemeDecorator';
 import {ThemeEnum} from "../../../app/contexts/Theme/lib/ThemeContext";
 
@@ -106,6 +106,26 @@ export const ErrorTitleDark: TextMode = {
 export const ErrorTextDark: TextMode = {
   args: {
     theme: TextTheme.ERROR,
+    text: "Nam nec semper augue. Curabitur ut enim placerat, eleifend lectus nec, varius quam. Duis efficitur, purus non lobortis facilisis, quam lorem finibus eros, sed sollicitudin mauris purus at metus."
+  },
+  decorators: [ThemeDecorator(ThemeEnum.DARK)],
+};
+
+export const PrimaryNormalCenter: TextMode = {
+  args: {
+    theme: TextTheme.PRIMARY,
+    align: TextAlign.CENTER,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    text: "Nam nec semper augue. Curabitur ut enim placerat, eleifend lectus nec, varius quam. Duis efficitur, purus non lobortis facilisis, quam lorem finibus eros, sed sollicitudin mauris purus at metus."
+  },
+  decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
+};
+
+export const PrimaryDarkRight: TextMode = {
+  args: {
+    theme: TextTheme.PRIMARY,
+    align: TextAlign.RIGHT,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     text: "Nam nec semper augue. Curabitur ut enim placerat, eleifend lectus nec, varius quam. Duis efficitur, purus non lobortis facilisis, quam lorem finibus eros, sed sollicitudin mauris purus at metus."
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],

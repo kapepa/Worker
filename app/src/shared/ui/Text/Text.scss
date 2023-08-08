@@ -7,6 +7,15 @@
     &--error{
       color: var(--red-light);
     }
+    &--right{
+      text-align: right;
+    }
+    &--center{
+      text-align: center;
+    }
+    &--left{
+      text-align: left;
+    }
   }
   &__p{
     font: var(--font-m);
@@ -15,6 +24,15 @@
     }
     &--error{
       color: var(--red-dark);
+    }
+    &--right{
+      text-align: right;
+    }
+    &--center{
+      text-align: center;
+    }
+    &--left{
+      text-align: left;
     }
   }
 }

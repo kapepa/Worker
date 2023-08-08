@@ -1,8 +1,10 @@
 {
   "profile page": "Profile page",
   "edit": "Edit",
+  "cancel": "Cancel",
   "placeholder": {
     "firstname": "Your firstname",
     "lastname": "Your lastname"
-  }
+  },
+  "error-profile": "This profile is not found."
 }

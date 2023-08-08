@@ -6,7 +6,9 @@ import {ProfileTypes} from "../types/profileTypes";
 const initialState: ProfileState = {
   loading: false,
   data: undefined,
+  edit: undefined,
   error: undefined,
+  readonly: true,
 }
 
 const ProfileSlice = createSlice({
@@ -15,6 +17,16 @@ const ProfileSlice = createSlice({
   reducers: {
     cleanUsers(state) {
       state.data = undefined;
+    },
+    SetReadonly(state: ProfileState, action: PayloadAction<boolean>) {
+      state.readonly = action.payload;
+    },
+    CancelEdit(state: ProfileState) {
+      state.readonly = !state.readonly;
+      state.edit = state.data;
+    },
+    ProfileSetEdit(state: ProfileState, action: PayloadAction<ProfileTypes>) {
+      state.edit = {...state.edit, ...action.payload};
     }
   },
   extraReducers: (builder) => {

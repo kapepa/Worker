@@ -1,46 +1,83 @@
-import {FC, memo} from "react";
+import {ChangeEvent, FC, memo, useCallback, useEffect} from "react";
 import "./ProfileCard.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
-import {Text, TextTheme} from "../../../../shared/ui/Text/Text";
+import {Text, TextAlign, TextTheme} from "../../../../shared/ui/Text/Text";
 import {useTranslation} from "react-i18next";
-import Button, {ThemeButtonEnum} from "../../../../shared/ui/Button/Button";
 import {BgInputEnum, ColorInputEnum, Input} from "../../../../shared/ui/Input/Input";
-import {useSelector} from "react-redux";
-import {GetProfileData} from "../../selectors/GetProfileData/GetProfileData";
+import {ProfileTypes} from "../../model/types/profileTypes";
+import Loader from "../../../../shared/ui/Loader/Loader";
+import {ProfileActions} from "../../model/slice/profileSlice";
+import {useDispatch} from "react-redux";
 
 interface ProfileCardProps {
   className?: string,
+  profile: ProfileTypes | undefined,
+  edit: ProfileTypes | undefined,
+  isLoading: boolean,
+  error?: string | undefined,
+  readonly: boolean,
 }
 
-const ProfileCard: FC<ProfileCardProps> = memo(({className}) => {
+const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoading, error, readonly}) => {
   const { t } = useTranslation("profile");
-  const { firstname, lastname } = useSelector(GetProfileData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(!!profile && !edit) dispatch(ProfileActions.ProfileSetEdit(profile))
+  }, [dispatch, profile, edit]);
+
+  const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const target = e.target;
+    dispatch(ProfileActions.ProfileSetEdit({[target.name]: target.value}))
+  }, [dispatch]);
+
+  if(isLoading) return (
+    <div className={ClassNames("profile-card", "profile-card--loader", className)} data-testid="profile-card">
+      <Loader/>
+    </div>
+  )
+
+  if(!!error) return (
+    <div className={ClassNames("profile-card", "profile-card--error", className)} data-testid="profile-card">
+      <Text
+        theme={TextTheme.ERROR}
+        align={TextAlign.CENTER}
+        title={t("error-profile")}
+      />
+    </div>
+  )
 
   return (
-    <div className={ClassNames("profile-card", className)} data-testid="profile-card">
-      <div className="profile-card__top">
-        <Text theme={TextTheme.PRIMARY} title={t("profile page")}/>
-        <Button theme={ThemeButtonEnum.OUTLINE}>{t("edit")}</Button>
-      </div>
-      <div className="profile-card__basement">
-        <Input
-          label={"firstname"}
-          theme={BgInputEnum.WHITE_BG}
-          color={ColorInputEnum.WHITE_COLOR}
-          defaultValue={firstname}
-          placeholder={t("placeholder.firstname")}
-          className="profile-card__input"
-          type="text"
-        />
-        <Input
-          label={"lastname"}
-          theme={BgInputEnum.WHITE_BG}
-          color={ColorInputEnum.WHITE_COLOR}
-          defaultValue={lastname}
-          placeholder={t("placeholder.lastname")}
-          className="profile-card__input"
-          type="text"
-        />
+    <div className={ClassNames("profile-card", "profile-card--border", className)} data-testid="profile-card">
+      <div className="profile-card__area">
+        { !!edit &&
+          <>
+            <Input
+              label={"firstname"}
+              name="firstname"
+              theme={BgInputEnum.WHITE_BG}
+              color={ColorInputEnum.WHITE_COLOR}
+              value={edit.firstname}
+              placeholder={t("placeholder.firstname")}
+              className="profile-card__input"
+              type="text"
+              readOnly={readonly}
+              onChange={onChangeInput}
+            />
+            <Input
+              label={"lastname"}
+              name="lastname"
+              theme={BgInputEnum.WHITE_BG}
+              color={ColorInputEnum.WHITE_COLOR}
+              value={edit.lastname}
+              placeholder={t("placeholder.lastname")}
+              className="profile-card__input"
+              type="text"
+              readOnly={readonly}
+              onChange={onChangeInput}
+            />
+          </>
+        }
       </div>
     </div>
   )
