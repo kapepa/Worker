@@ -7,18 +7,31 @@ export enum TextTheme {
   ERROR = "error",
 }
 
+export enum TextAlign {
+  RIGHT = "right",
+  CENTER = "center",
+  LEFT = "left",
+}
+
 interface TextProps {
   className?: string,
   title?: string,
   text?: string,
   theme: TextTheme,
+  align?: TextAlign,
 }
 
-const Text: FC<TextProps> = memo(({className, title, text, theme}) => {
+const Text: FC<TextProps> = memo(({className, title, text, theme, align = TextAlign.LEFT}) => {
   return (
-    <div className={ClassNames(className, "text")}>
-      {title && <p className={ClassNames("text__title", `text__title--${theme}`)}>{title}</p>}
-      {text && <p className={ClassNames("text__p", `text__p--${theme}`)}>{text}</p>}
+    <div className={ClassNames( "text", className)}>
+      {
+        title &&
+        <p className={ClassNames("text__title", `text__title--${theme}`, `text__title--${align}`)}>{title}</p>
+      }
+      {
+        text &&
+        <p className={ClassNames("text__p", `text__p--${theme}`, `text__p--${align}`)}>{text}</p>
+      }
     </div>
   )
 })

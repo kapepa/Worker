@@ -8,6 +8,9 @@ import {GetProfileLoading} from "./selectors/GetProfileLoading/GetProfileLoading
 import {GetProfileError} from "./selectors/GetProfileError/GetProfileError";
 import {GetProfileAvatar} from "./selectors/GetProfileAvatar/GetProfileAvatar";
 import {ProfileCard} from "./ui/ProfileCard/ProfileCard";
+import {ProfileHeader} from "./ui/ProfileHeader/ProfileHeader";
+import {GetProfileReadOnly} from "./selectors/GetProfileReadOnly/GetProfileReadOnly";
+import {GetProfileEdit} from "./selectors/GetProfileEdit/GetProfileEdit";
 
 export {
   ProfileActions,
@@ -16,8 +19,12 @@ export {
   GetProfile,
   GetProfileError,
   GetProfileData,
-  GetProfileLoading ,
+  GetProfileEdit,
+  GetProfileLoading,
   GetProfileAvatar,
-  ProfileCard
+  GetProfileReadOnly,
+  ProfileCard,
+  ProfileHeader,
 };
+
 export type { ProfileState, ProfileTypes }

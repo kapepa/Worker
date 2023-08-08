@@ -1,8 +1,10 @@
 {
   "profile page": "Страница профиля",
   "edit": "Редактировать",
+  "cancel": "Отмена",
   "placeholder": {
     "firstname": "Твое имя",
     "lastname": "Ваша фамилия"
-  }
+  },
+  "error-profile": "Этот профиль не найден."
 }

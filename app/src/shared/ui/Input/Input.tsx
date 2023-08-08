@@ -27,6 +27,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   minLength?: number,
   theme: BgInputEnum,
   color: ColorInputEnum,
+
 }
 
 const Input: FC<InputProps> = memo((
@@ -39,7 +40,7 @@ const Input: FC<InputProps> = memo((
       { !!label && <label className="input__label" >{t(`login-form.label.${label}`)}</label> }
       <input
         data-testid="input"
-        className={ClassNames("input", `input--${theme}`, className)}
+        className={ClassNames("input", `input--${theme}`, {"input--readonly": otherProps.readOnly}, className)}
         {...(!!label && !!register) ? register(label, { required, maxLength, minLength }) : {}}
         {...otherProps}
       />

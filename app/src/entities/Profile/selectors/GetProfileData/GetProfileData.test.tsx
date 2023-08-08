@@ -4,7 +4,7 @@ import {StateSchema} from "../../../../app/providers/Store";
 import {ProfileTypes} from "../../model/types/profileTypes";
 
 describe("GetProfileData", () => {
-  const mockProfile: ProfileState = {loading: false, error: undefined, data: undefined}
+  const mockProfile: ProfileState = {loading: false, error: undefined, data: undefined, edit: undefined, readonly: false}
 
   test("should be get profile", () => {
     const mockDate: ProfileTypes = {id: "MyID", email: "my@email.com"};
