@@ -34,6 +34,14 @@ export const Outline_Normal: ButtonStory = {
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
 
+export const Outline_Red_Normal: ButtonStory = {
+  args: {
+    children: "OUTLINE",
+    theme: ThemeButtonEnum.OUTLINE_RED,
+  },
+  decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
+};
+
 export const Background_Normal: ButtonStory = {
   args: {
     children: "BACKGROUND",
@@ -71,6 +79,14 @@ export const Outline_Dark: ButtonStory = {
   args: {
     children: "OUTLINE DARK",
     theme: ThemeButtonEnum.OUTLINE,
+  },
+  decorators: [ThemeDecorator(ThemeEnum.DARK)],
+};
+
+export const Outline_Red_Dark: ButtonStory = {
+  args: {
+    children: "OUTLINE RED DARK",
+    theme: ThemeButtonEnum.OUTLINE_RED,
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };

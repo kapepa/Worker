@@ -5,12 +5,17 @@ import {UsersModule} from './users/users.module';
 import {AuthModule} from './auth/auth.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {UsersEntity} from "./users/entities/users.entity";
+import {ServeStaticModule} from "@nestjs/serve-static";
+import { join } from 'path';
 
 dotenv.config()
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
