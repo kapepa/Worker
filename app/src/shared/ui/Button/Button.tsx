@@ -5,6 +5,7 @@ import {ClassNames} from "../../lib/ClassNames";
 export enum ThemeButtonEnum {
   CLEAR = "clear",
   OUTLINE = "outline",
+  OUTLINE_RED = "outline_red",
   BACKGROUND = "background",
   BACKGROUND_INVERTED = "background_inverted",
   OUTLINE_INVERTED = "outline_inverted",

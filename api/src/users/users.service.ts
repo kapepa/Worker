@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {UsersEntity} from "./entities/users.entity";
 import {Repository} from "typeorm";
@@ -21,6 +21,15 @@ export class UsersService {
     return from(this.usersRepository.findOne(data)).pipe(
       switchMap((user: UsersEntity) => of(!!user))
     );
+  }
+
+  updateUser(id: string, user: UsersEntityInterfaces): Observable<UsersEntityInterfaces> {
+    return this.findOne({ where: { id } }).pipe(
+      switchMap((profile: UsersEntityInterfaces) => {
+        if(!profile) throw new NotFoundException();
+        return this.saveUser({...profile, ...user});
+      })
+    )
   }
 
   saveUser(data:UsersEntityInterfaces): Observable<UsersEntityInterfaces> {

@@ -10,3 +10,5 @@ export interface ProfileTypes {
   city?: string,
   isActive?: boolean,
 }
+
+export type ProfileKeyTypes = keyof ProfileTypes;
