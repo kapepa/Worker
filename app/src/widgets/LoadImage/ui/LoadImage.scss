@@ -1,0 +1,8 @@
+.load_image{
+  cursor: pointer;
+  display: contents;
+  background-color: red;
+  &__input{
+    display: none;
+  }
+}

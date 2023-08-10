@@ -7,6 +7,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
 import {UsersEntity} from "./users/entities/users.entity";
 import {ServeStaticModule} from "@nestjs/serve-static";
 import { join } from 'path';
+import { FileModule } from './file/file.module';
 
 dotenv.config()
 
@@ -31,7 +32,8 @@ dotenv.config()
       inject: [ConfigService],
     }),
     UsersModule,
-    AuthModule
+    AuthModule,
+    FileModule
   ],
   controllers: [],
   providers: [],

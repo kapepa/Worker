@@ -28,6 +28,7 @@ const ProfileHeader: FC<ProfileHeaderProps> = memo(({className}) => {
   },[dispatch]);
 
   const onSend = useCallback(() => {
+
     return dispatch(ProfileUpdate());
   }, [dispatch])
 

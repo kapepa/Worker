@@ -10,6 +10,7 @@ import {ProfileReducer} from "../../../../entities/Profile";
 import {CurriedGetDefaultMiddleware} from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 import {NavigateFunction} from "react-router/dist/lib/hooks";
 import {useDispatch} from "react-redux";
+import {ToForm} from "../../../../utils/toForm";
 
 // const store = configureStore<StateSchema>({
 //   reducer: {
@@ -43,9 +44,10 @@ function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunc
     devTools: true,
     middleware: (getDefaultMiddleware: CurriedGetDefaultMiddleware<StateSchema>) => getDefaultMiddleware({
       thunk: {
-        extraArgument: { navigate },
-      }},
-    )
+        extraArgument: { navigate, toForm: ToForm },
+      },
+      serializableCheck: false
+    })
   });
 }
 
