@@ -5,7 +5,7 @@ export interface ProfileTypes {
   lastname?: string,
   email?: string,
   password?: string,
-  avatar?: string,
+  avatar?: string | File,
   country?: string,
   city?: string,
   isActive?: boolean,

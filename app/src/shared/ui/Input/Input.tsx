@@ -27,7 +27,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   minLength?: number,
   theme: BgInputEnum,
   color: ColorInputEnum,
-
 }
 
 const Input: FC<InputProps> = memo((

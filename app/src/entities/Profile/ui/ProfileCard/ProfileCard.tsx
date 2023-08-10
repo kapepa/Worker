@@ -15,7 +15,8 @@ import {ProfileKeyTypes, ProfileTypes} from "../../model/types/profileTypes";
 import Loader from "../../../../shared/ui/Loader/Loader";
 import {ProfileActions} from "../../model/slice/profileSlice";
 import {useDispatch} from "react-redux";
-import {Avatar} from "../../../../shared/ui/Avatar/Avatar";
+import {LoadAvatar} from "../../../../widgets/LoadAvatar";
+
 
 interface ProfileCardProps {
   className?: string,
@@ -24,6 +25,13 @@ interface ProfileCardProps {
   isLoading: boolean,
   error?: string | undefined,
   readonly: boolean,
+}
+
+interface PreInputProps {
+  key: string,
+  name: ProfileKeyTypes,
+  type: HTMLInputTypeAttribute,
+  value: string | number | undefined | ProfileTypes[ProfileKeyTypes];
 }
 
 const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoading, error, readonly}) => {
@@ -39,6 +47,10 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
     const target = e.target;
     dispatch(ProfileActions.ProfileSetEdit({[target.name]: target.value}))
   }, [dispatch]);
+
+  const onChangeAvatar = (file: File) => {
+    dispatch(ProfileActions.ProfileSetEdit({avatar: file}));
+  }
 
   if(isLoading) return (
     <div className={ClassNames("profile-card", "profile-card--loader", className)} data-testid="profile-card">
@@ -56,9 +68,7 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
     </div>
   )
 
-  const PreInput: FC<{key: string, name: ProfileKeyTypes, type: HTMLInputTypeAttribute, value: string | boolean | undefined }> = ( property) => {
-    const {key, name, type, value} = property;
-
+  const PreInput: FC<PreInputProps> = ({key, name, type, value}) => {
     return (
       <Input
         key={key}
@@ -79,10 +89,20 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
   return (
     <div className={ClassNames("profile-card", "profile-card--border", className)} data-testid="profile-card">
       <div className="profile-card__area">
-        { !!edit?.avatar && <Avatar className="profile-card__avatar" symbol={edit.firstname} src={edit.avatar} alt="avatar" size={250}/> }
+        { !!edit?.avatar &&
+          <LoadAvatar
+            className="profile-card__avatar"
+            symbol={edit.firstname}
+            src={edit.avatar}
+            onChangeAvatar={onChangeAvatar}
+            alt="avatar"
+            size={250}
+            readOnly={readonly}
+          />
+        }
         { !!edit &&
           listProps.map((name: ProfileKeyTypes, index: number) => {
-            return PreInput({ key: `${name}-${index}`, name, type: "text", value: edit[name] })
+            return PreInput({ key: `${name}-${index}`, name, type: "text", value: edit[name]})
           })
         }
       </div>
