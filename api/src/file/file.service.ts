@@ -14,7 +14,7 @@ export function createMulterOptions(): MulterModuleOptions {
         const filename = file.originalname;
         const prefix = filename.split(".").pop();
         const newFilename = `${uuid()}.${prefix}`;
-        cb(null, newFilename);
+        await cb(null, newFilename);
       }
     }),
     fileFilter(req, file, callback: (error: (Error | null), acceptFile: boolean) => void) {
@@ -30,6 +30,11 @@ export function createMulterOptions(): MulterModuleOptions {
 export class FileService {
 
   removeFile(filename: string) {
-    return of()
+    const pathToFile = path.join(__dirname, "..", "..", "static");
+    const exist = fs.existsSync( `${pathToFile}/${filename}` )
+    if(!exist) new HttpException('An error occurred when deleting the old avatar.', HttpStatus.BAD_REQUEST)
+    fs.unlinkSync(`${pathToFile}/${filename}`);
+
+    return of(true);
   }
 }

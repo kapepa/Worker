@@ -50,12 +50,12 @@ export class UsersController {
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'User not found or an error occurred while updating'})
   updateUser(@Req() req, @UploadedFiles() avatar: Express.Multer.File, @Body() body: UsersEntityInterfaces): Observable<UsersEntityInterfaces> {
     const toBody = JSON.parse(JSON.stringify(body));
-    const { filename } = avatar[0];
 
-    if( filename ) toBody.avatar = filename;
+    if(!!avatar?.[0]) toBody.avatar = avatar![0].filename
     return this.usersService.updateUser(req.user.id, toBody).pipe(
-      catchError(() => {
-        if( filename ) return this.fileService.removeFile(filename);
+      catchError((err) => {
+        if( toBody.filename && !!avatar ) this.fileService.removeFile(toBody.filename).subscribe();
+        return err;
       })
     );
   }

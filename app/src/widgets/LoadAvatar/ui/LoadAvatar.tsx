@@ -18,7 +18,7 @@ const LoadAvatar: FC<LoadAvatarProps> = (props) => {
   const {size, symbol, src, alt, className, readOnly, onChangeAvatar} = props;
   const [avatar, setAvatar] = useState<string | undefined | File>();
   const refInput = useRef<HTMLInputElement>(null);
-  const onload = () => refInput.current?.click();
+  const onload = () => { if(!readOnly) refInput.current?.click() };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const target: HTMLInputElement = e.target;
