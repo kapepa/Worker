@@ -34,5 +34,14 @@
   },
   "form-error": {
     "required": "Необходимый"
+  },
+  "country": {
+    "America": "Америка",
+    "Russia": "Россия",
+    "Belarus": "Беларусь",
+    "Ukraine": "Украина",
+    "Moldova": "Молдова",
+    "Bulgaria": "Болгария",
+    "Hungary": "Венгрия"
   }
 }

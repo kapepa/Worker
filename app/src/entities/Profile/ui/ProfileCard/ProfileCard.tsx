@@ -16,7 +16,8 @@ import Loader from "../../../../shared/ui/Loader/Loader";
 import {ProfileActions} from "../../model/slice/profileSlice";
 import {useDispatch} from "react-redux";
 import {LoadAvatar} from "../../../../widgets/LoadAvatar";
-
+import {Select} from "../../../../shared/ui/Select/Select";
+import {Countries} from "../../../../shared/const/Countries";
 
 interface ProfileCardProps {
   className?: string,
@@ -36,7 +37,7 @@ interface PreInputProps {
 
 const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoading, error, readonly}) => {
   const { t } = useTranslation("profile");
-  const listProps: ProfileKeyTypes[] = ["firstname", "lastname", "username", "country", "city"];
+  const listProps: ProfileKeyTypes[] = ["firstname", "lastname", "username"];
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
 
   const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
-    dispatch(ProfileActions.ProfileSetEdit({[target.name]: target.value}))
+    dispatch(ProfileActions.ProfileSetEdit({[target.name]: target.value}));
   }, [dispatch]);
 
   const onChangeAvatar = (file: File) => {
@@ -104,6 +105,9 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
           listProps.map((name: ProfileKeyTypes, index: number) => {
             return PreInput({ key: `${name}-${index}`, name, type: "text", value: edit[name]})
           })
+        }
+        { !!edit &&
+          <Select prefix="country" defaultValue={edit.country}/>
         }
       </div>
     </div>

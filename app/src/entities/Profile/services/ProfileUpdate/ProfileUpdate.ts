@@ -7,9 +7,10 @@ const ProfileUpdate = createAsyncThunk<ProfileTypes, undefined, { rejectValue: s
   'profile/ProfileUpdate',
   async (data: undefined, {rejectWithValue, extra, getState}) => {
     const { profile } = getState();
+    const form = extra.toForm && extra.toForm(profile.edit);
 
     try {
-      const result = await Axios.put<ProfileTypes>("/api/users/update", profile.edit);
+      const result = await Axios.put<ProfileTypes>("/api/users/update", form);
 
       return result.data;
     } catch (e) {
