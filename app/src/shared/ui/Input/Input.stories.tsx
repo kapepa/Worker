@@ -1,7 +1,9 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {BgInputEnum, ColorInputEnum, Input} from "./Input";
+import {Input} from "./Input";
 import ThemeDecorator from "../../config/ThemeDecorator/ThemeDecorator";
 import {ThemeEnum} from "../../../app/contexts/Theme/lib/ThemeContext";
+import {BgInputEnum} from "../../const/BgInput";
+import {ColorInputEnum} from "../../const/ColorInputEnum";
 
 const meta: Meta<typeof Input> = {
   component: Input,

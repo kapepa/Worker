@@ -6,16 +6,8 @@ import {UseFormGetFieldState} from "react-hook-form/dist/types/form";
 import {useTranslation} from "react-i18next";
 import {LoginTypes} from "../../../features/AuthByUsername";
 import {ProfileTypes} from "../../../entities/Profile";
-
-export enum BgInputEnum {
-  WHITE_BG = "white",
-  WHITE_BG_INVERTED = "white-inverted",
-}
-
-export enum ColorInputEnum {
-  WHITE_COLOR = "white-color",
-  WHITE_COLOR_INVERTED = "white-color-inverted",
-}
+import {BgInputEnum} from "../../const/BgInput";
+import {ColorInputEnum} from "../../const/ColorInputEnum";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string,
