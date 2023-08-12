@@ -4,7 +4,7 @@ import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {useTranslation} from "react-i18next";
 import Button, {ThemeButtonEnum} from "../../../../shared/ui/Button/Button";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {BgInputEnum, ColorInputEnum, Input} from "../../../../shared/ui/Input/Input";
+import {Input} from "../../../../shared/ui/Input/Input";
 import {LoginTypes} from "../../model/types/loginTypes";
 import {useDispatch, useSelector} from "react-redux";
 import {AuthActions} from "../../model/slice/authSlice";
@@ -13,6 +13,8 @@ import {LoginByUser} from "../../model/services/loginByUser/loginByUser";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {GetAuth} from "../../model/selectors/getAuth/getAuth";
 import {Text, TextTheme} from "../../../../shared/ui/Text/Text";
+import {BgInputEnum} from "../../../../shared/const/BgInput";
+import {ColorInputEnum} from "../../../../shared/const/ColorInputEnum";
 
 interface LoginFormProps {
   className?: string,

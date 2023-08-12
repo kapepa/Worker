@@ -1,74 +1,73 @@
-import {ChangeEvent, FC, useMemo, useState, SelectHTMLAttributes, useRef, useEffect} from "react";
+import {
+  FC,
+  useMemo,
+  useState,
+  useRef,
+  useEffect,
+  MouseEvent,
+  useCallback
+} from "react";
 import "./Select.scss";
-import {Countries} from "../../const/Countries";
-import {useTranslation} from "react-i18next";
 import {ClassNames} from "../../lib/ClassNames";
+import {BgInputEnum} from "../../const/BgInput";
+import {ColorInputEnum} from "../../const/ColorInputEnum";
+import {CountryListType} from "../../const/CountryListType";
 
-type CountryListType = { value: Countries, text: string };
-
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps {
   className?: string,
   prefix?: string,
+  theme?: BgInputEnum,
+  color?: ColorInputEnum,
+  label?: string,
+  selectList: CountryListType[],
+  toTranslation: (str: string | undefined) => string,
+  selected: (val: string) => void,
+  defaultValue?: string,
+  name: string,
+  readOnly?: boolean,
 }
 
-const Select: FC<SelectProps> = ({ className, prefix, ...otherProps}) => {
-  const { t } = useTranslation();
-  const [select, setSelect] = useState<Countries>();
+const Select: FC<SelectProps> = (props: SelectProps) => {
+  const { className, name, label, theme, color, selectList, toTranslation, selected, defaultValue, readOnly } = props;
   const [drop, setDrop] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const country: CountryListType[] = [
-    { value: Countries.USA, text: t(`country.${Countries.USA}`) },
-    { value: Countries.RUS, text: t(`country.${Countries.RUS}`) },
-    { value: Countries.BLR, text: t(`country.${Countries.BLR}`) },
-    { value: Countries.UKR, text: t(`country.${Countries.UKR}`) },
-    { value: Countries.MLD, text: t(`country.${Countries.MLD}`) },
-    { value: Countries.BLG, text: t(`country.${Countries.BLG}`) },
-    { value: Countries.HNG, text: t(`country.${Countries.HNG}`) },
-  ];
+  const onDrop = () => {if(!readOnly) setDrop(prev => !prev)};
 
+  const onClickOption = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    const target = e.currentTarget;
+    const select = target.dataset.select;
+    inputRef.current!.value = toTranslation(select);
+    if(!!select) selected(select);
+  }, [toTranslation, selected])
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const target = e.target
-    const val = target.value as Countries;
-    inputRef.current!.value = t(`${prefix}.${val}`);
-    setSelect(val);
-  };
-
-  const optionCountry = useMemo(() => {
-    return country.map((opt: CountryListType, index: number) => (
-      <option
-        key={`${opt.value}-${index}`}
-        value={opt.value}
-      >{opt.text}</option>
-    ))
-  }, [country.length, t, select])
 
   const dropList = useMemo(() => {
-    return country.map((cou: CountryListType, index: number) => (
-      <div key={`${cou.value}-${index}`} data-country={cou.value}>{cou.text}</div>
+    return selectList.map((cou: CountryListType, index: number) => (
+      <div key={`${cou.value}-${index}`} className="select__drop_arrow" onClick={onClickOption} data-select={cou.value}>{cou.text}</div>
     ))
-  }, [])
-
-  const onDrop = () => {
-    console.log("accc")
-    setDrop(pre => !pre);
-  }
+  }, [selectList, onClickOption])
 
   useEffect(() => {
-    if(inputRef.current) inputRef.current.value = t(`${prefix}.${otherProps.defaultValue}`);
-  }, [inputRef.current, t(`${prefix}.${otherProps.defaultValue}`)])
+    if(inputRef.current) inputRef.current.value = defaultValue as string;
+  }, [defaultValue])
 
   return (
-    <div className="select">
+    <div className={ClassNames("select", {"select--readonly": readOnly})} data-testid="select">
       <div className="select__frame" onClick={onDrop}>
-        <input className={ClassNames("select__input", className)} ref={inputRef} name={otherProps.name} type="text" disabled={true}/>
+        <div className={ClassNames("select__wrapper", {[`select__wrapper--${color}`]: !!color})}>
+          { !!label && <label className="select__label" >{label}</label> }
+          <input
+            type="text"
+            ref={inputRef}
+            name={name}
+            disabled={true}
+            className={ClassNames("select__input", {[`select__input--${theme}`]: !!theme}, className)}
+          />
+        </div>
         <div className={ClassNames("select__drop", {"select__drop--open": drop})} >
           {dropList}
         </div>
       </div>
-      <select className="select__select" onChange={onChange} name="country" {...otherProps}>
-        {optionCountry}
-      </select>
     </div>
   )
 }

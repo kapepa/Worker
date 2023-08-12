@@ -10,13 +10,15 @@ import "./ProfileCard.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {Text, TextAlign, TextTheme} from "../../../../shared/ui/Text/Text";
 import {useTranslation} from "react-i18next";
-import {BgInputEnum, ColorInputEnum, Input} from "../../../../shared/ui/Input/Input";
+import {Input} from "../../../../shared/ui/Input/Input";
 import {ProfileKeyTypes, ProfileTypes} from "../../model/types/profileTypes";
 import Loader from "../../../../shared/ui/Loader/Loader";
 import {ProfileActions} from "../../model/slice/profileSlice";
 import {useDispatch} from "react-redux";
 import {LoadAvatar} from "../../../../widgets/LoadAvatar";
-import {Select} from "../../../../shared/ui/Select/Select";
+import {BgInputEnum} from "../../../../shared/const/BgInput";
+import {ColorInputEnum} from "../../../../shared/const/ColorInputEnum";
+import {Country} from "../../../Country";
 import {Countries} from "../../../../shared/const/Countries";
 
 interface ProfileCardProps {
@@ -52,6 +54,10 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
   const onChangeAvatar = (file: File) => {
     dispatch(ProfileActions.ProfileSetEdit({avatar: file}));
   }
+
+  const countrySelected = useCallback((str: Countries) => {
+    dispatch(ProfileActions.ProfileSetEdit({country: str}));
+  }, [dispatch])
 
   if(isLoading) return (
     <div className={ClassNames("profile-card", "profile-card--loader", className)} data-testid="profile-card">
@@ -107,7 +113,10 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
           })
         }
         { !!edit &&
-          <Select prefix="country" defaultValue={edit.country}/>
+          <Country defaultVal={edit.country} selected={countrySelected} readOnly={readonly}/>
+        }
+        { edit?.city !== undefined &&
+          PreInput({ key: `city`, name: "city", type: "text", value: edit.city})
         }
       </div>
     </div>
