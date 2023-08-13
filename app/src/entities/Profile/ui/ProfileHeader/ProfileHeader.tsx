@@ -42,7 +42,7 @@ const ProfileHeader: FC<ProfileHeaderProps> = memo(({className}) => {
   }, [ProfileReadOnly, onEdit, onCancel, onSend, t]);
 
   return (
-    <div className={ClassNames(`profile-header`, className)}>
+    <div className={ClassNames(`profile-header`, className)} data-testid="profile-header">
       <Text className="profile-header__h" theme={TextTheme.PRIMARY} title={t("profile page")}/>
       <div className="profile-header__interaction">
         {SelectBtn}
