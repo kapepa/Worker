@@ -13,6 +13,7 @@ interface StateSchema {
 
 interface ThunkExtraArg {
   navigate?: NavigateFunction,
+  toForm?: (obj: { [key: string]: any } | undefined) => FormData,
 }
 
 export type {StateSchema, ThunkExtraArg}

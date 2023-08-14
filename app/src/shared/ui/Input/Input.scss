@@ -14,16 +14,19 @@
     color: var(--bg-color);
     background-color: var(--bg-color-inverted);
   }
+  &--readonly{
+    opacity: .7;
+  }
   &__wrapper{
     width: 100%;
     margin-bottom: 16px;
     position: relative;
     border-radius: 6px;
     &--white-color{
-      color: var(--bg-color-inverted);
+      color: var(--bg-color);
     }
     &--white-color-inverted{
-      color: var(--bg-color);
+      color: var(--bg-color-inverted);
     }
   }
   &__label{

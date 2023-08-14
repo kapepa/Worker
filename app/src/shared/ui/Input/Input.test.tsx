@@ -1,5 +1,7 @@
-import {BgInputEnum, ColorInputEnum, Input} from "./Input";
+import {Input} from "./Input";
 import RenderWithTranslation from "../../test/renderWithTranslation";
+import {BgInputEnum} from "../../const/BgInput";
+import {ColorInputEnum} from "../../const/ColorInputEnum";
 
 describe("<Input/>", () => {
   test("should to defined input", () => {

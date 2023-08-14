@@ -34,5 +34,14 @@
   },
   "form-error": {
     "required": "Required"
+  },
+  "country": {
+    "America": "America",
+    "Russia": "Russia",
+    "Belarus": "Belarus",
+    "Ukraine": "Ukraine",
+    "Moldova": "Moldova",
+    "Bulgaria": "Bulgaria",
+    "Hungary": "Hungary"
   }
 }

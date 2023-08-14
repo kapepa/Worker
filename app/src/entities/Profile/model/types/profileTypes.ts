@@ -1,3 +1,5 @@
+import {Countries} from "../../../../shared/const/Countries";
+
 export interface ProfileTypes {
   id?: string,
   username?: string,
@@ -5,8 +7,10 @@ export interface ProfileTypes {
   lastname?: string,
   email?: string,
   password?: string,
-  avatar?: string,
-  country?: string,
+  avatar?: string | File,
+  country?: Countries,
   city?: string,
   isActive?: boolean,
 }
+
+export type ProfileKeyTypes = keyof ProfileTypes;
