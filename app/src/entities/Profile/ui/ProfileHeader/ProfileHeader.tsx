@@ -7,14 +7,14 @@ import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {useSelector} from "react-redux";
 import {GetProfileReadOnly} from "../../selectors/GetProfileReadOnly/GetProfileReadOnly";
 import {ProfileActions} from "../../model/slice/profileSlice";
-import {ProfileUpdate} from "../../services/ProfileUpdate/ProfileUpdate";
 import {useAppDispatch} from "../../../../app/providers/Store/config/store";
 
 interface ProfileHeaderProps {
   className?: string,
+  onSend?: () => void,
 }
 
-const ProfileHeader: FC<ProfileHeaderProps> = memo(({className}) => {
+const ProfileHeader: FC<ProfileHeaderProps> = memo(({className, onSend}) => {
   const { t } = useTranslation("profile");
   const ProfileReadOnly = useSelector(GetProfileReadOnly);
   const dispatch = useAppDispatch();
@@ -27,17 +27,11 @@ const ProfileHeader: FC<ProfileHeaderProps> = memo(({className}) => {
     dispatch(ProfileActions.CancelEdit());
   },[dispatch]);
 
-  const onSend = useCallback(() => {
-
-    return dispatch(ProfileUpdate());
-  }, [dispatch])
-
-
   const SelectBtn = useMemo(() => {
     if(ProfileReadOnly) return <Button onClick={onEdit} theme={ThemeButtonEnum.OUTLINE}>{t("edit")}</Button>;
     return <>
       <Button onClick={onCancel} theme={ThemeButtonEnum.OUTLINE_RED}>{t("cancel")}</Button>
-      <Button onClick={onSend} theme={ThemeButtonEnum.OUTLINE}>{t("send")}</Button>
+      <Button onClick={onSend} type="submit" theme={ThemeButtonEnum.OUTLINE}>{t("send")}</Button>
     </>;
   }, [ProfileReadOnly, onEdit, onCancel, onSend, t]);
 

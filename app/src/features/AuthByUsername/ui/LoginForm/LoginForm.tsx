@@ -60,7 +60,7 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
   }, [dispatch, setEmail, setPassword]);
 
   return (
-    <div className={ClassNames(className, "login-form__wrapper")}>
+    <div className={ClassNames("login-form__wrapper", className)}>
       {/*<Text className="login-form__h" title={t("login-form.login")} theme={TextTheme.PRIMARY}/>*/}
       <h4 className="login-form__h">{t("login-form.login")}</h4>
       <form ref={refForm} onSubmit={handleSubmit(onSubmit)} className="login-form" data-testid="form">
@@ -79,6 +79,7 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
           color={ColorInputEnum.WHITE_COLOR}
           className="login-form__input"
           role="email"
+          errors={errors.email}
         />
         <Input
           onChange={onChangeLogin}
@@ -94,6 +95,7 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
           color={ColorInputEnum.WHITE_COLOR}
           className="login-form__input"
           role="password"
+          errors={errors.password}
         />
         <div className="login-form__basement">
           <Button

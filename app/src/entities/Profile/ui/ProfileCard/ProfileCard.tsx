@@ -1,17 +1,10 @@
-import {
-  ChangeEvent,
-  FC,
-  HTMLInputTypeAttribute,
-  memo,
-  useCallback,
-  useEffect,
-} from "react";
+import {ChangeEvent, FC, memo, MutableRefObject, useCallback, useEffect} from "react";
 import "./ProfileCard.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {Text, TextAlign, TextTheme} from "../../../../shared/ui/Text/Text";
 import {useTranslation} from "react-i18next";
 import {Input} from "../../../../shared/ui/Input/Input";
-import {ProfileKeyTypes, ProfileTypes} from "../../model/types/profileTypes";
+import {ProfileTypes} from "../../model/types/profileTypes";
 import Loader from "../../../../shared/ui/Loader/Loader";
 import {ProfileActions} from "../../model/slice/profileSlice";
 import {useDispatch} from "react-redux";
@@ -20,6 +13,10 @@ import {BgInputEnum} from "../../../../shared/const/BgInput";
 import {ColorInputEnum} from "../../../../shared/const/ColorInputEnum";
 import {Country} from "../../../Country";
 import {Countries} from "../../../../shared/const/Countries";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {LoginTypes} from "../../../../features/AuthByUsername";
+import {ProfileUpdate} from "../../services/ProfileUpdate/ProfileUpdate";
+import {AppDispatch} from "../../../../app/providers/Store/config/store";
 
 interface ProfileCardProps {
   className?: string,
@@ -28,23 +25,27 @@ interface ProfileCardProps {
   isLoading: boolean,
   error?: string | undefined,
   readonly: boolean,
+  refSend: MutableRefObject<HTMLButtonElement | null>
 }
 
-interface PreInputProps {
-  key: string,
-  name: ProfileKeyTypes,
-  type: HTMLInputTypeAttribute,
-  value: string | number | undefined | ProfileTypes[ProfileKeyTypes];
-}
-
-const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoading, error, readonly}) => {
+const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoading, error, readonly, refSend}) => {
   const { t } = useTranslation("profile");
-  const listProps: ProfileKeyTypes[] = ["firstname", "lastname", "username"];
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const { register, getFieldState, handleSubmit, reset, formState: { errors } } = useForm<LoginTypes>({
+    defaultValues: {
+      "firstname": profile!.firstname,
+      "lastname": profile!.lastname,
+      "username": profile!.username,
+      "country": profile!.country,
+      "city": profile!.city,
+    }
+  });
 
   useEffect(() => {
-    if(!!profile && !edit) dispatch(ProfileActions.ProfileSetEdit(profile))
-  }, [dispatch, profile, edit]);
+    if(!!profile && !edit){
+      dispatch(ProfileActions.ProfileSetEdit(profile));
+    }
+  }, [dispatch, profile, edit, reset]);
 
   const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
@@ -75,27 +76,13 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
     </div>
   )
 
-  const PreInput: FC<PreInputProps> = ({key, name, type, value}) => {
-    return (
-      <Input
-        key={key}
-        label={name}
-        name={name}
-        theme={BgInputEnum.WHITE_BG}
-        color={ColorInputEnum.WHITE_COLOR}
-        value={value as string}
-        placeholder={t(`placeholder.${name}`)}
-        className="profile-card__input"
-        type={type}
-        readOnly={readonly}
-        onChange={onChangeInput}
-      />
-    )
-  }
+  const onSubmit: SubmitHandler<LoginTypes> = (data: LoginTypes) => {
+    dispatch(ProfileUpdate());
+  };
 
   return (
     <div className={ClassNames("profile-card", "profile-card--border", className)} data-testid="profile-card">
-      <div className="profile-card__area">
+      <form className="profile-card__area" onSubmit={handleSubmit(onSubmit)} >
         { !!edit?.avatar &&
           <LoadAvatar
             className="profile-card__avatar"
@@ -108,17 +95,84 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
           />
         }
         { !!edit &&
-          listProps.map((name: ProfileKeyTypes, index: number) => {
-            return PreInput({ key: `${name}-${index}`, name, type: "text", value: edit[name]})
-          })
+          <>
+            <Input
+              type="text"
+              minLength={4}
+              required={true}
+              name="firstname"
+              label="firstname"
+              register={register}
+              readOnly={readonly}
+              onChange={onChangeInput}
+              errors={errors.firstname}
+              className="profile-card__input"
+              classNameAlert="profile-card__alert"
+              getFieldState={getFieldState}
+              theme={BgInputEnum.WHITE_BG}
+              color={ColorInputEnum.WHITE_COLOR_INVERTED}
+              placeholder={t(`placeholder.firstname`)}
+            />
+            <Input
+              type="text"
+              minLength={4}
+              required={true}
+              name="lastname"
+              label="lastname"
+              register={register}
+              readOnly={readonly}
+              onChange={onChangeInput}
+              errors={errors.lastname}
+              className="profile-card__input"
+              classNameAlert="profile-card__alert"
+              getFieldState={getFieldState}
+              theme={BgInputEnum.WHITE_BG}
+              color={ColorInputEnum.WHITE_COLOR_INVERTED}
+              placeholder={t(`placeholder.lastname`)}
+            />
+            <Input
+              type="text"
+              minLength={4}
+              required={true}
+              name="username"
+              label="username"
+              register={register}
+              readOnly={readonly}
+              onChange={onChangeInput}
+              errors={errors.username}
+              className="profile-card__input"
+              classNameAlert="profile-card__alert"
+              getFieldState={getFieldState}
+              theme={BgInputEnum.WHITE_BG}
+              color={ColorInputEnum.WHITE_COLOR_INVERTED}
+              placeholder={t(`placeholder.username`)}
+            />
+            <Country
+              defaultVal={edit.country}
+              selected={countrySelected}
+              readOnly={readonly}
+            />
+            <Input
+              type="text"
+              minLength={4}
+              required={true}
+              name="city"
+              label="city"
+              register={register}
+              readOnly={readonly}
+              onChange={onChangeInput}
+              errors={errors.city}
+              className="profile-card__input"
+              classNameAlert="profile-card__alert"
+              getFieldState={getFieldState}
+              theme={BgInputEnum.WHITE_BG}
+              color={ColorInputEnum.WHITE_COLOR_INVERTED}
+              placeholder={t(`placeholder.city`)}
+            />
+            <button ref={refSend} type="submit" style={{display: "none"}}/>
+          </>
         }
-        { !!edit &&
-          <Country defaultVal={edit.country} selected={countrySelected} readOnly={readonly}/>
-        }
-        { edit?.city !== undefined &&
-          PreInput({ key: `city`, name: "city", type: "text", value: edit.city})
-        }
-      </div>
+      </form>
     </div>
   )
 })

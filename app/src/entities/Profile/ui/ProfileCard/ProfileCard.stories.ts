@@ -37,6 +37,7 @@ export const ProfileCardNormal: ProfileCardStory = {
     isLoading: false,
     readonly: true,
     error: undefined,
+    refSend: { current: null },
   },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
@@ -48,6 +49,7 @@ export const ProfileCardDark: ProfileCardStory = {
     isLoading: false,
     readonly: true,
     error: undefined,
+    refSend: { current: null },
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };

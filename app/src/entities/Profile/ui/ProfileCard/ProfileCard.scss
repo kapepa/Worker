@@ -20,6 +20,9 @@
     border: 1px solid var(--secondary-color);
     border-radius: 2px;
   }
+  &__alert{
+    color: var(--red-dark);
+  }
   &__avatar{
     //display: flex;
     //justify-content: center;
