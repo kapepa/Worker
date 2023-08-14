@@ -1,0 +1,4 @@
+
+.button{cursor:pointer;color:var(--primary-color-inverted);border:none;padding:10px}.button--clear{border:none;background:none;outline:none}.button--outline{border:1px solid var(--primary-color);color:var(--primary-color);background:none}.button--outline_red{border:1px solid var(--red-dark);color:var(--red-dark);background:none}.button--outline_inverted{border:1px solid var(--primary-color-inverted);color:var(--primary-color-inverted);background:none}.button--background{color:var(--primary-color);background-color:var(--bg-colo)}.button--background_inverted{color:var(--primary-color-inverted);background-color:var(--bg-color-inverted)}.button--medium{font:var(--font-m)}.button--large{font:var(--font-l)}.button--extra-large{font:var(--font-xl)}.button--disabled{opacity:.5}
+
+/*# sourceMappingURL=widgets-LangSwitcher-ui-LangSwitcher-stories.63e7f712.chunk.css.map*/
