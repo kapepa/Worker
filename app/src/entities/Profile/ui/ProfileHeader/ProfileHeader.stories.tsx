@@ -21,20 +21,32 @@ export default meta;
 type ProfileHeaderStory = StoryObj<typeof ProfileHeader>;
 
 export const ProfileHeaderNormal: ProfileHeaderStory = {
+  args: {
+    onSend: () => {},
+  },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
 
 export const ProfileHeaderDark: ProfileHeaderStory = {
+  args: {
+    onSend: () => {},
+  },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };
 
 export const ProfileHeaderNormalEdit: ProfileHeaderStory = {
+  args: {
+    onSend: () => {},
+  },
   decorators: [StoreDecorator({
     profile: { readonly: false }
   }), ThemeDecorator(ThemeEnum.NORMAL)],
 };
 
 export const ProfileHeaderDarkEdit: ProfileHeaderStory = {
+  args: {
+    onSend: () => {},
+  },
   decorators: [StoreDecorator({
     profile: { readonly: false }
   }), ThemeDecorator(ThemeEnum.DARK)],
