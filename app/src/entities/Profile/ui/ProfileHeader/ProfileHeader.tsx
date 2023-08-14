@@ -43,6 +43,6 @@ const ProfileHeader: FC<ProfileHeaderProps> = memo(({className, onSend}) => {
       </div>
     </div>
   )
-})
+});
 
 export {ProfileHeader}
