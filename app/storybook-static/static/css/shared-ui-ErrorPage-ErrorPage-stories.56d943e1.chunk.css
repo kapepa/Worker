@@ -1,4 +1,0 @@
-.error-page{width:100%;height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;row-gap:30px;font:var(--font-l)}
-.button{cursor:pointer;color:var(--primary-color-inverted);border:none;padding:10px}.button--clear{border:none;background:none;outline:none}.button--outline{border:1px solid var(--primary-color);color:var(--primary-color);background:none}.button--outline_inverted{border:1px solid var(--primary-color-inverted);color:var(--primary-color-inverted);background:none}.button--background{color:var(--primary-color);background-color:var(--bg-colo)}.button--background_inverted{color:var(--primary-color-inverted);background-color:var(--bg-color-inverted)}.button--medium{font:var(--font-m)}.button--large{font:var(--font-l)}.button--extra-large{font:var(--font-xl)}.button--disabled{opacity:.5}
-
-/*# sourceMappingURL=shared-ui-ErrorPage-ErrorPage-stories.56d943e1.chunk.css.map*/
