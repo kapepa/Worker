@@ -4,10 +4,22 @@ import RouterDecorator from "../../../shared/config/RouterDecorator/RouterDecora
 import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
 import ThemeDecorator from "../../../shared/config/ThemeDecorator/ThemeDecorator";
 import {ThemeEnum} from "../../../app/contexts/Theme/lib/ThemeContext";
+import {Countries} from "../../../shared/const/Countries";
 
 const meta: Meta<typeof Profile> = {
   component: Profile,
-  decorators: [RouterDecorator, StoreDecorator({profile: {data: {id: "MyID", username: "MyName"}}})],
+  decorators: [RouterDecorator, StoreDecorator({
+    profile: {
+      data: {
+        id: "MyID",
+        firstname: "MyFirstname",
+        lastname: "MyLastname",
+        username: "MyUsername",
+        country: Countries.BLR,
+        city: "Odessa",
+      }
+    }
+  })],
 };
 
 export default meta;

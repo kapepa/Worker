@@ -1,11 +1,9 @@
-import {ChangeEvent, FC, memo, MutableRefObject, useCallback, useEffect} from "react";
+import {ChangeEvent, FC, memo, MutableRefObject, useCallback} from "react";
 import "./ProfileCard.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
-import {Text, TextAlign, TextTheme} from "../../../../shared/ui/Text/Text";
 import {useTranslation} from "react-i18next";
 import {Input} from "../../../../shared/ui/Input/Input";
 import {ProfileTypes} from "../../model/types/profileTypes";
-import Loader from "../../../../shared/ui/Loader/Loader";
 import {ProfileActions} from "../../model/slice/profileSlice";
 import {useDispatch} from "react-redux";
 import {LoadAvatar} from "../../../../widgets/LoadAvatar";
@@ -20,32 +18,23 @@ import {AppDispatch} from "../../../../app/providers/Store/config/store";
 
 interface ProfileCardProps {
   className?: string,
-  profile: ProfileTypes | undefined,
-  edit: ProfileTypes | undefined,
-  isLoading: boolean,
-  error?: string | undefined,
+  edit: ProfileTypes,
   readonly: boolean,
   refSend: MutableRefObject<HTMLButtonElement | null>
 }
 
-const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoading, error, readonly, refSend}) => {
+const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refSend}) => {
   const { t } = useTranslation("profile");
   const dispatch = useDispatch<AppDispatch>();
-  const { register, getFieldState, handleSubmit, reset, formState: { errors } } = useForm<LoginTypes>({
+  const { register, getFieldState, handleSubmit, formState: { errors } } = useForm<LoginTypes>({
     defaultValues: {
-      "firstname": profile!.firstname,
-      "lastname": profile!.lastname,
-      "username": profile!.username,
-      "country": profile!.country,
-      "city": profile!.city,
+      "firstname": edit.firstname,
+      "lastname": edit.lastname,
+      "username": edit.username,
+      "country": edit.country,
+      "city": edit.city,
     }
   });
-
-  useEffect(() => {
-    if(!!profile && !edit){
-      dispatch(ProfileActions.ProfileSetEdit(profile));
-    }
-  }, [dispatch, profile, edit, reset]);
 
   const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
@@ -60,29 +49,13 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
     dispatch(ProfileActions.ProfileSetEdit({country: str}));
   }, [dispatch])
 
-  if(isLoading) return (
-    <div className={ClassNames("profile-card", "profile-card--loader", className)} data-testid="profile-card">
-      <Loader/>
-    </div>
-  )
-
-  if(!!error) return (
-    <div className={ClassNames("profile-card", "profile-card--error", className)} data-testid="profile-card">
-      <Text
-        theme={TextTheme.ERROR}
-        align={TextAlign.CENTER}
-        title={t("error-profile")}
-      />
-    </div>
-  )
-
   const onSubmit: SubmitHandler<LoginTypes> = (data: LoginTypes) => {
-    dispatch(ProfileUpdate());
+    if(!errors) dispatch(ProfileUpdate());
   };
 
   return (
     <div className={ClassNames("profile-card", "profile-card--border", className)} data-testid="profile-card">
-      <form className="profile-card__area" onSubmit={handleSubmit(onSubmit)} >
+      <form className="profile-card__area" onSubmit={handleSubmit(onSubmit)} data-testid="form">
         { !!edit?.avatar &&
           <LoadAvatar
             className="profile-card__avatar"
@@ -169,7 +142,7 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, profile, edit, isLoa
               color={ColorInputEnum.WHITE_COLOR_INVERTED}
               placeholder={t(`placeholder.city`)}
             />
-            <button ref={refSend} type="submit" style={{display: "none"}}/>
+            <button ref={refSend} type="submit" style={{display: "none"}} data-testid="submit"/>
           </>
         }
       </form>

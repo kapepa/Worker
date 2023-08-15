@@ -32,11 +32,8 @@ type ProfileCardStory = StoryObj<typeof ProfileCard>;
 
 export const ProfileCardNormal: ProfileCardStory = {
   args: {
-    profile: mockProfile.data,
     edit: mockProfile.data,
-    isLoading: false,
     readonly: true,
-    error: undefined,
     refSend: { current: null },
   },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
@@ -44,11 +41,8 @@ export const ProfileCardNormal: ProfileCardStory = {
 
 export const ProfileCardDark: ProfileCardStory = {
   args: {
-    profile: mockProfile.data,
     edit: mockProfile.data,
-    isLoading: false,
     readonly: true,
-    error: undefined,
     refSend: { current: null },
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
