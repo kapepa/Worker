@@ -23,7 +23,7 @@ const ErrorPage = Loadable(lazy(() => import("../../../../pages/Error")));
 const routers = createBrowserRouter([
   {
     path: RouterPath.HOME,
-    element: <App />,
+    element:  <App />,
     errorElement: <ErrorPage/>,
     children: [
       {
