@@ -1,4 +1,4 @@
-import {FC, ReactNode} from "react";
+import {FC, memo, ReactNode, useMemo} from "react";
 import {Provider} from "react-redux";
 import {AppState, CreateReduxStore} from "../config/store";
 import {StateSchema} from "../config/StateSchema";
@@ -10,9 +10,9 @@ interface StoreProviderProps {
   getState?: (state: AppState) => void,
 }
 
-const StoreProvider: FC<StoreProviderProps> = ({children, preloadedState,getState }) => {
+const StoreProvider: FC<StoreProviderProps> = memo(({ children, preloadedState, getState }) => {
   const navigate = useNavigate();
-  const store = CreateReduxStore(preloadedState, navigate);
+  const store = useMemo(() => CreateReduxStore(preloadedState, navigate), [preloadedState, navigate])
   if(!!getState) getState(store.getState());
 
   return (
@@ -20,6 +20,6 @@ const StoreProvider: FC<StoreProviderProps> = ({children, preloadedState,getStat
       {children}
     </Provider>
   )
-}
+})
 
 export {StoreProvider};

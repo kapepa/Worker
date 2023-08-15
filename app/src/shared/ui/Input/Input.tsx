@@ -40,7 +40,7 @@ const Input: FC<InputProps> = memo( (
       />
       {
         (getFieldState && label && getFieldState(label).error) &&
-        <span className={ClassNames("input__alert", classNameAlert)}>
+        <span className={ClassNames("input__alert", classNameAlert)} data-testid="alert">
           {t(`form-error.${getFieldState(label).error?.type as string}`)}
         </span>
       }
