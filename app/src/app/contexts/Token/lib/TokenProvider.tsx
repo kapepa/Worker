@@ -34,7 +34,7 @@ const TokenProvider: FC<TokenProviderProps> = memo(({children}) => {
       setAxiosToken(token);
       dispatch(MyselfUsers())
     };
-  },[token, dispatch, profile])
+  },[token, dispatch])
 
   const getToken = useCallback(() => {
     const bearer = window.localStorage.getItem(LOCAL_STORAGE_TOKEN);
