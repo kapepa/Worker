@@ -52,11 +52,11 @@ const TokenProvider: FC<TokenProviderProps> = memo(({children}) => {
 
   useEffect(() => {
     if(!!token) setToken();
-  },[token, setToken, !!profile])
+  },[!!token, setToken])
 
   useEffect(() => {
     if(!profile) getToken()
-  },[getToken])
+  },[getToken, !profile])
 
   return (
     <TokenContext.Provider value={{logout}}>
