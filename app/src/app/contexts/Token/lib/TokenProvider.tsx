@@ -34,7 +34,7 @@ const TokenProvider: FC<TokenProviderProps> = memo(({children}) => {
       setAxiosToken(token);
       dispatch(MyselfUsers())
     };
-  },[token, dispatch, !!profile])
+  },[token, dispatch])
 
   const getToken = useCallback(() => {
     const bearer = window.localStorage.getItem(LOCAL_STORAGE_TOKEN);
@@ -42,7 +42,7 @@ const TokenProvider: FC<TokenProviderProps> = memo(({children}) => {
       setAxiosToken(bearer);
       dispatch(MyselfUsers())
     }
-  }, [dispatch, !profile])
+  }, [dispatch, profile])
 
   const logout = useCallback(() => {
     dispatch(cleanToken());
@@ -52,11 +52,11 @@ const TokenProvider: FC<TokenProviderProps> = memo(({children}) => {
 
   useEffect(() => {
     if(!!token) setToken();
-  },[token, setToken, !!profile])
+  },[token, setToken])
 
   useEffect(() => {
     if(!profile) getToken()
-  },[getToken])
+  },[getToken, profile])
 
   return (
     <TokenContext.Provider value={{logout}}>

@@ -50,7 +50,7 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refS
   }, [dispatch])
 
   const onSubmit: SubmitHandler<LoginTypes> = (data: LoginTypes) => {
-    if(!errors) dispatch(ProfileUpdate());
+    if(!Object.keys(errors).length) dispatch(ProfileUpdate());
   };
 
   return (

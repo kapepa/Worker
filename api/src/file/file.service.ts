@@ -4,7 +4,7 @@ import { v1 as uuid } from 'uuid';
 import {diskStorage, StorageEngine} from "multer";
 import * as path from 'path';
 import * as fs from "fs"
-import {of} from "rxjs";
+import {Observable, of, switchMap, throwError} from "rxjs";
 
 export function createMulterOptions(): MulterModuleOptions {
   return {
@@ -29,10 +29,10 @@ export function createMulterOptions(): MulterModuleOptions {
 @Injectable()
 export class FileService {
 
-  removeFile(filename: string) {
+  removeFile(filename: string): Observable<boolean> {
     const pathToFile = path.join(__dirname, "..", "..", "static");
     const exist = fs.existsSync( `${pathToFile}/${filename}` )
-    if(!exist) new HttpException('An error occurred when deleting the old avatar.', HttpStatus.BAD_REQUEST)
+    if(!exist) return throwError(() => new HttpException('An error occurred when deleting the old avatar.', HttpStatus.BAD_REQUEST));
     fs.unlinkSync(`${pathToFile}/${filename}`);
 
     return of(true);
