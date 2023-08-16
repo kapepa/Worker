@@ -22,6 +22,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = memo(({className}) => {
     >
       {theme === ThemeEnum.NORMAL && <img src={LightThemeIco} alt={'Theme'}/>}
       {theme === ThemeEnum.DARK && <img src={DarkTheme} alt={'Theme'}/>}
+      {theme === ThemeEnum.ORANGE && <img src={DarkTheme} alt={'Theme'}/>}
     </Button>
   )
 })
