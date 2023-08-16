@@ -6,6 +6,7 @@ import {of} from "rxjs";
 import {MockUsers} from "../utility/test/mockUsers";
 import DoneCallback = jest.DoneCallback;
 import {HttpException, HttpStatus, UnauthorizedException} from "@nestjs/common";
+import {AuthUsersDto} from "./dto/auth-users.dto";
 
 describe('AuthService',() => {
   let service: AuthService;
@@ -62,7 +63,7 @@ describe('AuthService',() => {
     const existUser = jest.spyOn(userService, "exitUser").mockReturnValue(of(false));
     const saveUser = jest.spyOn(userService, "saveUser").mockReturnValue(of(MockUsers));
 
-    service.signUp({ username: MockUsers.username, email: MockUsers.email, password: MockUsers.password }).subscribe((bol: boolean) => {
+    service.signUp({ username: MockUsers.username, email: MockUsers.email, password: MockUsers.password } as AuthUsersDto).subscribe((bol: boolean) => {
       expect(bol).toBeTruthy();
       expect(existUser).toHaveBeenCalledWith({ where: { username: MockUsers.username, email: MockUsers.email } });
       expect(saveUser).toHaveBeenCalled()
@@ -73,7 +74,7 @@ describe('AuthService',() => {
   it("signUp, should be user exist", () => {
     jest.spyOn(userService, "exitUser").mockReturnValue(of(true));
 
-    service.signUp({ username: MockUsers.username, email: MockUsers.email, password: MockUsers.password }).subscribe({
+    service.signUp({ username: MockUsers.username, email: MockUsers.email, password: MockUsers.password } as AuthUsersDto).subscribe({
       error: (err) => expect(err).toEqual(new HttpException('this letter already exists.', HttpStatus.FORBIDDEN))
     })
   })

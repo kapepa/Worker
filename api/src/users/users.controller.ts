@@ -54,16 +54,9 @@ export class UsersController {
     if(!!avatar?.[0]) toBody.avatar = avatar![0].filename
     return this.usersService.updateUser(req.user.id, toBody).pipe(
       catchError((err) => {
-        if( toBody.filename && !!avatar ) this.fileService.removeFile(toBody.filename).subscribe();
+        if( toBody.avatar && !!avatar ) this.fileService.removeFile(toBody.avatar).subscribe();
         return err;
       })
     );
-  }
-
-  @Post("/file")
-  @UseInterceptors(FilesInterceptor("avatar", 1000, createMulterOptions()))
-  fileLoader(@UploadedFiles() avatar: Express.Multer.File, @Body() body: UsersEntityInterfaces){
-    const toBody = JSON.parse(JSON.stringify(body));
-    const { filename } = avatar[0]
   }
 }

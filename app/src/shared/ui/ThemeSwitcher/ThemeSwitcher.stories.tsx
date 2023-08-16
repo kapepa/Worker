@@ -18,3 +18,7 @@ export const ThemeSwitcherNormal: ThemeSwitcherStory = {
 export const ThemeSwitcherDark: ThemeSwitcherStory = {
 	decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };
+
+export const ThemeSwitcherORANGE: ThemeSwitcherStory = {
+	decorators: [ThemeDecorator(ThemeEnum.ORANGE)],
+};

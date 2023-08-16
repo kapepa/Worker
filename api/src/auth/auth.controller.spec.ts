@@ -5,6 +5,7 @@ import { UsersService } from "../users/users.service";
 import { JwtService } from "@nestjs/jwt";
 import {of} from "rxjs";
 import {MockUsers} from "../utility/test/mockUsers";
+import {AuthUsersDto} from "./dto/auth-users.dto";
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -41,7 +42,7 @@ describe('AuthController', () => {
   it("signUp, should be return true", () => {
     const signUp = jest.spyOn(service, "signUp").mockReturnValue(of(true));
 
-    controller.signUp({ username: MockUsers.username, email: MockUsers.email, password: MockUsers.password }).subscribe((token) => {
+    controller.signUp({ username: MockUsers.username, email: MockUsers.email, password: MockUsers.password } as AuthUsersDto).subscribe((token) => {
       expect(token).toBeTruthy();
       expect(signUp).toHaveBeenCalledWith({ username: MockUsers.username, email: MockUsers.email, password: MockUsers.password });
     })
