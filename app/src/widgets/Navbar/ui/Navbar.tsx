@@ -37,14 +37,24 @@ const Navbar: FC<NavbarProps> = memo(({className}) => {
           <IcoImg className="navbar__ico" ico={"AboutIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
           <span className="navbar__symbol">{t("nav.about")}</span>
         </AppLink>
-        { !!profile && <AppLink
-          className={ClassNames("navbar__link", {"navbar__link--squeeze": open})}
-          theme={AppLinkTheme.SECONDARY} to={RouterPath.PROFILE}
-          role="link"
-        >
-          <IcoImg className="navbar__ico" ico={"ProfileIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
-          <span className="navbar__symbol">{t("nav.profile")}</span>
-        </AppLink> }
+        { !!profile && <>
+          <AppLink
+            className={ClassNames("navbar__link", {"navbar__link--squeeze": open})}
+            theme={AppLinkTheme.SECONDARY} to={RouterPath.PROFILE}
+            role="link"
+          >
+            <IcoImg className="navbar__ico" ico={"ProfileIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
+            <span className="navbar__symbol">{t("nav.profile")}</span>
+          </AppLink>
+          <AppLink
+            className={ClassNames("navbar__link", {"navbar__link--squeeze": open})}
+            theme={AppLinkTheme.SECONDARY} to={RouterPath.ARTICLE}
+            role="link"
+          >
+            <IcoImg className="navbar__ico" ico={"ArticleIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
+            <span className="navbar__symbol">{t("nav.article")}</span>
+          </AppLink>
+        </>}
       </nav>
     </div>
   )
