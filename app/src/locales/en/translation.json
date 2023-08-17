@@ -6,7 +6,8 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "profile": "Profile"
+    "profile": "Profile",
+    "article": "Article"
   },
   "sign_in": "Sign in",
   "logout": "Logout",

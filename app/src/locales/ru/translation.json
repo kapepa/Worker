@@ -6,7 +6,8 @@
   "nav": {
     "home": "Домой",
     "about": "О нас",
-    "profile": "Профиль"
+    "profile": "Профиль",
+    "article": "Статья"
   },
   "sign_in": "Войти",
   "logout": "Выйти",

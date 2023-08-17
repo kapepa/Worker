@@ -5,11 +5,14 @@ import { ClassNames } from "../../lib/ClassNames";
 import { ReactComponent as HomeIco } from "../../assets/icons/main-20-20.svg";
 import { ReactComponent as AboutIco } from "../../assets/icons/about-20-20.svg";
 import { ReactComponent as ProfileIco } from "../../assets/icons/profile-20-20.svg";
+import { ReactComponent as ArticleIco } from "../../assets/icons/article-20-20.svg"
 
 enum IcoNameEnum {
   HomeIco,
   AboutIco,
   ProfileIco,
+  ArticleIco,
+
 }
 
 export enum IcoImgColor {
@@ -34,6 +37,7 @@ const IcoImg: FC<IcoImgProps> = memo(({ className, ico, img, fill, color, alt=""
     "HomeIco": HomeIco,
     "AboutIco": AboutIco,
     "ProfileIco": ProfileIco,
+    "ArticleIco": ArticleIco,
   }
   
   if(!!ico) {

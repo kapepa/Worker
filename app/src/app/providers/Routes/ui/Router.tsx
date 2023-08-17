@@ -18,6 +18,8 @@ const Loadable = (Component: ElementType) =>
 const HomePage = Loadable(lazy(() => import("../../../../pages/Home")));
 const AboutPage = Loadable(lazy(() => import("../../../../pages/About").then(module => ({default: module.About}) )));
 const ProfilePage = Loadable(lazy( () => import("../../../../pages/Profile").then(module => ({default: module.Profile})) ));
+const ArticlePage = Loadable(lazy(() => import("../../../../pages/Article").then(module => ({default: module.Article})) ))
+const DetailsPage = Loadable(lazy(() => import("../../../../pages/Details").then(module => ({default: module.Details})) ));
 const ErrorPage = Loadable(lazy(() => import("../../../../pages/Error")));
 
 const routers = createBrowserRouter([
@@ -33,6 +35,14 @@ const routers = createBrowserRouter([
       {
         path: RouterPath.ABOUT,
         element: <AboutPage />,
+      },
+      {
+        path: RouterPath.ARTICLE + "/:id",
+        element: <ArticlePage />,
+      },
+      {
+        path: RouterPath.DETAILS,
+        element: <DetailsPage />,
       },
       {
         path: RouterPath.PROFILE,
