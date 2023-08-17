@@ -8,6 +8,7 @@ import {UsersEntity} from "./users/entities/users.entity";
 import {ServeStaticModule} from "@nestjs/serve-static";
 import { join } from 'path';
 import { FileModule } from './file/file.module';
+import { ArticlesModule } from './articles/articles.module';
 
 dotenv.config();
 
@@ -33,7 +34,8 @@ dotenv.config();
     }),
     UsersModule,
     AuthModule,
-    FileModule
+    FileModule,
+    ArticlesModule
   ],
   controllers: [],
   providers: [],
