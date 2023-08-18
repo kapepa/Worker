@@ -1,5 +1,8 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn} from 'typeorm';
-import {ArticlesBlocks, ArticlesInterface, ArticlesTypeKey} from "../interfaces/articles.interface";
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, OneToMany} from 'typeorm';
+import {ArticlesInterface, ArticlesTypeKey} from "../interfaces/articles.interface";
+import {UsersEntity} from "../../users/entities/users.entity";
+import {BlocksEntity} from "./blocks.entity";
+import {CommentsEntity} from "../../comments/entities/comments.entity";
 
 @Entity()
 export class ArticlesEntity implements ArticlesInterface {
@@ -15,14 +18,20 @@ export class ArticlesEntity implements ArticlesInterface {
   @Column({ default: "" })
   img: string;
 
-  @Column({ default: "" })
+  @Column({ default: 0 })
   views: number;
 
-  @Column({ default: ArticlesTypeKey.IT })
+  @Column({ type: 'enum', enum: ArticlesTypeKey, array: true, default: [] })
   type: ArticlesTypeKey[]
 
-  @Column({ default: {} })
-  blocks: ArticlesBlocks;
+  @ManyToOne(() => UsersEntity, (users) => users.articles)
+  users: UsersEntity;
+
+  @OneToMany(() => BlocksEntity, (block) => block.articles)
+  blocks: BlocksEntity[];
+
+  @OneToMany(() => CommentsEntity, (comments) => comments.articles)
+  comments: CommentsEntity[];
 
   @CreateDateColumn()
   createdAt: Date;
