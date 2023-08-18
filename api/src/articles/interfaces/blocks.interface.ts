@@ -1,3 +1,6 @@
+import {ArticlesInterface} from "./articles.interface";
+import {UsersEntityInterfaces} from "../../users/interfaces/users.interfaces";
+
 export enum ArticlesBlockType {
   CODE = 'CODE',
   IMAGE = 'IMAGE',
@@ -7,21 +10,20 @@ export enum ArticlesBlockType {
 interface ArticlesBlockBase {
   id: string,
   type: ArticlesBlockType,
+  articles?: ArticlesInterface,
+  users?: UsersEntityInterfaces,
 }
 
 export interface BlocksCodeInterface extends ArticlesBlockBase{
-  type: ArticlesBlockType.CODE,
   code: string,
 }
 
 export interface BlocksImageInterface extends ArticlesBlockBase{
-  type: ArticlesBlockType.IMAGE,
   src: string,
   title?: string,
 }
 
 export interface BlocksTextInterface extends ArticlesBlockBase{
-  type: ArticlesBlockType.TEXT,
   title?: string,
   paragraphs: string[]
 }

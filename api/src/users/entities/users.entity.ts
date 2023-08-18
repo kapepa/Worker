@@ -1,5 +1,8 @@
-import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany} from 'typeorm';
 import {UsersEntityInterfaces} from "../interfaces/users.interfaces";
+import {ArticlesEntity} from "../../articles/entities/articles.entity";
+import {BlocksEntity} from "../../articles/entities/blocks.entity";
+import {CommentsEntity} from "../../comments/entities/comments.entity";
 
 @Entity()
 export class UsersEntity implements UsersEntityInterfaces {
@@ -16,19 +19,28 @@ export class UsersEntity implements UsersEntityInterfaces {
   lastname: string;
 
   @Column()
-  email: string
+  email: string;
 
   @Column({ select: false })
   password: string;
 
   @Column({ default: "" })
-  avatar: string
+  avatar: string;
 
   @Column({ default: "" })
-  country: string
+  country: string;
 
   @Column({ default: "" })
-  city: string
+  city: string;
+
+  @OneToMany(type => ArticlesEntity, (articles) => articles.users)
+  articles: ArticlesEntity[];
+
+  @OneToMany(() => BlocksEntity, (blocks) => blocks.users)
+  blocks: BlocksEntity[];
+
+  @OneToMany(() => CommentsEntity, (comments) => comments.users)
+  comments: CommentsEntity[]
 
   @Column({ default: false , select: false})
   isActive: boolean;

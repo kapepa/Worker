@@ -1,11 +1,12 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
-import {ArticlesBlocks, ArticlesInterface, ArticlesTypeKey} from "../interfaces/articles.interface";
+import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {
   ArticlesBlockType,
   BlocksCodeInterface,
   BlocksImageInterface,
   BlocksTextInterface
 } from "../interfaces/blocks.interface";
+import {ArticlesEntity} from "./articles.entity";
+import {UsersEntity} from "../../users/entities/users.entity";
 
 @Entity()
 export class BlocksEntity implements BlocksCodeInterface, BlocksImageInterface, BlocksTextInterface {
@@ -13,8 +14,7 @@ export class BlocksEntity implements BlocksCodeInterface, BlocksImageInterface, 
   id: string;
 
   @Column()
-  // type: ArticlesBlockType.CODE | ArticlesBlockType.IMAGE | ArticlesBlockType.TEXT;
-  type: any;
+  type: ArticlesBlockType;
 
   @Column({ default: "" })
   code: string;
@@ -25,8 +25,14 @@ export class BlocksEntity implements BlocksCodeInterface, BlocksImageInterface, 
   @Column({ default: "" })
   title: string;
 
-  @Column({ default: [] })
-  paragraphs: string[]
+  @Column({ type: "text", default: [], array: true })
+  paragraphs: string[];
+
+  @ManyToOne(() => ArticlesEntity, (articles) => articles.blocks)
+  articles: ArticlesEntity;
+
+  @ManyToOne(() => UsersEntity, (users) => users.blocks)
+  users: UsersEntity;
 
   @CreateDateColumn()
   createdAt: Date;
