@@ -16,7 +16,7 @@ export interface ArticlesInterface {
   subtitle?: string,
   img?: string,
   views?: number,
-  createdAt: Date,
+  createdAt?: Date,
   type?: ArticlesTypeKey[],
   users?: UsersEntityInterfaces,
   blocks?: ArticlesBlocks[],

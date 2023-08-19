@@ -20,7 +20,6 @@ import {Observable} from "rxjs";
 @ApiTags('articles')
 @Controller('articles')
 export class ArticlesController {
-
   constructor(
     private articlesService: ArticlesService
   ) {}
@@ -51,12 +50,18 @@ export class ArticlesController {
     return this.articlesService.createBlocks(idArt, Object.assign({users: req.user}, toBody));
   }
 
+  @UseGuards(AuthGuard)
   @Get("/receive/art/:id")
+  @ApiResponse({ status: 201, description: 'Should be receive article on id'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   getArticles(@Param("id") id) {
     return this.articlesService.findOneArticle({where: {id}, relations: ["blocks", "comments"] })
   }
 
+  @UseGuards(AuthGuard)
   @Get("/receive/block/:id")
+  @ApiResponse({ status: 201, description: 'Should be receive block on id'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   getBlocks(@Param("id") id) {
     return this.articlesService.findOneBlocks({ where: {id} });
   }
