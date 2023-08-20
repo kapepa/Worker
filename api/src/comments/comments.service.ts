@@ -29,7 +29,7 @@ export class CommentsService {
     );
   }
 
-  createArtComment(idArt: string, body: CommentsInterfaces) {
+  createArtComment(idArt: string, body: CommentsInterfaces): Observable<CommentsInterfaces> {
     return this.articlesService.findOneArticle({where: {id: idArt}}).pipe(
       switchMap((article: ArticlesInterface) => {
         body.articles = article;

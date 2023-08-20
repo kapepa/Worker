@@ -32,7 +32,7 @@ export class ArticlesController {
   createArticles(@Req() req, @UploadedFiles() img: Array<Express.Multer.File>, @Body() body: ArticlesInterface): Observable<ArticlesInterface>{
     const toBody = JSON.parse(JSON.stringify(body));
     const toImg = JSON.parse(JSON.stringify(img));
-    if (!!toImg.img.length) toBody.img = toImg.img[0].filename;
+    if (!!toImg.img?.length) toBody.img = toImg.img[0].filename;
 
     return this.articlesService.saveArticle(Object.assign({users: req.user}, toBody));
   }
@@ -42,9 +42,9 @@ export class ArticlesController {
   @ApiResponse({ status: 201, description: 'Should be create new Block'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   @Post("/create/block/:id")
-  createBlocks(@Req() req, @Param("id") idArt: string, @UploadedFiles() src: Array<Express.Multer.File>, @Body() body: ArticlesBlocks){
+  createBlocks(@Req() req, @Param("id") idArt: string, @UploadedFiles() src: Array<Express.Multer.File>, @Body() body: ArticlesBlocks): Observable<ArticlesBlocks>{
     const toBody = JSON.parse(JSON.stringify(body));
-    const toSrc = JSON.parse(JSON.stringify(src));
+    const toSrc =  JSON.parse(JSON.stringify(src));
     if (toSrc.src && !!toSrc.src.length) toBody.src = toSrc.src[0].filename;
 
     return this.articlesService.createBlocks(idArt, Object.assign({users: req.user}, toBody));

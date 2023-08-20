@@ -3,7 +3,6 @@ import {ProfileTypes} from "../types/profileTypes";
 import {ProfileState} from "../types/profileState";
 import {ProfileRequest} from "../../services/ProfileRequest/ProfileRequest";
 import {DeepPartial} from "@reduxjs/toolkit";
-import {ThunkExtraArg} from "../../../../app/providers/Store/config/StateSchema";
 import {ProfileUpdate} from "../../services/ProfileUpdate/ProfileUpdate";
 
 describe("ProfileSlice", () => {

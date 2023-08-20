@@ -1,9 +1,9 @@
-import {render, screen} from '@testing-library/react'
 import {Details} from "./Details";
+import ComponentRender from "../../../shared/test/componentRender";
 
 describe("<Details/>", () => {
   test("should be defined", () => {
-    const { getByTestId } = render(<Details/>);
+    const { getByTestId } = ComponentRender(<Details/>);
     expect(getByTestId("details")).toBeInTheDocument();
   })
 })

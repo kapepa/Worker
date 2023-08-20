@@ -6,5 +6,5 @@ export interface CommentsInterfaces {
   text: string,
   articles?: ArticlesInterface,
   users?: UsersEntityInterfaces,
-  createdAt: Date;
+  createdAt?: Date;
 }
