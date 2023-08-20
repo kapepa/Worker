@@ -26,7 +26,7 @@ describe("<LoginForm/>", () => {
   })
 
   test("should be submit form", async () => {
-    const { getByRole, getByTestId } = ComponentRender(<LoginForm onClose={() => {}} />);
+    const { getByRole } = ComponentRender(<LoginForm onClose={() => {}} />);
     const name = await getByRole("email") as HTMLInputElement;
     const pass = await getByRole("password") as HTMLInputElement;
 

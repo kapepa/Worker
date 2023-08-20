@@ -6,8 +6,13 @@ import {AuthModule} from './auth/auth.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {UsersEntity} from "./users/entities/users.entity";
 import {ServeStaticModule} from "@nestjs/serve-static";
-import { join } from 'path';
-import { FileModule } from './file/file.module';
+import {join} from 'path';
+import {FileModule} from './file/file.module';
+import {ArticlesModule} from './articles/articles.module';
+import {ArticlesEntity} from "./articles/entities/articles.entity";
+import {BlocksEntity} from "./articles/entities/blocks.entity";
+import { CommentsModule } from './comments/comments.module';
+import {CommentsEntity} from "./comments/entities/comments.entity";
 
 dotenv.config();
 
@@ -26,14 +31,21 @@ dotenv.config();
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [UsersEntity],
+        entities: [
+          UsersEntity,
+          ArticlesEntity,
+          BlocksEntity,
+          CommentsEntity,
+        ],
         synchronize: true,
       }),
       inject: [ConfigService],
     }),
     UsersModule,
     AuthModule,
-    FileModule
+    FileModule,
+    ArticlesModule,
+    CommentsModule
   ],
   controllers: [],
   providers: [],

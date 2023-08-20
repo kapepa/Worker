@@ -3,16 +3,19 @@ import {ProfileHeader} from "./ProfileHeader";
 import ThemeDecorator from "../../../../shared/config/ThemeDecorator/ThemeDecorator";
 import {ThemeEnum} from "../../../../app/contexts/Theme/lib/ThemeContext";
 import StoreDecorator from "../../../../shared/config/StoreDecorator/StoreDecorator";
+import I18nDecorator from "../../../../shared/config/i18nDecorator/i18nDecorator";
+
+const mockData = {
+  lastname: "MyLastname",
+  firstname: "MyLastnameFirstname",
+  email: "MyEmail",
+}
 
 const meta: Meta<typeof ProfileHeader> = {
   component: ProfileHeader,
-  decorators: [StoreDecorator({
+  decorators: [I18nDecorator, StoreDecorator({
     profile: {
-      data: {
-        lastname: "MyLastname",
-        firstname: "MyLastnameFirstname",
-        email: "MyEmail",
-      },
+      data: mockData,
       readonly: true,
     }})],
 };
@@ -39,7 +42,7 @@ export const ProfileHeaderNormalEdit: ProfileHeaderStory = {
     onSend: () => {},
   },
   decorators: [StoreDecorator({
-    profile: { readonly: false }
+    profile: { readonly: false, data: mockData }
   }), ThemeDecorator(ThemeEnum.NORMAL)],
 };
 
@@ -48,6 +51,6 @@ export const ProfileHeaderDarkEdit: ProfileHeaderStory = {
     onSend: () => {},
   },
   decorators: [StoreDecorator({
-    profile: { readonly: false }
+    profile: { readonly: false, data: mockData }
   }), ThemeDecorator(ThemeEnum.DARK)],
 };

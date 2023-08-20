@@ -1,4 +1,4 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable, NotFoundException} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {UsersEntity} from "./entities/users.entity";
 import {Repository} from "typeorm";
@@ -16,7 +16,11 @@ export class UsersService {
   ) {}
 
   findOne(data: FindOneOptions): Observable<UsersEntityInterfaces> {
-    return from(this.usersRepository.findOne(data));
+    return from(this.usersRepository.findOne(data)).pipe(
+      switchMap((user: UsersEntityInterfaces) => {
+        return !!user ? of(user) : throwError(() => new HttpException("User not found", HttpStatus.NOT_FOUND))
+      })
+    );
   }
 
   exitUser(data: FindOneOptions): Observable<boolean> {
