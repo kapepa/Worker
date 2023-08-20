@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {CommentsEntity} from "./entities/comments.entity";
-import {from, Observable, switchMap} from "rxjs";
+import {from, Observable, of, switchMap, throwError} from "rxjs";
 import {CommentsInterfaces} from "./interfaces/comments.interfaces";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
 import {CommentsDto} from "./dto/comments.dto";
@@ -21,11 +21,15 @@ export class CommentsService {
     return from(this.articlesRepository.save(comment));
   }
 
-  findOneComments(data: FindOneOptions) {
-    return from(this.articlesRepository.findOne(data));
+  findOneComments(data: FindOneOptions): Observable<CommentsInterfaces> {
+    return from(this.articlesRepository.findOne(data)).pipe(
+      switchMap((comment: CommentsInterfaces) => {
+        return !!comment ? of(comment) : throwError(() => new HttpException("Comment not found", HttpStatus.NOT_FOUND));
+      })
+    );
   }
 
-  createArtComment(idArt: string, body: CommentsInterfaces) {
+  createArtComment(idArt: string, body: CommentsInterfaces): Observable<CommentsInterfaces> {
     return this.articlesService.findOneArticle({where: {id: idArt}}).pipe(
       switchMap((article: ArticlesInterface) => {
         body.articles = article;
