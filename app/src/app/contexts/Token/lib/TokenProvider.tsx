@@ -3,8 +3,9 @@ import {LOCAL_STORAGE_TOKEN, TokenContext} from "./TokenContext";
 import {useDispatch, useSelector} from "react-redux";
 import {AuthActions, GetAuth} from "../../../../features/AuthByUsername";
 import Axios from "../../../../utils/axios";
-import {GetUsersProfile, MyselfUsers, UsersActions} from "../../../../entities/Users";
+import {GetUsers, MyselfUsers, UsersActions} from "../../../../entities/Users";
 import {AppDispatch} from "../../../providers/Store/config/store";
+import Loader from "../../../../shared/ui/Loader/Loader";
 
 interface TokenProviderProps {
   children: ReactNode,
@@ -12,7 +13,7 @@ interface TokenProviderProps {
 
 const TokenProvider: FC<TokenProviderProps> = memo(({children}) => {
   const dispatch = useDispatch<AppDispatch>();
-  const profile = useSelector(GetUsersProfile);
+  const { profile, loading } = useSelector(GetUsers);
   const { cleanUsers } = UsersActions;
   const { token } = useSelector(GetAuth);
   const { cleanToken } = AuthActions;
@@ -38,7 +39,7 @@ const TokenProvider: FC<TokenProviderProps> = memo(({children}) => {
 
   const getToken = useCallback(() => {
     const bearer = window.localStorage.getItem(LOCAL_STORAGE_TOKEN);
-    if(!!bearer && !profile){
+    if (!!bearer && !profile){
       setAxiosToken(bearer);
       dispatch(MyselfUsers())
     }
@@ -51,12 +52,20 @@ const TokenProvider: FC<TokenProviderProps> = memo(({children}) => {
   }, [dispatch, cleanToken, cleanUsers])
 
   useEffect(() => {
-    if(!!token) setToken();
+    if (!!token) setToken();
   },[token, setToken])
 
   useEffect(() => {
-    if(!profile) getToken()
+    if (!profile) getToken()
   },[getToken, profile])
+
+  if ( !profile && loading ) {
+    return (
+      <div className="basic-loader">
+        <Loader />
+      </div>
+    )
+  }
 
   return (
     <TokenContext.Provider value={{logout}}>
