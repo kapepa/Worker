@@ -37,11 +37,11 @@ const routers = createBrowserRouter([
         element: <AboutPage />,
       },
       {
-        path: RouterPath.ARTICLE + "/:id",
+        path: RouterPath.ARTICLE,
         element: <ArticlePage />,
       },
       {
-        path: RouterPath.DETAILS,
+        path: RouterPath.ARTICLE + "/:id",
         element: <DetailsPage />,
       },
       {

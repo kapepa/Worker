@@ -11,6 +11,7 @@ import {CurriedGetDefaultMiddleware} from "@reduxjs/toolkit/dist/getDefaultMiddl
 import {NavigateFunction} from "react-router/dist/lib/hooks";
 import {useDispatch} from "react-redux";
 import {ToForm} from "../../../../utils/toForm";
+import {DetailsReducers} from "../../../../entities/Article";
 
 // const store = configureStore<StateSchema>({
 //   reducer: {
@@ -35,6 +36,7 @@ const storeReducers = combineReducers<StateSchema>({
   users: UsersReducer,
   auth: AuthReducer,
   profile: ProfileReducer,
+  details: DetailsReducers,
 });
 
 function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunction) {

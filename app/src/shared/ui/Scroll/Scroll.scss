@@ -1,0 +1,19 @@
+.scroll{
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  &::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+  }
+  &::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+  }
+}
