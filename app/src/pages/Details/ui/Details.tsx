@@ -7,7 +7,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ArticleDetails, FetchArticleById} from "../../../entities/Article";
 import {AppDispatch} from "../../../app/providers/Store/config/store";
 import {GetArticleDetails} from "../../../entities/Article/selectors/GetArticleDetails/GetArticleDetails";
-
 import {Text, TextAlign, TextTheme} from "../../../shared/ui/Text/Text";
 import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../../shared/ui/Skeleton/Skeleton";

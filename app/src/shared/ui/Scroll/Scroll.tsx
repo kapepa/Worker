@@ -9,7 +9,7 @@ interface ScrollProps {
 
 const Scroll: FC<ScrollProps> = ({className, children}) => {
   return (
-    <div className={ClassNames("scroll", className)}>
+    <div className={ClassNames("scroll", className)} data-testid="scroll" >
       {children}
     </div>
   )
