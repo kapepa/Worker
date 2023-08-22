@@ -3,7 +3,7 @@ import "./Article.scss";
 import {RouterPath} from "../../../shared/const/Routers";
 import {useSelector} from "react-redux";
 import {GetUsers} from "../../../entities/Users";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 // import {useTranslation} from "react-i18next";
 
 const Article: FC = memo(() => {
@@ -17,7 +17,7 @@ const Article: FC = memo(() => {
 
   return (
     <div className="article" data-testid="article">
-      Article
+      <NavLink to={`${RouterPath.ARTICLE}/aed4c183-3f50-44a8-acb9-750311590502`}>Der</NavLink>
     </div>
   )
 })

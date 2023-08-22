@@ -9,12 +9,12 @@ export enum ArticleTypesKey {
 export type ArticleBlocks = ArticleBlockCode | ArticleBlocImage | ArticleBlockText;
 
 export interface ArticleType {
-  id: string,
+  id?: string,
   title: string,
   subtitle: string,
   img: string,
   views: number,
-  createdAt: Date,
+  createdAt?: Date,
   type: ArticleTypesKey[],
-  blocks: ArticleBlocks,
+  blocks?: ArticleBlocks,
 }
