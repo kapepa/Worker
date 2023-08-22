@@ -21,7 +21,7 @@ const DetailsSlice = createSlice({
       })
       .addCase(FetchArticleById.fulfilled, (state: DetailsState, action: PayloadAction<ArticleType>) => {
         state.data = action.payload;
-        state.loading = !state.loading;
+        state.loading = false;
       })
       .addCase(FetchArticleById.rejected, (state: DetailsState, action) => {
         state.loading = !state.loading;

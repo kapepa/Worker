@@ -27,7 +27,6 @@ describe("MyselfUsers", () => {
   })
 
   test("should be rejected", async () => {
-    const mockUser = { id: "MyID", email: "mock@email.com", username: "MyName"};
     mockAxios.get.mockResolvedValue({status: 403});
     const action = MyselfUsers();
     const result = await action(dispatch, getState, undefined);
