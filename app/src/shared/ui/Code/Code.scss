@@ -1,0 +1,14 @@
+.code{
+  border: 1px solid var(--primary-color);
+  position: relative;
+  background-color: var(--code-bg);
+  &__copy{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  &__ico{
+    width: 20px;
+    height: 20px;
+  }
+}

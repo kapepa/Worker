@@ -26,6 +26,12 @@
   &__squeeze{
     position: absolute;
     left: 100%;
+    z-index: 10;
+    opacity: 1;
+    transition: opacity .25s linear;
+    &:hover{
+      opacity: .4;
+    }
   }
   &__toggle{
     transform: translateX(20px);

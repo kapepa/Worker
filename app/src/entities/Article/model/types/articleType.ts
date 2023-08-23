@@ -14,7 +14,7 @@ export interface ArticleType {
   subtitle: string,
   img: string,
   views: number,
-  createdAt?: Date,
+  createdAt?: Date | string,
   type: ArticleTypesKey[],
-  blocks?: ArticleBlocks,
+  blocks?: ArticleBlocks[],
 }
