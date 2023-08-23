@@ -2,6 +2,9 @@
   display: flex;
   align-items: center;
   &__fill{
+    &>path {
+      stroke: red;
+    }
     &--primary-color{
       fill: var(--primary-color);
     }

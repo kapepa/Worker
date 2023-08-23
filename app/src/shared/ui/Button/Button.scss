@@ -3,6 +3,11 @@
   color: var(--primary-color-inverted);
   border: none;
   padding: 10px;
+  opacity: 1;
+  transition: .25s linear opacity;
+  &:hover{
+    opacity: .75;
+  }
   &--clear{
     border: none;
     background: none;

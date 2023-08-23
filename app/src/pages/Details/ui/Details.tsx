@@ -29,7 +29,7 @@ const Details: FC = memo(() => {
     if(params.id) dispatch(FetchArticleById(params.id));
   }, [dispatch, params])
 
-  if(!!data) {
+  if(loading) {
     return (
       <Scroll>
         <div className="details--skeleton">
