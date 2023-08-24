@@ -6,7 +6,9 @@ describe("ArticleBlocImageComponent", () => {
   const block: ArticleBlocImage = {id: "blockID", src: "mock.png", title: "BlockTitle", type: ArticleBlockType.IMAGE};
 
   test("should be defined", () => {
-    const { getByTestId } = render(<ArticleBlocImageComponent block={block}/>);
+    const { getByTestId, queryByText, queryByAltText } = render(<ArticleBlocImageComponent block={block}/>);
     expect(getByTestId("article-image")).toBeInTheDocument();
+    expect(queryByText("BlockTitle")).toBeInTheDocument();
+    expect(queryByAltText("BlockTitle")).toBeInTheDocument();
   })
 })

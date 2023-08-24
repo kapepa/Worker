@@ -2,9 +2,6 @@
   display: flex;
   align-items: center;
   &__fill{
-    &>path {
-      stroke: red;
-    }
     &--primary-color{
       fill: var(--primary-color);
     }
@@ -16,6 +13,32 @@
     }
     &--secondary-color-inverted{
       fill: var(--secondary-color-inverted);
+    }
+  }
+  &__stroke{
+    &--primary-color{
+      fill:transparent;
+      & path{
+        stroke: var(--primary-color);
+      }
+    }
+    &--secondary-color{
+      fill:transparent;
+      & path{
+        stroke:  var(--secondary-color);
+      }
+    }
+    &--primary-color-inverted{
+      fill:transparent;
+      & path{
+        stroke: var(--primary-color-inverted);
+      }
+    }
+    &--secondary-color-inverted{
+      fill:transparent;
+      & path{
+        stroke: var(--secondary-color-inverted);
+      }
     }
   }
 }

@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/shared-ui-Image-Image-stories.41be89d3.chunk.css","mappings":"AAAA","sources":["webpack://app/./src/shared/ui/Image/Image.scss"],"sourcesContent":[".image{\r\n  width: 100%;\r\n  height: 100%;\r\n  max-width: 100%;\r\n  max-height: 100%;\r\n}"],"names":[],"sourceRoot":""}

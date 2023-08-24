@@ -29,14 +29,13 @@ export enum IcoImgColor {
 
 interface IcoImgProps {
   className?: string,
-  alt?: string,
-  ico?: keyof typeof IcoNameEnum,
-  img?: boolean,
+  ico: keyof typeof IcoNameEnum,
   fill?: string,
   color?: IcoImgColor,
+  stroke?: boolean,
 }
 
-const IcoImg: FC<IcoImgProps> = memo(({ className, ico, img, fill, color, alt="" }) => {
+const IcoImg: FC<IcoImgProps> = memo(({ className, ico,  fill, color, stroke }) => {
   const icoList: Record<keyof typeof IcoNameEnum, React.FunctionComponent<React.SVGProps<SVGSVGElement> & {title?: string | undefined}> > = {  
     "HomeIco": HomeIco,
     "AboutIco": AboutIco,
@@ -46,21 +45,17 @@ const IcoImg: FC<IcoImgProps> = memo(({ className, ico, img, fill, color, alt=""
     "CalendarIco": CalendarIco,
     "CopyIco": CopyIco,
   }
-  
-  if(!!ico) {
-    return (
-      <div className={ClassNames(className, "ico-img")} data-testid="ico-img">
-        {React.createElement(icoList[ico], {fill, width: "100%", height: "100%", className: ClassNames(`ico-img__fill--${color}`)})}
-      </div>
-    )
-  }
 
   return (
-    <div className={ClassNames(className, "ico-img")} data-testid="ico-img">
-      <img
-        className={ClassNames(className, "ico-img")}
-        alt={alt}
-      />
+    <div className={ClassNames("ico-img", className)} data-testid="ico-img">
+      {React.createElement(
+        icoList[ico],
+        {
+          fill, width: "100%",
+          height: "100%",
+          className: stroke ? ClassNames(`ico-img__stroke--${color}`) : ClassNames(`ico-img__fill--${color}`),
+        }
+      )}
     </div>
   )
 })
