@@ -13,7 +13,7 @@ const ArticleBlockCodeComponent: FC<ArticleBlockCodeComponentProps> =  memo(({cl
   const { code } = block;
   return (
     <div className={ClassNames("article-code", className)} data-testid="article-code">
-      <Code>{code}</Code>
+      <Code text={code}>{code}</Code>
     </div>
   )
 });
