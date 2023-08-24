@@ -17,6 +17,15 @@ const Avatar: FC<AvatarProps> = memo(({api = true, className, src, alt, size, sy
   const getFirstLetter = (str: string) => str.charAt(0).toUpperCase();
 
   const ToHaveAvatar = (src: string | undefined | File) => {
+
+    if( typeof src === "string" && /http/ig.test(src)){
+      return <img
+        src={src}
+        alt={alt}
+        className={ClassNames("avatar__circle", className)}
+      />
+    }
+
     if(!!src) {
       const toString = typeof src === "string" ? src : URL.createObjectURL(src);
       return <img

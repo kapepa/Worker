@@ -1,0 +1,25 @@
+.view-eye{
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  &__quantity{
+    font: var(--font-l);
+    color: inherit;
+  }
+  &__ico{
+    max-width: 32px;
+    color: inherit;
+  }
+  &--primary-def{
+    color: var(--primary-color);
+  }
+  &--primary-inv{
+    color: var(--primary-color-inverted);
+  }
+  &--secondary-def{
+    color: var(--secondary-color);
+  }
+  &--secondary-inv{
+    color: var(--secondary-color-inverted);
+  }
+}

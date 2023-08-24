@@ -1,3 +1,11 @@
 .article-image{
-
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 10px;
+  &__image{
+    display: block;
+  }
+  &__title{
+    display: block;
+  }
 }
