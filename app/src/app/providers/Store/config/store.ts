@@ -12,6 +12,7 @@ import {NavigateFunction} from "react-router/dist/lib/hooks";
 import {useDispatch} from "react-redux";
 import {ToForm} from "../../../../utils/toForm";
 import {DetailsReducers} from "../../../../entities/Article";
+import {counterReducer} from "../../../../entities/Comments";
 
 // const store = configureStore<StateSchema>({
 //   reducer: {
@@ -37,6 +38,7 @@ const storeReducers = combineReducers<StateSchema>({
   auth: AuthReducer,
   profile: ProfileReducer,
   details: DetailsReducers,
+  comments: counterReducer,
 });
 
 function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunction) {

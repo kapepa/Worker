@@ -12,6 +12,8 @@ import {useTranslation} from "react-i18next";
 import {Skeleton} from "../../../shared/ui/Skeleton/Skeleton";
 import {SkeletonShape} from "../../../shared/const/SkeletonShape";
 import {Scroll} from "../../../shared/ui/Scroll/Scroll";
+import {FetchCommentsArtById} from "../../../entities/Comments";
+import {FetchCommentsQuery} from "../../../entities/Comments/services/FetchCommentsArtById/FetchCommentsArtById";
 
 const Details: FC = memo(() => {
   const { t } = useTranslation("details")
@@ -26,7 +28,10 @@ const Details: FC = memo(() => {
   }, [profile, loading, navigate]);
 
   useEffect(() => {
-    if(params.id) dispatch(FetchArticleById(params.id));
+    if(params.id) {
+      dispatch(FetchArticleById(params.id));
+      dispatch(FetchCommentsArtById({ artId: params.id, query: { take: FetchCommentsQuery.Take, skip: FetchCommentsQuery.Skip } }));
+    }
   }, [dispatch, params])
 
   if(loading) {

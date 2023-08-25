@@ -8,21 +8,22 @@ import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
 import {CommentsDto} from "./dto/comments.dto";
 import {ArticlesService} from "../articles/articles.service";
 import {ArticlesInterface} from "../articles/interfaces/articles.interface";
+import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
 
 @Injectable()
 export class CommentsService {
   constructor(
     @InjectRepository(CommentsEntity)
-    private articlesRepository: Repository<CommentsEntity>,
+    private commentsRepository: Repository<CommentsEntity>,
     private articlesService: ArticlesService,
   ) {}
 
   saveComments(comment: CommentsInterfaces | CommentsDto): Observable<CommentsInterfaces> {
-    return from(this.articlesRepository.save(comment));
+    return from(this.commentsRepository.save(comment));
   }
 
   findOneComments(data: FindOneOptions): Observable<CommentsInterfaces> {
-    return from(this.articlesRepository.findOne(data)).pipe(
+    return from(this.commentsRepository.findOne(data)).pipe(
       switchMap((comment: CommentsInterfaces) => {
         return !!comment ? of(comment) : throwError(() => new HttpException("Comment not found", HttpStatus.NOT_FOUND));
       })
@@ -36,5 +37,13 @@ export class CommentsService {
         return this.saveComments(body);
       })
     )
+  }
+
+  findComments(data: FindManyOptions): Observable<CommentsInterfaces[]> {
+    return from(this.commentsRepository.find(data)).pipe(
+      switchMap((comments: CommentsInterfaces[] ) => {
+        return !!comments ? of(comments) : throwError(() => new HttpException("Comments not found", HttpStatus.NOT_FOUND));
+      })
+    );
   }
 }

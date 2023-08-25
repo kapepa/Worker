@@ -1,4 +1,5 @@
 import {Countries} from "../../../../shared/const/Countries";
+import {ArticleBlocks, ArticleType} from "../../../Article/model/types/articleType";
 
 export interface UsersTypes {
   id: string,
@@ -10,4 +11,6 @@ export interface UsersTypes {
   avatar?: string | File,
   country?: Countries,
   city?: string,
+  articles?: ArticleType[]
+  blocks?: ArticleBlocks[],
 }

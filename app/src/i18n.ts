@@ -9,13 +9,18 @@ import enHome from "./locales/en/home.json";
 import enAbout from "./locales/en/about.json";
 import enProfile from "./locales/en/profile.json";
 import enError from "./locales/en/error.json";
-
+import enArticle from "./locales/en/article.json";
+import enDetails from "./locales/en/details.json";
+import enComments from "./locales/en/comments.json";
 
 import ruTranslation from "./locales/ru/translation.json";
 import ruHome from "./locales/ru/home.json";
 import ruAbout from "./locales/ru/about.json";
 import ruProfile from "./locales/ru/profile.json";
 import ruError from "./locales/ru/error.json";
+import ruArticle from "./locales/ru/article.json";
+import ruDetails from "./locales/ru/details.json";
+import ruComments from "./locales/ru/comments.json";
 
 i18n
   .use(Backend)
@@ -29,14 +34,20 @@ i18n
         home: enHome,
         about: enAbout,
         profile: enProfile,
-        error: enError
+        error: enError,
+        article: enArticle,
+        details: enDetails,
+        comments: enComments,
       },
       ru: {
         translation: ruTranslation,
         home: ruHome,
         about: ruAbout,
         profile: ruProfile,
-        error: ruError
+        error: ruError,
+        article: ruArticle,
+        details: ruDetails,
+        comments: ruComments,
       }
     },
     fallbackLng: 'en',

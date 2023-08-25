@@ -11,6 +11,8 @@ import {ArticleBlockType} from "../../model/types/articleBlock";
 import {ArticleBlockTextComponent} from "../ArticleBlockTextComponent/ArticleBlockTextComponent";
 import {ArticleBlocImageComponent} from "../ArticleBlocImageComponent/ArticleBlocImageComponent";
 import {ArticleBlockCodeComponent} from "../ArticleBlockCodeComponent/ArticleBlockCodeComponent";
+import {useTranslation} from "react-i18next";
+import {CommentsList} from "../../../Comments";
 
 interface ArticleDetailsProps {
   className?: string,
@@ -18,6 +20,7 @@ interface ArticleDetailsProps {
 }
 
 const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
+  const {t} = useTranslation("article");
   const {img, title, subtitle, views, createdAt, blocks} = date;
 
   const renderBlocks = useCallback((block: ArticleBlocks, index: number) => {
@@ -50,6 +53,11 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
       <ViewEye quantity={views} theme={ColorView.PrimaryDef}/>
       <ViewDate date={createdAt} theme={ColorView.PrimaryDef}/>
       { !!blocks && blocks.map(renderBlocks) }
+      <Text
+        theme={TextTheme.PRIMARY}
+        title={t("comments")}
+      />
+      <CommentsList/>
     </div>
   )
 });

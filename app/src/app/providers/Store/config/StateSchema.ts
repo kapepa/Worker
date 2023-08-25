@@ -4,6 +4,7 @@ import {AuthState} from "../../../../features/AuthByUsername";
 import {ProfileState} from "../../../../entities/Profile";
 import {NavigateFunction} from "react-router/dist/lib/hooks";
 import {DetailsState} from "../../../../entities/Article/model/types/detailsState";
+import {CommentsState} from "../../../../entities/Comments";
 
 interface StateSchema {
   counter: CounterState,
@@ -11,6 +12,7 @@ interface StateSchema {
   auth: AuthState,
   profile: ProfileState,
   details: DetailsState,
+  comments: CommentsState,
 };
 
 interface ThunkExtraArg {
