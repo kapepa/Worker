@@ -38,7 +38,7 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
   return (
     <div className={ClassNames("article-details", className)} data-testid="article-details">
       <div className="article-details__frame-ava">
-        <Avatar className="article-details__avatar" src={img} alt={title} symbol={title}/>
+        <Avatar className="article-details__avatar" src={img} alt={title} symbol={title} size={200}/>
       </div>
       <Text
         theme={TextTheme.PRIMARY}
