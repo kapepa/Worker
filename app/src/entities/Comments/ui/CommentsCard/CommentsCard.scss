@@ -1,3 +1,15 @@
 .comments-card{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+  &__header{
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+  }
+  &__avatar{
 
+  }
 }

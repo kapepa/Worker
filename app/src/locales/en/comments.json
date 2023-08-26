@@ -1,3 +1,4 @@
 {
-  "error-comments": "Error getting comments."
+  "error-comments": "Error getting comments.",
+  "comments-empty": "Comments is empty."
 }
