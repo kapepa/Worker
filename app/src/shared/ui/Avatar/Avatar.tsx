@@ -6,14 +6,17 @@ import config from "../../../config";
 interface AvatarProps {
   api?: boolean | undefined,
   className?: string,
-  size?: number,
+  size: number,
   src: string | undefined | File,
   alt: string,
   symbol: string | undefined,
 }
 
 const Avatar: FC<AvatarProps> = memo(({api = true, className, src, alt, size, symbol}) => {
-  const style = useMemo<CSSProperties>(() => ({maxWidth: `${size}px`, maxHeight: `${size}px`, fontSize: `${ size ? size * .5 : 10 }px`}),[size]);
+  const style = useMemo<CSSProperties>(
+    () => ({maxWidth: `${size}px`, maxHeight: `${size}px`, fontSize: `${ size * .5 }px`}),
+    [size]
+  );
   const getFirstLetter = (str: string) => str.charAt(0).toUpperCase();
 
   const ToHaveAvatar = (src: string | undefined | File) => {
@@ -41,7 +44,7 @@ const Avatar: FC<AvatarProps> = memo(({api = true, className, src, alt, size, sy
   }
 
   return (
-    <div className="avatar" style={style} data-testid="avatar">
+    <div style={style} className={ClassNames("avatar")}  data-testid="avatar">
       {ToHaveAvatar(src)}
     </div>
   )

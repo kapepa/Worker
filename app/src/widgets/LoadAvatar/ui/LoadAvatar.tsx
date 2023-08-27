@@ -6,7 +6,7 @@ import {Avatar} from "../../../shared/ui/Avatar/Avatar";
 interface LoadAvatarProps {
   className?: string,
   api?: boolean | undefined,
-  size?: number,
+  size: number,
   src: string | File | undefined,
   alt: string,
   symbol: string | undefined,

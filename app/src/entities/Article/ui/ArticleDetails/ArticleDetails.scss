@@ -1,7 +1,7 @@
 .article-details{
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: min-content;
+  grid-auto-rows: min-content;
   row-gap: 20px;
   &__frame-ava{
     margin: 0 auto;
