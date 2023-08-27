@@ -4,9 +4,11 @@ import ThemeDecorator from "../../../../shared/config/ThemeDecorator/ThemeDecora
 import {ThemeEnum} from "../../../../app/contexts/Theme/lib/ThemeContext";
 import MockArticle from "../../../../shared/test/mock/article.json";
 import {ArticleType} from "../../model/types/articleType";
+import StoreDecorator from "../../../../shared/config/StoreDecorator/StoreDecorator";
 
 const meta: Meta<typeof ArticleDetails> = {
   component: ArticleDetails,
+  decorators: [StoreDecorator({})]
 };
 
 export default meta;

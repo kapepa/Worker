@@ -1,0 +1,10 @@
+{
+  "id": "userID",
+  "username": "UserName",
+  "firstname": "Firstname",
+  "lastname": "Lastname",
+  "email": "user@mail.com",
+  "avatar": "avatar.png",
+  "country": "America",
+  "city": "Loa Angeles"
+}

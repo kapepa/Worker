@@ -1,4 +1,4 @@
-import {counterActions, counterReducer} from "./model/slice/commentsSlice";
+import {commentsActions, CommentsReducer, getCommentsAdapter} from "./model/slice/commentsSlice";
 import {CommentsState} from "./model/types/commentsState";
 import {CommentsTypes} from "./model/types/commentsTypes";
 import {CommentsCard} from "./ui/CommentsCard/CommentsCard";
@@ -7,5 +7,5 @@ import {GetComments} from "./selectors/GetComments/GetComments";
 import {GetCommentsLoader} from "./selectors/GetCommentsLoader/GetCommentsLoader";
 import {FetchCommentsArtById} from "./services/FetchCommentsArtById/FetchCommentsArtById";
 
-export {counterActions, counterReducer, CommentsCard, CommentsList, GetComments, GetCommentsLoader, FetchCommentsArtById};
+export {commentsActions, CommentsReducer, CommentsCard, CommentsList, GetComments, GetCommentsLoader, FetchCommentsArtById, getCommentsAdapter};
 export type {CommentsState, CommentsTypes}
