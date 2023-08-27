@@ -9,7 +9,8 @@ describe("<CommentsCard/>", () => {
   const mockComment: CommentsTypes = { id: "commentID", text: "some text", users: mockUser, articles: {} as ArticleType };
 
   test("should be defined", () => {
-    const { getByTestId } = render(<CommentsCard comment={mockComment} />)
+    const { getByTestId, getByText } = render(<CommentsCard comment={mockComment} />)
     expect(getByTestId("comments-card")).toBeInTheDocument();
+    expect(getByText("some text")).toBeInTheDocument();
   })
 })

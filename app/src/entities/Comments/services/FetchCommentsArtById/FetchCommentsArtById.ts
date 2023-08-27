@@ -24,9 +24,10 @@ const FetchCommentsArtById = createAsyncThunk<CommentsTypes[], FetchCommentsArtB
       const response = await Axios.get(`/api/comments/receive/${artId}`, {
         params: query,
       })
+
       return response.data
     } catch (e) {
-      thunkAPI.rejectWithValue("error-comments")
+      return thunkAPI.rejectWithValue("error-comments");
     }
   }
 )

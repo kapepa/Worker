@@ -10,6 +10,7 @@ import {CommentsCard} from "../CommentsCard/CommentsCard";
 import {CommentsTypes} from "../../model/types/commentsTypes";
 import {Skeleton} from "../../../../shared/ui/Skeleton/Skeleton";
 import {SkeletonShape} from "../../../../shared/const/SkeletonShape";
+// import {getCommentsAdapter} from "../../model/slice/commentsSlice";
 
 interface CommentsListProps {
   className?: string,
@@ -18,6 +19,7 @@ interface CommentsListProps {
 const CommentsList: FC<CommentsListProps> = memo( ({className}) => {
   const {t} = useTranslation("comments")
   const {data, error, loading} = useSelector(GetComments);
+  // const data = useSelector(getCommentsAdapter.selectAll);
 
   const ShowComments = useCallback( ( comment: CommentsTypes, index: number ) => {
     return <CommentsCard key={`${comment.id}-${index}`} comment={comment}/>
@@ -47,7 +49,7 @@ const CommentsList: FC<CommentsListProps> = memo( ({className}) => {
     )
   }
 
-  if(!data && loading) {
+  if(!data?.length && loading) {
     return (
       <div className="comments-list comments-list--loading">
         <Loader/>
