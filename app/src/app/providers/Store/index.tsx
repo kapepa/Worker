@@ -1,6 +1,7 @@
 import {StoreProvider} from "./ui/StoreProvider";
 import {StateSchema} from "./config/StateSchema";
 import {CreateReduxStore} from "./config/store";
+import {GetFormComment} from "../../../features/FormComment/selectors/getFormComment/getFormComment";
 
-export {StoreProvider, CreateReduxStore};
+export {StoreProvider, CreateReduxStore, GetFormComment};
 export type {StateSchema}

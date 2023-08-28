@@ -13,6 +13,7 @@ import {ArticleBlocImageComponent} from "../ArticleBlocImageComponent/ArticleBlo
 import {ArticleBlockCodeComponent} from "../ArticleBlockCodeComponent/ArticleBlockCodeComponent";
 import {useTranslation} from "react-i18next";
 import {CommentsList} from "../../../Comments";
+import {FormComment} from "../../../../features/FormComment";
 
 interface ArticleDetailsProps {
   className?: string,
@@ -57,6 +58,7 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
         theme={TextTheme.PRIMARY}
         title={t("comments")}
       />
+      <FormComment/>
       <CommentsList/>
     </div>
   )

@@ -1,4 +1,5 @@
 {
   "error-comments": "Error getting comments.",
-  "comments-empty": "Comments is empty."
+  "comments-empty": "Comments is empty.",
+  "send-comment": "Send"
 }

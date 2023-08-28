@@ -40,7 +40,7 @@ const Navbar: FC<NavbarProps> = memo(({className}) => {
         { !!profile && <>
           <AppLink
             className={ClassNames("navbar__link", {"navbar__link--squeeze": open})}
-            theme={AppLinkTheme.SECONDARY} to={RouterPath.PROFILE}
+            theme={AppLinkTheme.SECONDARY} to={`${RouterPath.PROFILE}/${profile.id}`}
             role="link"
           >
             <IcoImg className="navbar__ico" ico={"ProfileIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>

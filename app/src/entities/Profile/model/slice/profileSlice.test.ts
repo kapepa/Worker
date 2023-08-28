@@ -37,7 +37,7 @@ describe("ProfileSlice", () => {
   test("ProfileRequest fulfilled", () => {
     const state: DeepPartial<ProfileState> = mockState;
 
-    expect(ProfileReducer(state as ProfileState, ProfileRequest.fulfilled(mockProfile, "", undefined)))
+    expect(ProfileReducer(state as ProfileState, ProfileRequest.fulfilled(mockProfile, "", "userID")))
       .toEqual({ ...mockState, data: mockProfile, edit: mockProfile });
   })
 

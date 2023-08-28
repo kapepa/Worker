@@ -45,7 +45,7 @@ const routers = createBrowserRouter([
         element: <DetailsPage />,
       },
       {
-        path: RouterPath.PROFILE,
+        path: RouterPath.PROFILE + "/:id",
         element: <ProfilePage />,
       },
       {
