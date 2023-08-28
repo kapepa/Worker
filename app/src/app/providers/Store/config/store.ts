@@ -13,6 +13,7 @@ import {useDispatch} from "react-redux";
 import {ToForm} from "../../../../utils/toForm";
 import {DetailsReducers} from "../../../../entities/Article";
 import {CommentsReducer} from "../../../../entities/Comments";
+import {FormCommentReducer} from "../../../../features/FormComment";
 
 // const store = configureStore<StateSchema>({
 //   reducer: {
@@ -39,6 +40,7 @@ const storeReducers = combineReducers<StateSchema>({
   profile: ProfileReducer,
   details: DetailsReducers,
   comments: CommentsReducer,
+  formComment: FormCommentReducer,
 });
 
 function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunction) {

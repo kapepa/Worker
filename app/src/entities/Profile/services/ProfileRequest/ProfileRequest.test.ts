@@ -21,7 +21,7 @@ describe("ProfileRequest", () => {
   test("should be fulfilled", async () => {
     const mockUser = { id: "MyID", email: "mock@email.com", username: "MyName"};
     mockAxios.get.mockResolvedValue({data: mockUser});
-    const action = ProfileRequest();
+    const action = ProfileRequest("userID");
     const result = await action(dispatch, getState, {navigate});
 
     expect(mockAxios.get).toHaveBeenCalled();
@@ -31,7 +31,7 @@ describe("ProfileRequest", () => {
 
   test("should be rejected", async () => {
     mockAxios.get.mockResolvedValue({status: 403});
-    const action = ProfileRequest();
+    const action = ProfileRequest("userID");
     const result = await action(dispatch, getState, {navigate});
 
     expect(mockAxios.get).toHaveBeenCalled();

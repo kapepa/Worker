@@ -1,5 +1,6 @@
 import {ArticleBlocImage, ArticleBlockCode, ArticleBlockText} from "./articleBlock";
 import {UsersTypes} from "../../../Users";
+import {CommentsTypes} from "../../../Comments";
 
 export enum ArticleTypesKey {
   IT = "IT",
@@ -19,4 +20,5 @@ export interface ArticleType {
   type: ArticleTypesKey[],
   blocks?: ArticleBlocks[],
   users?: UsersTypes,
+  comments?: CommentsTypes[],
 }
