@@ -1,11 +1,10 @@
 import {FC, FormEvent, memo, useMemo} from "react";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import Button from "../../../shared/ui/Button/Button";
-import {Input} from "../../../shared/ui/Input/Input";
-import {BgInputEnum} from "../../../shared/const/BgInput";
-import {ColorInputEnum} from "../../../shared/const/ColorInputEnum";
 import {FormFieldsNameType} from "../types/FormFieldsNameType";
 import {UseFormRegister} from "react-hook-form/dist/types/form";
+import {IFormCommentFormInput} from "../../../features/FormComment/model/interface/IFormCommentFormInput";
+import {FieldError, FieldValues} from "react-hook-form";
 
 interface FormConstructorProps{
   className?:string,
@@ -14,24 +13,31 @@ interface FormConstructorProps{
   disabled: boolean,
   submitText: string,
   onSubmit: (data: FormEvent<HTMLFormElement>) => ReturnType<any>,
-  // onSubmit(data: FormEvent<HTMLFormElement>): ReturnType<any>,
   fieldsName: FormFieldsNameType[],
-  register?: UseFormRegister<any>,
+  register: UseFormRegister<IFormCommentFormInput>,
+  // error: FieldError | undefined;
 }
 
 const FormConstructor: FC<FormConstructorProps> = memo((props) => {
-  const {className, classForm, disabled, submitText, onSubmit, fieldsName, register} = props;
+  const {className, classForm, classInput, disabled, submitText, onSubmit, fieldsName, register} = props;
 
   const createFields = useMemo(() => {
-    return fieldsName.map(({ name, type }: FormFieldsNameType, index: number) => {
-      return <Input
-        key={`${name}-${type}-${index}`}
-        theme={BgInputEnum.WHITE_BG}
-        color={ColorInputEnum.WHITE_COLOR}
-        name={name}
-        type={type}
-        register={register}
-      />
+    return fieldsName.map(({ name, type, label }: FormFieldsNameType, index: number) => {
+      return (
+        <div key={`${name}-${index}`}>
+          {!!label && <label className={ClassNames("form-constructor__label")} htmlFor={name} >{label}</label>}
+          <input
+            type={type}
+            {...register(name, {required: true})}
+            className={ClassNames("form-constructor__label", classInput )}
+          />
+          {/*{error &&*/}
+          {/*  <div className="form-constructor__error">*/}
+          {/*    "asdasd"*/}
+          {/*  </div>*/}
+          {/*}*/}
+        </div>
+      )
     })
   },[fieldsName, register]);
 
