@@ -1,10 +1,13 @@
 import {FC, FormEvent, memo, useMemo} from "react";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import Button from "../../../shared/ui/Button/Button";
-import {FormFieldsNameType} from "../types/FormFieldsNameType";
-import {UseFormRegister} from "react-hook-form/dist/types/form";
+import {FormState, UseFormRegister} from "react-hook-form/dist/types/form";
 import {IFormCommentFormInput} from "../../../features/FormComment/model/interface/IFormCommentFormInput";
-import {FieldError, FieldValues} from "react-hook-form";
+import {FormFieldsTypeComment} from "../types/FormFieldsTypeComment";
+import {Input} from "../../../shared/ui/Input/Input";
+import {BgInputEnum} from "../../../shared/const/BgInput";
+
+type formStateTypes = IFormCommentFormInput
 
 interface FormConstructorProps{
   className?:string,
@@ -12,34 +15,44 @@ interface FormConstructorProps{
   classInput?: string,
   disabled: boolean,
   submitText: string,
-  onSubmit: (data: FormEvent<HTMLFormElement>) => ReturnType<any>,
-  fieldsName: FormFieldsNameType[],
+  fieldsName: FormFieldsTypeComment[],
   register: UseFormRegister<IFormCommentFormInput>,
-  // error: FieldError | undefined;
+  onSubmit: (data: FormEvent<HTMLFormElement>) => Promise<void>,
+  formState: FormState<formStateTypes>
 }
 
 const FormConstructor: FC<FormConstructorProps> = memo((props) => {
-  const {className, classForm, classInput, disabled, submitText, onSubmit, fieldsName, register} = props;
+  const {className, classForm, classInput, disabled, submitText, onSubmit, fieldsName, register, formState} = props;
+  const { errors, touchedFields, dirtyFields, } = formState;
+
 
   const createFields = useMemo(() => {
-    return fieldsName.map(({ name, type, label }: FormFieldsNameType, index: number) => {
+    return fieldsName.map(({ name, type, label, placeholder, validation }: FormFieldsTypeComment, index: number) => {
+      const { ref, ...other } = register(name, validation);
+      const error = errors[name];
+      const touch = touchedFields[name];
+      const dirty = dirtyFields[name];
+
       return (
         <div key={`${name}-${index}`}>
           {!!label && <label className={ClassNames("form-constructor__label")} htmlFor={name} >{label}</label>}
-          <input
+          <Input
+            theme={BgInputEnum.WHITE_BG}
             type={type}
-            {...register(name, {required: true})}
+            placeholder={placeholder}
             className={ClassNames("form-constructor__label", classInput )}
+            refs={{ref}}
+            {...other}
           />
-          {/*{error &&*/}
-          {/*  <div className="form-constructor__error">*/}
-          {/*    "asdasd"*/}
-          {/*  </div>*/}
-          {/*}*/}
+          { (error?.message && ( !touch || dirty ) ) &&
+            <div className="form-constructor__error">
+              {error?.message}
+            </div>
+          }
         </div>
       )
     })
-  },[fieldsName, register]);
+  },[fieldsName, register, classInput, dirtyFields, touchedFields, errors]);
 
   return (<div className={ClassNames("form-constructor", className)}>
     <form onSubmit={onSubmit} className={ClassNames("form-constructor__form", classForm)}>

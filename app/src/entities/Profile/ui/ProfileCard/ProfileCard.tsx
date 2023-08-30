@@ -69,79 +69,79 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refS
         }
         { !!edit &&
           <>
-            <Input
-              type="text"
-              minLength={4}
-              required={true}
-              name="firstname"
-              label="firstname"
-              register={register}
-              readOnly={readonly}
-              onChange={onChangeInput}
-              errors={errors.firstname}
-              className="profile-card__input"
-              classNameAlert="profile-card__alert"
-              getFieldState={getFieldState}
-              theme={BgInputEnum.WHITE_BG}
-              color={ColorInputEnum.WHITE_COLOR_INVERTED}
-              placeholder={t(`placeholder.firstname`)}
-            />
-            <Input
-              type="text"
-              minLength={4}
-              required={true}
-              name="lastname"
-              label="lastname"
-              register={register}
-              readOnly={readonly}
-              onChange={onChangeInput}
-              errors={errors.lastname}
-              className="profile-card__input"
-              classNameAlert="profile-card__alert"
-              getFieldState={getFieldState}
-              theme={BgInputEnum.WHITE_BG}
-              color={ColorInputEnum.WHITE_COLOR_INVERTED}
-              placeholder={t(`placeholder.lastname`)}
-            />
-            <Input
-              type="text"
-              minLength={4}
-              required={true}
-              name="username"
-              label="username"
-              register={register}
-              readOnly={readonly}
-              onChange={onChangeInput}
-              errors={errors.username}
-              className="profile-card__input"
-              classNameAlert="profile-card__alert"
-              getFieldState={getFieldState}
-              theme={BgInputEnum.WHITE_BG}
-              color={ColorInputEnum.WHITE_COLOR_INVERTED}
-              placeholder={t(`placeholder.username`)}
-            />
-            <Country
-              defaultVal={edit.country}
-              selected={countrySelected}
-              readOnly={readonly}
-            />
-            <Input
-              type="text"
-              minLength={4}
-              required={true}
-              name="city"
-              label="city"
-              register={register}
-              readOnly={readonly}
-              onChange={onChangeInput}
-              errors={errors.city}
-              className="profile-card__input"
-              classNameAlert="profile-card__alert"
-              getFieldState={getFieldState}
-              theme={BgInputEnum.WHITE_BG}
-              color={ColorInputEnum.WHITE_COLOR_INVERTED}
-              placeholder={t(`placeholder.city`)}
-            />
+            {/*<Input*/}
+            {/*  type="text"*/}
+            {/*  minLength={4}*/}
+            {/*  required={true}*/}
+            {/*  name="firstname"*/}
+            {/*  label="firstname"*/}
+            {/*  register={register}*/}
+            {/*  readOnly={readonly}*/}
+            {/*  onChange={onChangeInput}*/}
+            {/*  errors={errors.firstname}*/}
+            {/*  className="profile-card__input"*/}
+            {/*  classNameAlert="profile-card__alert"*/}
+            {/*  getFieldState={getFieldState}*/}
+            {/*  theme={BgInputEnum.WHITE_BG}*/}
+            {/*  color={ColorInputEnum.WHITE_COLOR_INVERTED}*/}
+            {/*  placeholder={t(`placeholder.firstname`)}*/}
+            {/*/>*/}
+            {/*<Input*/}
+            {/*  type="text"*/}
+            {/*  minLength={4}*/}
+            {/*  required={true}*/}
+            {/*  name="lastname"*/}
+            {/*  label="lastname"*/}
+            {/*  register={register}*/}
+            {/*  readOnly={readonly}*/}
+            {/*  onChange={onChangeInput}*/}
+            {/*  errors={errors.lastname}*/}
+            {/*  className="profile-card__input"*/}
+            {/*  classNameAlert="profile-card__alert"*/}
+            {/*  getFieldState={getFieldState}*/}
+            {/*  theme={BgInputEnum.WHITE_BG}*/}
+            {/*  color={ColorInputEnum.WHITE_COLOR_INVERTED}*/}
+            {/*  placeholder={t(`placeholder.lastname`)}*/}
+            {/*/>*/}
+            {/*<Input*/}
+            {/*  type="text"*/}
+            {/*  minLength={4}*/}
+            {/*  required={true}*/}
+            {/*  name="username"*/}
+            {/*  label="username"*/}
+            {/*  register={register}*/}
+            {/*  readOnly={readonly}*/}
+            {/*  onChange={onChangeInput}*/}
+            {/*  errors={errors.username}*/}
+            {/*  className="profile-card__input"*/}
+            {/*  classNameAlert="profile-card__alert"*/}
+            {/*  getFieldState={getFieldState}*/}
+            {/*  theme={BgInputEnum.WHITE_BG}*/}
+            {/*  color={ColorInputEnum.WHITE_COLOR_INVERTED}*/}
+            {/*  placeholder={t(`placeholder.username`)}*/}
+            {/*/>*/}
+            {/*<Country*/}
+            {/*  defaultVal={edit.country}*/}
+            {/*  selected={countrySelected}*/}
+            {/*  readOnly={readonly}*/}
+            {/*/>*/}
+            {/*<Input*/}
+            {/*  type="text"*/}
+            {/*  minLength={4}*/}
+            {/*  required={true}*/}
+            {/*  name="city"*/}
+            {/*  label="city"*/}
+            {/*  register={register}*/}
+            {/*  readOnly={readonly}*/}
+            {/*  onChange={onChangeInput}*/}
+            {/*  errors={errors.city}*/}
+            {/*  className="profile-card__input"*/}
+            {/*  classNameAlert="profile-card__alert"*/}
+            {/*  getFieldState={getFieldState}*/}
+            {/*  theme={BgInputEnum.WHITE_BG}*/}
+            {/*  color={ColorInputEnum.WHITE_COLOR_INVERTED}*/}
+            {/*  placeholder={t(`placeholder.city`)}*/}
+            {/*/>*/}
             <button ref={refSend} type="submit" style={{display: "none"}} data-testid="submit"/>
           </>
         }

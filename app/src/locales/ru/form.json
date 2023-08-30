@@ -1,0 +1,23 @@
+{
+  "login": "Авторизоваться",
+  "send": "Отправлять",
+  "placeholder-user": "Ваше имя",
+  "placeholder-email": "Ваша почта",
+  "placeholder-password": "Ваш пароль",
+  "label": {
+    "username": "Имя",
+    "firstname": "Фамилия",
+    "lastname": "Фамилия",
+    "email": "Почта",
+    "password": "Пароль",
+    "avatar": "Аватар",
+    "country": "Страна",
+    "city": "Город"
+  },
+  "email-required": "Требуется электронная почта",
+  "password-required": "Необходим пароль",
+  "password-short": "Пароль короткий",
+  "error": {
+    "error-login": "Ваши пользовательские данные неверны."
+  }
+}
