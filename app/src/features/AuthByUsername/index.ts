@@ -5,6 +5,8 @@ import {AuthState} from "./model/types/AuthState";
 import {GetAuth} from "./model/selectors/getAuth/getAuth";
 import {GetLogin} from "./model/selectors/getLogin/getLogin";
 import {LoginFormAsync} from "./ui/LoginForm/LoginForm.async";
+import {ILoginFormInput} from "./model/interface/ILoginFormInput";
+import {LoginFormFields} from "./model/types/LoginFormFields";
 
 export {LoginModal, AuthActions, AuthReducer, GetAuth, GetLogin, LoginFormAsync};
-export type {LoginTypes, AuthState};
+export type {LoginTypes, AuthState, ILoginFormInput, LoginFormFields};

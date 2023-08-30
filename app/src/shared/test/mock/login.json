@@ -1,0 +1,16 @@
+{
+  "email":{
+    "name": "email",
+    "type": "email",
+    "label": "Email",
+    "placeholder": "Your email",
+    "validation": { "required": { "value": true, "message": "Email is required" } }
+  },
+  "password":{
+    "name": "password",
+    "type": "password",
+    "label": "Password",
+    "placeholder": "Your password",
+    "validation": { "required": { "value": true, "message": "Password is required" }, "minLength": { "value": 5, "message": "Password is short" }}
+  }
+}

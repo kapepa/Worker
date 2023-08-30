@@ -1,5 +1,5 @@
 import {FormConstructor} from "./ui/FormConstructor";
-import {FormFieldsNameType} from "./types/FormFieldsNameType";
+import {FormFieldsTypeComment} from "./types/FormFieldsTypeComment";
 
 export { FormConstructor };
-export type { FormFieldsNameType };
+export type { FormFieldsTypeComment };

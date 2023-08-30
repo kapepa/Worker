@@ -1,0 +1,24 @@
+.input-dynamic{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 22px;
+  &__label{
+    font-size: 18px;
+    padding-bottom: 3px;
+    color: var(--bg-color);
+  }
+  &__board{
+    position: relative;
+  }
+  &__input{
+
+  }
+  &__alert{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    color: var(--red-light);
+    text-shadow: 5px 0px 16px #000;
+  }
+}
