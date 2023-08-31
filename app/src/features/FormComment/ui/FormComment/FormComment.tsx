@@ -4,11 +4,10 @@ import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {useSelector} from "react-redux";
 import {GetFormComment} from "../../selectors/getFormComment/getFormComment";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {FormConstructor} from "../../../../widgets/FormConstructor";
+import {FormConstructor, FormFieldsTypeComment} from "../../../../widgets/FormConstructor";
 import {IFormCommentFormInput} from "../../model/interface/IFormCommentFormInput";
 import {useTranslation} from "react-i18next";
 import {Text, TextTheme} from "../../../../shared/ui/Text/Text";
-import {FormFieldsTypeComment} from "../../../../widgets/FormConstructor/types/FormFieldsTypeComment";
 
 interface FormCommentProps {
   className?: string,

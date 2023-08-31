@@ -7,5 +7,30 @@
     "firstname": "Your firstname",
     "lastname": "Your lastname"
   },
+  "label": {
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "username": "Username",
+    "country": "Country",
+    "city": "City"
+  },
+  "validation": {
+    "firstname": {
+      "required": "Required firstname",
+      "minLength": "Firstname is long enough"
+    },
+    "lastname": {
+      "required": "Required lastname",
+      "minLength": "Lastname is long enough"
+    },
+    "username": {
+      "required": "Required username",
+      "minLength": "Username is long enough"
+    },
+    "city": {
+      "required": "Required city",
+      "minLength": "City is long enough"
+    }
+  },
   "error-profile": "This profile is not found."
 }

@@ -27,9 +27,9 @@ const Profile: FC = function () {
     if(!params.id) navigate(RouterPath.HOME);
   },[dispatch, data, params.id, navigate]);
 
-  useEffect(() => {
-    if(!data && !edit) navigate(RouterPath.HOME);
-  }, [data, edit, navigate]);
+  // useEffect(() => {
+  //   if(!data && !edit) navigate(RouterPath.HOME);
+  // }, [data, edit, navigate]);
 
   if(loading) return (
     <div className={ClassNames("profile", "profile--loader")} data-testid="profile">

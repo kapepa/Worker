@@ -13,12 +13,13 @@
   &__input{
     border: 1px solid var(--secondary-color);
     border-radius: 2px;
+    padding: 12px 24px;
+    font-size: 20px;
   }
   &__alert{
     color: var(--red-dark);
   }
   &__avatar{
-    //display: flex;
-    //justify-content: center;
+
   }
 }
