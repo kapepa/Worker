@@ -34,6 +34,13 @@ export const LoginFormDARK: LoginFormStory = {
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };
 
+export const LoginFormORANGE: LoginFormStory = {
+  args: {
+    onClose: () => {},
+  },
+  decorators: [ThemeDecorator(ThemeEnum.ORANGE)],
+};
+
 export const LoginFormError: LoginFormStory = {
   args: {
     onClose: () => {},

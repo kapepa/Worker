@@ -3,14 +3,14 @@
   font-size: 20px;
   outline: none;
   width: 100%;
-  &--white{
+  &--bg-color{
     color: var(--bg-color-inverted);
     background-color: var(--bg-color);
     &::placeholder{
       color: var(--bg-color-inverted);
     }
   }
-  &--white-inverted{
+  &--bg-color-inverted{
     color: var(--bg-color);
     background-color: var(--bg-color-inverted);
   }

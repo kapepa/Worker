@@ -1,7 +1,7 @@
 import RenderWithForm from "../../../shared/test/renderWithForm";
 import {InputDynamic} from "./InputDynamic";
 import EmailMockType from "../../../shared/test/mock/login.json";
-import {BgInputEnum} from "../../../shared/const/BgInput";
+import {BgEnum} from "../../../shared/const/BgEnum";
 import {fireEvent} from "@testing-library/react";
 
 describe("<InputDynamic/>", () => {
@@ -11,7 +11,7 @@ describe("<InputDynamic/>", () => {
 
   test("should be defined",() => {
     const { getByText, getByDisplayValue } = RenderWithForm(<InputDynamic
-      theme={BgInputEnum.WHITE_BG}
+      themeInput={BgEnum.BG_COLOR}
       name={emailMockType.name}
       label={emailMockType.label}
       onChange={ mockChange }
@@ -24,7 +24,7 @@ describe("<InputDynamic/>", () => {
 
   test("should be change",() => {
     const { getByTestId, getByDisplayValue, debug } = RenderWithForm(<InputDynamic
-      theme={BgInputEnum.WHITE_BG}
+      themeInput={BgEnum.BG_COLOR}
       name={emailMockType.name}
       label={emailMockType.label}
       onChange={ mockChange }

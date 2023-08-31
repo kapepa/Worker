@@ -2,8 +2,8 @@ import type {Meta, StoryObj} from '@storybook/react';
 import {Select} from "./Select";
 import ThemeDecorator from "../../config/ThemeDecorator/ThemeDecorator";
 import {ThemeEnum} from "../../../app/contexts/Theme/lib/ThemeContext";
-import {BgInputEnum} from "../../const/BgInput";
-import {ColorInputEnum} from "../../const/ColorInputEnum";
+import {BgEnum} from "../../const/BgEnum";
+import {ColorEnum} from "../../const/ColorEnum";
 import {Countries} from "../../const/Countries";
 
 
@@ -22,8 +22,8 @@ export const WhiteBGInverted: SelectStory = {
     defaultValue: Countries.USA,
     selected: (str) => {},
     toTranslation: (str) => str ?? "",
-    theme: BgInputEnum.WHITE_BG_INVERTED,
-    color: ColorInputEnum.WHITE_COLOR_INVERTED
+    theme: BgEnum.BG_COLOR_INVERTED,
+    color: ColorEnum.SECONDARY_COLOR
   },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
@@ -36,8 +36,8 @@ export const WhiteBG: SelectStory = {
     defaultValue: Countries.USA,
     selected: (str) => {},
     toTranslation: (str) => str ?? "",
-    theme: BgInputEnum.WHITE_BG_INVERTED,
-    color: ColorInputEnum.WHITE_COLOR_INVERTED
+    theme: BgEnum.BG_COLOR_INVERTED,
+    color: ColorEnum.SECONDARY_COLOR
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };

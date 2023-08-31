@@ -1,11 +1,11 @@
 import {FC, InputHTMLAttributes, memo} from "react";
 import "./Input.scss";
 import {ClassNames} from "../../lib/ClassNames";
-import {BgInputEnum} from "../../const/BgInput";
+import {BgEnum} from "../../const/BgEnum";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
   className?:string
-  theme: BgInputEnum,
+  theme: BgEnum,
   refs?: {ref: (instance: any) => void},
 }
 

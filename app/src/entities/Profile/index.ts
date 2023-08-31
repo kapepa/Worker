@@ -12,6 +12,7 @@ import {ProfileHeader} from "./ui/ProfileHeader/ProfileHeader";
 import {GetProfileReadOnly} from "./selectors/GetProfileReadOnly/GetProfileReadOnly";
 import {GetProfileEdit} from "./selectors/GetProfileEdit/GetProfileEdit";
 import {ProfileUpdate} from "./services/ProfileUpdate/ProfileUpdate";
+import {IProfileFormInput} from "./interface/IProfileFormInput";
 
 export {
   ProfileActions,
@@ -29,4 +30,4 @@ export {
   ProfileHeader,
 };
 
-export type { ProfileState, ProfileTypes, ProfileKeyTypes }
+export type { ProfileState, ProfileTypes, ProfileKeyTypes, IProfileFormInput }

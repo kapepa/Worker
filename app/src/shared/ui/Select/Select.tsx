@@ -9,15 +9,15 @@ import {
 } from "react";
 import "./Select.scss";
 import {ClassNames} from "../../lib/ClassNames";
-import {BgInputEnum} from "../../const/BgInput";
-import {ColorInputEnum} from "../../const/ColorInputEnum";
-import {CountryListType} from "../../const/CountryListType";
+import {BgEnum} from "../../const/BgEnum";
+import {ColorEnum} from "../../const/ColorEnum";
+import {CountryListType} from "../../types/CountryListType";
 
 interface SelectProps {
   className?: string,
   prefix?: string,
-  theme?: BgInputEnum,
-  color?: ColorInputEnum,
+  theme?: BgEnum,
+  color?: ColorEnum,
   label?: string,
   selectList: CountryListType[],
   toTranslation: (str: string | undefined) => string,
@@ -52,7 +52,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   }, [defaultValue])
 
   return (
-    <div className={ClassNames("select", {"select--readonly": readOnly})} data-testid="select">
+    <div className={ClassNames("select")} data-testid="select">
       <div className="select__frame" onClick={onDrop}>
         <div className={ClassNames("select__wrapper", {[`select__wrapper--${color}`]: !!color})}>
           { !!label && <label className="select__label" >{label}</label> }
@@ -61,7 +61,11 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
             ref={inputRef}
             name={name}
             disabled={true}
-            className={ClassNames("select__input", {[`select__input--${theme}`]: !!theme}, className)}
+            className={ClassNames(
+              "select__input",
+              { [`select__input--${theme}`]: !!theme, "select__input--readonly": readOnly },
+              className
+            )}
           />
         </div>
         <div className={ClassNames("select__drop", {"select__drop--open": drop})} >

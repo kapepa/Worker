@@ -5,7 +5,7 @@ import {FormState, UseFormRegister} from "react-hook-form/dist/types/form";
 import {IFormCommentFormInput} from "../../../features/FormComment/model/interface/IFormCommentFormInput";
 import {FormFieldsTypeComment} from "../types/FormFieldsTypeComment";
 import {Input} from "../../../shared/ui/Input/Input";
-import {BgInputEnum} from "../../../shared/const/BgInput";
+import {BgEnum} from "../../../shared/const/BgEnum";
 
 type formStateTypes = IFormCommentFormInput
 
@@ -37,7 +37,7 @@ const FormConstructor: FC<FormConstructorProps> = memo((props) => {
         <div key={`${name}-${index}`}>
           {!!label && <label className={ClassNames("form-constructor__label")} htmlFor={name} >{label}</label>}
           <Input
-            theme={BgInputEnum.WHITE_BG}
+            theme={BgEnum.BG_COLOR}
             type={type}
             placeholder={placeholder}
             className={ClassNames("form-constructor__label", classInput )}
