@@ -5,7 +5,9 @@
   "send": "Send",
   "placeholder": {
     "firstname": "Your firstname",
-    "lastname": "Your lastname"
+    "lastname": "Your lastname",
+    "username": "Your username",
+    "city": "Your city"
   },
   "label": {
     "firstname": "Firstname",

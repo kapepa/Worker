@@ -4,10 +4,10 @@
   outline: none;
   width: 100%;
   &--bg-color{
-    color: var(--bg-color-inverted);
+    color: var(--primary-color-inverted);
     background-color: var(--bg-color);
     &::placeholder{
-      color: var(--bg-color-inverted);
+      color: var(--primary-color-inverted);
     }
   }
   &--bg-color-inverted{

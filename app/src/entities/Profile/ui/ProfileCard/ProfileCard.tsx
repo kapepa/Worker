@@ -79,7 +79,8 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refS
               validation={{
                 required: { value: true, message: t("validation.firstname.required") },
                 minLength: { value: 3, message: t("validation.firstname.minLength") }
-            }}
+               }}
+              defaultValue={edit.firstname}
               onChange={onChangeInput}
               themeInput={BgEnum.BG_COLOR}
             />
@@ -94,6 +95,7 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refS
                 required: { value: true, message: t("validation.lastname.required") },
                 minLength: { value: 3, message: t("validation.lastname.minLength") }
               }}
+              defaultValue={edit.lastname}
               onChange={onChangeInput}
               themeInput={BgEnum.BG_COLOR}
             />
@@ -108,6 +110,7 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refS
                 required: { value: true, message: t("validation.username.required") },
                 minLength: { value: 3, message: t("validation.username.minLength") }
               }}
+              defaultValue={edit.username}
               onChange={onChangeInput}
               themeInput={BgEnum.BG_COLOR}
             />
@@ -129,6 +132,7 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refS
                 required: { value: true, message: t("validation.city.required") },
                 minLength: { value: 3, message: t("validation.city.minLength") }
               }}
+              defaultValue={edit.city}
               onChange={onChangeInput}
               themeInput={BgEnum.BG_COLOR}
             />

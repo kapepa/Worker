@@ -3,7 +3,7 @@ import {FormComment} from "./FormComment";
 
 describe("<FormComment/>", () => {
   test("should be defined", () => {
-    const { getByTestId } = render(<FormComment/>)
+    const { getByTestId } = render(<FormComment onSend={() => {}}/>)
     expect(getByTestId("form-comment")).toBeInTheDocument();
   })
 })

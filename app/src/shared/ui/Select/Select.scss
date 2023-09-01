@@ -18,10 +18,10 @@
     width: 100%;
     background-color: var(--bg-color);
     &--bg-color{
-      color: var(--bg-color-inverted);
+      color: var(--primary-color-inverted);
       background-color: var(--bg-color);
       &::placeholder{
-        color: var(--bg-color-inverted);
+        color: var(--primary-color-inverted);
       }
     }
     &--bg-color-inverted{

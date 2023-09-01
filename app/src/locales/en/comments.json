@@ -2,5 +2,11 @@
   "error-save": "Error save.",
   "error-comments": "Error getting comments.",
   "comments-empty": "Comments is empty.",
-  "send-comment": "Send"
+  "send-comment": "Send",
+  "placeholder": {
+    "comment": "Comment"
+  },
+  "validation": {
+    "required": "Required comment"
+  }
 }
