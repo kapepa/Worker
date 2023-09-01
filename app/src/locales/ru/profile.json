@@ -5,7 +5,9 @@
   "send": "Отправить",
   "placeholder": {
     "firstname": "Твое имя",
-    "lastname": "Ваша фамилия"
+    "lastname": "Ваша фамилия",
+    "username": "Ваш логин",
+    "city": "Ваш город"
   },
   "label": {
     "firstname": "Имя",

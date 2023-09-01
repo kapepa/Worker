@@ -1,4 +1,4 @@
-import {FC, InputHTMLAttributes, memo, useEffect} from "react";
+import {FC, InputHTMLAttributes, memo, useEffect, useMemo} from "react";
 import "./InputDynamic.scss";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import {useFormContext} from "react-hook-form";
@@ -22,10 +22,9 @@ interface InputDynamicProps extends InputHTMLAttributes<HTMLInputElement>{
 
 const InputDynamic: FC<InputDynamicProps> = memo((props) => {
   const { className, classLabel, classInput, classAlert, themeInput, colorLabel, label, validation, name, defaultValue, ...otherProps } = props;
-  const { register, formState: { errors }, setValue, getValues, clearErrors } = useFormContext();
+  const { register, formState: { errors }, setValue, clearErrors } = useFormContext();
   const { ref, ...reg } = register(name, validation);
   const toHaveError = errors[name];
-  const currentVal = getValues(name)
 
   useEffect(() => {
     setValue(name,defaultValue);
@@ -33,7 +32,16 @@ const InputDynamic: FC<InputDynamicProps> = memo((props) => {
 
   useEffect(() => {
     clearErrors(name)
-  },[currentVal, name, clearErrors])
+  },[defaultValue, name, clearErrors])
+
+  const translateError = useMemo(() => {
+    if(name in errors){
+      for(let key in validation) if(errors[name]?.type === key) {
+          return {[name]: {...errors[name], message: validation[key].message}}
+        }
+    }
+    return errors
+  }, [validation, errors, name])
 
   return (
     <div className={ClassNames("input-dynamic", className)}>
@@ -47,7 +55,7 @@ const InputDynamic: FC<InputDynamicProps> = memo((props) => {
         <Input className={ClassNames("input-dynamic__input", classInput)}  theme={themeInput} refs={{ref}} { ...Object.assign(reg, otherProps) }/>
         { !!toHaveError &&
           <span className={ClassNames("input-dynamic__alert", classAlert)} data-testid="alert">
-            <ErrorMessage errors={errors} name={name} />
+            <ErrorMessage errors={translateError} name={name} />
           </span>
         }
       </div>

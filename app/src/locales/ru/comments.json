@@ -2,5 +2,11 @@
   "error-save": "Ошибка сохранения.",
   "error-comments": "Ошибка получения комментариев.",
   "comments-empty": "Комментарии пусты.",
-  "send-comment": "Отправлять"
+  "send-comment": "Отправлять",
+  "placeholder": {
+    "comment": "Комментарий"
+  },
+  "validation": {
+    "required": "Обязательный комментарий"
+  }
 }

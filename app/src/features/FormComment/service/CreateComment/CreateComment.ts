@@ -1,19 +1,20 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import Axios from "../../../../utils/axios";
 import {CommentsTypes} from "../../../../entities/Comments";
-import {ThunkExtraArg} from "../../../../app/providers/Store/config/StateSchema";
+import {StateSchema, ThunkExtraArg} from "../../../../app/providers/Store/config/StateSchema";
+import {GetArticleDetailsData} from "../../../../entities/Article";
+import {GetUsersProfile} from "../../../../entities/Users";
 
-interface CreateCommentProps {
-  artID: string,
-  text: string,
-}
-
-const CreateComment = createAsyncThunk<CommentsTypes, CreateCommentProps, { rejectValue: string, extra: ThunkExtraArg }>(
+const CreateComment = createAsyncThunk<CommentsTypes, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
   'formComment/CreateComment',
-  async (props: CreateCommentProps, thunkAPI) => {
-    const { artID, text } = props;
+  async (text, thunkAPI) => {
+    let art = GetArticleDetailsData(thunkAPI.getState())
+    let user = GetUsersProfile(thunkAPI.getState());
+
+    if (!art?.id || !user) return thunkAPI.rejectWithValue("create-comment-error");
+
     try {
-      const response = await Axios.post(`/api/comments/art${artID}`, text);
+      const response = await Axios.post(`/api/comments/art${art.id}`, text);
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue("create-comment-error");

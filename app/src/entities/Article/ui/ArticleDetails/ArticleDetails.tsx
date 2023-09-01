@@ -13,7 +13,9 @@ import {ArticleBlocImageComponent} from "../ArticleBlocImageComponent/ArticleBlo
 import {ArticleBlockCodeComponent} from "../ArticleBlockCodeComponent/ArticleBlockCodeComponent";
 import {useTranslation} from "react-i18next";
 import {CommentsList} from "../../../Comments";
-import {FormComment} from "../../../../features/FormComment";
+import {CreateComment, FormCommentAsync} from "../../../../features/FormComment";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../../../app/providers/Store/config/store";
 
 interface ArticleDetailsProps {
   className?: string,
@@ -22,7 +24,13 @@ interface ArticleDetailsProps {
 
 const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
   const {t} = useTranslation("article");
+  const dispatch = useDispatch<AppDispatch>();
   const {img, title, subtitle, views, createdAt, blocks} = date;
+
+  const onSend = useCallback(
+    (str: string) => {dispatch(CreateComment(str))},
+    [dispatch]
+  );
 
   const renderBlocks = useCallback((block: ArticleBlocks, index: number) => {
     switch (block.type) {
@@ -58,7 +66,7 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
         theme={TextTheme.PRIMARY}
         title={t("comments")}
       />
-      <FormComment/>
+      <FormCommentAsync onSend={onSend}/>
       <CommentsList/>
     </div>
   )
