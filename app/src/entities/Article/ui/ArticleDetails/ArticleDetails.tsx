@@ -29,8 +29,7 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
 
   const onSend = useCallback(
     (str: string) => {
-      // if(!!CreateComment) dispatch(CreateComment(str))
-      console.log(CreateComment)
+      if(!!CreateComment) dispatch(CreateComment(str));
     },
     [dispatch]
   );
