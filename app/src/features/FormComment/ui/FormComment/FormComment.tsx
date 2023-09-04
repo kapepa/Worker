@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, memo, useCallback, useEffect} from "react";
+import {ChangeEvent, FC, memo, useCallback} from "react";
 import "./FormComment.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {useDispatch, useSelector} from "react-redux";
@@ -34,7 +34,7 @@ const FormComment: FC<FormCommentProps> = memo(({className, onSend}) => {
       onSend(data.comment);
       methods.reset();
     },
-    [onSend]
+    [onSend, methods]
   );
 
   return (
