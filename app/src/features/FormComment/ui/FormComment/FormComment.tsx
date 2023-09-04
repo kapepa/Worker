@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, memo, useCallback} from "react";
+import {ChangeEvent, FC, memo, useCallback, useEffect} from "react";
 import "./FormComment.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {useDispatch, useSelector} from "react-redux";
@@ -30,7 +30,10 @@ const FormComment: FC<FormCommentProps> = memo(({className, onSend}) => {
     [dispatch, changeComment]);
 
   const onSubmit: SubmitHandler<IFormCommentFormInput> = useCallback(
-    (data: IFormCommentFormInput) => onSend(data.comment),
+    (data: IFormCommentFormInput) => {
+      onSend(data.comment);
+      methods.reset();
+    },
     [onSend]
   );
 
@@ -38,7 +41,7 @@ const FormComment: FC<FormCommentProps> = memo(({className, onSend}) => {
     <FormProvider {...methods}>
       <div className={ClassNames("form-comment__environment", className)} data-testid="form-comment">
         {!!error && <Text theme={TextTheme.ERROR} title={t("error-save")} />}
-        <form className="form-comment" onSubmit={methods.handleSubmit(onSubmit)}>
+        <form className="form-comment" onSubmit={methods.handleSubmit(onSubmit)} data-testid="form">
           <InputDynamic
             name="comment"
             type="text"
@@ -54,6 +57,7 @@ const FormComment: FC<FormCommentProps> = memo(({className, onSend}) => {
               className="form-comment__btn"
               theme={ThemeButtonEnum.OUTLINE}
               disabled={loading}
+              type="submit"
             >{t("send-comment")}</Button>
           </div>
         </form>

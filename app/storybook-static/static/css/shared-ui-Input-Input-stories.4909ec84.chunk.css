@@ -1,0 +1,3 @@
+.input{padding:12px 24px;font-size:20px;outline:none;width:100%}.input--bg-color{color:var(--primary-color-inverted);background-color:var(--bg-color)}.input--bg-color::-webkit-input-placeholder{color:var(--primary-color-inverted)}.input--bg-color::placeholder{color:var(--primary-color-inverted)}.input--bg-color-inverted{color:var(--bg-color);background-color:var(--bg-color-inverted)}.input--readonly{opacity:.7}
+
+/*# sourceMappingURL=shared-ui-Input-Input-stories.4909ec84.chunk.css.map*/

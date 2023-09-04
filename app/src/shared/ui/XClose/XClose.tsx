@@ -18,7 +18,13 @@ interface XCloseProps{
 }
 
 const XClose: FC<XCloseProps> = memo(({cb, className, color = "BG_COLOR" }) => {
-  return <button onClick={cb} className={ClassNames("x-close", className, `x-close--${ColorCloseEnum[color]}` )} data-testid="x-close" />
+  return (
+    <button
+      onClick={cb}
+      className={ClassNames("x-close", className, `x-close--${ColorCloseEnum[color]}` )}
+      data-testid="x-close"
+    />
+  )
 })
 
 export default XClose;

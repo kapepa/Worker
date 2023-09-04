@@ -10,12 +10,13 @@ describe("<InputDynamic/>", () => {
   const mockChange = jest.fn();
 
   test("should be defined",() => {
-    const { getByText, getByDisplayValue } = RenderWithForm(<InputDynamic
+    const { getByText, getByDisplayValue} = RenderWithForm(<InputDynamic
       themeInput={BgEnum.BG_COLOR}
       name={emailMockType.name}
       label={emailMockType.label}
       onChange={ mockChange }
       validation={emailMockType.validation}
+      defaultValue={mockValue}
     />, {defaultValues: { email: mockValue }})
 
     expect(getByText(emailMockType.label)).toBeInTheDocument();

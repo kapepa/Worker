@@ -6,10 +6,11 @@ import StoreDecorator from "../../../../shared/config/StoreDecorator/StoreDecora
 import CommentsMock from "../../../../shared/test/mock/comments.json";
 import UsersMock from "../../../../shared/test/mock/user.json";
 import {CommentsTypes} from "../../model/types/commentsTypes";
+import RouterDecorator from "../../../../shared/config/RouterDecorator/RouterDecorator";
 
 const meta: Meta<typeof CommentsList> = {
   component: CommentsList,
-  decorators: [StoreDecorator(
+  decorators: [RouterDecorator, StoreDecorator(
     {
       comments: {
         entities: { [CommentsMock.id]: {...CommentsMock, users: {...UsersMock, avatar: ""}} as CommentsTypes },
