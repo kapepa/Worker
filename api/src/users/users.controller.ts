@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Get,
-  HttpStatus, ParseFilePipe, ParseFilePipeBuilder,
+  HttpStatus, Param, ParseFilePipe, ParseFilePipeBuilder,
   Post,
   Put,
   Req,
@@ -36,11 +36,11 @@ export class UsersController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('/profile-full')
+  @Get('/customer/:id')
   @ApiResponse({ status: 200, description: 'Get full user data'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
-  getProfileFull(@Req() req): Observable<UsersEntityInterfaces>{
-    return this.usersService.findOne({where: { id: req.user.id }});
+  getProfileFull(@Req() req, @Param() param): Observable<UsersEntityInterfaces>{
+    return this.usersService.findOne({where: { id: param.id }});
   }
 
   @UseGuards(AuthGuard)

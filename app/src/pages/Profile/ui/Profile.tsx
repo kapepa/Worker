@@ -7,10 +7,11 @@ import {ClassNames} from "../../../shared/lib/ClassNames";
 import Loader from "../../../shared/ui/Loader/Loader";
 import {Text, TextAlign, TextTheme} from "../../../shared/ui/Text/Text";
 import {useTranslation} from "react-i18next";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {RouterPath} from "../../../shared/const/Routers";
 
 const Profile: FC = function () {
+  const params = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation("profile");
   const refSend = useRef<HTMLButtonElement>(null);
@@ -22,12 +23,13 @@ const Profile: FC = function () {
   }, [refSend]);
 
   useEffect(() => {
-    if(!data) dispatch(ProfileRequest());
-  },[dispatch, data]);
+    if(!data && !!params.id) dispatch(ProfileRequest(params.id));
+    if(!params.id) navigate(RouterPath.HOME);
+  },[dispatch, data, params.id, navigate]);
 
-  useEffect(() => {
-    if(!data && !edit) navigate(RouterPath.HOME);
-  }, [data, edit, navigate]);
+  // useEffect(() => {
+  //   if(!data && !edit) navigate(RouterPath.HOME);
+  // }, [data, edit, navigate]);
 
   if(loading) return (
     <div className={ClassNames("profile", "profile--loader")} data-testid="profile">

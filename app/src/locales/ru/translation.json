@@ -13,26 +13,6 @@
   "logout": "Выйти",
   "decrease": "Снижаться",
   "increase": "Увеличивать",
-  "login-form": {
-    "login": "Авторизоваться",
-    "send": "Отправлять",
-    "placeholder-user": "Ваше имя",
-    "placeholder-email": "Ваша почта",
-    "placeholder-password": "Ваш пароль",
-    "label": {
-      "username": "Имя",
-      "firstname": "Фамилия",
-      "lastname": "Фамилия",
-      "email": "Почта",
-      "password": "Пароль",
-      "avatar": "Аватар",
-      "country": "Страна",
-      "city": "Город"
-    },
-    "error": {
-      "error-login": "Ваши пользовательские данные неверны."
-    }
-  },
   "form-error": {
     "required": "Необходимый"
   },

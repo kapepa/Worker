@@ -5,7 +5,34 @@
   "send": "Отправить",
   "placeholder": {
     "firstname": "Твое имя",
-    "lastname": "Ваша фамилия"
+    "lastname": "Ваша фамилия",
+    "username": "Ваш логин",
+    "city": "Ваш город"
+  },
+  "label": {
+    "firstname": "Имя",
+    "lastname": "Фамилия",
+    "username": "Имя пользователя",
+    "country": "Страна",
+    "city": "Город"
+  },
+  "validation": {
+    "firstname": {
+      "required": "Обязательное имя",
+      "minLength": "Имя достаточно длинное"
+    },
+    "lastname": {
+      "required": "Требуемая фамилия",
+      "minLength": "Фамилия достаточно длинная"
+    },
+    "username": {
+      "required": "Требуемое имя пользователя",
+      "minLength": "Имя пользователя достаточно длинное"
+    },
+    "city": {
+      "required": "Требуемый город",
+      "minLength": "Город достаточно длинный"
+    }
   },
   "error-profile": "Этот профиль не найден."
 }

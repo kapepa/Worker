@@ -3,7 +3,6 @@ import ComponentRender from "../../../../shared/test/componentRender";
 import {LoginForm} from "./LoginForm";
 import userEvent from '@testing-library/user-event';
 
-
 describe("<LoginForm/>", () => {
   const mockName: string = "my@email.come";
   const mockPass: string = "123456";
@@ -14,25 +13,26 @@ describe("<LoginForm/>", () => {
   })
 
   test("should be write down value in input", async () => {
-    const { getByRole } = ComponentRender(<LoginForm onClose={() => {}} />);
-    const name = await getByRole("email");
-    const pass = await getByRole("password");
+    const { getByDisplayValue } = ComponentRender(
+      <LoginForm onClose={() => {}} />,
+      { reloadedState: { auth: { login: { email: mockName, password: mockPass } } } }
+    );
 
-    fireEvent.input(name, { target: { value: mockName } });
-    fireEvent.input(pass, { target: { value: mockPass } });
-
-    expect(screen.getByDisplayValue(mockName)).toBeInTheDocument();
-    expect(screen.getByDisplayValue(mockPass)).toBeInTheDocument();
+    expect(getByDisplayValue(mockName)).toBeInTheDocument();
+    expect(getByDisplayValue(mockPass)).toBeInTheDocument();
   })
 
   test("should be submit form", async () => {
-    const { getByRole } = ComponentRender(<LoginForm onClose={() => {}} />);
-    const name = await getByRole("email") as HTMLInputElement;
-    const pass = await getByRole("password") as HTMLInputElement;
+    const { getByDisplayValue, getByTestId } = ComponentRender(
+      <LoginForm onClose={() => {}} />,
+      { reloadedState: { auth: { login: { email: mockName, password: mockPass } } } }
+    );
+    const name = await getByDisplayValue(mockName);
+    const pass = await getByDisplayValue(mockPass);
 
     await userEvent.type(name, mockName);
     await userEvent.type(pass, mockPass);
 
-    // fireEvent.submit(getByTestId("form"));
+    fireEvent.submit(getByTestId("form"));
   })
 })

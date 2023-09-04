@@ -5,6 +5,7 @@ import {ProfileState} from "../../../../entities/Profile";
 import {NavigateFunction} from "react-router/dist/lib/hooks";
 import {DetailsState} from "../../../../entities/Article/model/types/detailsState";
 import {CommentsState} from "../../../../entities/Comments";
+import {FormCommentState} from "../../../../features/FormComment/model/types/formCommentState";
 
 interface StateSchema {
   counter: CounterState,
@@ -13,7 +14,8 @@ interface StateSchema {
   profile: ProfileState,
   details: DetailsState,
   comments: CommentsState,
-};
+  formComment: FormCommentState,
+}
 
 interface ThunkExtraArg {
   navigate?: NavigateFunction,

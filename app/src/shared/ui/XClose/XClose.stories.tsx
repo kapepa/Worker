@@ -23,3 +23,10 @@ export const LoaderDark: XCloseMode = {
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };
+
+export const LoaderOrange: XCloseMode = {
+  args: {
+    color: "BG_COLOR_INVERTED",
+  },
+  decorators: [ThemeDecorator(ThemeEnum.ORANGE)],
+};

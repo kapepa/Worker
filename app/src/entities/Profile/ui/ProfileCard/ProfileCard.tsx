@@ -2,19 +2,18 @@ import {ChangeEvent, FC, memo, MutableRefObject, useCallback} from "react";
 import "./ProfileCard.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {useTranslation} from "react-i18next";
-import {Input} from "../../../../shared/ui/Input/Input";
 import {ProfileTypes} from "../../model/types/profileTypes";
 import {ProfileActions} from "../../model/slice/profileSlice";
 import {useDispatch} from "react-redux";
 import {LoadAvatar} from "../../../../widgets/LoadAvatar";
-import {BgInputEnum} from "../../../../shared/const/BgInput";
-import {ColorInputEnum} from "../../../../shared/const/ColorInputEnum";
+import {BgEnum} from "../../../../shared/const/BgEnum";
 import {Country} from "../../../Country";
 import {Countries} from "../../../../shared/const/Countries";
-import {SubmitHandler, useForm} from "react-hook-form";
+import {FormProvider, SubmitHandler, useForm} from "react-hook-form";
 import {LoginTypes} from "../../../../features/AuthByUsername";
 import {ProfileUpdate} from "../../services/ProfileUpdate/ProfileUpdate";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
+import {InputDynamic} from "../../../../widgets/InputDynamic";
 
 interface ProfileCardProps {
   className?: string,
@@ -26,7 +25,7 @@ interface ProfileCardProps {
 const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refSend}) => {
   const { t } = useTranslation("profile");
   const dispatch = useDispatch<AppDispatch>();
-  const { register, getFieldState, handleSubmit, formState: { errors } } = useForm<LoginTypes>({
+  const methods = useForm<LoginTypes>({
     defaultValues: {
       "firstname": edit.firstname,
       "lastname": edit.lastname,
@@ -50,12 +49,13 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refS
   }, [dispatch])
 
   const onSubmit: SubmitHandler<LoginTypes> = (data: LoginTypes) => {
-    if(!Object.keys(errors).length) dispatch(ProfileUpdate());
+    if(!Object.keys(methods.formState.errors).length) dispatch(ProfileUpdate());
   };
 
   return (
     <div className={ClassNames("profile-card", "profile-card--border", className)} data-testid="profile-card">
-      <form className="profile-card__area" onSubmit={handleSubmit(onSubmit)} data-testid="form">
+      <FormProvider {...methods} >
+      <form className="profile-card__area" onSubmit={methods.handleSubmit(onSubmit)} data-testid="form">
         { !!edit?.avatar &&
           <LoadAvatar
             className="profile-card__avatar"
@@ -69,83 +69,78 @@ const ProfileCard: FC<ProfileCardProps> = memo(({className, edit, readonly, refS
         }
         { !!edit &&
           <>
-            <Input
+            <InputDynamic
               type="text"
-              minLength={4}
-              required={true}
-              name="firstname"
-              label="firstname"
-              register={register}
-              readOnly={readonly}
-              onChange={onChangeInput}
-              errors={errors.firstname}
-              className="profile-card__input"
-              classNameAlert="profile-card__alert"
-              getFieldState={getFieldState}
-              theme={BgInputEnum.WHITE_BG}
-              color={ColorInputEnum.WHITE_COLOR_INVERTED}
+              name={"firstname"}
+              label={t("label.firstname")}
               placeholder={t(`placeholder.firstname`)}
-            />
-            <Input
-              type="text"
-              minLength={4}
-              required={true}
-              name="lastname"
-              label="lastname"
-              register={register}
               readOnly={readonly}
+              classInput="profile-card__input"
+              validation={{
+                required: { value: true, message: t("validation.firstname.required") },
+                minLength: { value: 3, message: t("validation.firstname.minLength") }
+               }}
+              defaultValue={edit.firstname}
               onChange={onChangeInput}
-              errors={errors.lastname}
-              className="profile-card__input"
-              classNameAlert="profile-card__alert"
-              getFieldState={getFieldState}
-              theme={BgInputEnum.WHITE_BG}
-              color={ColorInputEnum.WHITE_COLOR_INVERTED}
+              themeInput={BgEnum.BG_COLOR}
+            />
+            <InputDynamic
+              type="text"
+              name={"lastname"}
+              label={t("label.lastname")}
               placeholder={t(`placeholder.lastname`)}
-            />
-            <Input
-              type="text"
-              minLength={4}
-              required={true}
-              name="username"
-              label="username"
-              register={register}
               readOnly={readonly}
+              classInput="profile-card__input"
+              validation={{
+                required: { value: true, message: t("validation.lastname.required") },
+                minLength: { value: 3, message: t("validation.lastname.minLength") }
+              }}
+              defaultValue={edit.lastname}
               onChange={onChangeInput}
-              errors={errors.username}
-              className="profile-card__input"
-              classNameAlert="profile-card__alert"
-              getFieldState={getFieldState}
-              theme={BgInputEnum.WHITE_BG}
-              color={ColorInputEnum.WHITE_COLOR_INVERTED}
+              themeInput={BgEnum.BG_COLOR}
+            />
+            <InputDynamic
+              type="text"
+              name={"username"}
+              label={t("label.username")}
               placeholder={t(`placeholder.username`)}
+              readOnly={readonly}
+              classInput="profile-card__input"
+              validation={{
+                required: { value: true, message: t("validation.username.required") },
+                minLength: { value: 3, message: t("validation.username.minLength") }
+              }}
+              defaultValue={edit.username}
+              onChange={onChangeInput}
+              themeInput={BgEnum.BG_COLOR}
             />
             <Country
+              label={t("label.country")}
               defaultVal={edit.country}
               selected={countrySelected}
               readOnly={readonly}
-            />
-            <Input
-              type="text"
-              minLength={4}
-              required={true}
-              name="city"
-              label="city"
-              register={register}
-              readOnly={readonly}
-              onChange={onChangeInput}
-              errors={errors.city}
               className="profile-card__input"
-              classNameAlert="profile-card__alert"
-              getFieldState={getFieldState}
-              theme={BgInputEnum.WHITE_BG}
-              color={ColorInputEnum.WHITE_COLOR_INVERTED}
+            />
+            <InputDynamic
+              type="text"
+              name={"city"}
+              label={t("label.city")}
               placeholder={t(`placeholder.city`)}
+              readOnly={readonly}
+              classInput="profile-card__input"
+              validation={{
+                required: { value: true, message: t("validation.city.required") },
+                minLength: { value: 3, message: t("validation.city.minLength") }
+              }}
+              defaultValue={edit.city}
+              onChange={onChangeInput}
+              themeInput={BgEnum.BG_COLOR}
             />
             <button ref={refSend} type="submit" style={{display: "none"}} data-testid="submit"/>
           </>
         }
       </form>
+      </FormProvider>
     </div>
   )
 })

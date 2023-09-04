@@ -13,26 +13,6 @@
   "logout": "Logout",
   "decrease": "Decrease",
   "increase": "Increase",
-  "login-form": {
-    "login": "Login",
-    "send": "Send",
-    "placeholder-user": "Your name",
-    "placeholder-email": "Your email",
-    "placeholder-password": "Your password",
-    "label": {
-      "username": "Username",
-      "firstname": "Firstname",
-      "lastname": "Lastname",
-      "email": "Email",
-      "password": "Password",
-      "avatar": "Avatar",
-      "country": "Country",
-      "city": "Сity"
-    },
-    "error": {
-      "error-login": "Your user data is incorrect."
-    }
-  },
   "form-error": {
     "required": "Required"
   },

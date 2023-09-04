@@ -12,6 +12,7 @@ import enError from "./locales/en/error.json";
 import enArticle from "./locales/en/article.json";
 import enDetails from "./locales/en/details.json";
 import enComments from "./locales/en/comments.json";
+import enForm from "./locales/en/form.json";
 
 import ruTranslation from "./locales/ru/translation.json";
 import ruHome from "./locales/ru/home.json";
@@ -21,6 +22,7 @@ import ruError from "./locales/ru/error.json";
 import ruArticle from "./locales/ru/article.json";
 import ruDetails from "./locales/ru/details.json";
 import ruComments from "./locales/ru/comments.json";
+import ruForm from "./locales/ru/form.json";
 
 i18n
   .use(Backend)
@@ -38,6 +40,7 @@ i18n
         article: enArticle,
         details: enDetails,
         comments: enComments,
+        form: enForm,
       },
       ru: {
         translation: ruTranslation,
@@ -48,6 +51,7 @@ i18n
         article: ruArticle,
         details: ruDetails,
         comments: ruComments,
+        form: ruForm,
       }
     },
     fallbackLng: 'en',

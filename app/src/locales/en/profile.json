@@ -5,7 +5,34 @@
   "send": "Send",
   "placeholder": {
     "firstname": "Your firstname",
-    "lastname": "Your lastname"
+    "lastname": "Your lastname",
+    "username": "Your username",
+    "city": "Your city"
+  },
+  "label": {
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "username": "Username",
+    "country": "Country",
+    "city": "City"
+  },
+  "validation": {
+    "firstname": {
+      "required": "Required firstname",
+      "minLength": "Firstname is long enough"
+    },
+    "lastname": {
+      "required": "Required lastname",
+      "minLength": "Lastname is long enough"
+    },
+    "username": {
+      "required": "Required username",
+      "minLength": "Username is long enough"
+    },
+    "city": {
+      "required": "Required city",
+      "minLength": "City is long enough"
+    }
   },
   "error-profile": "This profile is not found."
 }

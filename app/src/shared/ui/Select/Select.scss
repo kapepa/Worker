@@ -1,41 +1,39 @@
 .select{
   width: 100%;
-  &--readonly{
-    opacity: .7;
-  }
   &__wrapper{
     width: 100%;
     margin-bottom: 16px;
     position: relative;
     border-radius: 6px;
-    &--white-color{
+    &--secondary-color{
       color: var(--bg-color-inverted);
     }
-    &--white-color-inverted{
+    &--secondary-color-inverted{
       color: var(--bg-color);
     }
   }
   &__input{
     cursor: pointer;
-    padding: 8px 16px;
-    font-size: 16px;
     outline: none;
     width: 100%;
     background-color: var(--bg-color);
-    &--white{
-      color: var(--bg-color-inverted);
+    &--bg-color{
+      color: var(--primary-color-inverted);
       background-color: var(--bg-color);
       &::placeholder{
-        color: var(--bg-color-inverted);
+        color: var(--primary-color-inverted);
       }
     }
-    &--white-inverted{
+    &--bg-color-inverted{
       color: var(--bg-color);
       background-color: var(--bg-color-inverted);
     }
+    &--readonly{
+      opacity: .7;
+    }
   }
   &__label{
-    font-size: 16px;
+    font-size: 18px;
     color: inherit;
   }
   &__frame{

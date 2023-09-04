@@ -16,7 +16,7 @@ const DetailsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(FetchArticleById.pending, (state: DetailsState) => {
-        state.loading = !state.loading;
+        state.loading = true;
         state.error = undefined;
       })
       .addCase(FetchArticleById.fulfilled, (state: DetailsState, action: PayloadAction<ArticleType>) => {
@@ -24,7 +24,7 @@ const DetailsSlice = createSlice({
         state.loading = false;
       })
       .addCase(FetchArticleById.rejected, (state: DetailsState, action) => {
-        state.loading = !state.loading;
+        state.loading = false;
         state.error = action.payload;
       })
   }
