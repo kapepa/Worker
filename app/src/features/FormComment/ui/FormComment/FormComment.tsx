@@ -25,9 +25,11 @@ const FormComment: FC<FormCommentProps> = memo(({className, onSend}) => {
   const methods = useForm<IFormCommentFormInput>({ defaultValues: {comment: text} });
   const {changeComment} = FormCommentActions;
 
-  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) =>
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) =>
     dispatch(changeComment(e.currentTarget.value)),
-    [dispatch, changeComment]);
+    [dispatch, changeComment]
+  );
 
   const onSubmit: SubmitHandler<IFormCommentFormInput> = useCallback(
     (data: IFormCommentFormInput) => {
