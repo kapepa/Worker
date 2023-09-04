@@ -8,7 +8,7 @@ import {GetUsersProfile} from "../../../../entities/Users";
 const CreateComment = createAsyncThunk<CommentsTypes, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
   'formComment/CreateComment',
   async (text, thunkAPI) => {
-    let art = GetArticleDetailsData(thunkAPI.getState())
+    let art = GetArticleDetailsData(thunkAPI.getState());
     let user = GetUsersProfile(thunkAPI.getState());
 
     if (!art?.id || !user) return thunkAPI.rejectWithValue("create-comment-error");

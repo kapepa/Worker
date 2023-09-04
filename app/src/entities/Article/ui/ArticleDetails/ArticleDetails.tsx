@@ -13,7 +13,7 @@ import {ArticleBlocImageComponent} from "../ArticleBlocImageComponent/ArticleBlo
 import {ArticleBlockCodeComponent} from "../ArticleBlockCodeComponent/ArticleBlockCodeComponent";
 import {useTranslation} from "react-i18next";
 import {CommentsList} from "../../../Comments";
-import {CreateComment, FormCommentAsync} from "../../../../features/FormComment";
+import {CreateComment, FormComment} from "../../../../features/FormComment";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
 
@@ -28,7 +28,10 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
   const {img, title, subtitle, views, createdAt, blocks} = date;
 
   const onSend = useCallback(
-    (str: string) => {dispatch(CreateComment(str))},
+    (str: string) => {
+      // if(!!CreateComment) dispatch(CreateComment(str))
+      console.log(CreateComment)
+    },
     [dispatch]
   );
 
@@ -66,7 +69,7 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
         theme={TextTheme.PRIMARY}
         title={t("comments")}
       />
-      <FormCommentAsync onSend={onSend}/>
+      <FormComment onSend={onSend}/>
       <CommentsList/>
     </div>
   )

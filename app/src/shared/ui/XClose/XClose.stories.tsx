@@ -12,14 +12,21 @@ type XCloseMode = StoryObj<typeof XClose>;
 
 export const LoaderNormal: XCloseMode = {
   args: {
-    color: "BG_COLOR",
+    color: "BG_COLOR_INVERTED",
   },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
 
 export const LoaderDark: XCloseMode = {
   args: {
-    color: "BG_COLOR",
+    color: "BG_COLOR_INVERTED",
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
+};
+
+export const LoaderOrange: XCloseMode = {
+  args: {
+    color: "BG_COLOR_INVERTED",
+  },
+  decorators: [ThemeDecorator(ThemeEnum.ORANGE)],
 };
