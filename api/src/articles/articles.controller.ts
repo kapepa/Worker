@@ -52,7 +52,7 @@ export class ArticlesController {
 
   @UseGuards(AuthGuard)
   @Get("/receive/art/:id")
-  @ApiResponse({ status: 201, description: 'Should be receive article on id'})
+  @ApiResponse({ status: 200, description: 'Should be receive article on id'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   getArticles(@Param("id") id) {
     return this.articlesService.findOneArticle({where: {id}, relations: ["blocks", "comments"] })
@@ -60,9 +60,19 @@ export class ArticlesController {
 
   @UseGuards(AuthGuard)
   @Get("/receive/block/:id")
-  @ApiResponse({ status: 201, description: 'Should be receive block on id'})
+  @ApiResponse({ status: 200, description: 'Should be receive block on id'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   getBlocks(@Param("id") id) {
     return this.articlesService.findOneBlocks({ where: {id} });
+  }
+
+  @Get("/receive/all")
+  @ApiResponse({ status: 200, description: 'All articles on request must be received'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
+  getAllArticles(@Query() query?: {take: string, skip: string}): Observable<ArticlesInterface[]> {
+    const take = !!query?.take ? Number(query.take) : 8;
+    const skip = !!query?.skip ? Number(query.skip) : 0;
+
+    return this.articlesService.findArticles({ take, skip, order: { createdAt: "ASC" }, relations: ["users"] });
   }
 }

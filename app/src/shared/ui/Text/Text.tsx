@@ -21,6 +21,8 @@ export enum TextSize {
 
 interface TextProps {
   className?: string,
+  classTitle?: string,
+  classText?: string,
   title?: string,
   text?: string,
   theme: TextTheme,
@@ -28,19 +30,20 @@ interface TextProps {
   size?: TextSize,
 }
 
-const Text: FC<TextProps> = memo(({className, title, text, theme, size, align = TextAlign.LEFT}) => {
+const Text: FC<TextProps> = memo((props: TextProps) => {
+  const {className, classTitle, classText, title, text, theme, size, align = TextAlign.LEFT} = props;
   return (
     <div className={ClassNames( "text", className)}>
       {
         title &&
         <p
-          className={ClassNames("text__title", `text__title--${theme}`, `text--${align}`, {[`text--${size}`]: size} )}
+          className={ClassNames("text__title", `text__title--${theme}`, `text--${align}`, {[`text--${size}`]: size}, classTitle )}
         >{title}</p>
       }
       {
         text &&
         <p
-          className={ClassNames("text__p", `text__p--${theme}`, `text--${align}`, {[`text--${size}`]: size} )}
+          className={ClassNames("text__p", `text__p--${theme}`, `text--${align}`, {[`text--${size}`]: size}, classText )}
         >{text}</p>
       }
     </div>

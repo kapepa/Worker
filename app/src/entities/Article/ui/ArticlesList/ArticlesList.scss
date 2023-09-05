@@ -1,0 +1,14 @@
+.articles-list{
+  display: flex;
+  &--loading, &--error, &--empty{
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  &--block{
+
+  }
+  &--square{
+    max-width: 350px;
+  }
+}

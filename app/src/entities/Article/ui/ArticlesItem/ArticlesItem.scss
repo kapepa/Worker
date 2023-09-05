@@ -1,0 +1,50 @@
+.articles-item{
+  cursor: pointer;
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  &--block{
+
+  }
+  &--square{
+
+  }
+  &__roof{
+    position: relative;
+  }
+  &__date{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px ;
+  }
+  &__basement{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 10px 10px;
+  }
+  &__info{
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+  }
+  &__type{
+    display: flex;
+    column-gap: 10px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__eye{
+    flex: 1 1 300px;
+  }
+  &__piece{
+    font: var(--font-l);
+  }
+  &__title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
