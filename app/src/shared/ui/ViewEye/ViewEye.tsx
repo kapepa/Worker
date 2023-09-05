@@ -6,11 +6,12 @@ import {ColorView} from "../../const/ColorView";
 
 interface ViewEyeProps {
   className?: string,
+  reverse?: boolean
   quantity: number,
   theme: ColorView,
 }
 
-const ViewEye: FC<ViewEyeProps> = memo(({className, quantity, theme}) => {
+const ViewEye: FC<ViewEyeProps> = memo(({className, quantity, theme, reverse}) => {
 
   const switchColor = (theme: ColorView) => {
     switch (theme) {
@@ -33,7 +34,7 @@ const ViewEye: FC<ViewEyeProps> = memo(({className, quantity, theme}) => {
   }
 
   return (
-    <div className={ClassNames("view-eye", switchColor(theme), className)} data-testid="view-eye">
+    <div className={ClassNames("view-eye", switchColor(theme), {"view-eye--reverse": reverse}, className)} data-testid="view-eye">
       <IcoImg className="view-eye__ico" ico={"EyeIco"} color={switchIco(theme)}/>
       <span className="view-eye__quantity">{quantity}</span>
     </div>

@@ -16,7 +16,13 @@ describe('ArticlesController', () => {
       controllers: [ArticlesController],
       providers: [
         JwtService,
-        { provide: ArticlesService, useValue: { saveArticle: jest.fn(), createBlocks: jest.fn(), findOneArticle: jest.fn(), findOneBlocks: jest.fn()}}
+        { provide: ArticlesService, useValue: {
+            saveArticle: jest.fn(),
+            createBlocks: jest.fn(),
+            findOneArticle: jest.fn(),
+            findOneBlocks: jest.fn(),
+            findArticles: jest.fn(),
+        }}
       ],
     }).compile();
 
@@ -71,5 +77,27 @@ describe('ArticlesController', () => {
       }
     })
   })
+
+  it("getAllArticles", () => {
+    let findArticles = jest.spyOn(articlesService, "findArticles").mockReturnValue(of([MockArticles]));
+
+    controller.getAllArticles({take: "1", skip: "0"}).subscribe({
+      next: (articles) => {
+        expect(articles).toEqual([MockArticles]);
+        expect(findArticles).toHaveBeenCalledWith({ take: 1, skip: 0, order: { createdAt: "ASC" }, relations: ["users"] });
+      }
+    })
+  });
+
+  it("getAllArticles when query is empty", () => {
+    let findArticles = jest.spyOn(articlesService, "findArticles").mockReturnValue(of([MockArticles]));
+
+    controller.getAllArticles().subscribe({
+      next: (articles) => {
+        expect(articles).toEqual([MockArticles]);
+        expect(findArticles).toHaveBeenCalledWith({ take: 8, skip: 0, order: { createdAt: "ASC" }, relations: ["users"] });
+      }
+    })
+  });
 
 });

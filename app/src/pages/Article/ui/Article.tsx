@@ -3,7 +3,10 @@ import "./Article.scss";
 import {RouterPath} from "../../../shared/const/Routers";
 import {useSelector} from "react-redux";
 import {GetUsers} from "../../../entities/Users";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {ArticlesList} from "../../../entities/Article";
+import {Scroll} from "../../../shared/ui/Scroll/Scroll";
+import {ArticlesView} from "../../../shared/const/ArticlesView";
 // import {useTranslation} from "react-i18next";
 
 const Article: FC = memo(() => {
@@ -16,9 +19,11 @@ const Article: FC = memo(() => {
   }, [profile, loading, navigate]);
 
   return (
-    <div className="article" data-testid="article">
-      <NavLink to={`${RouterPath.ARTICLE}/aed4c183-3f50-44a8-acb9-750311590502`}>Der</NavLink>
-    </div>
+    <Scroll>
+      <div className="article" data-testid="article">
+        <ArticlesList view={ArticlesView.Square}/>
+      </div>
+    </Scroll>
   )
 })
 
