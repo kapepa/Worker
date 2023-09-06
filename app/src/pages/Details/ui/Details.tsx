@@ -1,4 +1,4 @@
-import {FC, memo, useEffect} from "react";
+import {FC, memo, useCallback, useEffect} from "react";
 import "./Details.scss";
 import {RouterPath} from "../../../shared/const/Routers";
 import {useDispatch, useSelector} from "react-redux";
@@ -14,6 +14,7 @@ import {SkeletonShape} from "../../../shared/const/SkeletonShape";
 import {Scroll} from "../../../shared/ui/Scroll/Scroll";
 import {FetchCommentsArtById} from "../../../entities/Comments";
 import {FetchCommentsQuery} from "../../../entities/Comments/services/FetchCommentsArtById/FetchCommentsArtById";
+import Button, {ThemeButtonEnum} from "../../../shared/ui/Button/Button";
 
 const Details: FC = memo(() => {
   const { t } = useTranslation("details")
@@ -22,6 +23,10 @@ const Details: FC = memo(() => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const params = useParams();
+
+  const toArticle = useCallback(() => {
+    navigate(RouterPath.ARTICLE);
+  },[navigate])
 
   useEffect(() => {
     if(!profile?.id && !loading) navigate(RouterPath.HOME);
@@ -38,6 +43,9 @@ const Details: FC = memo(() => {
     return (
       <Scroll>
         <div className="details--skeleton">
+          <div>
+            <Button onClick={toArticle} theme={ThemeButtonEnum.OUTLINE}>{t("back-to-list")}</Button>
+          </div>
           <Skeleton className="details__avatar" shape={SkeletonShape.Circle}/>
           <Skeleton className="details__title" shape={SkeletonShape.Square}/>
           <Skeleton className="details__subtitle" shape={SkeletonShape.Square}/>
@@ -62,6 +70,7 @@ const Details: FC = memo(() => {
   return (
     <Scroll>
       <div className="details" data-testid="details">
+        <Button onClick={toArticle} theme={ThemeButtonEnum.OUTLINE}>{t("back-to-list")}</Button>
         {!!data && <ArticleDetails date={data}/>}
       </div>
     </Scroll>

@@ -18,7 +18,7 @@ export enum SizeButton {
   C = "custom",
 }
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string,
   children?: ReactNode,
   theme?: ThemeButtonEnum,
@@ -26,9 +26,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
   disabled?: boolean,
 }
 
-const Button: FC<ButtonProps> = memo((
-  {className, theme = ThemeButtonEnum.CLEAR, disabled = false, size = SizeButton.M, children, ...otherProps}
-) => {
+const Button: FC<ButtonProps> = memo((props) => {
+  const {className, theme = ThemeButtonEnum.CLEAR, disabled = false, size = SizeButton.M, children, ...otherProps} = props;
+
   return (
     <button
       data-testid="button"
