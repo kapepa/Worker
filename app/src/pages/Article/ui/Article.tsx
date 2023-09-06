@@ -21,7 +21,7 @@ const Article: FC = memo(() => {
   return (
     <Scroll>
       <div className="article" data-testid="article">
-        <ArticlesList view={ArticlesView.Square}/>
+        <ArticlesList view={ArticlesView.Block}/>
       </div>
     </Scroll>
   )

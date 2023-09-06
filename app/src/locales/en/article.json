@@ -1,5 +1,6 @@
 {
   "comments": "Comments",
   "all-articles-error": "Error getting articles",
-  "articles-empty": "List of articles is empty"
+  "articles-empty": "List of articles is empty",
+  "read-more": "Read more"
 }

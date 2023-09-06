@@ -1,5 +1,6 @@
 {
   "comments": "Комментарии",
   "all-articles-error": "Ошибка при получении статей",
-  "articles-empty": "Список статей пуст"
+  "articles-empty": "Список статей пуст",
+  "read-more": "Читать далее"
 }

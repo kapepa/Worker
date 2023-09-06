@@ -73,6 +73,6 @@ export class ArticlesController {
     const take = !!query?.take ? Number(query.take) : 8;
     const skip = !!query?.skip ? Number(query.skip) : 0;
 
-    return this.articlesService.findArticles({ take, skip, order: { createdAt: "ASC" }, relations: ["users"] });
+    return this.articlesService.findArticles({ take, skip, order: { createdAt: "ASC" }, relations: ["users", "blocks"] });
   }
 }
