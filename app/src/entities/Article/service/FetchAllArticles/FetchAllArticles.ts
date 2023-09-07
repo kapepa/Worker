@@ -2,8 +2,8 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {ArticleType} from "../../model/types/articleType";
 import Axios from "../../../../utils/axios";
 import {StateSchema, ThunkExtraArg} from "../../../../app/providers/Store/config/StateSchema";
-import {GetArticlesData} from "../../selectors/GetArticlesData/GetArticlesData";
 import {ArticlesQuery} from "../../../../shared/const/ArticlesQuery";
+import {GetArticlesIds} from "../../selectors/GetArticlesIds/GetArticlesIds";
 
 interface FetchAllArticlesProps {
   take: number,
@@ -14,7 +14,7 @@ const FetchAllArticles = createAsyncThunk<ArticleType[], FetchAllArticlesProps |
   'articles/FetchAllArticles',
   async (query: FetchAllArticlesProps | undefined, thunkAPI) => {
     try {
-      const articles = GetArticlesData(thunkAPI.getState())
+      const articles = GetArticlesIds(thunkAPI.getState())
       const skip = query?.skip ?? articles?.length ?? ArticlesQuery.Skip;
       const take = query?.take ?? ArticlesQuery.Take;
 

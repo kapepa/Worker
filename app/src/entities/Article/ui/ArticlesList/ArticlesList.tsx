@@ -1,10 +1,8 @@
-import {FC, memo, useCallback, useEffect, useMemo} from "react";
+import {FC, memo, useMemo} from "react";
 import "./ArticlesList.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {GetArticles} from "../../selectors/GetArticles/GetArticles";
-import {FetchAllArticles} from "../../service/FetchAllArticles/FetchAllArticles";
-import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {Text, TextTheme} from "../../../../shared/ui/Text/Text";
 import {useTranslation} from "react-i18next";
 import {ArticlesView} from "../../../../shared/const/ArticlesView";
@@ -21,25 +19,28 @@ interface ArticlesListProps {
 
 const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
   const {t} = useTranslation("article");
-  const dispatch = useDispatch<AppDispatch>();
-  const { loading, error, data, ids, entities } = useSelector(GetArticles);
+  const { loading, error, ids, entities } = useSelector(GetArticles);
   const viewClass = useMemo(() => ({"articles-list--block": view === "block", "articles-list--square": view === "square"}), [view]);
-
-  const firstLoading = useCallback(() => {
-    dispatch(FetchAllArticles());
-  }, [dispatch]);
 
   const blockSkeleton = useMemo(() => {
     const quantitySkeleton = new Array(6).fill("");
 
     return quantitySkeleton.map((_: string, index: number) => (
       <Card key={index} className="block-skeleton" theme={BgEnum.BG_COLOR_INVERTED}>
-        <Skeleton shape={SkeletonShape.Circle} className="block-skeleton__avatar" />
-        <Skeleton shape={SkeletonShape.Square} className="block-skeleton__name" />
-        <Skeleton shape={SkeletonShape.Square} className="block-skeleton__title" />
-        <Skeleton shape={SkeletonShape.Square} className="block-skeleton__date" />
+        <div className="block-skeleton__header">
+          <div className="block-skeleton__detail">
+            <div className="block-skeleton__user">
+              <Skeleton shape={SkeletonShape.Circle} className="block-skeleton__avatar" />
+              <Skeleton shape={SkeletonShape.Square} className="block-skeleton__name" />
+            </div>
+            <Skeleton shape={SkeletonShape.Square} className="block-skeleton__title" />
+          </div>
+          <div className="block-skeleton__detail">
+            <Skeleton shape={SkeletonShape.Square} className="block-skeleton__date" />
+          </div>
+        </div>
         <Skeleton shape={SkeletonShape.Square} className="block-skeleton__img" />
-        <Skeleton shape={SkeletonShape.Square} className="block-skeleton__title" />
+        <Skeleton shape={SkeletonShape.Square} className="block-skeleton__subtitle" />
       </Card>
     ))
   }, [])
@@ -56,13 +57,9 @@ const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
     ))
   }, [])
 
-  useEffect(() => {
-    if(!data) firstLoading();
-  }, [data,firstLoading])
-
   if(loading) {
     return (
-      <div className={ClassNames("articles-list", "articles-list--loading", className)}>
+      <div className={ClassNames("articles-list", "articles-list--loading", className)} data-testid="loading">
         { view === ArticlesView.Block ? blockSkeleton : squareSkeleton}
       </div>
     )
@@ -70,22 +67,22 @@ const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
 
   if(!!error) {
     return (
-      <div className={ClassNames("articles-list", "articles-list--error", className)}>
-        <Text theme={TextTheme.ERROR} title={t(error)} className={"article-skeleton__img"}/>
+      <div className={ClassNames("articles-list", "articles-list--error", className)} data-testid="error">
+        <Text theme={TextTheme.ERROR} title={t(error)}/>
       </div>
     )
   }
 
   if(!ids.length) {
     return (
-      <div className={ClassNames("articles-list", "articles-empty", className)}>
+      <div className={ClassNames("articles-list", "articles-list--empty", className)} data-testid="empty">
         <Text theme={TextTheme.ERROR} title={t("articles-empty")}/>
       </div>
     )
   }
 
   return (
-    <div className={ClassNames("articles-list", viewClass, className )}>
+    <div className={ClassNames("articles-list", viewClass, className )} data-testid="articles">
       {
         ids.map((id: string, index: number) => {
           const article = entities[id];

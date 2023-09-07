@@ -9,13 +9,13 @@ describe("DetailsSlice", () => {
 
   test("FetchArticleById pending", () => {
     const mockState = Object.assign({}, state);
-    expect( DetailsReducers(mockState, FetchArticleById.pending) )
+    expect( DetailsReducers(mockState, { type: FetchArticleById.pending }) )
       .toEqual({...mockState, loading: true});
   })
 
   test("FetchArticleById fulfilled", () => {
     const mockState = Object.assign({}, state);
-    expect( DetailsReducers(mockState, FetchArticleById.fulfilled(mockDetails, "", "")) )
+    expect( DetailsReducers(mockState, { type: FetchArticleById.fulfilled, payload: mockDetails }) )
       .toEqual({...mockState, data: mockDetails});
   })
 })

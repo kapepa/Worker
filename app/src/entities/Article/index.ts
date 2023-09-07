@@ -9,18 +9,20 @@ import {GetArticles} from "./selectors/GetArticles/GetArticles";
 import {GetArticlesData} from "./selectors/GetArticlesData/GetArticlesData";
 import {ArticlesList} from "./ui/ArticlesList/ArticlesList";
 import {ArticlesItem} from "./ui/ArticlesItem/ArticlesItem";
+import {GetArticlesIds} from "./selectors/GetArticlesIds/GetArticlesIds";
 
 export {
   ArticleDetails,
   DetailsActions,
+  ArticlesActions,
+  ArticlesList,
+  ArticlesItem,
   DetailsReducers,
   FetchArticleById,
   GetArticleDetailsData,
-  ArticlesActions,
   ArticlesReducer,
   GetArticles,
   GetArticlesData,
-  ArticlesList,
-  ArticlesItem
+  GetArticlesIds,
 };
 export type {ArticleBlocks, ArticlesState};
