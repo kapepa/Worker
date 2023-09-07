@@ -12,13 +12,14 @@ describe("UsersReducer", () => {
 
   test("MyselfUsers pending", () => {
     const statUser: DeepPartial<UsersState> = {loading: false};
-    expect(UsersReducer(statUser, MyselfUsers.pending))
+    expect(UsersReducer(statUser, { type: MyselfUsers.pending }))
       .toEqual({loading: true})
   })
 
   test("MyselfUsers fulfilled", () => {
     const statUser: DeepPartial<UsersState> = state;
-    expect(UsersReducer(statUser, MyselfUsers.fulfilled(mockUser, "", undefined)))
+
+    expect(UsersReducer(statUser, { type: MyselfUsers.fulfilled, payload: mockUser }))
       .toEqual({...statUser, profile: mockUser})
   })
 })
