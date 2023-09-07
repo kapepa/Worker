@@ -6,6 +6,7 @@ import {BlocksEntity} from "./entities/blocks.entity";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
 import {from, Observable, of, switchMap, throwError} from "rxjs";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
+import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
 
 @Injectable()
 export class ArticlesService {
@@ -22,6 +23,14 @@ export class ArticlesService {
 
   saveBlocks( blocks: ArticlesBlocks ): Observable<ArticlesBlocks>{
     return from(this.blocksRepository.save(blocks));
+  }
+
+  findArticles(data: FindManyOptions): Observable<ArticlesInterface[]> {
+    return from(this.articlesRepository.find(data)).pipe(
+      switchMap((articles: ArticlesInterface[]) => {
+        return !!articles ? of(articles) : throwError(() => new HttpException("Articles not found", HttpStatus.NOT_FOUND))
+      })
+    )
   }
 
   findOneArticle(data: FindOneOptions):Observable<ArticlesInterface> {

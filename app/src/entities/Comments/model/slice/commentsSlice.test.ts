@@ -16,15 +16,16 @@ describe("commentSlice", () => {
 
   test("should be defined", () => {
     const mockState = Object.assign({}, state);
-    expect(CommentsReducer( mockState, FetchCommentsArtById.pending))
+    expect(CommentsReducer( mockState, { type: FetchCommentsArtById.pending }))
       .toEqual({...mockState, loading: true});
   })
 
   test("should be defined", () => {
+
     const mockState = Object.assign({}, state);
     expect(CommentsReducer(
       {...mockState, data: [mockComment]},
-      FetchCommentsArtById.fulfilled(mockComment, "", { artId: CommentsMock.id, query: {take: 1, skip: 0} })
+      { type: FetchCommentsArtById.fulfilled, payload: mockComment}
     ))
       .toEqual({...mockState, data: mockComment, ids: [CommentsMock.id], entities: {[CommentsMock.id]: CommentsMock}});
   })

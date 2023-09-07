@@ -24,6 +24,7 @@ const formCommentSlice = createSlice({
       })
       .addCase(CreateComment.fulfilled, (state: FormCommentState) => {
         state.loading = false;
+        state.text = undefined;
       })
       .addCase(CreateComment.rejected, (state: FormCommentState, action ) => {
         state.loading = false;

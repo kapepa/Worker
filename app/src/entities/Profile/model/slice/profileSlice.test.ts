@@ -30,14 +30,14 @@ describe("ProfileSlice", () => {
   test("ProfileRequest pending", () => {
     const state: DeepPartial<ProfileState> = { loading: false };
 
-    expect(ProfileReducer(state as ProfileState, ProfileRequest.pending))
+    expect(ProfileReducer(state as ProfileState, { type: ProfileRequest.pending }))
       .toEqual({loading: true})
   })
 
   test("ProfileRequest fulfilled", () => {
     const state: DeepPartial<ProfileState> = mockState;
 
-    expect(ProfileReducer(state as ProfileState, ProfileRequest.fulfilled(mockProfile, "", "userID")))
+    expect(ProfileReducer(state as ProfileState, { type: ProfileRequest.fulfilled, payload: mockProfile }))
       .toEqual({ ...mockState, data: mockProfile, edit: mockProfile });
   })
 

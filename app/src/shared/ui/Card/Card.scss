@@ -1,0 +1,9 @@
+.card{
+  border-radius: 10px;
+  &--bg-color{
+    background-color: var(--bg-color);
+  }
+  &--bg-color-inverted{
+    background-color: var(--bg-color-inverted);
+  }
+}

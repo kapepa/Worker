@@ -15,6 +15,7 @@ describe("formCommentSlice", () => {
   })
 
   test("CreateComment fulfilled", () => {
-    expect(FormCommentReducer({...state, loading: true}, CreateComment.pending).loading).toBeFalsy();
+    const mockText = "some text";
+   expect(FormCommentReducer(state, { type: CreateComment.fulfilled, payload: mockText}).text).toBeUndefined()
   })
 })

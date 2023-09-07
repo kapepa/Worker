@@ -60,6 +60,18 @@ describe('ArticlesService', () => {
     })
   })
 
+  it("findArticles resolve", () => {
+    const find = jest.spyOn(repositoryArticles, "find").mockResolvedValue([MockArticles] as ArticlesEntity[]);
+    const attr = { take: 8, skip: 0, order: { createdAt: "ASC" }, relations: ["users"] };
+
+    serviceArticles.findArticles(attr).subscribe({
+      next: (articles: ArticlesInterface[]) => {
+        expect(articles).toEqual([MockArticles]);
+        expect(find).toHaveBeenCalledWith(attr);
+      }
+    })
+  })
+
   it("findOneArticle resolve", () => {
     const findOneArticle = jest.spyOn(repositoryArticles, "findOne").mockResolvedValue(MockArticles as ArticlesEntity);
 

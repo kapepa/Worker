@@ -8,11 +8,12 @@ interface ViewDateProps {
   className?: string,
   date: Date | string | undefined,
   theme: ColorView,
+  showIco?: boolean
 }
 
 type typeDate = ViewDateProps["date"];
 
-const ViewDate: FC<ViewDateProps> = memo(({className, date, theme}) => {
+const ViewDate: FC<ViewDateProps> = memo(({className, date, theme, showIco = true}) => {
 
   const extractDate = (date: typeDate) => {
     if(typeof date === "string" || typeof date === "object"){
@@ -44,7 +45,7 @@ const ViewDate: FC<ViewDateProps> = memo(({className, date, theme}) => {
 
   return (
     <div className={ClassNames("view-date", switchColor(theme), className)} data-testid="view-date">
-      <IcoImg className="view-date__ico" ico={"CalendarIco"} color={switchIco(theme)}/>
+      {!!showIco && <IcoImg className="view-date__ico" ico={"CalendarIco"} color={switchIco(theme)}/>}
       <span className="view-date__calendar">{extractDate(date)}</span>
     </div>
   )
