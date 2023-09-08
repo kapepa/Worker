@@ -4,35 +4,41 @@ import {RouterPath} from "../../../shared/const/Routers";
 import {useDispatch, useSelector} from "react-redux";
 import {GetUsers} from "../../../entities/Users";
 import {useNavigate} from "react-router-dom";
-import {ArticlesList, GetArticlesIds} from "../../../entities/Article";
+import {ArticlesList, GetArticlesIds, GetArticlesView} from "../../../entities/Article";
 import {Scroll} from "../../../shared/ui/Scroll/Scroll";
-import {ArticlesView} from "../../../shared/const/ArticlesView";
 import {FetchAllArticles} from "../../../entities/Article/service/FetchAllArticles/FetchAllArticles";
 import {AppDispatch} from "../../../app/providers/Store/config/store";
+import {SwitchView} from "../../../widgets/SwitchView";
+
 // import {useTranslation} from "react-i18next";
 
 const Article: FC = memo(() => {
   // const { t } = useTranslation("article");
   const dispatch = useDispatch<AppDispatch>();
-  const { profile, loading } = useSelector(GetUsers);
+  const { profile } = useSelector(GetUsers);
   const ids = useSelector(GetArticlesIds);
+  const articlesView = useSelector(GetArticlesView);
   const navigate = useNavigate();
+
   const firstLoading = useCallback(() => {
     dispatch(FetchAllArticles());
   }, [dispatch]);
 
   useEffect(() => {
-    if(!profile?.id && !loading) navigate(RouterPath.HOME);
-  }, [profile, loading, navigate]);
+    if(!profile?.id) navigate(RouterPath.HOME);
+  }, [profile, navigate]);
 
   useEffect(() => {
     if(!ids.length) firstLoading();
-  }, [ids, firstLoading])
+  }, [ids, firstLoading]);
 
   return (
     <Scroll>
       <div className="article" data-testid="article">
-        <ArticlesList view={ArticlesView.Block}/>
+        <div className="article__roof">
+          <SwitchView/>
+        </div>
+        <ArticlesList view={articlesView}/>
       </div>
     </Scroll>
   )

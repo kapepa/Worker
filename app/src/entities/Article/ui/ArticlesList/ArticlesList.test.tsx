@@ -5,8 +5,6 @@ import ComponentRender from "../../../../shared/test/componentRender";
 import {ArticlesList} from "./ArticlesList";
 import {ArticlesView} from "../../../../shared/const/ArticlesView";
 import {ArticlesState} from "../../model/types/articlesState";
-import {FetchAllArticles} from "../../service/FetchAllArticles/FetchAllArticles";
-
 
 describe("ArticlesList", () => {
   const mockArticle: ArticleType = {
@@ -21,6 +19,7 @@ describe("ArticlesList", () => {
     data: undefined,
     error: undefined,
     loading: false,
+    view: ArticlesView.Block,
   }
 
   test("block article type should be returned", () => {

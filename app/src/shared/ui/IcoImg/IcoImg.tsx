@@ -9,6 +9,8 @@ import { ReactComponent as ArticleIco } from "../../assets/icons/article-20-20.s
 import { ReactComponent as EyeIco } from "../../assets/icons/eye-20-20.svg";
 import { ReactComponent as CalendarIco } from "../../assets/icons/calendar-20-20.svg";
 import { ReactComponent as CopyIco } from "../../assets/icons/copy-20-20.svg";
+import { ReactComponent as TiledIco } from "../../assets/icons/tiled-24-24.svg";
+import { ReactComponent as ListIco } from "../../assets/icons/list-24-24.svg";
 
 enum IcoNameEnum {
   HomeIco,
@@ -18,6 +20,8 @@ enum IcoNameEnum {
   EyeIco,
   CalendarIco,
   CopyIco,
+  TiledIco,
+  ListIco,
 }
 
 export enum IcoImgColor {
@@ -44,6 +48,8 @@ const IcoImg: FC<IcoImgProps> = memo(({ className, ico,  fill, color, stroke }) 
     "EyeIco": EyeIco,
     "CalendarIco": CalendarIco,
     "CopyIco": CopyIco,
+    "TiledIco": TiledIco,
+    "ListIco": ListIco,
   }
 
   return (
@@ -53,7 +59,9 @@ const IcoImg: FC<IcoImgProps> = memo(({ className, ico,  fill, color, stroke }) 
         {
           fill, width: "100%",
           height: "100%",
-          className: stroke ? ClassNames(`ico-img__stroke--${color}`) : ClassNames(`ico-img__fill--${color}`),
+          className: stroke ?
+            ClassNames({[`ico-img__stroke--${color}`]: color}) :
+            ClassNames({[`ico-img__fill--${color}`]: color}),
         }
       )}
     </div>
