@@ -48,7 +48,7 @@ const ArticlesItem: FC<ArticlesItemProps> = memo(({className, article, view}) =>
     <AppLink to={`${RouterPath.ARTICLE}/${id}`} className={ClassNames("articles-item", viewClass, className)} title={title}>
       <div className="item-square__roof">
         <ViewDate className="item-square__date" date={createdAt} theme={ColorView.PrimaryDef} showIco={false} />
-        <Image alt={title} src={img} />
+        <Image className="item-square__image" alt={title} src={img} />
       </div>
       <div className="item-square__basement">
         <div className="item-square__info">

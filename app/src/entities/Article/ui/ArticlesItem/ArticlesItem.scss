@@ -44,6 +44,10 @@
     opacity: 0;
     transition: opacity .25s linear;
   }
+  &__image{
+    max-height: 300px;
+    object-fit: cover;
+  }
   &__basement{
     display: flex;
     flex-direction: column;

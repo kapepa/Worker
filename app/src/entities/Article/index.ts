@@ -10,6 +10,7 @@ import {GetArticlesData} from "./selectors/GetArticlesData/GetArticlesData";
 import {ArticlesList} from "./ui/ArticlesList/ArticlesList";
 import {ArticlesItem} from "./ui/ArticlesItem/ArticlesItem";
 import {GetArticlesIds} from "./selectors/GetArticlesIds/GetArticlesIds";
+import {GetArticlesView} from "./selectors/GetArticlesView/GetArticlesView";
 
 export {
   ArticleDetails,
@@ -24,5 +25,6 @@ export {
   GetArticles,
   GetArticlesData,
   GetArticlesIds,
+  GetArticlesView
 };
 export type {ArticleBlocks, ArticlesState};

@@ -42,7 +42,12 @@ const FormComment: FC<FormCommentProps> = memo(({className, onSend}) => {
   return (
     <FormProvider {...methods}>
       <div className={ClassNames("form-comment__environment", className)} data-testid="form-comment">
-        {!!error && <Text theme={TextTheme.ERROR} title={t("error-save")} />}
+        {!!error && <Text
+          className="form-comment__error"
+          classTitle="form-comment__error-title"
+          theme={TextTheme.ERROR}
+          title={t("error-save")}
+        />}
         <form className="form-comment" onSubmit={methods.handleSubmit(onSubmit)} data-testid="form">
           <InputDynamic
             name="comment"

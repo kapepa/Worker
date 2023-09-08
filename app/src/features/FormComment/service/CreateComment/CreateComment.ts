@@ -14,7 +14,7 @@ const CreateComment = createAsyncThunk<CommentsTypes, string, { rejectValue: str
     if (!art?.id || !user) return thunkAPI.rejectWithValue("create-comment-error");
 
     try {
-      const response = await Axios.post(`/api/comments/art/${art.id}`, text);
+      const response = await Axios.post(`/api/comments/create/art/${art.id}`, {text});
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue("create-comment-error");
