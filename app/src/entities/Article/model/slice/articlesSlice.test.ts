@@ -3,6 +3,7 @@ import ArticleMock from "../../../../shared/test/mock/article.json"
 import {ArticleType} from "../types/articleType";
 import {ArticlesReducer} from "./articlesSlice";
 import {FetchAllArticles} from "../../service/FetchAllArticles/FetchAllArticles";
+import {ArticlesView} from "../../../../shared/const/ArticlesView";
 
 describe("articlesSlice", () => {
   const state: ArticlesState = {
@@ -11,6 +12,7 @@ describe("articlesSlice", () => {
     error: undefined,
     ids: [],
     entities: {},
+    view: ArticlesView.Block,
   }
 
   test("FetchAllArticles pending", () => {

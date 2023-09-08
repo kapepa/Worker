@@ -2,6 +2,7 @@ import {createEntityAdapter, createSlice, PayloadAction, Reducer} from '@reduxjs
 import {ArticlesState} from "../types/articlesState";
 import {FetchAllArticles} from "../../service/FetchAllArticles/FetchAllArticles";
 import {ArticleType} from "../types/articleType";
+import {ArticlesView} from "../../../../shared/const/ArticlesView";
 
 export const articlesAdapter = createEntityAdapter();
 
@@ -11,12 +12,17 @@ const initialState = articlesAdapter.getInitialState<ArticlesState>({
   error: undefined,
   ids: [],
   entities: {},
+  view: ArticlesView.Block,
 })
 
 const articlesSlice = createSlice({
   name: 'articles',
   initialState,
-  reducers: {},
+  reducers: {
+    changeView: ( state: ArticlesState, action: PayloadAction<ArticlesView> ) => {
+      state.view = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(FetchAllArticles.pending, (state: ArticlesState) => {

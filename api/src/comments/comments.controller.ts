@@ -19,7 +19,7 @@ export class CommentsController {
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   createArtComment(@Req() req, @Param("id") idArt: string, @Body(new ValidationPipe()) body: CommentsInterfaces): Observable<CommentsInterfaces> {
     body.users = req.user;
-    return this.commentsService.createArtComment(idArt, body)
+    return this.commentsService.createArtComment(idArt, body);
   }
 
   @Get("/receive/:id")

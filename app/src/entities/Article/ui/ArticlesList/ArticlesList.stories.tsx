@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 
-import { ArticlesList } from './ArticlesList';
+import {ArticlesList} from './ArticlesList';
 import ThemeDecorator from "../../../../shared/config/ThemeDecorator/ThemeDecorator";
 import {ThemeEnum} from "../../../../app/contexts/Theme/lib/ThemeContext";
 import {ArticlesView} from "../../../../shared/const/ArticlesView";
@@ -18,6 +18,7 @@ const articles: ArticlesState = {
   data: undefined,
   error: undefined,
   loading: false,
+  view: ArticlesView.Block,
 }
 
 const meta: Meta<typeof ArticlesList> = {

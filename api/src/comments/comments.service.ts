@@ -30,11 +30,11 @@ export class CommentsService {
     );
   }
 
-  createArtComment(idArt: string, body: CommentsInterfaces): Observable<CommentsInterfaces> {
+  createArtComment(idArt: string, comment: CommentsInterfaces): Observable<CommentsInterfaces> {
     return this.articlesService.findOneArticle({where: {id: idArt}}).pipe(
       switchMap((article: ArticlesInterface) => {
-        body.articles = article;
-        return this.saveComments(body);
+        comment.articles = article;
+        return this.saveComments(comment);
       })
     )
   }

@@ -5,6 +5,7 @@ import Article from "../../../../shared/test/mock/article.json"
 import {Dispatch} from "@reduxjs/toolkit";
 import {StateSchema} from "../../../../app/providers/Store";
 import {ArticlesState} from "../../model/types/articlesState";
+import {ArticlesView} from "../../../../shared/const/ArticlesView";
 
 jest.mock("../../../../utils/axios");
 const mockAxios = jest.mocked(Axios, true);
@@ -17,7 +18,16 @@ describe("FetchAllArticles", () => {
   beforeEach(() => {
     dispatch = jest.fn();
     getState = jest.fn(() => {
-      return { articles: { ids: [], entities: {}, data: undefined, error: undefined, loading: false } as ArticlesState } as StateSchema
+      return {
+        articles: {
+          ids: [],
+          entities: {},
+          data: undefined,
+          error: undefined,
+          loading: false,
+          view: ArticlesView.Block,
+        } as ArticlesState
+      } as StateSchema
     });
   })
 

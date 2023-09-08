@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Article } from './Article';
+import type {Meta, StoryObj} from '@storybook/react';
+import {Article} from './Article';
 import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
 import RouterDecorator from "../../../shared/config/RouterDecorator/RouterDecorator";
 import {ArticlesState} from "../../../entities/Article";
@@ -9,6 +9,7 @@ import UserMock from "../../../shared/test/mock/user.json";
 import {UsersTypes} from "../../../entities/Users";
 import ThemeDecorator from "../../../shared/config/ThemeDecorator/ThemeDecorator";
 import {ThemeEnum} from "../../../app/contexts/Theme/lib/ThemeContext";
+import {ArticlesView} from "../../../shared/const/ArticlesView";
 
 const articles: ArticlesState = {
   ids: [ArticleMock.article.id],
@@ -16,6 +17,7 @@ const articles: ArticlesState = {
   data: undefined,
   error: undefined,
   loading: false,
+  view: ArticlesView.Block,
 }
 
 const meta: Meta<typeof Article> = {

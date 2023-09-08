@@ -22,3 +22,7 @@ export const SidebarNormal: SidebarStory = {
 export const SidebarDark: SidebarStory = {
 	decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };
+
+export const SidebarORANGE: SidebarStory = {
+  decorators: [ThemeDecorator(ThemeEnum.ORANGE)],
+};

@@ -1,0 +1,18 @@
+.switch-view{
+  display: flex;
+  column-gap: 10px;
+  &__btn{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 30px;
+    background-color: transparent;
+  }
+  &__ico{
+    fill: var(--primary-color);
+    transition: fill .25s linear;
+    &--active{
+      fill: var(--primary-color-inverted);
+    }
+  }
+}
