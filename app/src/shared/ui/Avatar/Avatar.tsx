@@ -6,13 +6,14 @@ import config from "../../../config";
 interface AvatarProps {
   api?: boolean | undefined,
   className?: string,
+  classImage?: string,
   size: number,
   src: string | undefined | File,
   alt: string,
   symbol: string | undefined,
 }
 
-const Avatar: FC<AvatarProps> = memo(({api = true, className, src, alt, size, symbol}) => {
+const Avatar: FC<AvatarProps> = memo(({api = true, className, classImage, src, alt, size, symbol}) => {
   const style = useMemo<CSSProperties>(
     () => ({maxWidth: `${size}px`, maxHeight: `${size}px`, fontSize: `${ size * .5 }px`}),
     [size]
@@ -25,7 +26,7 @@ const Avatar: FC<AvatarProps> = memo(({api = true, className, src, alt, size, sy
       return <img
         src={src}
         alt={alt}
-        className={ClassNames("avatar__circle", className)}
+        className={ClassNames("avatar__circle", classImage)}
       />
     }
 
@@ -34,17 +35,17 @@ const Avatar: FC<AvatarProps> = memo(({api = true, className, src, alt, size, sy
       return <img
         src={`${ api ? config.api + "/" : "" }${toString}`}
         alt={alt}
-        className={ClassNames("avatar__circle", className)}
+        className={ClassNames("avatar__circle", classImage)}
       />
     }
 
     if(!!symbol) return <div
-      className={ClassNames("avatar__circle", "avatar__symbol", className)}
+      className={ClassNames("avatar__circle", "avatar__symbol", classImage)}
     >{getFirstLetter(symbol)}</div>;
   }
 
   return (
-    <div style={style} className={ClassNames("avatar")}  data-testid="avatar">
+    <div style={style} className={ClassNames("avatar", className)}  data-testid="avatar">
       {ToHaveAvatar(src)}
     </div>
   )

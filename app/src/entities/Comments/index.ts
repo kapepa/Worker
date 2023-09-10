@@ -6,6 +6,18 @@ import {CommentsList} from "./ui/CommentsList/CommentsList";
 import {GetComments} from "./selectors/GetComments/GetComments";
 import {GetCommentsLoader} from "./selectors/GetCommentsLoader/GetCommentsLoader";
 import {FetchCommentsArtById} from "./services/FetchCommentsArtById/FetchCommentsArtById";
+import {CommentRemove} from "./model/types/commentRemove";
+import {GetCommentRemove} from "./selectors/GetCommentRemove/GetCommentRemove";
 
-export {commentsActions, CommentsReducer, CommentsCard, CommentsList, GetComments, GetCommentsLoader, FetchCommentsArtById, getCommentsAdapter};
-export type {CommentsState, CommentsTypes}
+export {
+  commentsActions,
+  CommentsCard,
+  CommentsList,
+  getCommentsAdapter,
+  CommentsReducer,
+  GetComments,
+  GetCommentsLoader,
+  FetchCommentsArtById,
+  GetCommentRemove
+};
+export type {CommentsState, CommentsTypes, CommentRemove};

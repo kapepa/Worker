@@ -19,6 +19,7 @@ type Story = StoryObj<typeof CommentsCard>;
 export const CommentsCardNORMAL: Story = {
   args: {
     comment: {...CommentsMock, users:  {...UsersMock, avatar: ""} } as CommentsTypes,
+    isOwner: true,
   },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)]
 };
@@ -26,13 +27,15 @@ export const CommentsCardNORMAL: Story = {
 export const CommentsCardDARK: Story = {
   args: {
     comment: {...CommentsMock, users:  {...UsersMock, avatar: ""} } as CommentsTypes,
+    isOwner: true,
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };
 
 export const CommentsCardORANGE: Story = {
   args: {
-    comment: {...CommentsMock, users:  {...UsersMock, avatar: ""} } as CommentsTypes
+    comment: {...CommentsMock, users:  {...UsersMock, avatar: ""} } as CommentsTypes,
+    isOwner: true,
   },
   decorators: [ThemeDecorator(ThemeEnum.ORANGE)]
 };

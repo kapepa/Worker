@@ -1,8 +1,9 @@
 import {CommentsState} from "../types/commentsState";
-import {AnyAction, createEntityAdapter, createSlice, Reducer} from "@reduxjs/toolkit";
+import {AnyAction, createEntityAdapter, createSlice, PayloadAction, Reducer} from "@reduxjs/toolkit";
 import {FetchCommentsArtById} from "../../services/FetchCommentsArtById/FetchCommentsArtById";
 import {CommentsTypes} from "../types/commentsTypes";
 import {StateSchema} from "../../../../app/providers/Store";
+import {CommentRemove} from "../types/commentRemove";
 
 export const commentsAdapter = createEntityAdapter({
   selectId: (comment: CommentsTypes) => comment.id,
@@ -12,6 +13,7 @@ const initialState: CommentsState = {
   loading: false,
   error: undefined,
   data: undefined,
+  remove: undefined,
   ids: [],
   entities: {},
 }
@@ -19,7 +21,11 @@ const initialState: CommentsState = {
 export const commentsSlice = createSlice({
   name: 'comments',
   initialState: commentsAdapter.getInitialState(initialState),
-  reducers: {},
+  reducers: {
+    removeComment: (state: CommentsState, action: PayloadAction<CommentRemove | undefined> ) => {
+      state.remove = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(FetchCommentsArtById.pending, (state: CommentsState) => {
