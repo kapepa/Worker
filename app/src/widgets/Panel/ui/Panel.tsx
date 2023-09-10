@@ -28,7 +28,7 @@ const Panel: FC<PanelProps> = memo(({classNames}) => {
 
 	const onOpenModal = useCallback(() => {
 		if(!open) setOpen( true );
-	},[open])
+	},[open, setOpen])
 
 	const isLogout = () => {
 		logout();
@@ -42,6 +42,6 @@ const Panel: FC<PanelProps> = memo(({classNames}) => {
 			<LoginModal isOpen={open} onClose={onCloseModal}/>
 		</div>
 	)
-})
+});
 
 export default Panel;

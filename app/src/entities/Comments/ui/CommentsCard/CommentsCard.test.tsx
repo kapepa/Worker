@@ -9,7 +9,9 @@ describe("<CommentsCard/>", () => {
   const mockComment: CommentsTypes = { id: "commentID", text: "some text", users: mockUser, articles: {} as ArticleType };
 
   test("should be defined", () => {
-    const { getByTestId, getByText } = RenderWithRouter(<CommentsCard comment={mockComment} />)
+    const { getByTestId, getByText } = RenderWithRouter(
+      <CommentsCard comment={mockComment} isOwner={true} onDelete={jest.fn()} index={0}/>
+    );
     expect(getByTestId("comments-card")).toBeInTheDocument();
     expect(getByText("some text")).toBeInTheDocument();
   })
