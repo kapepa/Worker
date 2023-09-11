@@ -16,16 +16,18 @@ import {Notification} from "../../../../widgets/Notification";
 import {NotificationEnum} from "../../../../shared/const/NotificationEnum";
 import {CommentRemove} from "../../model/types/commentRemove";
 import {GetCommentRemove} from "../../selectors/GetCommentRemove/GetCommentRemove";
+import {AppDispatch} from "../../../../app/providers/Store/config/store";
+import {DeleteCommentById} from "../../services/DeleteCommentById/DeleteCommentById";
 
 interface CommentsListProps {
   className?: string,
 }
 
 const CommentsList: FC<CommentsListProps> = memo( ({className}) => {
-  const dispatch = useDispatch();
+  const {t} = useTranslation("comments");
+  const dispatch = useDispatch<AppDispatch>();
   const getCommentRemove = useSelector(GetCommentRemove);
   const [isOpen, setOpen] = useState<boolean>(false);
-  const {t} = useTranslation("comments");
   const profile = useSelector(GetUsersProfile);
   const {error, loading} = useSelector(GetComments);
   const data = useSelector(getCommentsAdapter.selectAll);
@@ -42,8 +44,10 @@ const CommentsList: FC<CommentsListProps> = memo( ({className}) => {
   }, [dispatch, removeComment]);
 
   const confirmedRemove = useCallback(() => {
-    setOpen(false)
-    console.log(getCommentRemove)
+    if(getCommentRemove) {
+      setOpen(false);
+      dispatch(DeleteCommentById(getCommentRemove?.comment.id));
+    }
   }, [getCommentRemove])
 
   const ShowComments = useCallback(( data: CommentsTypes, index: number ) => {
@@ -97,7 +101,7 @@ const CommentsList: FC<CommentsListProps> = memo( ({className}) => {
         onConfirmed={confirmedRemove}
         onClose={onCloseNotification}
         isOpen={isOpen}
-        text={"Notification text"}
+        text={t("delete-comment")}
         type={NotificationEnum.Attention}
       />
       <div className={ClassNames("comments-list", className)} data-testid="comments-list">

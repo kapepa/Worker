@@ -1,4 +1,16 @@
-import {Body, Controller, Get, HttpStatus, Param, Post, Query, Req, UseGuards, ValidationPipe} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+  ValidationPipe
+} from '@nestjs/common';
 import {ApiForbiddenResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {CommentsService} from "./comments.service";
 import {AuthGuard} from "../auth/guard/auth.guard";
@@ -37,5 +49,13 @@ export class CommentsController {
       order: { createdAt: "DESC" },
       relations: ["users"]
     })
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete("/delete/:id")
+  @ApiResponse({ status: 204, description: 'Successfully delete user comment'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'The comment was not found or has the wrong owner'})
+  deleteUserComment(@Req() req, @Param() param) {
+    return this.commentsService.deleteUserComment(req.user, param.id);
   }
 }
