@@ -6,9 +6,13 @@ import {Repository} from "typeorm";
 import {ArticlesService} from "../articles/articles.service";
 import {BlocksEntity} from "../articles/entities/blocks.entity";
 import {MockComments} from "../utility/test/mockComments";
-import {HttpException, HttpStatus} from "@nestjs/common";
 import {MockArticles} from "../utility/test/mockArticles";
+import {MockUsers} from "../utility/test/mockUsers";
+import {HttpException, HttpStatus} from "@nestjs/common";
 import {of, throwError} from "rxjs";
+import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
+import {UsersDto} from "../users/dto/users.dto";
+import {CommentsInterfaces} from "./interfaces/comments.interfaces";
 
 describe('CommentsService', () => {
   let serviceComments: CommentsService;
@@ -89,6 +93,78 @@ describe('CommentsService', () => {
       error: (err) => {
         expect(err).toEqual(new HttpException("Article not found", HttpStatus.NOT_FOUND));
         expect(findOneArticle).toHaveBeenCalledWith({where: {id: MockArticles.id}});
+      }
+    })
+  })
+
+  it("findComments resolve", () => {
+    const find = jest.spyOn(repositoryComments, "find").mockResolvedValue([MockComments] as CommentsEntity[]);
+
+    serviceComments.findComments({where: { articles: { id: MockArticles.id } }}).subscribe({
+      next: ( comments: CommentsInterfaces[] ) => {
+        expect(comments).toEqual([MockComments]);
+        expect(find).toHaveBeenCalledWith({where: { articles: { id: MockArticles.id } }});
+      }
+    })
+  })
+
+  it("findComments resolve", () => {
+    const find = jest.spyOn(repositoryComments, "find").mockResolvedValue([] as CommentsEntity[]);
+
+    serviceComments.findComments({where: { articles: { id: MockArticles.id } }}).subscribe({
+      error: (err) => {
+        expect(err).toEqual(new HttpException("Comments not found", HttpStatus.NOT_FOUND));
+        expect(find).toHaveBeenCalledWith({where: { articles: { id: MockArticles.id } }});
+      }
+    })
+  })
+
+  it("deleteComments resolve", () => {
+    const result: DeleteResult = { raw: 1, affected: 204 }
+    const findOne = jest.spyOn(repositoryComments, "findOne").mockResolvedValue(MockComments as CommentsEntity);
+    const deleteOne = jest.spyOn(repositoryComments, "delete").mockResolvedValue(result);
+
+    serviceComments.deleteComments({ where: MockComments }).subscribe({
+      next: (del: DeleteResult) => {
+        expect(del).toEqual(result);
+        expect(findOne).toHaveBeenCalledWith({ where: MockComments });
+        expect(deleteOne).toHaveBeenCalledWith(MockComments.id);
+      }
+    })
+  })
+
+  it("deleteComments reject", () => {
+    const findOne = jest.spyOn(repositoryComments, "findOne").mockResolvedValue(undefined);
+
+    serviceComments.deleteComments({ where: MockComments }).subscribe({
+      error: (err) => {
+        expect(err).toEqual(new HttpException("Comment not found", HttpStatus.NOT_FOUND));
+        expect(findOne).toHaveBeenCalledWith({ where: MockComments });
+      }
+    })
+  })
+
+  it("deleteUserComment resolve", () => {
+    const result: DeleteResult = { raw: 1, affected: 204 }
+    const findOne = jest.spyOn(repositoryComments, "findOne").mockResolvedValue(MockComments as CommentsEntity);
+    const deleteOne = jest.spyOn(repositoryComments, "delete").mockResolvedValue(result);
+
+    serviceComments.deleteUserComment(MockUsers as UsersDto, MockComments.id).subscribe({
+      next: (del: DeleteResult) => {
+        expect(del).toEqual(result);
+        expect(findOne).toHaveBeenCalledWith({ where: { id: MockComments.id } });
+        expect(deleteOne).toHaveBeenCalledWith(MockComments.id);
+      }
+    })
+  })
+
+  it("deleteUserComment reject", () => {
+    const findOne = jest.spyOn(repositoryComments, "findOne").mockResolvedValue(undefined);
+
+    serviceComments.deleteUserComment(MockUsers as UsersDto, MockComments.id).subscribe({
+      error: (err) => {
+        expect(err).toEqual(new HttpException("Comment not found", HttpStatus.NOT_FOUND));
+        expect(findOne).toHaveBeenCalled();
       }
     })
   })

@@ -8,5 +8,6 @@
   },
   "validation": {
     "required": "Required comment"
-  }
+  },
+  "delete-comment": "Are you sure you meant to delete the comment?"
 }

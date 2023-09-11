@@ -8,6 +8,7 @@ import {GetCommentsLoader} from "./selectors/GetCommentsLoader/GetCommentsLoader
 import {FetchCommentsArtById} from "./services/FetchCommentsArtById/FetchCommentsArtById";
 import {CommentRemove} from "./model/types/commentRemove";
 import {GetCommentRemove} from "./selectors/GetCommentRemove/GetCommentRemove";
+import {DeleteCommentById} from "./services/DeleteCommentById/DeleteCommentById";
 
 export {
   commentsActions,
@@ -18,6 +19,7 @@ export {
   GetComments,
   GetCommentsLoader,
   FetchCommentsArtById,
-  GetCommentRemove
+  GetCommentRemove,
+  DeleteCommentById,
 };
 export type {CommentsState, CommentsTypes, CommentRemove};
