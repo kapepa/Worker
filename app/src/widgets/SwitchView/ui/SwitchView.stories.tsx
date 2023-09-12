@@ -14,6 +14,7 @@ const articles: ArticlesState = {
   data: undefined,
   entities: {},
   ids: [],
+  hasMore: false,
 }
 
 const meta: Meta<typeof SwitchView> = {

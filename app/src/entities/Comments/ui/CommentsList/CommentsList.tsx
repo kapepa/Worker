@@ -18,6 +18,7 @@ import {CommentRemove} from "../../model/types/commentRemove";
 import {GetCommentRemove} from "../../selectors/GetCommentRemove/GetCommentRemove";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {DeleteCommentById} from "../../services/DeleteCommentById/DeleteCommentById";
+import PortalModal from "../../../../shared/ui/PortalModal/PortalModal";
 
 interface CommentsListProps {
   className?: string,
@@ -48,7 +49,7 @@ const CommentsList: FC<CommentsListProps> = memo( ({className}) => {
       setOpen(false);
       dispatch(DeleteCommentById(getCommentRemove?.comment.id));
     }
-  }, [getCommentRemove])
+  }, [dispatch, getCommentRemove])
 
   const ShowComments = useCallback(( data: CommentsTypes, index: number ) => {
     const isOwner = profile?.id === data.users.id;
@@ -97,13 +98,16 @@ const CommentsList: FC<CommentsListProps> = memo( ({className}) => {
 
   return (
     <>
-      <Notification
-        onConfirmed={confirmedRemove}
-        onClose={onCloseNotification}
-        isOpen={isOpen}
-        text={t("delete-comment")}
-        type={NotificationEnum.Attention}
-      />
+      <PortalModal>
+        <Notification
+          onConfirmed={confirmedRemove}
+          onClose={onCloseNotification}
+          isOpen={isOpen}
+          text={t("delete-comment")}
+          type={NotificationEnum.Attention}
+          isLoading={loading}
+        />
+      </PortalModal>
       <div className={ClassNames("comments-list", className)} data-testid="comments-list">
         {!!data?.length ?
           data.map(ShowComments) :

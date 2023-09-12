@@ -55,15 +55,15 @@ const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
         <Skeleton shape={SkeletonShape.Square} className="square-skeleton__desc" />
       </Card>
     ))
-  }, [])
+  }, []);
 
-  if(loading) {
+  const isLoadingArticles = useMemo(() => {
     return (
-      <div className={ClassNames("articles-list", "articles-list--loading", className)} data-testid="loading">
+      <div className="articles-list articles-list--loading" data-testid="loading">
         { view === ArticlesView.Block ? blockSkeleton : squareSkeleton}
       </div>
     )
-  }
+  }, [view, blockSkeleton, squareSkeleton]);
 
   if(!!error) {
     return (
@@ -73,7 +73,7 @@ const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
     )
   }
 
-  if(!ids.length) {
+  if(!ids.length && !loading) {
     return (
       <div className={ClassNames("articles-list", "articles-list--empty", className)} data-testid="empty">
         <Text theme={TextTheme.ERROR} title={t("articles-empty")}/>
@@ -89,6 +89,7 @@ const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
           return  <ArticlesItem key={`${id}-${index}`} article={article} view={view}/>
         })
       }
+      { loading && isLoadingArticles }
     </div>
   )
 })

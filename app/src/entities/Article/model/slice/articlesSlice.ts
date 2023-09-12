@@ -13,6 +13,7 @@ const initialState = articlesAdapter.getInitialState<ArticlesState>({
   ids: [],
   entities: {},
   view: ArticlesView.Block,
+  hasMore: false,
 })
 
 const articlesSlice = createSlice({
