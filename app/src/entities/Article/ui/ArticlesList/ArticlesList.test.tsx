@@ -20,6 +20,7 @@ describe("ArticlesList", () => {
     error: undefined,
     loading: false,
     view: ArticlesView.Block,
+    hasMore: false,
   }
 
   test("block article type should be returned", () => {

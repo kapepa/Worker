@@ -18,6 +18,7 @@ const articles: ArticlesState = {
   error: undefined,
   loading: false,
   view: ArticlesView.Block,
+  hasMore: false,
 }
 
 const meta: Meta<typeof Article> = {

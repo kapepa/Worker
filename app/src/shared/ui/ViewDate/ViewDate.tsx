@@ -19,7 +19,7 @@ const ViewDate: FC<ViewDateProps> = memo(({className, date, theme, showIco = tru
     if(typeof date === "string" || typeof date === "object"){
       const toDate = new Date(date);
       const appendZero = (digit: number) => digit > 9 ? digit : `0${digit}`;
-      return `${appendZero(toDate.getDay())}.${appendZero(toDate.getMonth() + 1)}.${toDate.getFullYear()}`
+      return `${appendZero(toDate.getDate())}.${appendZero(toDate.getMonth() + 1)}.${toDate.getFullYear()}`
     }
   }
 

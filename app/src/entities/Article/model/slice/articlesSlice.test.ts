@@ -13,6 +13,7 @@ describe("articlesSlice", () => {
     ids: [],
     entities: {},
     view: ArticlesView.Block,
+    hasMore: false,
   }
 
   test("FetchAllArticles pending", () => {
