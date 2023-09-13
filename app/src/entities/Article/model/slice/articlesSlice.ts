@@ -13,7 +13,7 @@ const initialState = articlesAdapter.getInitialState<ArticlesState>({
   ids: [],
   entities: {},
   view: ArticlesView.Block,
-  hasMore: false,
+  hasMore: true,
 })
 
 const articlesSlice = createSlice({
@@ -31,8 +31,10 @@ const articlesSlice = createSlice({
         state.error = undefined;
       })
       .addCase(FetchAllArticles.fulfilled, (state: ArticlesState, action: PayloadAction<ArticleType[]>) => {
-        articlesAdapter.upsertMany(state, action.payload);
+        // articlesAdapter.upsertMany(state, action.payload);
+        articlesAdapter.addMany(state, action.payload);
         state.loading = false;
+        state.hasMore = action.payload.length > 0;
       })
       .addCase(FetchAllArticles.rejected, (state: ArticlesState, action) => {
         state.loading = false;
