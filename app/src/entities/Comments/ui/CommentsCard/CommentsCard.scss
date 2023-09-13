@@ -5,12 +5,28 @@
   padding: 10px;
   border: 1px solid var(--primary-color);
   &__header{
+    display: flex;justify-content: space-between;
+  }
+  &__info{
     display: flex;
     column-gap: 20px;
     align-items: center;
     text-decoration: none;
+    padding-right: 40px;
   }
   &__avatar{
-
+    width: 35px;
+    height: 35px;
+  }
+  &__remove{
+    width: 26px;
+    height: 26px;
+    opacity: .7;
+    pointer-events: auto;
+    position: relative;
+    transition: opacity .25s linear;
+    &:hover{
+      opacity: 1;
+    }
   }
 }

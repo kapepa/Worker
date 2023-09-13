@@ -13,6 +13,7 @@ const meta: Meta<typeof CommentsList> = {
   decorators: [RouterDecorator, StoreDecorator(
     {
       comments: {
+        ids: [CommentsMock.id],
         entities: { [CommentsMock.id]: {...CommentsMock, users: {...UsersMock, avatar: ""}} as CommentsTypes },
         data: [{...CommentsMock, users:  {...UsersMock, avatar: ""} } as CommentsTypes]
       }

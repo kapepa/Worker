@@ -12,6 +12,7 @@ describe("GetArticlesIds", () => {
       error: undefined,
       data: undefined,
       view: ArticlesView.Block,
+      hasMore: false,
     };
     const state: StateSchema = { articles } as StateSchema;
 

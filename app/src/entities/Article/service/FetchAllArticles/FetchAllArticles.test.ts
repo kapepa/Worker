@@ -26,6 +26,7 @@ describe("FetchAllArticles", () => {
           error: undefined,
           loading: false,
           view: ArticlesView.Block,
+          hasMore: true,
         } as ArticlesState
       } as StateSchema
     });

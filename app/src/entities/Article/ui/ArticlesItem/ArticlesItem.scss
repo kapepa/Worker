@@ -82,6 +82,10 @@
     align-items: center;
     column-gap: 16px;
   }
+  &__avatar{
+    width: 55px;
+    height: 55px;
+  }
   &__date{
     align-self: flex-start;
   }

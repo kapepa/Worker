@@ -65,7 +65,7 @@ const ArticlesItem: FC<ArticlesItemProps> = memo(({className, article, view}) =>
       <div className="item-block__roof">
         <div className="item-block__info">
           <div className="item-block__user">
-            <Avatar size={55} src={users?.avatar} alt={"avatar"} symbol={users?.username}/>
+            <Avatar className="item-block__avatar" size={55} src={users?.avatar} alt={"avatar"} symbol={users?.username}/>
             <Text theme={TextTheme.PRIMARY} title={users?.username} />
           </div>
           <Text classTitle="item-block__title" theme={TextTheme.PRIMARY} title={title}/>

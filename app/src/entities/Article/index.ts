@@ -11,6 +11,7 @@ import {ArticlesList} from "./ui/ArticlesList/ArticlesList";
 import {ArticlesItem} from "./ui/ArticlesItem/ArticlesItem";
 import {GetArticlesIds} from "./selectors/GetArticlesIds/GetArticlesIds";
 import {GetArticlesView} from "./selectors/GetArticlesView/GetArticlesView";
+import {GetArticlesHasMore} from "./selectors/GetArticlesHasMore/GetArticlesHasMore";
 
 export {
   ArticleDetails,
@@ -25,6 +26,7 @@ export {
   GetArticles,
   GetArticlesData,
   GetArticlesIds,
-  GetArticlesView
+  GetArticlesView,
+  GetArticlesHasMore
 };
 export type {ArticleBlocks, ArticlesState};

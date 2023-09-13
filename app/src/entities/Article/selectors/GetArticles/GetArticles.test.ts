@@ -12,6 +12,7 @@ describe("GetArticles", () => {
       ids: [],
       entities: {},
       view: ArticlesView.Block,
+      hasMore: false,
     }
     const state: StateSchema = { articles } as StateSchema;
 

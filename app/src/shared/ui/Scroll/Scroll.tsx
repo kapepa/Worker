@@ -1,17 +1,18 @@
-import {FC, memo, ReactNode} from "react";
+import {FC, memo, ReactNode, HTMLAttributes, MutableRefObject} from "react";
 import "./Scroll.scss";
 import {ClassNames} from "../../lib/ClassNames";
 
-interface ScrollProps {
+interface ScrollProps extends HTMLAttributes<HTMLElement>{
   className?: string,
   children: ReactNode,
+  wrapperRef?: MutableRefObject<HTMLDivElement | null>
 }
 
-const Scroll: FC<ScrollProps> = memo(({className, children}) => {
+const Scroll: FC<ScrollProps> = memo(({className, children, wrapperRef}) => {
   return (
-    <div className={ClassNames("scroll", className)} data-testid="scroll" >
+    <section ref={wrapperRef} className={ClassNames("scroll", className)} data-testid="scroll" >
       {children}
-    </div>
+    </section>
   )
 })
 

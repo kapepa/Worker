@@ -1,6 +1,6 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {FindOptionsWhere, Repository} from "typeorm";
 import {CommentsEntity} from "./entities/comments.entity";
 import {from, Observable, of, switchMap, throwError} from "rxjs";
 import {CommentsInterfaces} from "./interfaces/comments.interfaces";
@@ -9,6 +9,8 @@ import {CommentsDto} from "./dto/comments.dto";
 import {ArticlesService} from "../articles/articles.service";
 import {ArticlesInterface} from "../articles/interfaces/articles.interface";
 import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
+import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
+import {UsersDto} from "../users/dto/users.dto";
 
 @Injectable()
 export class CommentsService {
@@ -42,8 +44,26 @@ export class CommentsService {
   findComments(data: FindManyOptions): Observable<CommentsInterfaces[]> {
     return from(this.commentsRepository.find(data)).pipe(
       switchMap((comments: CommentsInterfaces[] ) => {
-        return !!comments ? of(comments) : throwError(() => new HttpException("Comments not found", HttpStatus.NOT_FOUND));
+        return !!comments.length ? of(comments) : throwError(() => new HttpException("Comments not found", HttpStatus.NOT_FOUND));
       })
     );
+  }
+
+  deleteComments(props: FindOneOptions): Observable<DeleteResult> {
+    return this.findOneComments(props).pipe(
+      switchMap((comment: CommentsInterfaces) => {
+        if(!comment) return throwError(() => new HttpException("Comments not found", HttpStatus.NOT_FOUND));
+        return from(this.commentsRepository.delete(comment.id));
+      })
+    )
+  }
+
+  deleteUserComment(users: UsersDto, commentID: string): Observable<DeleteResult> {
+    return this.findOneComments({ where: {id: commentID, users} }).pipe(
+      switchMap((comment: CommentsInterfaces) => {
+        if(!comment) return throwError(() => new HttpException("You do not own this comment", HttpStatus.NOT_FOUND));
+        return this.deleteComments({where: {id: comment.id}})
+      })
+    )
   }
 }

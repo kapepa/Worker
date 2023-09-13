@@ -6,6 +6,8 @@ import {of} from "rxjs";
 import {MockComments} from "../utility/test/mockComments";
 import {MockUsers} from "../utility/test/mockUsers";
 import {MockArticles} from "../utility/test/mockArticles";
+import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
+import {CommentsInterfaces} from "./interfaces/comments.interfaces";
 
 describe('CommentsController', () => {
   let controllerComments: CommentsController;
@@ -16,7 +18,14 @@ describe('CommentsController', () => {
       controllers: [CommentsController],
       providers: [
         JwtService,
-        { provide: CommentsService, useValue: {createArtComment : jest.fn()} }
+        {
+          provide: CommentsService,
+          useValue: {
+            findComments: jest.fn(),
+            createArtComment: jest.fn(),
+            deleteUserComment: jest.fn(),
+          }
+        }
       ]
     }).compile();
 
@@ -38,4 +47,33 @@ describe('CommentsController', () => {
       }
     });
   });
+
+  it("receiveComments", () => {
+    const findComments = jest.spyOn(commentsService, "findComments").mockImplementation(() => of([MockComments]));
+
+    controllerComments.receiveComments(MockArticles.id, {take: "1", skip: "0"}).subscribe({
+      next: (comments: CommentsInterfaces[]) => {
+        expect(comments).toEqual([MockComments]);
+        expect(findComments).toHaveBeenCalledWith({
+          where: { articles: { id: MockArticles.id } },
+          take: 1,
+          skip: 0,
+          order: { createdAt: "DESC" },
+          relations: ["users"]
+        })
+      }
+    })
+  });
+
+  it("deleteUserComment", () => {
+    const result: DeleteResult = { raw: 1, affected: 204 }
+    const deleteUserComment = jest.spyOn(commentsService, "deleteUserComment").mockImplementation(() => of(result));
+
+    controllerComments.deleteUserComment({user: MockUsers}, {id: MockComments.id}).subscribe({
+      next: (del: DeleteResult) => {
+        expect(del).toEqual(result);
+        expect(deleteUserComment).toHaveBeenCalledWith(MockUsers, MockComments.id);
+      }
+    })
+  })
 });
