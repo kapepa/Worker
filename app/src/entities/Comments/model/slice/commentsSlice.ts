@@ -1,5 +1,5 @@
 import {CommentsState} from "../types/commentsState";
-import {Action, AnyAction, createEntityAdapter, createSlice, PayloadAction, Reducer} from "@reduxjs/toolkit";
+import {AnyAction, createEntityAdapter, createSlice, PayloadAction, Reducer} from "@reduxjs/toolkit";
 import {FetchCommentsArtById} from "../../services/FetchCommentsArtById/FetchCommentsArtById";
 import {CommentsTypes} from "../types/commentsTypes";
 import {StateSchema} from "../../../../app/providers/Store";
