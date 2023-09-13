@@ -7,7 +7,7 @@ const DeleteCommentById = createAsyncThunk<any, string, { rejectValue: string, e
   async (commentId: string, thunkAPI) => {
     try {
       const response = await Axios.delete(`/api/comments/delete/${commentId}`);
-      if(!(response.status == 204 || response.status === 200)) return thunkAPI.rejectWithValue("comments-delete");
+      if(!(response.status === 204 || response.status === 200)) return thunkAPI.rejectWithValue("comments-delete");
       return commentId;
     } catch (e) {
       return thunkAPI.rejectWithValue("comments-delete");
