@@ -11,6 +11,7 @@ import {Card} from "../../../../shared/ui/Card/Card";
 import {Skeleton} from "../../../../shared/ui/Skeleton/Skeleton";
 import {SkeletonShape} from "../../../../shared/const/SkeletonShape";
 import {BgEnum} from "../../../../shared/const/BgEnum";
+import {ArticlesQuery} from "../../../../shared/const/ArticlesQuery";
 
 interface ArticlesListProps {
   className?: string,
@@ -23,7 +24,7 @@ const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
   const viewClass = useMemo(() => ({"articles-list--block": view === "block", "articles-list--square": view === "square"}), [view]);
 
   const blockSkeleton = useMemo(() => {
-    const quantitySkeleton = new Array(6).fill("");
+    const quantitySkeleton = new Array(ArticlesQuery.Take).fill("");
 
     return quantitySkeleton.map((_: string, index: number) => (
       <Card key={index} className="block-skeleton" theme={BgEnum.BG_COLOR_INVERTED}>
@@ -46,7 +47,7 @@ const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
   }, [])
 
   const squareSkeleton = useMemo(() => {
-    const quantitySkeleton = new Array(3).fill("");
+    const quantitySkeleton = new Array(ArticlesQuery.Take).fill("");
 
     return quantitySkeleton.map((_: string, index: number) => (
       <Card key={index} className="square-skeleton" theme={BgEnum.BG_COLOR_INVERTED}>
@@ -90,6 +91,7 @@ const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
         })
       }
       { loading && isLoadingArticles }
+
     </div>
   )
 })

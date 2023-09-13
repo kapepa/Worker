@@ -1,4 +1,4 @@
 export enum ArticlesQuery {
   Skip = 0,
-  Take = 6,
+  Take = 4,
 }

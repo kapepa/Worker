@@ -1,37 +1,33 @@
-import {FC, memo, MutableRefObject, useCallback, useEffect, useRef} from "react";
+import {FC, memo, useCallback, useEffect} from "react";
 import "./Article.scss";
 import {RouterPath} from "../../../shared/const/Routers";
 import {useDispatch, useSelector} from "react-redux";
 import {GetUsers, MyselfUsers} from "../../../entities/Users";
 import {useNavigate} from "react-router-dom";
-import {ArticlesList, GetArticlesIds, GetArticlesView} from "../../../entities/Article";
-import {Scroll} from "../../../shared/ui/Scroll/Scroll";
+import {ArticlesList, GetArticlesHasMore, GetArticlesIds, GetArticlesView} from "../../../entities/Article";
 import {FetchAllArticles} from "../../../entities/Article/service/FetchAllArticles/FetchAllArticles";
 import {AppDispatch} from "../../../app/providers/Store/config/store";
 import {SwitchView} from "../../../widgets/SwitchView";
-import {UseInfiniteScroll} from "../../../shared/hooks/UseInfiniteScroll/UseInfiniteScroll";
+import {InfiniteScroll} from "../../../widgets/InfiniteScroll";
 
 // import {useTranslation} from "react-i18next";
 
 const Article: FC = memo(() => {
   // const { t } = useTranslation("article");
   const dispatch = useDispatch<AppDispatch>();
+  const articlesHasMore = useSelector(GetArticlesHasMore);
   const { profile } = useSelector(GetUsers);
   const ids = useSelector(GetArticlesIds);
   const articlesView = useSelector(GetArticlesView);
   const navigate = useNavigate();
-  const triggerRef = useRef() as MutableRefObject<HTMLElement>;
-  const wrapperRef = useRef() as MutableRefObject<HTMLElement>;
-
-  UseInfiniteScroll({
-    triggerRef,
-    wrapperRef,
-    callback: () => console.log("UseInfiniteScroll")
-  })
 
   const firstLoading = useCallback(() => {
     dispatch(FetchAllArticles());
   }, [dispatch]);
+
+  const onScrollNextArticles = useCallback(() => {
+    if(articlesHasMore) dispatch(FetchAllArticles());
+  }, [dispatch, articlesHasMore])
 
   useEffect(() => {
     if(!profile) dispatch(MyselfUsers());
@@ -43,15 +39,14 @@ const Article: FC = memo(() => {
   }, [ids, firstLoading]);
 
   return (
-    <Scroll {...{ ref: wrapperRef}}>
+    <InfiniteScroll scrollEnd={onScrollNextArticles}>
       <div className="article" data-testid="article">
         <div className="article__roof">
           <SwitchView/>
         </div>
         <ArticlesList view={articlesView}/>
-        <div/>
       </div>
-    </Scroll>
+    </InfiniteScroll>
   )
 })
 
