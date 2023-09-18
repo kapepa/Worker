@@ -8,9 +8,10 @@ interface ScrollProps extends HTMLAttributes<HTMLElement>{
   wrapperRef?: MutableRefObject<HTMLDivElement | null>
 }
 
-const Scroll: FC<ScrollProps> = memo(({className, children, wrapperRef}) => {
+const Scroll: FC<ScrollProps> = memo((props: ScrollProps) => {
+  const {className, children, wrapperRef, ...otherProps} = props
   return (
-    <section ref={wrapperRef} className={ClassNames("scroll", className)} data-testid="scroll" >
+    <section ref={wrapperRef} className={ClassNames("scroll", className)} {...otherProps} data-testid="scroll" >
       {children}
     </section>
   )
