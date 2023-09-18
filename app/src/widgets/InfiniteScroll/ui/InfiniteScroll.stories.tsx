@@ -3,9 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { InfiniteScroll } from './InfiniteScroll';
 import ThemeDecorator from "../../../shared/config/ThemeDecorator/ThemeDecorator";
 import {ThemeEnum} from "../../../app/contexts/Theme/lib/ThemeContext";
+import RouterDecorator from "../../../shared/config/RouterDecorator/RouterDecorator";
+import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
 
 const meta: Meta<typeof InfiniteScroll> = {
   component: InfiniteScroll,
+  decorators: [RouterDecorator, StoreDecorator({ scroll: {pages: {}} })]
 };
 
 export default meta;
