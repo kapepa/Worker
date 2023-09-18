@@ -1,5 +1,13 @@
-import {render} from '@testing-library/react'
 import {InfiniteScroll} from "./InfiniteScroll"
+import {RenderWithStore} from "../../../shared/test/renderWithStore";
+import {StateSchema} from "../../../app/providers/Store";
+
+jest.mock("react-router-dom",
+  () => ({
+    useLocation: () => ({pathname: "/"}),
+    useNavigate: () => {}
+  })
+);
 
 describe("<InfiniteScroll/>", () => {
   test("should be defined", () => {
@@ -12,10 +20,11 @@ describe("<InfiniteScroll/>", () => {
     };
 
     window.IntersectionObserver = jest.fn().mockImplementation(mockObserveFn);
-    const { getByTestId, getByText } = render(
+    const { getByTestId, getByText } = RenderWithStore(
       <InfiniteScroll scrollEnd={scrollEnd}>
         <div>{ "Mock text" }</div>
-      </InfiniteScroll>
+      </InfiniteScroll>,
+      { scroll: { pages: { } } } as StateSchema
     );
 
     expect(getByTestId("infinite-scroll")).toBeInTheDocument();

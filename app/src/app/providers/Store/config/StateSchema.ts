@@ -7,6 +7,7 @@ import {DetailsState} from "../../../../entities/Article/model/types/detailsStat
 import {CommentsState} from "../../../../entities/Comments";
 import {FormCommentState} from "../../../../features/FormComment/model/types/formCommentState";
 import {ArticlesState} from "../../../../entities/Article";
+import {ScrollHistoryState} from "../../../../features/ScrollHistory";
 
 interface StateSchema {
   counter: CounterState,
@@ -17,6 +18,7 @@ interface StateSchema {
   comments: CommentsState,
   formComment: FormCommentState,
   articles: ArticlesState,
+  scroll: ScrollHistoryState,
 }
 
 interface ThunkExtraArg {
