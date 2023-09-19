@@ -11,11 +11,12 @@ import {UseThrottle} from "../../../shared/hooks/UseThrottle/UseThrottle";
 interface InfiniteScrollProps {
   className?: string,
   children: ReactNode,
-  scrollEnd: () => void
+  scrollEnd: () => void,
+  isEnd: boolean
 }
 
 const InfiniteScroll: FC<InfiniteScrollProps> = (props: InfiniteScrollProps) => {
-  const { children, scrollEnd, className} = props;
+  const { children, scrollEnd, className, isEnd} = props;
   const { pathname } = useLocation();
   const scrollPage = useSelector(GetScrollHistoryPages(pathname));
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const InfiniteScroll: FC<InfiniteScrollProps> = (props: InfiniteScrollProps) => 
     <Scroll wrapperRef={wrapperRef} onScroll={onScroll}>
       <div className={ClassNames("infinite-scroll", className)} data-testid="infinite-scroll">
         {children}
-        <div className="infinite-scroll__trigger" ref={triggerRef}/>
+        {isEnd && <div className="infinite-scroll__trigger" ref={triggerRef}/>}
       </div>
     </Scroll>
   )

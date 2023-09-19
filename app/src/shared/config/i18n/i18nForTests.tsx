@@ -11,6 +11,7 @@ import enDetails from "../../../locales/en/details.json";
 import enComments from "../../../locales/en/comments.json";
 import enForm from "../../../locales/en/form.json";
 import enNotification from "../../../locales/en/notification.json";
+import enFilter from "../../../locales/en/filter.json";
 
 import ruTranslation from "../../../locales/ru/translation.json";
 import ruHome from "../../../locales/ru/home.json";
@@ -22,6 +23,7 @@ import ruDetails from "../../../locales/ru/details.json";
 import ruComments from "../../../locales/ru/comments.json";
 import ruForm from "../../../locales/ru/form.json";
 import ruNotification from "../../../locales/ru/notification.json";
+import ruFilter from "../../../locales/ru/filter.json";
 
 i18n
   .use(initReactI18next)
@@ -44,6 +46,7 @@ i18n
         comments: enComments,
         form: enForm,
         notification: enNotification,
+        filter: enFilter,
       },
       ru: {
         translation: ruTranslation,
@@ -56,6 +59,7 @@ i18n
         comments: ruComments,
         form: ruForm,
         notification: ruNotification,
+        filter: ruFilter,
       }
     },
 
