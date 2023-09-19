@@ -19,7 +19,8 @@ const ArrayBr = new Array(50).fill(<br/>)
 export const InfiniteScrollNORMAL: Story = {
   args: {
     scrollEnd: () => {},
-    children: ArrayBr
+    children: ArrayBr,
+    isEnd: true,
   },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
@@ -27,7 +28,8 @@ export const InfiniteScrollNORMAL: Story = {
 export const InfiniteScrollDARK: Story = {
   args: {
     scrollEnd: () => {},
-    children: ArrayBr
+    children: ArrayBr,
+    isEnd: true,
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };
@@ -35,7 +37,8 @@ export const InfiniteScrollDARK: Story = {
 export const InfiniteScrollORANGE: Story = {
   args: {
     scrollEnd: () => {},
-    children: ArrayBr
+    children: ArrayBr,
+    isEnd: true,
   },
   decorators: [ThemeDecorator(ThemeEnum.ORANGE)],
 };

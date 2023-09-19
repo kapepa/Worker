@@ -1,0 +1,11 @@
+{
+  "sort": {
+    "title": "Title",
+    "views": "Views",
+    "createdAt": "Created"
+  },
+  "order": {
+    "ASC": "Ascending",
+    "DESC": "Descending"
+  }
+}

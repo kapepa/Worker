@@ -9,6 +9,7 @@ import {FetchAllArticles} from "../../../entities/Article/service/FetchAllArticl
 import {AppDispatch} from "../../../app/providers/Store/config/store";
 import {SwitchView} from "../../../widgets/SwitchView";
 import {InfiniteScroll} from "../../../widgets/InfiniteScroll";
+import {FilterArticlesSearch, FilterArticlesSelectors} from "../../../features/FilterArticles";
 
 // import {useTranslation} from "react-i18next";
 
@@ -39,10 +40,14 @@ const Article: FC = memo(() => {
   }, [ids, firstLoading]);
 
   return (
-    <InfiniteScroll scrollEnd={onScrollNextArticles}>
+    <InfiniteScroll scrollEnd={onScrollNextArticles} isEnd={articlesHasMore}>
       <div className="article" data-testid="article">
         <div className="article__roof">
+          <FilterArticlesSelectors/>
           <SwitchView/>
+        </div>
+        <div className="article__middle">
+          <FilterArticlesSearch/>
         </div>
         <ArticlesList view={articlesView}/>
       </div>

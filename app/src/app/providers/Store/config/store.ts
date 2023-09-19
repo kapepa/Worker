@@ -15,6 +15,7 @@ import {ArticlesReducer, DetailsReducers} from "../../../../entities/Article";
 import {CommentsReducer} from "../../../../entities/Comments";
 import {FormCommentReducer} from "../../../../features/FormComment";
 import {ScrollReducer} from "../../../../features/ScrollHistory";
+import {filterArticlesReducer} from "../../../../features/FilterArticles";
 
 // const store = configureStore<StateSchema>({
 //   reducer: {
@@ -44,6 +45,7 @@ const storeReducers = combineReducers<StateSchema>({
   formComment: FormCommentReducer,
   articles: ArticlesReducer,
   scroll: ScrollReducer,
+  filterArticles: filterArticlesReducer,
 });
 
 function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunction) {

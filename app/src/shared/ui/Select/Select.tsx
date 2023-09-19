@@ -28,10 +28,13 @@ interface SelectProps {
 }
 
 const Select: FC<SelectProps> = (props: SelectProps) => {
-  const { className, name, label, theme, color, selectList, toTranslation, selected, defaultValue, readOnly } = props;
+  const { className, name, label, theme, color, selectList, toTranslation, selected, defaultValue, readOnly
+  } = props;
   const [drop, setDrop] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const onDrop = () => {if(!readOnly) setDrop(prev => !prev)};
+  const onDrop = () => {
+    if(!readOnly) setDrop(prev => !prev)
+  };
 
   const onClickOption = useCallback((e: MouseEvent<HTMLDivElement>) => {
     const target = e.currentTarget;
@@ -39,7 +42,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     inputRef.current!.value = toTranslation(select);
     if(!!select) selected(select);
   }, [toTranslation, selected])
-
 
   const dropList = useMemo(() => {
     return selectList.map((cou: CountryListType, index: number) => (
@@ -60,7 +62,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
             type="text"
             ref={inputRef}
             name={name}
-            disabled={true}
             className={ClassNames(
               "select__input",
               { [`select__input--${theme}`]: !!theme, "select__input--readonly": readOnly },
