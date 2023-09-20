@@ -1,12 +1,15 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {ArticlesEntity} from "./entities/articles.entity";
-import {Repository} from "typeorm";
+import {Like, Repository} from "typeorm";
 import {BlocksEntity} from "./entities/blocks.entity";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
 import {from, Observable, of, switchMap, throwError} from "rxjs";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
 import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
+import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
+import {OrderFieldFind} from "../shared/Types/OrderFieldFind";
+import {ArticlesFilterFields} from "../shared/enum/ArticlesFilterFields";
 
 @Injectable()
 export class ArticlesService {
@@ -56,5 +59,15 @@ export class ArticlesService {
         return this.saveBlocks(blocks);
       })
     )
+  }
+
+  getAllArticles(query?: QueryArticlesFilter):  Observable<ArticlesInterface[]> {
+    const take: number = !!query?.take ? Number(query.take) : 8;
+    const skip: number = !!query?.skip ? Number(query.skip) : 0;
+    const sort: ArticlesFilterFields = query?.sort && query?.sort !== ArticlesFilterFields.TITLE ? query?.sort : ArticlesFilterFields.CREATE;
+    const order: OrderFieldFind = query.order ?? "DESC";
+    const search: FindManyOptions | undefined = query.search ? { where: { [query?.sort]: Like( `${"Mock Scroll"}%` ) } } : undefined;
+
+    return this.findArticles({ where: { [query?.sort]: Like( `${"Mock Scroll"}%` ) }, take, skip, order:{ [sort]: order }, relations: ["users", "blocks"]});
   }
 }

@@ -33,11 +33,11 @@ jobs:
         working-directory: ./app
         run: npm run test:ui:ci
         if: always()
-      - name: api install
-        working-directory: ./api
+      - name: shared install
+        working-directory: ./shared
         run: npm install
         if: always()
-      - name: api build
-        working-directory: ./api
+      - name: shared build
+        working-directory: ./shared
         run: npm run build
         if: always()

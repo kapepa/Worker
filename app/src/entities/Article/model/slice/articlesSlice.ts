@@ -22,6 +22,9 @@ const articlesSlice = createSlice({
   reducers: {
     changeView: ( state: ArticlesState, action: PayloadAction<ArticlesView> ) => {
       state.view = action.payload;
+    },
+    cleanArticles: ( state: ArticlesState ) => {
+      articlesAdapter.removeAll(state);
     }
   },
   extraReducers: (builder) => {
@@ -39,6 +42,7 @@ const articlesSlice = createSlice({
       .addCase(FetchAllArticles.rejected, (state: ArticlesState, action) => {
         state.loading = false;
         state.error = action.payload;
+        articlesAdapter.setMany(state, [])
       })
   }
 })

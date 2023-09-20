@@ -27,8 +27,8 @@ const Article: FC = memo(() => {
   }, [dispatch]);
 
   const onScrollNextArticles = useCallback(() => {
-    if(articlesHasMore) dispatch(FetchAllArticles());
-  }, [dispatch, articlesHasMore])
+    if(articlesHasMore && ids.length) dispatch(FetchAllArticles());
+  }, [dispatch, articlesHasMore, ids.length])
 
   useEffect(() => {
     if(!profile) dispatch(MyselfUsers());

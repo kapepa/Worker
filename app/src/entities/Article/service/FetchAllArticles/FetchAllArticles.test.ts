@@ -34,7 +34,7 @@ describe("FetchAllArticles", () => {
 
   test("should be defined resolve", async () => {
     mockAxios.get.mockResolvedValue({ data: ArticlesMock });
-    const action = FetchAllArticles({ take: 1, skip: 0 });
+    const action = FetchAllArticles();
     const result = await action(dispatch, getState, {});
 
     expect(mockAxios.get).toHaveBeenCalled();
@@ -44,7 +44,7 @@ describe("FetchAllArticles", () => {
 
   test("should be defined reject", async () => {
     mockAxios.get.mockRejectedValue({status: 403});
-    const action = FetchAllArticles({ take: 1, skip: 0 });
+    const action = FetchAllArticles();
     const result = await action(dispatch, getState, {});
 
     expect(mockAxios.get).toHaveBeenCalled();

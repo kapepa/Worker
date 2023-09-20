@@ -1,4 +1,9 @@
 {
+  "type": {
+    "sort": "Sort on",
+    "order": "Order",
+    "keyword": "Keyword"
+  },
   "sort": {
     "title": "Title",
     "views": "Views",
