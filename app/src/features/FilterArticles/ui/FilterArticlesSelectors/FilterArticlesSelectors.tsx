@@ -1,5 +1,5 @@
 import {FC, memo, useCallback, useMemo} from "react";
-import "./FilterArticlesSelectors.css";
+import "./FilterArticlesSelectors.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {Select} from "../../../../shared/ui/Select/Select";
 import {useTranslation} from "react-i18next";
@@ -10,6 +10,8 @@ import {GetFilterArticles} from "../../selectors/getFilterArticles/getFilterArti
 import {ArticleOrderSort} from "../../../../shared/const/ArticleOrderSort";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {filterArticlesActions} from "../../model/slice/filterArticlesSlice";
+import {BgEnum} from "../../../../shared/const/BgEnum";
+import {ArticlesActions} from "../../../../entities/Article";
 
 interface FilterArticlesSelectorsProps {
   className?: string,
@@ -18,9 +20,10 @@ const FilterArticlesSelectors: FC<FilterArticlesSelectorsProps> = memo(({classNa
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation("filter");
   const { sort, order } = useSelector(GetFilterArticles);
+  const { cleanArticles } = ArticlesActions;
   const { setOrderArticles, setSortArticles,  } = filterArticlesActions;
 
-  const sortList: CountryListType[] = useMemo(() => {
+  const sortList: CountryListType<ArticleOrderField>[] = useMemo(() => {
     return [
       { text: t(`sort.${ArticleOrderField.CREATED}`), value: ArticleOrderField.CREATED },
       { text: t(`sort.${ArticleOrderField.TITLE}`), value: ArticleOrderField.TITLE },
@@ -28,7 +31,7 @@ const FilterArticlesSelectors: FC<FilterArticlesSelectorsProps> = memo(({classNa
     ]
   }, [t])
 
-  const orderList = useMemo(() => {
+  const orderList: CountryListType<ArticleOrderSort>[] = useMemo(() => {
     return [
       { text: t(`order.${ArticleOrderSort.DESC}`), value: ArticleOrderSort.DESC },
       { text: t(`order.${ArticleOrderSort.ASC}`), value: ArticleOrderSort.ASC },
@@ -37,11 +40,13 @@ const FilterArticlesSelectors: FC<FilterArticlesSelectorsProps> = memo(({classNa
 
   const onSort = useCallback((val: string) => {
     dispatch(setSortArticles(val));
-  }, [dispatch, setSortArticles])
+    dispatch(cleanArticles())
+  }, [dispatch, setSortArticles, cleanArticles])
 
   const onOrder = useCallback((val: string) => {
     dispatch(setOrderArticles(val));
-  }, [dispatch, setOrderArticles]);
+    dispatch(cleanArticles())
+  }, [dispatch, setOrderArticles, cleanArticles]);
 
   const toTranslationSort = useCallback((str: string | undefined) => t(`sort.${str}`), [t]);
 
@@ -50,19 +55,25 @@ const FilterArticlesSelectors: FC<FilterArticlesSelectorsProps> = memo(({classNa
   return (
     <div className={ClassNames("filter-selectors", className )}>
       <Select
+        label={t(`type.sort`)}
+        className="filter-selectors__select"
         defaultValue={toTranslationSort(sort)}
         selectList={sortList}
         name="sort"
         selected={onSort}
         toTranslation={toTranslationSort}
+        theme={BgEnum.BG_COLOR_INVERTED}
       />
 
       <Select
+        label={t(`type.order`)}
+        className="filter-selectors__select"
         defaultValue={toTranslationOrder(order)}
         selectList={orderList}
         name="order"
         selected={onOrder}
         toTranslation={toTranslationOrder}
+        theme={BgEnum.BG_COLOR_INVERTED}
       />
     </div>
   )

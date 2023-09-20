@@ -13,21 +13,22 @@ import {BgEnum} from "../../const/BgEnum";
 import {ColorEnum} from "../../const/ColorEnum";
 import {CountryListType} from "../../types/CountryListType";
 
-interface SelectProps {
+interface SelectProps <T>{
   className?: string,
   prefix?: string,
   theme?: BgEnum,
   color?: ColorEnum,
   label?: string,
-  selectList: CountryListType[],
+  selectList: CountryListType<T>[],
   toTranslation: (str: string | undefined) => string,
-  selected: (val: string) => void,
+  selected: (val: T) => void,
   defaultValue?: string,
   name: string,
   readOnly?: boolean,
 }
 
-const Select: FC<SelectProps> = (props: SelectProps) => {
+const Select: FC<SelectProps<any>> = <T,>(props: SelectProps<T>) => {
+// const Select =  function <T>(props: SelectProps<T>) {
   const { className, name, label, theme, color, selectList, toTranslation, selected, defaultValue, readOnly
   } = props;
   const [drop, setDrop] = useState<boolean>(false);
@@ -40,11 +41,11 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     const target = e.currentTarget;
     const select = target.dataset.select;
     inputRef.current!.value = toTranslation(select);
-    if(!!select) selected(select);
+    if(!!select) selected(select as T);
   }, [toTranslation, selected])
 
   const dropList = useMemo(() => {
-    return selectList.map((cou: CountryListType, index: number) => (
+    return selectList.map((cou: CountryListType<T>, index: number) => (
       <div key={`${cou.value}-${index}`} className="select__drop_arrow" onClick={onClickOption} data-select={cou.value}>{cou.text}</div>
     ))
   }, [selectList, onClickOption])

@@ -2,28 +2,29 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {ArticleType} from "../../model/types/articleType";
 import Axios from "../../../../utils/axios";
 import {StateSchema, ThunkExtraArg} from "../../../../app/providers/Store/config/StateSchema";
-import {ArticlesQuery} from "../../../../shared/const/ArticlesQuery";
 import {GetArticlesIds} from "../../selectors/GetArticlesIds/GetArticlesIds";
 import {GetArticlesHasMore} from "../../selectors/GetArticlesHasMore/GetArticlesHasMore";
+import {GetFilterArticles} from "../../../../features/FilterArticles";
 
-interface FetchAllArticlesProps {
-  take: number,
-  skip: number,
-}
-
-const FetchAllArticles = createAsyncThunk<ArticleType[], FetchAllArticlesProps | undefined, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+const FetchAllArticles = createAsyncThunk<ArticleType[], undefined, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
   'articles/FetchAllArticles',
-  async (query: FetchAllArticlesProps | undefined, thunkAPI) => {
+  async (props, thunkAPI) => {
     try {
       const articles = GetArticlesIds(thunkAPI.getState());
       const hasMore = GetArticlesHasMore(thunkAPI.getState());
-      const skip = query?.skip ?? articles?.length ?? ArticlesQuery.Skip;
-      const take = query?.take ?? ArticlesQuery.Take;
+      const { skip, take, order, sort, search } = GetFilterArticles(thunkAPI.getState());
+      const skipVal = articles?.length ?? skip;
 
       if(!hasMore) return;
 
       const result = await Axios.get(`/api/articles/receive/all`, {
-        params: { skip, take }
+        params: {
+          order,
+          sort,
+          search,
+          take,
+          skip: skipVal,
+        }
       });
 
       return result.data;

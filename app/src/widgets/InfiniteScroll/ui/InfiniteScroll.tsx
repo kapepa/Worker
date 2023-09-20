@@ -1,4 +1,4 @@
-import {FC, ReactNode, UIEvent, useCallback, useEffect, useRef} from "react";
+import {FC, memo, ReactNode, UIEvent, useCallback, useEffect, useRef} from "react";
 import "./InfiniteScroll.scss";
 import {UseInfiniteScroll} from "../../../shared/hooks/UseInfiniteScroll/UseInfiniteScroll";
 import {Scroll} from "../../../shared/ui/Scroll/Scroll";
@@ -15,7 +15,7 @@ interface InfiniteScrollProps {
   isEnd: boolean
 }
 
-const InfiniteScroll: FC<InfiniteScrollProps> = (props: InfiniteScrollProps) => {
+const InfiniteScroll: FC<InfiniteScrollProps> = memo( (props: InfiniteScrollProps) => {
   const { children, scrollEnd, className, isEnd} = props;
   const { pathname } = useLocation();
   const scrollPage = useSelector(GetScrollHistoryPages(pathname));
@@ -52,6 +52,6 @@ const InfiniteScroll: FC<InfiniteScrollProps> = (props: InfiniteScrollProps) => 
       </div>
     </Scroll>
   )
-}
+})
 
 export {InfiniteScroll};

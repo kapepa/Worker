@@ -1,3 +1,1 @@
-import {Countries} from "../const/Countries";
-
-export type CountryListType = { value: Countries | string, text: string };
+export type CountryListType<T> = { text: string, value: T };
