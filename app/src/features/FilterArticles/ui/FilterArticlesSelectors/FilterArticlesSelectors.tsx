@@ -11,6 +11,7 @@ import {ArticleOrderSort} from "../../../../shared/const/ArticleOrderSort";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {filterArticlesActions} from "../../model/slice/filterArticlesSlice";
 import {BgEnum} from "../../../../shared/const/BgEnum";
+import {FetchAllArticles} from "../../../../entities/Article/service/FetchAllArticles/FetchAllArticles";
 import {ArticlesActions} from "../../../../entities/Article";
 
 interface FilterArticlesSelectorsProps {
@@ -19,8 +20,8 @@ interface FilterArticlesSelectorsProps {
 const FilterArticlesSelectors: FC<FilterArticlesSelectorsProps> = memo(({className}) => {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation("filter");
+  const { resetHasMore } = ArticlesActions;
   const { sort, order } = useSelector(GetFilterArticles);
-  const { cleanArticles } = ArticlesActions;
   const { setOrderArticles, setSortArticles,  } = filterArticlesActions;
 
   const sortList: CountryListType<ArticleOrderField>[] = useMemo(() => {
@@ -39,14 +40,16 @@ const FilterArticlesSelectors: FC<FilterArticlesSelectorsProps> = memo(({classNa
   }, [t])
 
   const onSort = useCallback((val: string) => {
+    dispatch(resetHasMore())
     dispatch(setSortArticles(val));
-    dispatch(cleanArticles())
-  }, [dispatch, setSortArticles, cleanArticles])
+    dispatch(FetchAllArticles(true));
+  }, [dispatch, setSortArticles, resetHasMore])
 
   const onOrder = useCallback((val: string) => {
+    dispatch(resetHasMore())
     dispatch(setOrderArticles(val));
-    dispatch(cleanArticles())
-  }, [dispatch, setOrderArticles, cleanArticles]);
+    dispatch(FetchAllArticles(true));
+  }, [dispatch, setOrderArticles, resetHasMore]);
 
   const toTranslationSort = useCallback((str: string | undefined) => t(`sort.${str}`), [t]);
 

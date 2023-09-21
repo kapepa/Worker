@@ -37,7 +37,8 @@ const Article: FC = memo(() => {
 
   useEffect(() => {
     if(!ids.length) firstLoading();
-  }, [ids, firstLoading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <InfiniteScroll scrollEnd={onScrollNextArticles} isEnd={articlesHasMore}>
