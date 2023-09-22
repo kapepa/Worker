@@ -13,6 +13,8 @@ import {filterArticlesActions} from "../../model/slice/filterArticlesSlice";
 import {BgEnum} from "../../../../shared/const/BgEnum";
 import {FetchAllArticles} from "../../../../entities/Article/service/FetchAllArticles/FetchAllArticles";
 import {ArticlesActions} from "../../../../entities/Article";
+import {UseUpdateParam} from "../../../../shared/hooks/UseUpdateParam/UseUpdateParam";
+import {FilterArticlesState} from "../../model/types/filterArticlesState";
 
 interface FilterArticlesSelectorsProps {
   className?: string,
@@ -40,12 +42,14 @@ const FilterArticlesSelectors: FC<FilterArticlesSelectorsProps> = memo(({classNa
   }, [t])
 
   const onSort = useCallback((val: string) => {
+    UseUpdateParam<FilterArticlesState>("sort", val);
     dispatch(resetHasMore())
     dispatch(setSortArticles(val));
     dispatch(FetchAllArticles(true));
   }, [dispatch, setSortArticles, resetHasMore])
 
   const onOrder = useCallback((val: string) => {
+    UseUpdateParam<FilterArticlesState>("order", val);
     dispatch(resetHasMore())
     dispatch(setOrderArticles(val));
     dispatch(FetchAllArticles(true));

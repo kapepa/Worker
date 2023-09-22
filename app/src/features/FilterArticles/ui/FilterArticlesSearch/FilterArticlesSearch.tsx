@@ -10,6 +10,8 @@ import {filterArticlesActions} from "../../model/slice/filterArticlesSlice";
 import {FetchAllArticles} from "../../../../entities/Article/service/FetchAllArticles/FetchAllArticles";
 import {ArticlesActions} from "../../../../entities/Article";
 import {UseDebounce} from "../../../../shared/hooks/UseDebounce/UseDebounce";
+import {UseUpdateParam} from "../../../../shared/hooks/UseUpdateParam/UseUpdateParam";
+import {FilterArticlesState} from "../../model/types/filterArticlesState";
 
 interface FilterArticlesSearchProps {
   className?: string,
@@ -22,6 +24,7 @@ const FilterArticlesSearch: FC<FilterArticlesSearchProps> = memo(({ className })
 
   const onChange = UseDebounce((e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
+    UseUpdateParam<FilterArticlesState>("search", target.value);
     dispatch(resetHasMore());
     dispatch(setSearchArticles(target.value));
     dispatch(FetchAllArticles(true));

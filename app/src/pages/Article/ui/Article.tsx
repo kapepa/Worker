@@ -4,31 +4,47 @@ import {RouterPath} from "../../../shared/const/Routers";
 import {useDispatch, useSelector} from "react-redux";
 import {GetUsers, MyselfUsers} from "../../../entities/Users";
 import {useNavigate} from "react-router-dom";
-import {ArticlesList, GetArticlesHasMore, GetArticlesIds, GetArticlesView} from "../../../entities/Article";
+import {ArticlesList, GetArticlesHasMore, GetArticlesView} from "../../../entities/Article";
 import {FetchAllArticles} from "../../../entities/Article/service/FetchAllArticles/FetchAllArticles";
 import {AppDispatch} from "../../../app/providers/Store/config/store";
 import {SwitchView} from "../../../widgets/SwitchView";
 import {InfiniteScroll} from "../../../widgets/InfiniteScroll";
-import {FilterArticlesSearch, FilterArticlesSelectors} from "../../../features/FilterArticles";
+import {ArticleOrderSort} from "../../../shared/const/ArticleOrderSort";
+import {ArticleOrderField} from "../../../shared/const/ArticleOrderField";
+import {ArticlesQuery} from "../../../shared/const/ArticlesQuery";
+import {
+  filterArticlesActions,
+  FilterArticlesSearch,
+  FilterArticlesSelectors,
+  FilterArticlesState, FilterArticlesTabs
+} from "../../../features/FilterArticles";
 
 // import {useTranslation} from "react-i18next";
+// import { useSearchParams } from 'react-router-dom';
 
+type paramsTypes = {[key in keyof FilterArticlesState]?: string | ArticleOrderSort | ArticleOrderField | ArticlesQuery};
 const Article: FC = memo(() => {
   // const { t } = useTranslation("article");
+  // const [searchParams] = useSearchParams();
   const dispatch = useDispatch<AppDispatch>();
   const articlesHasMore = useSelector(GetArticlesHasMore);
   const { profile } = useSelector(GetUsers);
-  const ids = useSelector(GetArticlesIds);
   const articlesView = useSelector(GetArticlesView);
+  const { setQueryAll } = filterArticlesActions;
   const navigate = useNavigate();
 
   const firstLoading = useCallback(() => {
+    // searchParams
+    const urlParams: URLSearchParams = new URLSearchParams(window.location.search);
+    const params: paramsTypes = Object.fromEntries(urlParams.entries());
+
+    dispatch(setQueryAll(params));
     dispatch(FetchAllArticles());
-  }, [dispatch]);
+  }, [dispatch, setQueryAll]);
 
   const onScrollNextArticles = useCallback(() => {
-    if(articlesHasMore && ids.length) dispatch(FetchAllArticles());
-  }, [dispatch, articlesHasMore, ids.length])
+    if(articlesHasMore) dispatch(FetchAllArticles());
+  }, [dispatch, articlesHasMore]);
 
   useEffect(() => {
     if(!profile) dispatch(MyselfUsers());
@@ -36,7 +52,7 @@ const Article: FC = memo(() => {
   }, [profile, navigate, dispatch]);
 
   useEffect(() => {
-    if(!ids.length) firstLoading();
+    firstLoading();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -49,6 +65,9 @@ const Article: FC = memo(() => {
         </div>
         <div className="article__middle">
           <FilterArticlesSearch/>
+        </div>
+        <div className="article__middle">
+          <FilterArticlesTabs/>
         </div>
         <ArticlesList view={articlesView}/>
       </div>
