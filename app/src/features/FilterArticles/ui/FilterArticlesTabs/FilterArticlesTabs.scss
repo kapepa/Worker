@@ -1,0 +1,7 @@
+.filter-tabs{
+  display: grid;
+  grid-template-rows: auto;
+  grid-auto-columns: minmax(auto, 200px);
+  grid-auto-flow: column;
+  gap: 20px;
+}

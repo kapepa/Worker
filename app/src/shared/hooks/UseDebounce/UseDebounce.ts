@@ -5,8 +5,8 @@ const UseDebounce = (callback: (e: ChangeEvent<HTMLInputElement>) => void, milli
 
   return useCallback( (e: ChangeEvent<HTMLInputElement>) => {
     if(!!refTimeout.current) clearTimeout(refTimeout.current);
-    refTimeout.current = setTimeout(() => {callback(e)}, milliseconds)
-  }, [callback, milliseconds])
+    refTimeout.current = setTimeout(() => {callback(e)}, milliseconds);
+  }, [callback, milliseconds]);
 };
 
 export { UseDebounce };

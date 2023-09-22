@@ -6,6 +6,10 @@ import {Dispatch} from "@reduxjs/toolkit";
 import {StateSchema} from "../../../../app/providers/Store";
 import {ArticlesState} from "../../model/types/articlesState";
 import {ArticlesView} from "../../../../shared/const/ArticlesView";
+import {ArticleOrderSort} from "../../../../shared/const/ArticleOrderSort";
+import {ArticleOrderField} from "../../../../shared/const/ArticleOrderField";
+import {ArticleTypesAdditionName} from "../../../../shared/const/ArticleTypesTabs";
+import {ArticlesQuery} from "../../../../shared/const/ArticlesQuery";
 
 jest.mock("../../../../utils/axios");
 const mockAxios = jest.mocked(Axios, true);
@@ -27,7 +31,15 @@ describe("FetchAllArticles", () => {
           loading: false,
           view: ArticlesView.Block,
           hasMore: true,
-        } as ArticlesState
+        } as ArticlesState,
+        filterArticles: {
+          order: ArticleOrderSort.DESC,
+          sort: ArticleOrderField.CREATED,
+          tab: ArticleTypesAdditionName.ALL,
+          search: "",
+          skip: ArticlesQuery.Skip,
+          take: ArticlesQuery.Take,
+        }
       } as StateSchema
     });
   })
@@ -39,7 +51,7 @@ describe("FetchAllArticles", () => {
 
     expect(mockAxios.get).toHaveBeenCalled();
     expect(result.meta.requestStatus).toEqual('fulfilled');
-    expect(result.payload).toEqual(ArticlesMock);
+    expect(result.payload).toEqual({articles: ArticlesMock, replace: false, hasMore: false});
   })
 
   test("should be defined reject", async () => {

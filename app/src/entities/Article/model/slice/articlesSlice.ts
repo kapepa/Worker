@@ -37,10 +37,10 @@ const articlesSlice = createSlice({
         state.error = undefined;
       })
       .addCase(FetchAllArticles.fulfilled, (state: ArticlesState, action: PayloadAction<FetchAllArticlesRes>) => {
-        const { replace, articles } = action.payload;
+        const { replace, articles, hasMore } = action.payload;
         replace ? articlesAdapter.setAll(state, articles) : articlesAdapter.addMany(state, articles);
         state.loading = false;
-        state.hasMore = articles.length > 0;
+        state.hasMore = hasMore;
       })
       .addCase(FetchAllArticles.rejected, (state: ArticlesState, action) => {
         state.loading = false;

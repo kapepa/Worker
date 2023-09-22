@@ -9,6 +9,8 @@ import {GetFilterArticlesTake} from "./selectors/getFilterArticlesTake/getFilter
 import {FilterArticlesSelectors} from "./ui/FilterArticlesSelectors/FilterArticlesSelectors";
 import {FilterArticlesSearch} from "./ui/FilterArticlesSearch/FilterArticlesSearch";
 import {FetchAllArticlesRes} from "./model/interface/FetchAllArticlesRes";
+import {FilterArticlesTabs} from "./ui/FilterArticlesTabs/FilterArticlesTabs";
+import {GetFilterArticlesTab} from "./selectors/getFilterArticlesTab/getFilterArticlesTab";
 
 export {
   filterArticlesActions,
@@ -19,7 +21,9 @@ export {
   GetFilterArticlesSearch,
   GetFilterArticlesSkip,
   GetFilterArticlesTake,
+  GetFilterArticlesTab,
   FilterArticlesSelectors,
-  FilterArticlesSearch
+  FilterArticlesSearch,
+  FilterArticlesTabs,
 };
 export type {FilterArticlesState, FetchAllArticlesRes};

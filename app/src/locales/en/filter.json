@@ -12,5 +12,11 @@
   "order": {
     "ASC": "Ascending",
     "DESC": "Descending"
+  },
+  "tab": {
+    "ALL": "All",
+    "IT": "It",
+    "SCIENCE": "Science",
+    "ECONOMICS": "Economics"
   }
 }

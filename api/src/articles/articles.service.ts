@@ -1,7 +1,7 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {ArticlesEntity} from "./entities/articles.entity";
-import {ILike, Like, Repository} from "typeorm";
+import {ArrayContains, ILike, Repository} from "typeorm";
 import {BlocksEntity} from "./entities/blocks.entity";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
 import {from, Observable, of, switchMap, tap, throwError} from "rxjs";
@@ -66,8 +66,9 @@ export class ArticlesService {
     const skip: number = !!query?.skip ? Number(query.skip) : 0;
     const sort: ArticlesFilterFields = query?.sort ?? ArticlesFilterFields.CREATE;
     const order: OrderFieldFind = query.order ?? "DESC";
+    const type: FindManyOptions | undefined = !!query.type ? { where: { type: ArrayContains([query.type]) } } : undefined;
     const search: FindManyOptions | undefined = !!query.search.trim() ? { where: { title: ILike(`%${query.search}%`) } } : undefined;
 
-    return this.findArticles({ ...search, take, skip, order:{ [sort]: order }, relations: ["users", "blocks"]});
+    return this.findArticles({ ...search, ...type, take, skip, order:{ [sort]: order }, relations: ["users", "blocks"]});
   }
 }

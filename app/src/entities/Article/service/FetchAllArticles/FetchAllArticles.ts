@@ -3,7 +3,8 @@ import Axios from "../../../../utils/axios";
 import {StateSchema, ThunkExtraArg} from "../../../../app/providers/Store/config/StateSchema";
 import {GetArticlesIds} from "../../selectors/GetArticlesIds/GetArticlesIds";
 import {GetArticlesHasMore} from "../../selectors/GetArticlesHasMore/GetArticlesHasMore";
-import {FetchAllArticlesRes, GetFilterArticles} from "../../../../features/FilterArticles";
+import {FetchAllArticlesRes, GetFilterArticles, GetFilterArticlesTab} from "../../../../features/FilterArticles";
+import {ArticleTypesAdditionName} from "../../../../shared/const/ArticleTypesTabs";
 
 type replaceType = boolean | undefined;
 
@@ -13,15 +14,17 @@ const FetchAllArticles = createAsyncThunk<FetchAllArticlesRes, replaceType, { re
     try {
       const articles = GetArticlesIds(thunkAPI.getState());
       const hasMore = GetArticlesHasMore(thunkAPI.getState());
+      const tab = GetFilterArticlesTab(thunkAPI.getState());
+      const type = tab === ArticleTypesAdditionName.ALL ? undefined : { type: tab };
       const { skip, take, order, sort, search } = GetFilterArticles(thunkAPI.getState());
       const skipVal = replace ? skip : articles?.length ?? skip;
 
-      if(!hasMore) return {articles: [], replace};
+      if(!hasMore) return {articles: [], replace, hasMore: true};
 
-      const params = { order, sort, search, take, skip: skipVal };
+      const params = { order, sort, search, take, skip: skipVal, ...type };
       const result = await Axios.get(`/api/articles/receive/all`, {params});
 
-      return {articles: result.data, replace};
+      return {articles: result.data, replace, hasMore: result.data.length >= take};
     } catch (e) {
       return thunkAPI.rejectWithValue("all-articles-error");
     }
