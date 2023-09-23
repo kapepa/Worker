@@ -17,4 +17,7 @@
   &--readonly{
     opacity: .7;
   }
+  &::placeholder{
+    color: var(--secondary-color);
+  }
 }

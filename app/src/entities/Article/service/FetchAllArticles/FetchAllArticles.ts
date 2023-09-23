@@ -1,32 +1,30 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {ArticleType} from "../../model/types/articleType";
 import Axios from "../../../../utils/axios";
 import {StateSchema, ThunkExtraArg} from "../../../../app/providers/Store/config/StateSchema";
-import {ArticlesQuery} from "../../../../shared/const/ArticlesQuery";
 import {GetArticlesIds} from "../../selectors/GetArticlesIds/GetArticlesIds";
 import {GetArticlesHasMore} from "../../selectors/GetArticlesHasMore/GetArticlesHasMore";
+import {FetchAllArticlesRes, GetFilterArticles, GetFilterArticlesTab} from "../../../../features/FilterArticles";
+import {ArticleTypesAdditionName} from "../../../../shared/const/ArticleTypesTabs";
 
-interface FetchAllArticlesProps {
-  take: number,
-  skip: number,
-}
+type replaceType = boolean | undefined;
 
-const FetchAllArticles = createAsyncThunk<ArticleType[], FetchAllArticlesProps | undefined, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+const FetchAllArticles = createAsyncThunk<FetchAllArticlesRes, replaceType, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
   'articles/FetchAllArticles',
-  async (query: FetchAllArticlesProps | undefined, thunkAPI) => {
+  async (replace = false , thunkAPI) => {
     try {
       const articles = GetArticlesIds(thunkAPI.getState());
       const hasMore = GetArticlesHasMore(thunkAPI.getState());
-      const skip = query?.skip ?? articles?.length ?? ArticlesQuery.Skip;
-      const take = query?.take ?? ArticlesQuery.Take;
+      const tab = GetFilterArticlesTab(thunkAPI.getState());
+      const type = tab === ArticleTypesAdditionName.ALL ? undefined : { type: tab };
+      const { skip, take, order, sort, search } = GetFilterArticles(thunkAPI.getState());
+      const skipVal = replace ? skip : articles?.length ?? skip;
 
-      if(!hasMore) return;
+      if(!hasMore) return {articles: [], replace, hasMore: true};
 
-      const result = await Axios.get(`/api/articles/receive/all`, {
-        params: { skip, take }
-      });
+      const params = { order, sort, search, take, skip: skipVal, ...type };
+      const result = await Axios.get(`/api/articles/receive/all`, {params});
 
-      return result.data;
+      return {articles: result.data, replace, hasMore: result.data.length >= take};
     } catch (e) {
       return thunkAPI.rejectWithValue("all-articles-error");
     }

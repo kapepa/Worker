@@ -4,6 +4,7 @@ import {ArticleType} from "../types/articleType";
 import {ArticlesReducer} from "./articlesSlice";
 import {FetchAllArticles} from "../../service/FetchAllArticles/FetchAllArticles";
 import {ArticlesView} from "../../../../shared/const/ArticlesView";
+import {FetchAllArticlesRes} from "../../../../features/FilterArticles";
 
 describe("articlesSlice", () => {
   const state: ArticlesState = {
@@ -24,7 +25,7 @@ describe("articlesSlice", () => {
     const mockArticle = {...ArticleMock.article, blocks: [ArticleMock.text, ArticleMock.code, ArticleMock.image]} as ArticleType;
     const mockArticlesArr: ArticleType[] = [mockArticle];
 
-    expect( ArticlesReducer(state, { type: FetchAllArticles.fulfilled, payload: mockArticlesArr }))
+    expect( ArticlesReducer(state, { type: FetchAllArticles.fulfilled, payload: { articles: mockArticlesArr, hasMore: true, replace: false } as FetchAllArticlesRes }))
       .toEqual({...state, ids: [mockArticle.id], entities: {[mockArticle.id as string]: mockArticle}});
   })
 

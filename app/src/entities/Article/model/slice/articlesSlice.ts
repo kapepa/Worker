@@ -1,8 +1,8 @@
 import {createEntityAdapter, createSlice, PayloadAction, Reducer} from '@reduxjs/toolkit';
 import {ArticlesState} from "../types/articlesState";
 import {FetchAllArticles} from "../../service/FetchAllArticles/FetchAllArticles";
-import {ArticleType} from "../types/articleType";
 import {ArticlesView} from "../../../../shared/const/ArticlesView";
+import {FetchAllArticlesRes} from "../../../../features/FilterArticles";
 
 export const articlesAdapter = createEntityAdapter();
 
@@ -22,6 +22,12 @@ const articlesSlice = createSlice({
   reducers: {
     changeView: ( state: ArticlesState, action: PayloadAction<ArticlesView> ) => {
       state.view = action.payload;
+    },
+    cleanArticles: ( state: ArticlesState ) => {
+      articlesAdapter.removeAll(state);
+    },
+    resetHasMore: (state: ArticlesState) => {
+      state.hasMore = true;
     }
   },
   extraReducers: (builder) => {
@@ -30,11 +36,11 @@ const articlesSlice = createSlice({
         state.loading = true;
         state.error = undefined;
       })
-      .addCase(FetchAllArticles.fulfilled, (state: ArticlesState, action: PayloadAction<ArticleType[]>) => {
-        // articlesAdapter.upsertMany(state, action.payload);
-        articlesAdapter.addMany(state, action.payload);
+      .addCase(FetchAllArticles.fulfilled, (state: ArticlesState, action: PayloadAction<FetchAllArticlesRes>) => {
+        const { replace, articles, hasMore } = action.payload;
+        replace ? articlesAdapter.setAll(state, articles) : articlesAdapter.addMany(state, articles);
         state.loading = false;
-        state.hasMore = action.payload.length > 0;
+        state.hasMore = hasMore;
       })
       .addCase(FetchAllArticles.rejected, (state: ArticlesState, action) => {
         state.loading = false;

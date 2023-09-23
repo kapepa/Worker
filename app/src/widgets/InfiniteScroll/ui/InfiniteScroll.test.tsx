@@ -21,7 +21,7 @@ describe("<InfiniteScroll/>", () => {
 
     window.IntersectionObserver = jest.fn().mockImplementation(mockObserveFn);
     const { getByTestId, getByText } = RenderWithStore(
-      <InfiniteScroll scrollEnd={scrollEnd}>
+      <InfiniteScroll scrollEnd={scrollEnd} isEnd={true}>
         <div>{ "Mock text" }</div>
       </InfiniteScroll>,
       { scroll: { pages: { } } } as StateSchema

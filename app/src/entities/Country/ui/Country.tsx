@@ -24,7 +24,7 @@ const Country: FC<CountryProps> = memo(({ className, defaultVal, selected, readO
     selected(val as Countries);
   }, [selected])
 
-  const country = useMemo<CountryListType[]>(() => {
+  const country = useMemo<CountryListType<Countries>[]>(() => {
     return [
       { value: Countries.USA, text: t(`country.${Countries.USA}`) },
       { value: Countries.RUS, text: t(`country.${Countries.RUS}`) },

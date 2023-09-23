@@ -1,0 +1,8 @@
+.filter-selectors{
+  display: flex;
+  column-gap: 30px;
+  &__select{
+    padding: 12px 24px;
+    font-size: 18px;
+  }
+}

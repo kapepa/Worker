@@ -91,7 +91,6 @@ const ArticlesList: FC<ArticlesListProps> = memo(({ className, view }) => {
         })
       }
       { loading && isLoadingArticles }
-
     </div>
   )
 })
