@@ -38,7 +38,8 @@ const filterArticlesSlice: Slice = createSlice({
     },
     setQueryAll(state: FilterArticlesState, action: PayloadAction<FilterArticlesState>): void {
       if(!!action.payload.skip) state.skip = Number(action.payload.skip);
-      if(!!action.payload.take) state.skip = Number(action.payload.take);
+      if(!!action.payload.take) state.take = Number(action.payload.take);
+      if(!!action.payload.tab) state.tab = action.payload.tab;
       if(!!action.payload.order) state.order = action.payload.order;
       if(!!action.payload.sort) state.sort = action.payload.sort;
       if(!!action.payload.search) state.search = action.payload.search;
