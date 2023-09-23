@@ -1,4 +1,0 @@
-.input-dynamic{display:flex;flex-direction:column;padding-bottom:22px;width:100%}.input-dynamic__label{font-size:18px;padding-bottom:3px}.input-dynamic__label--secondary-color{color:var(--secondary-color)}.input-dynamic__label--secondary-color-inverted{color:var(--secondary-color-inverted)}.input-dynamic__board{position:relative}.input-dynamic__alert{position:absolute;top:100%;left:0;right:0;color:var(--red-light);text-shadow:5px 0px 16px #000}
-.input{padding:12px 24px;font-size:20px;outline:none;width:100%}.input--bg-color{color:var(--primary-color-inverted);background-color:var(--bg-color)}.input--bg-color::-webkit-input-placeholder{color:var(--primary-color-inverted)}.input--bg-color::placeholder{color:var(--primary-color-inverted)}.input--bg-color-inverted{color:var(--bg-color);background-color:var(--bg-color-inverted)}.input--readonly{opacity:.7}
-
-/*# sourceMappingURL=widgets-InputDynamic-ui-InputDynamic-stories.629e2eec.chunk.css.map*/

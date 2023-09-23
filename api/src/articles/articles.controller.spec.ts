@@ -6,6 +6,9 @@ import {MockArticles} from "../utility/test/mockArticles";
 import {MockUsers} from "../utility/test/mockUsers";
 import {MockBlocks} from "../utility/test/mockBlocks";
 import {JwtService} from "@nestjs/jwt";
+import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
+import {UsersDto} from "../users/dto/users.dto";
+import {ReqProps} from "../shared/interfaces/ReqProps";
 
 describe('ArticlesController', () => {
   let controller: ArticlesController;
@@ -22,6 +25,7 @@ describe('ArticlesController', () => {
             findOneArticle: jest.fn(),
             findOneBlocks: jest.fn(),
             findArticles: jest.fn(),
+            getAllArticles: jest.fn(),
         }}
       ],
     }).compile();
@@ -37,7 +41,7 @@ describe('ArticlesController', () => {
   it("createArticles", () => {
     let createArticles = jest.spyOn(articlesService, "saveArticle").mockReturnValue(of(MockArticles));
 
-    controller.createArticles({user: MockUsers}, [], MockArticles).subscribe({
+    controller.createArticles({user: MockUsers as UsersDto} as ReqProps, [], MockArticles).subscribe({
       next: (art) => {
         expect(art).toEqual(MockArticles);
         expect(createArticles).toHaveBeenCalledWith({...MockArticles, users: MockUsers});
@@ -48,7 +52,7 @@ describe('ArticlesController', () => {
   it("createBlocks", () => {
     let createBlocks = jest.spyOn(articlesService, "createBlocks").mockReturnValue(of(MockBlocks));
 
-    controller.createBlocks({user: MockUsers}, MockArticles.id, [], MockBlocks).subscribe({
+    controller.createBlocks({user: MockUsers as UsersDto} as ReqProps, MockArticles.id, [], MockBlocks).subscribe({
       next: (block) => {
         expect(block).toEqual(MockBlocks);
         expect(createBlocks).toHaveBeenCalledWith(MockArticles.id, {...MockBlocks, users: MockUsers})
@@ -79,23 +83,12 @@ describe('ArticlesController', () => {
   })
 
   it("getAllArticles", () => {
-    let findArticles = jest.spyOn(articlesService, "findArticles").mockReturnValue(of([MockArticles]));
+    let getAllArticles = jest.spyOn(articlesService, "getAllArticles").mockReturnValue(of([MockArticles]));
 
-    controller.getAllArticles({take: "1", skip: "0"}).subscribe({
+    controller.getAllArticles({take: "1", skip: "0"} as QueryArticlesFilter).subscribe({
       next: (articles) => {
         expect(articles).toEqual([MockArticles]);
-        expect(findArticles).toHaveBeenCalledWith({ take: 1, skip: 0, order: { createdAt: "ASC" }, relations: ["users"] });
-      }
-    })
-  });
-
-  it("getAllArticles when query is empty", () => {
-    let findArticles = jest.spyOn(articlesService, "findArticles").mockReturnValue(of([MockArticles]));
-
-    controller.getAllArticles().subscribe({
-      next: (articles) => {
-        expect(articles).toEqual([MockArticles]);
-        expect(findArticles).toHaveBeenCalledWith({ take: 8, skip: 0, order: { createdAt: "ASC" }, relations: ["users"] });
+        expect(getAllArticles).toHaveBeenCalledWith({ take: "1", skip: "0" });
       }
     })
   });
