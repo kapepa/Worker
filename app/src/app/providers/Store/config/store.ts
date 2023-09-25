@@ -11,7 +11,7 @@ import {CurriedGetDefaultMiddleware} from "@reduxjs/toolkit/dist/getDefaultMiddl
 import {NavigateFunction} from "react-router/dist/lib/hooks";
 import {useDispatch} from "react-redux";
 import {ToForm} from "../../../../utils/toForm";
-import {ArticlesReducer, DetailsReducers} from "../../../../entities/Article";
+import {ArticlesReducer, DetailsReducers, RecommendedReducer} from "../../../../entities/Article";
 import {CommentsReducer} from "../../../../entities/Comments";
 import {FormCommentReducer} from "../../../../features/FormComment";
 import {ScrollReducer} from "../../../../features/ScrollHistory";
@@ -46,6 +46,7 @@ const storeReducers = combineReducers<StateSchema>({
   articles: ArticlesReducer,
   scroll: ScrollReducer,
   filterArticles: filterArticlesReducer,
+  recommendedArticle: RecommendedReducer,
 });
 
 function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunction) {

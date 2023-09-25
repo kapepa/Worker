@@ -15,7 +15,7 @@ const ArticleBlocImageComponent: FC<ArticleBlocImageComponentProps> =  memo(({cl
 
   return (
     <div className={ClassNames("article-image", className)} data-testid="article-image">
-      <Image src={ src } alt={ title ?? "" }/>
+      <Image className="article-image__image" src={ src } alt={ title ?? "" }/>
       {!!title && <Text theme={TextTheme.PRIMARY} title={title}/>}
     </div>
   )

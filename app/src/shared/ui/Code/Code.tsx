@@ -21,7 +21,7 @@ const Code: FC<CodeProps> = memo(({className, children, text}) => {
       <Button className="code__copy" onClick={onCopy}>
         <IcoImg className="code__ico" ico={"CopyIco"} stroke={true} color={IcoImgColor.SECONDARY_COLOR}/>
       </Button>
-      <code >
+      <code>
         {children}
       </code>
     </pre>
