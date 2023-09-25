@@ -44,7 +44,7 @@ export class CommentsService {
   findComments(data: FindManyOptions): Observable<CommentsInterfaces[]> {
     return from(this.commentsRepository.find(data)).pipe(
       switchMap((comments: CommentsInterfaces[] ) => {
-        return !!comments.length ? of(comments) : throwError(() => new HttpException("Comments not found", HttpStatus.NOT_FOUND));
+        return Array.isArray(comments) ? of(comments) : throwError(() => new HttpException("Comments not found", HttpStatus.NOT_FOUND));
       })
     );
   }

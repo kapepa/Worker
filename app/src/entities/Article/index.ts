@@ -12,6 +12,9 @@ import {ArticlesItem} from "./ui/ArticlesItem/ArticlesItem";
 import {GetArticlesIds} from "./selectors/GetArticlesIds/GetArticlesIds";
 import {GetArticlesView} from "./selectors/GetArticlesView/GetArticlesView";
 import {GetArticlesHasMore} from "./selectors/GetArticlesHasMore/GetArticlesHasMore";
+import {ArticlesRecommended} from "./ui/ArticlesRecommended/ArticlesRecommended";
+import {RecommendedState} from "./model/types/recommendedState";
+import {RecommendedActions, RecommendedReducer} from "./model/slice/recommendedSlice";
 
 export {
   ArticleDetails,
@@ -19,14 +22,18 @@ export {
   ArticlesActions,
   ArticlesList,
   ArticlesItem,
+  ArticlesRecommended,
+  RecommendedActions,
   DetailsReducers,
   FetchArticleById,
   GetArticleDetailsData,
   ArticlesReducer,
+  RecommendedReducer,
   GetArticles,
   GetArticlesData,
   GetArticlesIds,
   GetArticlesView,
-  GetArticlesHasMore
+  GetArticlesHasMore,
 };
-export type {ArticleBlocks, ArticlesState};
+
+export type {ArticleBlocks, ArticlesState, RecommendedState};
