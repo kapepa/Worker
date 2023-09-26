@@ -4,7 +4,7 @@ import {RouterPath} from "../../../shared/const/Routers";
 import {useDispatch, useSelector} from "react-redux";
 import {GetUsers} from "../../../entities/Users";
 import {useNavigate, useParams} from "react-router-dom";
-import {ArticleDetails, FetchArticleById} from "../../../entities/Article";
+import {ArticleDetails, FetchArticleById, FetchRecommended, GetRecommendedLoading} from "../../../entities/Article";
 import {AppDispatch} from "../../../app/providers/Store/config/store";
 import {GetArticleDetails} from "../../../entities/Article/selectors/GetArticleDetails/GetArticleDetails";
 import {Text, TextAlign, TextTheme} from "../../../shared/ui/Text/Text";
@@ -20,6 +20,8 @@ const Details: FC = memo(() => {
   const { t } = useTranslation("details")
   const { profile } = useSelector(GetUsers);
   const { loading, error, data } = useSelector(GetArticleDetails);
+  const recommendedLoading = useSelector(GetRecommendedLoading);
+
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const params = useParams();
@@ -35,11 +37,12 @@ const Details: FC = memo(() => {
   useEffect(() => {
     if(params.id) {
       dispatch(FetchArticleById(params.id));
+      dispatch(FetchRecommended());
       dispatch(FetchCommentsArtById({ artId: params.id, query: { take: FetchCommentsQuery.Take, skip: FetchCommentsQuery.Skip } }));
     }
   }, [dispatch, params])
 
-  if(loading) {
+  if(loading || recommendedLoading) {
     return (
       <Scroll>
         <div className="details--skeleton">

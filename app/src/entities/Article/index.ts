@@ -15,6 +15,11 @@ import {GetArticlesHasMore} from "./selectors/GetArticlesHasMore/GetArticlesHasM
 import {ArticlesRecommended} from "./ui/ArticlesRecommended/ArticlesRecommended";
 import {RecommendedState} from "./model/types/recommendedState";
 import {RecommendedActions, RecommendedReducer} from "./model/slice/recommendedSlice";
+import {GetRecommended} from "./selectors/GetRecommended/GetRecommended";
+import {GetRecommendedEntities} from "./selectors/GetRecommendedEntities/GetRecommendedEntities";
+import {GetRecommendedIds} from "./selectors/GetRecommendedIds/GetRecommendedIds";
+import {FetchRecommended} from "./service/FetchRecommended/FetchRecommended";
+import {GetRecommendedLoading} from "./selectors/GetRecommendedLoading/GetRecommendedLoading";
 
 export {
   ArticleDetails,
@@ -24,9 +29,9 @@ export {
   ArticlesItem,
   ArticlesRecommended,
   RecommendedActions,
-  DetailsReducers,
   FetchArticleById,
-  GetArticleDetailsData,
+  FetchRecommended,
+  DetailsReducers,
   ArticlesReducer,
   RecommendedReducer,
   GetArticles,
@@ -34,6 +39,11 @@ export {
   GetArticlesIds,
   GetArticlesView,
   GetArticlesHasMore,
+  GetRecommended,
+  GetRecommendedEntities,
+  GetRecommendedIds,
+  GetArticleDetailsData,
+  GetRecommendedLoading,
 };
 
 export type {ArticleBlocks, ArticlesState, RecommendedState};

@@ -16,10 +16,11 @@ import {CommentsList} from "../../../Comments";
 import {CreateComment, FormComment} from "../../../../features/FormComment";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
+import {ArticlesRecommended} from "../ArticlesRecommended/ArticlesRecommended";
 
 interface ArticleDetailsProps {
   className?: string,
-  date: ArticleType;
+  date: ArticleType,
 }
 
 const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
@@ -68,6 +69,7 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
         theme={TextTheme.PRIMARY}
         title={t("comments")}
       />
+      <ArticlesRecommended/>
       <FormComment onSend={onSend}/>
       <CommentsList/>
     </div>

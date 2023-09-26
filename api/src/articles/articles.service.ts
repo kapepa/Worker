@@ -67,7 +67,7 @@ export class ArticlesService {
     const sort: ArticlesFilterFields = query?.sort ?? ArticlesFilterFields.CREATE;
     const order: OrderFieldFind = query.order ?? "DESC";
     const type: FindManyOptions | undefined = !!query.type ? { where: { type: ArrayContains([query.type]) } } : undefined;
-    const search: FindManyOptions | undefined = !!query.search.trim() ? { where: { title: ILike(`%${query.search}%`) } } : undefined;
+    const search: FindManyOptions | undefined = !!query.search ? { where: { title: ILike(`%${query.search}%`) } } : undefined;
 
     return this.findArticles({ ...search, ...type, take, skip, order:{ [sort]: order }, relations: ["users", "blocks"]});
   }

@@ -1,5 +1,9 @@
-import {createSlice, Reducer} from '@reduxjs/toolkit'
+import {createEntityAdapter, createSlice, PayloadAction, Reducer} from '@reduxjs/toolkit'
 import {RecommendedState} from "../types/recommendedState";
+import {FetchRecommended} from "../../service/FetchRecommended/FetchRecommended";
+import {ArticleType} from "../types/articleType";
+
+export const recommendedAdapter = createEntityAdapter();
 
 const initialState: RecommendedState = {
   ids: [],
@@ -11,9 +15,22 @@ const initialState: RecommendedState = {
 const recommendedSlice = createSlice({
   name: 'recommendedArticle',
   initialState,
-  reducers: {
-
-  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(FetchRecommended.pending, (state: RecommendedState) => {
+        state.loading = true;
+        state.error = undefined;
+      })
+      .addCase(FetchRecommended.fulfilled, (state: RecommendedState, action: PayloadAction<ArticleType[]>) => {
+        recommendedAdapter.addMany(state, action.payload);
+        state.loading = false;
+      })
+      .addCase(FetchRecommended.rejected, (state: RecommendedState, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+  }
 })
 
 const RecommendedActions = recommendedSlice.actions;
