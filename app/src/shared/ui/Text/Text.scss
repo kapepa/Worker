@@ -4,6 +4,9 @@
     &--primary{
       color: var(--primary-color);
     }
+    &--inverted{
+      color: var(--primary-color-inverted);
+    }
     &--error{
       color: var(--red-light);
     }
@@ -12,6 +15,9 @@
     font: var(--font-m);
     &--primary{
       color: var(--secondary-color);
+    }
+    &--inverted{
+      color: var(--secondary-color-inverted);
     }
     &--error{
       color: var(--red-dark);

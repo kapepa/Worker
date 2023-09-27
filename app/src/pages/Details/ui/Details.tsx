@@ -15,6 +15,7 @@ import {Scroll} from "../../../shared/ui/Scroll/Scroll";
 import {FetchCommentsArtById} from "../../../entities/Comments";
 import {FetchCommentsQuery} from "../../../entities/Comments/services/FetchCommentsArtById/FetchCommentsArtById";
 import Button, {ThemeButtonEnum} from "../../../shared/ui/Button/Button";
+import {ArticleHeader} from "../../../entities/Article/ui/ArticleHeader/ArticleHeader";
 
 const Details: FC = memo(() => {
   const { t } = useTranslation("details")
@@ -73,7 +74,7 @@ const Details: FC = memo(() => {
   return (
     <Scroll>
       <div className="details" data-testid="details">
-        <Button onClick={toArticle} theme={ThemeButtonEnum.OUTLINE}>{t("back-to-list")}</Button>
+        <ArticleHeader toBack={toArticle} />
         {!!data && <ArticleDetails date={data}/>}
       </div>
     </Scroll>

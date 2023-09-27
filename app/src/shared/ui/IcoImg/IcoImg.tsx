@@ -11,6 +11,7 @@ import { ReactComponent as CalendarIco } from "../../assets/icons/calendar-20-20
 import { ReactComponent as CopyIco } from "../../assets/icons/copy-20-20.svg";
 import { ReactComponent as TiledIco } from "../../assets/icons/tiled-24-24.svg";
 import { ReactComponent as ListIco } from "../../assets/icons/list-24-24.svg";
+import { ReactComponent as EditIco } from "../../assets/icons/edit-20-20.svg";
 
 enum IcoNameEnum {
   HomeIco,
@@ -22,6 +23,7 @@ enum IcoNameEnum {
   CopyIco,
   TiledIco,
   ListIco,
+  EditIco,
 }
 
 export enum IcoImgColor {
@@ -50,6 +52,7 @@ const IcoImg: FC<IcoImgProps> = memo(({ className, ico,  fill, color, stroke }) 
     "CopyIco": CopyIco,
     "TiledIco": TiledIco,
     "ListIco": ListIco,
+    "EditIco": EditIco,
   }
 
   return (
