@@ -56,7 +56,7 @@ export class ArticlesController {
   @ApiResponse({ status: 200, description: 'Should be receive article on id'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   getArticles(@Param("id") id: string) {
-    return this.articlesService.findOneArticle({where: {id}, relations: ["blocks", "comments"] })
+    return this.articlesService.findOneArticle({where: {id}, relations: ["blocks", "comments", "users"] })
   }
 
   @UseGuards(AuthGuard)
@@ -72,5 +72,12 @@ export class ArticlesController {
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   getAllArticles(@Query() query?: QueryArticlesFilter): Observable<ArticlesInterface[]> {
     return this.articlesService.getAllArticles(query)
+  }
+
+  @Get("/edit/:id")
+  @ApiResponse({ status: 200, description: 'the article should be returned if the user owns it'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'User is not owner.'})
+  getEditArticle(@Param("id") id: string, @Req() red: ReqProps): Observable<ArticlesInterface> {
+    return this.articlesService.getEditArticle(id, red.user);
   }
 }

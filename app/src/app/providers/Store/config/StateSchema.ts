@@ -9,6 +9,7 @@ import {FormCommentState} from "../../../../features/FormComment/model/types/for
 import {ArticlesState, RecommendedState} from "../../../../entities/Article";
 import {ScrollHistoryState} from "../../../../features/ScrollHistory";
 import {FilterArticlesState} from "../../../../features/FilterArticles";
+import {EditorArticleState} from "../../../../features/EditorArticle";
 
 interface StateSchema {
   counter: CounterState,
@@ -22,6 +23,7 @@ interface StateSchema {
   scroll: ScrollHistoryState,
   filterArticles: FilterArticlesState,
   recommendedArticle: RecommendedState,
+  editorArticle: EditorArticleState,
 }
 
 interface ThunkExtraArg {

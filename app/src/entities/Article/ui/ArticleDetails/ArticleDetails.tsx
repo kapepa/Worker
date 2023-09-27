@@ -67,9 +67,13 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
       { !!blocks && blocks.map(renderBlocks) }
       <Text
         theme={TextTheme.PRIMARY}
-        title={t("comments")}
+        title={t("recommended")}
       />
       <ArticlesRecommended/>
+      <Text
+        theme={TextTheme.PRIMARY}
+        title={t("comments")}
+      />
       <FormComment onSend={onSend}/>
       <CommentsList/>
     </div>

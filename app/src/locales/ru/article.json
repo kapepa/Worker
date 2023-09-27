@@ -2,5 +2,6 @@
   "comments": "Комментарии",
   "all-articles-error": "Ошибка при получении статей",
   "articles-empty": "Список статей пуст",
-  "read-more": "Читать далее"
+  "read-more": "Читать далее",
+  "recommended": "Рекомендуемые"
 }

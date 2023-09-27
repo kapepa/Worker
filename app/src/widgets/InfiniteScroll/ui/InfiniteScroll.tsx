@@ -12,7 +12,7 @@ interface InfiniteScrollProps {
   className?: string,
   children: ReactNode,
   scrollEnd: () => void,
-  isEnd: boolean
+  isEnd?: boolean
 }
 
 const InfiniteScroll: FC<InfiniteScrollProps> = memo( (props: InfiniteScrollProps) => {

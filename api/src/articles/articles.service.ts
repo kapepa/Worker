@@ -10,6 +10,7 @@ import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
 import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
 import {OrderFieldFind} from "../shared/Types/OrderFieldFind";
 import {ArticlesFilterFields} from "../shared/enum/ArticlesFilterFields";
+import {UsersDto} from "../users/dto/users.dto";
 
 @Injectable()
 export class ArticlesService {
@@ -70,5 +71,9 @@ export class ArticlesService {
     const search: FindManyOptions | undefined = !!query.search ? { where: { title: ILike(`%${query.search}%`) } } : undefined;
 
     return this.findArticles({ ...search, ...type, take, skip, order:{ [sort]: order }, relations: ["users", "blocks"]});
+  }
+
+  getEditArticle(articleID: string, users: UsersDto): Observable<ArticlesInterface> {
+    return this.findOneArticle({ where: { id: articleID, users } })
   }
 }

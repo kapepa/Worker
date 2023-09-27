@@ -54,6 +54,14 @@ const Navbar: FC<NavbarProps> = memo(({className}) => {
             <IcoImg className="navbar__ico" ico={"ArticleIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
             <span className="navbar__symbol">{t("nav.article")}</span>
           </AppLink>
+          <AppLink
+            className={ClassNames("navbar__link", {"navbar__link--squeeze": open})}
+            theme={AppLinkTheme.SECONDARY} to={RouterPath.ARTICLE_CREATE}
+            role="link"
+          >
+            <IcoImg className="navbar__ico" ico={"EditIco"} color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
+            <span className="navbar__symbol">{t("nav.create")}</span>
+          </AppLink>
         </>}
       </nav>
     </div>
