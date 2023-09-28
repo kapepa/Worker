@@ -1,0 +1,28 @@
+{
+  "title": {
+    "create": "Create an article",
+    "edit": "Edit an article"
+  },
+  "submit": {
+    "create": "Create",
+    "edit": "Change"
+  },
+  "label": {
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "Image": "Image"
+  },
+  "placeholder": {
+    "title": "Title article",
+    "subtitle": "Subtitle article"
+  },
+  "required": {
+    "title": "Title is required",
+    "subtitle": "Subtitle is required",
+    "Image": "Image is required"
+  },
+  "minLength": {
+    "title": "Short title",
+    "subtitle": "Short subtitle"
+  }
+}
