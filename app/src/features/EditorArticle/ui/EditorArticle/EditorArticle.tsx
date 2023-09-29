@@ -31,6 +31,10 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
   const onChangeArticle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target)
   }, [])
+
+  const loadImageArticle = useCallback((file: File) => {
+    console.log(file)
+  }, [])
   const onSubmit: SubmitHandler<ArticleFormType> = (data: ArticleFormType) => console.log(data)
 
   return (
@@ -38,14 +42,14 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
       <Text theme={TextTheme.PRIMARY} title={getTitle} />
       <FormProvider {...methods}>
         <form className="editor-article__form" onSubmit={methods.handleSubmit(onSubmit)}>
-          <InputDynamic
+          {isEdit && <InputDynamic
             name="id"
             type="id"
             className="editor-article__input--hidden"
             validation={{ required: { value: true, message: "" } }}
             onChange={onChangeArticle}
             themeInput={BgEnum.BG_COLOR}
-          />
+          />}
           <InputDynamic
             name="title"
             type="title"
@@ -66,7 +70,12 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
             onChange={onChangeArticle}
             themeInput={BgEnum.BG_COLOR}
           />
-          <ImageDynamic/>
+          <ImageDynamic
+            name="img"
+            // entryImage={"https://eimg.pravda.com/images/doc/0/b/0b9b29c-what-is-url-770x503.jpg"}
+            loadImage={loadImageArticle}
+            validation={{ required: { value: true, message: "required.img" } }}
+          />
 
           <Button
             theme={ThemeButtonEnum.OUTLINE}
