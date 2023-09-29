@@ -8,6 +8,7 @@ import {GetEditorArticleLoading} from "./model/selectors/GetEditorArticleLoading
 import {GetEditorArticleError} from "./model/selectors/GetEditorArticleError/GetEditorArticleError";
 import {GetEditorArticleRecord} from "./model/selectors/GetEditorArticleRecord/GetEditorArticleRecord";
 import {GetEditorArticleEdit} from "./model/selectors/GetEditorArticleEdit/GetEditorArticleEdit";
+import {ArticleFormImgType} from "./model/types/ArticleFormType";
 
 export {
   EditorArticle,
@@ -22,4 +23,4 @@ export {
   GetEditorArticleEdit,
 };
 
-export type {EditorArticleState}
+export type {EditorArticleState, ArticleFormImgType}
