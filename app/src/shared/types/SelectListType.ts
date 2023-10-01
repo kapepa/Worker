@@ -1,0 +1,1 @@
+export type SelectListType<T> = { text: string, value: T };

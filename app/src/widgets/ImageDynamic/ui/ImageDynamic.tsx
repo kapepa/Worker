@@ -1,4 +1,4 @@
-import {FC, memo, useCallback, useEffect, useMemo} from "react";
+import {FC, memo, useCallback, useEffect, useMemo, useState} from "react";
 import "./ImageDynamic.scss"
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import {ImageLoader} from "../../../shared/ui/ImageLoader/ImageLoader";
@@ -6,20 +6,19 @@ import {useFormContext} from "react-hook-form";
 import {RegisterOptions} from "react-hook-form/dist/types/validator";
 import {ErrorMessage} from "@hookform/error-message/dist";
 
-
 interface ImageDynamicProps {
   name: string,
   className?: string,
   classAlert?: string,
-  entryImage?: string,
   loadImage: (file: File) => void,
   validation: RegisterOptions,
 }
 
 const ImageDynamic: FC<ImageDynamicProps> = memo((props: ImageDynamicProps) => {
-  const { name, validation, className, classAlert, entryImage, loadImage} = props;
-  const { register, formState: { errors }, setValue, clearErrors } = useFormContext();
+  const { name, validation, className, classAlert, loadImage} = props;
+  const { register, formState: { errors }, setValue, getValues, clearErrors } = useFormContext();
   const { ref, ...reg } = register(name, validation);
+  const [entryImage, setEntryImage] = useState<string | undefined>(undefined);
   const toHaveError = errors[name];
 
   const onChangeImage = useCallback((file: File) => {
@@ -39,6 +38,11 @@ const ImageDynamic: FC<ImageDynamicProps> = memo((props: ImageDynamicProps) => {
   useEffect(() => {
     clearErrors(name)
   },[name, clearErrors])
+
+  useEffect(() => {
+    setEntryImage(getValues()[name]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <div className={ClassNames("image-dynamic", className)}>

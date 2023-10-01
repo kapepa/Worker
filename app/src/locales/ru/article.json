@@ -3,5 +3,11 @@
   "all-articles-error": "Ошибка при получении статей",
   "articles-empty": "Список статей пуст",
   "read-more": "Читать далее",
-  "recommended": "Рекомендуемые"
+  "recommended": "Рекомендуемые",
+  "type": {
+    "choose": "Выбирать",
+    "IT": "Айти",
+    "SCIENCE": "Наука",
+    "ECONOMICS": "Экономика"
+  }
 }

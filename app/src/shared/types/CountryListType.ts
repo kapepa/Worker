@@ -1,1 +1,0 @@
-export type CountryListType<T> = { text: string, value: T };

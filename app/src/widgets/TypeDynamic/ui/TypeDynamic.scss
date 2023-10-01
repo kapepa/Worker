@@ -1,0 +1,21 @@
+.type-dynamic{
+  padding-bottom: 22px;
+  &__base{
+    position: relative;
+  }
+  &__choose{
+    display: flex;
+    gap: 16px;
+  }
+  &__label{
+    font-size: 18px;
+    padding-bottom: 3px;
+    display: block;
+    &--secondary-color{
+      color: var(--secondary-color);
+    }
+    &--secondary-color-inverted{
+      color: var(--secondary-color-inverted);
+    }
+  }
+}
