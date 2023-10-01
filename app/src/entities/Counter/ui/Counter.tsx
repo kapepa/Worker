@@ -21,7 +21,7 @@ const Counter: FC<CounterProps> = ({className}) => {
 
   const onIncrease = (e: MouseEvent) => {
     dispatch(CounterActions.increment())
-  }
+  };
 
   return (
     <div className={ClassNames(className, "counter")}>
@@ -30,6 +30,6 @@ const Counter: FC<CounterProps> = ({className}) => {
       <Button theme={ThemeButtonEnum.OUTLINE} data-testid="counter-increase" onClick={onIncrease}>{t("increase")}</Button>
     </div>
   )
-}
+};
 
 export {Counter};

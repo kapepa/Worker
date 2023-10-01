@@ -10,7 +10,8 @@
   "label": {
     "title": "Title",
     "subtitle": "Subtitle",
-    "Image": "Image"
+    "Image": "Image",
+    "type": "Type"
   },
   "placeholder": {
     "title": "Title article",
@@ -19,7 +20,8 @@
   "required": {
     "title": "Title is required",
     "subtitle": "Subtitle is required",
-    "Image": "Image is required"
+    "img": "Image is required",
+    "type": "Type is required"
   },
   "minLength": {
     "title": "Short title",

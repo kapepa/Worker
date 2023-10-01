@@ -2,7 +2,7 @@ import {FC, memo, useCallback, useMemo} from "react";
 import "./Country.scss";
 import {Select} from "../../../shared/ui/Select/Select";
 import {Countries} from "../../../shared/const/Countries";
-import {CountryListType} from "../../../shared/types/CountryListType";
+import {SelectListType} from "../../../shared/types/SelectListType";
 import {useTranslation} from "react-i18next";
 import {BgEnum} from "../../../shared/const/BgEnum";
 import {ColorEnum} from "../../../shared/const/ColorEnum";
@@ -24,7 +24,7 @@ const Country: FC<CountryProps> = memo(({ className, defaultVal, selected, readO
     selected(val as Countries);
   }, [selected])
 
-  const country = useMemo<CountryListType<Countries>[]>(() => {
+  const country = useMemo<SelectListType<Countries>[]>(() => {
     return [
       { value: Countries.USA, text: t(`country.${Countries.USA}`) },
       { value: Countries.RUS, text: t(`country.${Countries.RUS}`) },

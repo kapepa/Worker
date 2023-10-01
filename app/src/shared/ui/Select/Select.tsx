@@ -11,7 +11,7 @@ import "./Select.scss";
 import {ClassNames} from "../../lib/ClassNames";
 import {BgEnum} from "../../const/BgEnum";
 import {ColorEnum} from "../../const/ColorEnum";
-import {CountryListType} from "../../types/CountryListType";
+import {SelectListType} from "../../types/SelectListType";
 
 interface SelectProps <T>{
   className?: string,
@@ -19,13 +19,13 @@ interface SelectProps <T>{
   theme?: BgEnum,
   color?: ColorEnum,
   label?: string,
-  selectList: CountryListType<T>[],
+  selectList: SelectListType<T>[],
   toTranslation: (str: string | undefined) => string,
   selected: (val: T) => void,
   defaultValue?: string,
   name: string,
   readOnly?: boolean,
-}
+};
 
 const Select: FC<SelectProps<any>> = <T,>(props: SelectProps<T>) => {
 // const Select =  function <T>(props: SelectProps<T>) {
@@ -45,14 +45,14 @@ const Select: FC<SelectProps<any>> = <T,>(props: SelectProps<T>) => {
   }, [toTranslation, selected])
 
   const dropList = useMemo(() => {
-    return selectList.map((cou: CountryListType<T>, index: number) => (
+    return selectList.map((cou: SelectListType<T>, index: number) => (
       <div key={`${cou.value}-${index}`} className="select__drop_arrow" onClick={onClickOption} data-select={cou.value}>{cou.text}</div>
     ))
   }, [selectList, onClickOption])
 
   useEffect(() => {
     if(inputRef.current) inputRef.current.value = defaultValue as string;
-  }, [defaultValue])
+  }, [defaultValue]);
 
   return (
     <div className={ClassNames("select")} data-testid="select">

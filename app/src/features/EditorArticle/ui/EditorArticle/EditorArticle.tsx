@@ -9,6 +9,8 @@ import {InputDynamic} from "../../../../widgets/InputDynamic";
 import {BgEnum} from "../../../../shared/const/BgEnum";
 import {ArticleFormType} from "../../model/types/ArticleFormType";
 import {ImageDynamic} from "../../../../widgets/ImageDynamic";
+import {TypeDynamic} from "../../../../widgets/TypeDynamic";
+import {ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
 
 interface EditorArticleProps {
   className?: string,
@@ -72,9 +74,13 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
           />
           <ImageDynamic
             name="img"
-            // entryImage={"https://eimg.pravda.com/images/doc/0/b/0b9b29c-what-is-url-770x503.jpg"}
             loadImage={loadImageArticle}
-            validation={{ required: { value: true, message: "required.img" } }}
+            validation={{ required: { value: true, message: t("required.img") } }}
+          />
+          <TypeDynamic
+            name="type"
+            label={t("label.type")}
+            validation={{ required: { value: true, message: t("required.type") } }}
           />
 
           <Button
