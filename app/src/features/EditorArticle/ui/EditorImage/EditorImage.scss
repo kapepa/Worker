@@ -1,0 +1,15 @@
+.editor-image{
+  &__header{
+    display: flex;
+    column-gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__label{
+    font-size: 18px;
+    color: var(--primary-color);
+  }
+  &__main{
+
+  }
+}

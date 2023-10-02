@@ -86,7 +86,7 @@ const TypeDynamic: FC<TypeDynamicProps> = memo((props) => {
         return accum;
       }, prevState);
     })
-  }, [setTabs])
+  }, [name, getValues, setTabs])
 
   useEffect(() => {
     clearErrors(name)
