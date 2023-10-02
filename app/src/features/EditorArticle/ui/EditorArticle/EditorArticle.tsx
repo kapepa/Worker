@@ -10,7 +10,7 @@ import {BgEnum} from "../../../../shared/const/BgEnum";
 import {ArticleFormType} from "../../model/types/ArticleFormType";
 import {ImageDynamic} from "../../../../widgets/ImageDynamic";
 import {TypeDynamic} from "../../../../widgets/TypeDynamic";
-import {ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
+import {EditorBlocks} from "../EditorBlocks/EditorBlocks";
 
 interface EditorArticleProps {
   className?: string,
@@ -82,7 +82,9 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
             label={t("label.type")}
             validation={{ required: { value: true, message: t("required.type") } }}
           />
-
+          <EditorBlocks
+            label={t("label.blocks")}
+          />
           <Button
             theme={ThemeButtonEnum.OUTLINE}
             type="submit"

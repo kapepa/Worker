@@ -9,10 +9,18 @@ import {GetEditorArticleError} from "./model/selectors/GetEditorArticleError/Get
 import {GetEditorArticleRecord} from "./model/selectors/GetEditorArticleRecord/GetEditorArticleRecord";
 import {GetEditorArticleEdit} from "./model/selectors/GetEditorArticleEdit/GetEditorArticleEdit";
 import {ArticleFormImgType} from "./model/types/ArticleFormType";
+import {EditorBlocks} from "./ui/EditorBlocks/EditorBlocks";
+import {EditorImage} from "./ui/EditorImage/EditorImage";
+import {EditorText} from "./ui/EditorText/EditorText";
+import {EditorCode} from "./ui/EditorCode/EditorCode";
 
 export {
   EditorArticle,
   EditorArticleActions,
+  EditorBlocks,
+  EditorImage,
+  EditorText,
+  EditorCode,
   EditorArticleReducer,
   FetchEditorArticle,
   GetEditorArticle,

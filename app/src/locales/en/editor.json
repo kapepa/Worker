@@ -11,7 +11,8 @@
     "title": "Title",
     "subtitle": "Subtitle",
     "Image": "Image",
-    "type": "Type"
+    "type": "Type",
+    "blocks": "Blocks"
   },
   "placeholder": {
     "title": "Title article",
@@ -26,5 +27,11 @@
   "minLength": {
     "title": "Short title",
     "subtitle": "Short subtitle"
-  }
+  },
+  "block": {
+    "code": "Code",
+    "image": "Image",
+    "text": "Text"
+  },
+  "delete": "Delete"
 }
