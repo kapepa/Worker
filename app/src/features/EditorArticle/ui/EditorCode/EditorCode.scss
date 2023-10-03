@@ -1,9 +1,11 @@
 .editor-code{
+  border-bottom: 1px solid var(--primary-color-inverted);
   &__header{
     display: flex;
     column-gap: 20px;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 10px;
   }
   &__label{
     font-size: 18px;
