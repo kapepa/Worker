@@ -40,8 +40,8 @@ const InputDynamic: FC<InputDynamicProps> = memo((props) => {
           return {[name]: {...errors[name], message: validation[key].message}}
         }
     }
-    return errors
-  }, [validation, errors, name])
+    return errors;
+  }, [validation, errors, name]);
 
   return (
     <div className={ClassNames("input-dynamic", className)}>

@@ -16,8 +16,8 @@ interface ImageDynamicProps {
 
 const ImageDynamic: FC<ImageDynamicProps> = memo((props: ImageDynamicProps) => {
   const { name, validation, className, classAlert, loadImage} = props;
-  const { register, formState: { errors }, setValue, getValues, clearErrors } = useFormContext();
-  const { ref, ...reg } = register(name, validation);
+  const { register, control, formState: { errors }, setValue, getValues, clearErrors } = useFormContext();
+  const { ref, onChange, ...reg } = register(name, validation);
   const [entryImage, setEntryImage] = useState<string | undefined>(undefined);
   const toHaveError = errors[name];
 

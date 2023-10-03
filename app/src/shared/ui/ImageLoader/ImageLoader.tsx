@@ -1,4 +1,4 @@
-import {FC, memo, useCallback, useRef, MouseEvent, ChangeEvent, useState, useMemo, useEffect} from "react";
+import {FC, memo, useCallback, useRef, MouseEvent, ChangeEvent, useState, useMemo, useEffect, RefObject} from "react";
 import "./ImageLoader.scss"
 import {ClassNames} from "../../lib/ClassNames";
 import Button, {ThemeButtonEnum} from "../Button/Button";

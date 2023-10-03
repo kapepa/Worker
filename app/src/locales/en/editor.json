@@ -12,11 +12,17 @@
     "subtitle": "Subtitle",
     "Image": "Image",
     "type": "Type",
-    "blocks": "Blocks"
+    "blocks": "Blocks",
+    "block-image": "Title image",
+    "block-text": "Title text"
   },
   "placeholder": {
     "title": "Title article",
-    "subtitle": "Subtitle article"
+    "subtitle": "Subtitle article",
+    "code": "Your code",
+    "block-image": "Title for your image",
+    "block-text": "Title for your text",
+    "block-textarea": "Your text for block"
   },
   "required": {
     "title": "Title is required",
