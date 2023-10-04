@@ -18,7 +18,7 @@ const ImageDynamic: FC<ImageDynamicProps> = memo((props: ImageDynamicProps) => {
   const { name, validation, className, classAlert, loadImage} = props;
   const { register, control, formState: { errors }, setValue, getValues, clearErrors } = useFormContext();
   const { ref, onChange, ...reg } = register(name, validation);
-  const [entryImage, setEntryImage] = useState<string | undefined>(undefined);
+  const [ entryImage, setEntryImage] = useState<string | undefined>(undefined);
   const toHaveError = errors[name];
 
   const onChangeImage = useCallback((file: File) => {
@@ -40,6 +40,7 @@ const ImageDynamic: FC<ImageDynamicProps> = memo((props: ImageDynamicProps) => {
   },[name, clearErrors])
 
   useEffect(() => {
+    console.log(getValues()["blocks"][1]["src"])
     setEntryImage(getValues()[name]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])

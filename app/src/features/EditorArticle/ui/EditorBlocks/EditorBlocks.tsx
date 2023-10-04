@@ -83,6 +83,7 @@ const EditorBlocks: FC<EditorBlocks> = memo(({className, label, theme, control})
             key={`${block.type}-${index}`}
             index={index}
             onRemove={onRemoveBlock}
+            control={control}
             {...block}
           />;
       }

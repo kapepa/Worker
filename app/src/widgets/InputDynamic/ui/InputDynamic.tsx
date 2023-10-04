@@ -22,13 +22,9 @@ interface InputDynamicProps extends InputHTMLAttributes<HTMLInputElement>{
 
 const InputDynamic: FC<InputDynamicProps> = memo((props) => {
   const { className, classLabel, classInput, classAlert, themeInput, colorLabel, label, validation, name, defaultValue, ...otherProps } = props;
-  const { register, formState: { errors }, setValue, clearErrors } = useFormContext();
+  const { register, formState: { errors }, getValues, clearErrors } = useFormContext();
   const { ref, ...reg } = register(name, validation);
   const toHaveError = errors[name];
-
-  useEffect(() => {
-    setValue(name,defaultValue);
-  }, [defaultValue, name, setValue])
 
   useEffect(() => {
     clearErrors(name)
@@ -43,6 +39,10 @@ const InputDynamic: FC<InputDynamicProps> = memo((props) => {
     return errors;
   }, [validation, errors, name]);
 
+  const getDefaultValue = useMemo(() => {
+    return getValues(name)
+  },[name, getValues]);
+
   return (
     <div className={ClassNames("input-dynamic", className)}>
       {!!label &&
@@ -52,7 +52,13 @@ const InputDynamic: FC<InputDynamicProps> = memo((props) => {
         >{label}</label>
       }
       <div className="input-dynamic__board">
-        <Input className={ClassNames("input-dynamic__input", classInput)}  theme={themeInput} refs={{ref}} { ...Object.assign(reg, otherProps) }/>
+        <Input
+          className={ClassNames("input-dynamic__input", classInput)}
+          theme={themeInput}
+          refs={{ref}}
+          defaultValue={getDefaultValue}
+          {...Object.assign(reg, otherProps)}
+        />
         { !!toHaveError &&
           <span className={ClassNames("input-dynamic__alert", classAlert)} data-testid="alert">
             <ErrorMessage errors={translateError} name={name} />

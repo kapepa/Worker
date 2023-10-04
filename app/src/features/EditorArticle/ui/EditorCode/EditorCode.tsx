@@ -1,14 +1,13 @@
-import {FC, memo, useEffect, useMemo} from "react";
+import {FC, memo, useMemo} from "react";
 import "./EditorCode.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
-import {ArticleBlockCode, ArticleBlockType} from "../../../../entities/Article/model/types/articleBlock";
+import {ArticleBlockCode} from "../../../../entities/Article/model/types/articleBlock";
 import {useTranslation} from "react-i18next";
 import XClose from "../../../../shared/ui/XClose/XClose";
 import {Textarea} from "../../../../shared/ui/Textarea/Textarea";
 import {BgEnum} from "../../../../shared/const/BgEnum";
-import {Control, useController, useForm, useFormContext} from "react-hook-form";
+import {Control, useController} from "react-hook-form";
 import {ArticleFormType} from "../../model/types/ArticleFormType";
-import {ErrorMessage} from "@hookform/error-message";
 
 interface EditorCodeProps extends Partial<ArticleBlockCode>{
   className?: string,
@@ -29,37 +28,32 @@ const EditorCode: FC<EditorCodeProps> = memo((props: EditorCodeProps) => {
     theme,
     control,
   } = props;
-  const { field, fieldState } = useController({
+  const { field: {ref, ...otherField}, fieldState } = useController({
     control,
-    rules: {required: { value: true, message: t("required.img") }},
+    rules: {required: { value: true, message: t("required.code")}},
     name: `blocks.${index}.code`
   });
 
-  // const translateError = useMemo(() => {
-  //   if(name in errors){
-  //     for(let key in validation) if(errors[name]?.type === key) {
-  //       return {[name]: {...errors[name], message: validation[key].message}}
-  //     }
-  //   }
-  //   return errors
-  // }, [errors, name]);
-
-  console.log(fieldState)
+  const translateError = useMemo(() => {
+    return fieldState.error;
+  }, [fieldState.error]);
 
   return (
     <div className={ClassNames("editor-code", className)}>
-      <div className="editor-code__header">
-        <label className="editor-code__label">{t(`block.code`)}</label>
-        <XClose color={"PRIMARY_COLOR"} onClick={() => onRemove(index)} type="button" title={t("delete")}/>
+      <div className="input-dynamic__board">
+        <div className="editor-code__header">
+          <label className="editor-code__label">{t(`block.code`)}</label>
+          <XClose color={"PRIMARY_COLOR"} onClick={() => onRemove(index)} type="button" title={t("delete")}/>
+        </div>
+        <div className="editor-code__main">
+          <Textarea theme={theme} placeholder={t("placeholder.code")} refs={{ref}} {...otherField} />
+        </div>
+        { !!translateError &&
+          <span className={ClassNames("editor-code__alert", classAlert)} data-testid="alert">
+            {fieldState.error?.message}
+          </span>
+        }
       </div>
-      <div className="editor-code__main">
-        <Textarea theme={theme} placeholder={t("placeholder.code")}  />
-      </div>
-      {/*{ !!toHaveError &&*/}
-      {/*  <span className={ClassNames("input-dynamic__alert", classAlert)} data-testid="alert">*/}
-      {/*    <ErrorMessage errors={translateError} name={name} />*/}
-      {/*  </span>*/}
-      {/*}*/}
     </div>
   )
 });
