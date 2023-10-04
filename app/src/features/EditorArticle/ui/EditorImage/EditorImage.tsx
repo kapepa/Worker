@@ -7,16 +7,24 @@ import {useTranslation} from "react-i18next";
 import {ImageDynamic} from "../../../../widgets/ImageDynamic";
 import {InputDynamic} from "../../../../widgets/InputDynamic";
 import {BgEnum} from "../../../../shared/const/BgEnum";
+import {Control, useController} from "react-hook-form";
+import {ArticleFormType} from "../../model/types/ArticleFormType";
 
 interface EditorImageProps extends Partial<ArticleBlocImage>{
   className?: string,
   index: number,
   onRemove: (index: number) => void,
+  control: Control<ArticleFormType>
 }
 
 const EditorImage: FC<EditorImageProps> = memo((props: EditorImageProps) => {
   const {t} = useTranslation("editor");
-  const {className, index, onRemove, id, type, src, title} = props;
+  const {className, index, onRemove, control, id, type, src, title} = props;
+  const { field: {ref, ...otherField}, fieldState } = useController({
+    control,
+    rules: {required: { value: true, message: t("required.code")}},
+    name: `blocks.${index}`
+  });
 
   const loadImageArticle = useCallback((file: File) => {
     console.log(file)
@@ -26,6 +34,8 @@ const EditorImage: FC<EditorImageProps> = memo((props: EditorImageProps) => {
     console.log(e.target)
   }, [])
 
+  console.log()
+
   return (
     <div className={ClassNames("editor-image", className)}>
       <div className="editor-image__header">
@@ -34,7 +44,7 @@ const EditorImage: FC<EditorImageProps> = memo((props: EditorImageProps) => {
       </div>
       <div className="editor-image__main">
         <InputDynamic
-          name="title"
+          name={`blocks.${index}.title`}
           type="title"
           label={t("label.block-image")}
           placeholder={t("placeholder.block-image")}
@@ -44,7 +54,7 @@ const EditorImage: FC<EditorImageProps> = memo((props: EditorImageProps) => {
           themeInput={BgEnum.BG_COLOR}
         />
         <ImageDynamic
-          name="img"
+          name={`blocks.${index}.src`}
           loadImage={loadImageArticle}
           validation={{ required: { value: true, message: t("required.img") } }}
         />
