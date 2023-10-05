@@ -1,10 +1,9 @@
-import {FC, InputHTMLAttributes, memo, useEffect, useMemo} from "react";
+import {ChangeEvent, FC, InputHTMLAttributes, memo, useCallback, useEffect, useMemo} from "react";
 import "./InputDynamic.scss";
 import {ClassNames} from "../../../shared/lib/ClassNames";
-import {useFormContext} from "react-hook-form";
+import {useController, useFormContext} from "react-hook-form";
 import {Input} from "../../../shared/ui/Input/Input";
 import {RegisterOptions} from "react-hook-form/dist/types/validator";
-import { ErrorMessage } from '@hookform/error-message/dist';
 import {BgEnum} from "../../../shared/const/BgEnum";
 import {ColorEnum} from "../../../shared/const/ColorEnum";
 
@@ -22,26 +21,21 @@ interface InputDynamicProps extends InputHTMLAttributes<HTMLInputElement>{
 
 const InputDynamic: FC<InputDynamicProps> = memo((props) => {
   const { className, classLabel, classInput, classAlert, themeInput, colorLabel, label, validation, name, defaultValue, ...otherProps } = props;
-  const { register, formState: { errors }, getValues, clearErrors } = useFormContext();
-  const { ref, ...reg } = register(name, validation);
-  const toHaveError = errors[name];
+  const { control, clearErrors } = useFormContext();
+  const { field: {ref, onChange, ...otherField}, fieldState } = useController({name, control, rules: validation})
 
   useEffect(() => {
     clearErrors(name)
   },[defaultValue, name, clearErrors])
 
   const translateError = useMemo(() => {
-    if(name in errors){
-      for(let key in validation) if(errors[name]?.type === key) {
-          return {[name]: {...errors[name], message: validation[key].message}}
-        }
-    }
-    return errors;
-  }, [validation, errors, name]);
+    return fieldState.error;
+  }, [fieldState.error]);
 
-  const getDefaultValue = useMemo(() => {
-    return getValues(name)
-  },[name, getValues]);
+  const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e);
+    if(!!otherProps.onChange) otherProps.onChange(e);
+  }, [onChange, otherProps])
 
   return (
     <div className={ClassNames("input-dynamic", className)}>
@@ -53,15 +47,15 @@ const InputDynamic: FC<InputDynamicProps> = memo((props) => {
       }
       <div className="input-dynamic__board">
         <Input
+          {...Object.assign(otherField, otherProps)}
           className={ClassNames("input-dynamic__input", classInput)}
           theme={themeInput}
           refs={{ref}}
-          defaultValue={getDefaultValue}
-          {...Object.assign(reg, otherProps)}
+          onChange={onChangeInput}
         />
-        { !!toHaveError &&
+        { !!translateError &&
           <span className={ClassNames("input-dynamic__alert", classAlert)} data-testid="alert">
-            <ErrorMessage errors={translateError} name={name} />
+            {translateError.message}
           </span>
         }
       </div>

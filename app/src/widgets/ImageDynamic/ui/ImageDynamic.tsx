@@ -2,9 +2,8 @@ import {FC, memo, useCallback, useEffect, useMemo, useState} from "react";
 import "./ImageDynamic.scss"
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import {ImageLoader} from "../../../shared/ui/ImageLoader/ImageLoader";
-import {useFormContext} from "react-hook-form";
+import {useController, useFormContext} from "react-hook-form";
 import {RegisterOptions} from "react-hook-form/dist/types/validator";
-import {ErrorMessage} from "@hookform/error-message/dist";
 
 interface ImageDynamicProps {
   name: string,
@@ -16,10 +15,9 @@ interface ImageDynamicProps {
 
 const ImageDynamic: FC<ImageDynamicProps> = memo((props: ImageDynamicProps) => {
   const { name, validation, className, classAlert, loadImage} = props;
-  const { register, control, formState: { errors }, setValue, getValues, clearErrors } = useFormContext();
-  const { ref, onChange, ...reg } = register(name, validation);
+  const { control, setValue, getValues, clearErrors } = useFormContext();
+  const { field: {ref, onChange, value, ...otherField}, fieldState } = useController({name, control, rules: validation})
   const [ entryImage, setEntryImage] = useState<string | undefined>(undefined);
-  const toHaveError = errors[name];
 
   const onChangeImage = useCallback((file: File) => {
     setValue(name, file);
@@ -27,21 +25,15 @@ const ImageDynamic: FC<ImageDynamicProps> = memo((props: ImageDynamicProps) => {
   }, [name, loadImage, setValue]);
 
   const translateError = useMemo(() => {
-    if(name in errors){
-      for(let key in validation) if(errors[name]?.type === key) {
-        return {[name]: {...errors[name], message: validation[key].message}}
-      }
-    }
-    return errors
-  }, [validation, errors, name])
+    return fieldState.error;
+  }, [fieldState.error]);
 
   useEffect(() => {
     clearErrors(name)
   },[name, clearErrors])
 
   useEffect(() => {
-    console.log(getValues()["blocks"][1]["src"])
-    setEntryImage(getValues()[name]);
+    setEntryImage(getValues([name][0]));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
@@ -51,11 +43,11 @@ const ImageDynamic: FC<ImageDynamicProps> = memo((props: ImageDynamicProps) => {
         <ImageLoader
           loadImage={onChangeImage}
           entryImage={entryImage}
-          {...reg}
+          {...otherField}
         />
-        { !!toHaveError &&
+        { !!translateError &&
           <span className={ClassNames("image-dynamic__alert", classAlert)} data-testid="alert">
-            <ErrorMessage errors={translateError} name={name} />
+            {translateError.message}
           </span>
         }
       </div>

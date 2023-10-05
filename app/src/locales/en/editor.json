@@ -29,7 +29,8 @@
     "subtitle": "Subtitle is required",
     "img": "Image is required",
     "type": "Type is required",
-    "code": "Code is required"
+    "code": "Code is required",
+    "paragraphs": "Text is required"
   },
   "minLength": {
     "title": "Short title",
