@@ -6,7 +6,7 @@ import {I18nextProvider} from "react-i18next";
 
 const RenderWithForm = (component: ReactNode, {defaultValues}: {defaultValues: {[key: string]: string}}) => {
   const Form: FC = () => {
-    const onSubmit: SubmitHandler<any> = (data:any) => {}
+    const onSubmit: SubmitHandler<any> = (data: any) => {}
     const methods = useForm({
       defaultValues,
     });

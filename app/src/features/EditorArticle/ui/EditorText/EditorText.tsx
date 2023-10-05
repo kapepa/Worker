@@ -6,7 +6,7 @@ import XClose from "../../../../shared/ui/XClose/XClose";
 import {useTranslation} from "react-i18next";
 import {InputDynamic} from "../../../../widgets/InputDynamic";
 import {BgEnum} from "../../../../shared/const/BgEnum";
-import {Textarea} from "../../../../shared/ui/Textarea/Textarea";
+import {TextareaDynamic} from "../../../../widgets/TextareaDynamic";
 
 interface EditorTextProps extends Partial<ArticleBlockText>{
   className?: string,
@@ -16,10 +16,14 @@ interface EditorTextProps extends Partial<ArticleBlockText>{
 }
 
 const EditorText: FC<EditorTextProps> = memo((props: EditorTextProps) => {
-  const {t} = useTranslation("editor");
-  const {className, index, id, onRemove,  title, type, paragraphs, theme} = props;
+  const { t} = useTranslation("editor");
+  const { className, index, onRemove, theme} = props;
 
-  const onChangeArticle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeTitle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target)
+  }, [])
+
+  const onChangeParagraphs = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     console.log(e.target)
   }, [])
 
@@ -31,16 +35,22 @@ const EditorText: FC<EditorTextProps> = memo((props: EditorTextProps) => {
       </div>
       <div className="editor-text__main">
         <InputDynamic
-          name="title"
+          name={`blocks.${index}.title`}
           type="title"
           label={t("label.block-text")}
           placeholder={t("placeholder.block-text")}
           classInput="editor-article__input"
           validation={{ required: { value: true, message: t("required.title") }, minLength: { value: 3, message: t("minLength.title") } }}
-          onChange={onChangeArticle}
+          onChange={onChangeTitle}
           themeInput={BgEnum.BG_COLOR}
         />
-        <Textarea theme={theme} placeholder={t("placeholder.block-textarea")} />
+        <TextareaDynamic
+          theme={theme}
+          placeholder={t("placeholder.block-textarea")}
+          name={`blocks.${index}.paragraphs`}
+          validation={{ required: { value: true, message: t("required.paragraphs") } }}
+          onChange={onChangeParagraphs}
+        />
       </div>
     </div>
   )

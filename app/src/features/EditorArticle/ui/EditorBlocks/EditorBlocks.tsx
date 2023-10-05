@@ -17,14 +17,14 @@ import {BgEnum} from "../../../../shared/const/BgEnum";
 import {useFieldArray, Control} from "react-hook-form";
 import {ArticleFormType} from "../../model/types/ArticleFormType";
 
-interface EditorBlocks {
+interface EditorBlocksProps {
   className?: string,
   label: string,
   theme: BgEnum,
   control: Control<ArticleFormType>
 }
 
-const EditorBlocks: FC<EditorBlocks> = memo(({className, label, theme, control}) => {
+const EditorBlocks: FC<EditorBlocksProps> = memo(({className, label, theme, control}) => {
   const {t} = useTranslation("editor");
   const [blocks, setBlocks] = useState<ArticleBlocks[]>([]);
   const { fields, append, remove } = useFieldArray({
@@ -45,18 +45,18 @@ const EditorBlocks: FC<EditorBlocks> = memo(({className, label, theme, control})
     }
 
     return !!block ? block : addBlock();
-  }, [blocks, setBlocks]);
+  }, []);
 
   const onCreateBlock = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     const name: ArticleBlockType = e.currentTarget.name as ArticleBlockType;
     const getBlock: ArticleBlocks = appendBlocks(name);
 
     append(getBlock);
-  }, [blocks]);
+  }, [append, appendBlocks]);
 
   const onRemoveBlock = useCallback((index: number) => {
     remove(index);
-  }, [blocks, setBlocks]);
+  }, [remove]);
 
   const renderBlocks = useMemo(() => {
     return blocks.map((block: ArticleBlocks, index: number) => {
@@ -75,7 +75,6 @@ const EditorBlocks: FC<EditorBlocks> = memo(({className, label, theme, control})
             index={index}
             onRemove={onRemoveBlock}
             theme={theme}
-            control={control}
             {...block}
           />;
         case ArticleBlockType.IMAGE:
@@ -83,12 +82,13 @@ const EditorBlocks: FC<EditorBlocks> = memo(({className, label, theme, control})
             key={`${block.type}-${index}`}
             index={index}
             onRemove={onRemoveBlock}
-            control={control}
             {...block}
           />;
+        default:
+          return undefined;
       }
     })
-  }, [blocks, onRemoveBlock]);
+  }, [theme, blocks, onRemoveBlock]);
 
   useEffect(() => {
     setBlocks(fields)
