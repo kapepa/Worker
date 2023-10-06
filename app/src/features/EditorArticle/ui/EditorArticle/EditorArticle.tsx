@@ -11,25 +11,27 @@ import {ArticleFormType} from "../../model/types/ArticleFormType";
 import {ImageDynamic} from "../../../../widgets/ImageDynamic";
 import {TypeDynamic} from "../../../../widgets/TypeDynamic";
 import {EditorBlocks} from "../EditorBlocks/EditorBlocks";
-import {ArticleBlockType} from "../../../../entities/Article/model/types/articleBlock";
-import {ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../../../app/providers/Store/config/store";
+import {EditorArticleActions} from "../../model/slice/editorArticleSlice";
+import {ArticleBlocks, ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
 
 interface EditorArticleProps {
   className?: string,
   isEdit: boolean,
 }
 const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
+  const dispatch = useDispatch<AppDispatch>();
   const {t} = useTranslation("editor");
+  const {
+    setTitle,
+    setSubtitle,
+    setImg ,
+    setType,
+    setBlocks,
+  } = EditorArticleActions;
   const methods = useForm<ArticleFormType>({
-    defaultValues: {
-      title: "Mock test Title",
-      subtitle: "Mock test Subtitle!",
-      img: "",
-      type: [ArticleTypesKey.IT],
-      blocks: [
-        {"id": "14", "type": ArticleBlockType.TEXT, "title": "Заголовок этого блока", "paragraphs": []}
-      ]
-    },
+    defaultValues: {}
   });
 
   const getTitle: string = useMemo(() => {
@@ -41,12 +43,31 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
   }, [t, isEdit]);
 
   const onChangeArticle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target)
-  }, [])
+    const target = e.currentTarget;
+    const name = target.name as keyof ArticleFormType;
+    const value = target.value;
+
+    switch (name) {
+      case "title": dispatch(setTitle(value));
+        break;
+      case "subtitle": dispatch(setSubtitle(value));
+        break;
+    }
+  }, [dispatch, setTitle, setSubtitle]);
 
   const loadImageArticle = useCallback((file: File) => {
-    console.log(file)
-  }, [])
+    dispatch(setImg(file));
+  }, [dispatch, setImg]);
+
+  const onToggleType = useCallback((type: ArticleTypesKey[]): void => {
+    dispatch(setType(type))
+  }, [dispatch, setType]);
+
+  const onToggleBlocks = useCallback((block: any) => {
+    const getBlocks: ArticleBlocks[] | undefined = methods.getValues("blocks");
+    // if(getBlocks) dispatch(setBlocks(getBlocks));
+    if(getBlocks) dispatch(setBlocks([...getBlocks]));
+  },[methods, dispatch, setBlocks]);
 
   const onSubmit: SubmitHandler<ArticleFormType> = (data: ArticleFormType) => console.log(data)
 
@@ -92,11 +113,13 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
             name="type"
             label={t("label.type")}
             validation={{ required: { value: true, message: t("required.type") } }}
+            onToggleType={onToggleType}
           />
           <EditorBlocks
             label={t("label.blocks")}
             theme={BgEnum.BG_COLOR}
             control={methods.control}
+            onToggleBlocks={onToggleBlocks}
           />
           <Button
             theme={ThemeButtonEnum.OUTLINE}
