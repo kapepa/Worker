@@ -20,12 +20,13 @@ interface TypeDynamicProps {
   classAlert?: string,
   label?: string,
   colorLabel?: ColorEnum,
-  validation: RegisterOptions
+  validation: RegisterOptions,
+  onToggleType(type: ArticleTypesKey[]): void,
 }
 
-const TypeDynamic: FC<TypeDynamicProps> = memo((props) => {
+const TypeDynamic: FC<TypeDynamicProps> = memo((props: TypeDynamicProps) => {
   const {t} = useTranslation("article");
-  const {className, classLabel, classAlert, name, label, colorLabel, validation} = props;
+  const {className, classLabel, classAlert, name, label, colorLabel, validation, onToggleType} = props;
   const {register, formState: { errors }, setValue, getValues, clearErrors } = useFormContext();
   const toHaveError = errors[name];
 
@@ -47,11 +48,12 @@ const TypeDynamic: FC<TypeDynamicProps> = memo((props) => {
     const toArrayTabs: ArticleTypesKey[] = (Object.entries(setActive) as Array<TabEntries>).reduce((accum: ArticleTypesKey[], [val, bool]: TabEntries) => {
       if(bool) accum.push(val);
       return accum;
-    }, []);
+    }, [] as ArticleTypesKey[]);
 
     setTabs(setActive);
     setValue(name, toArrayTabs);
-  }, [name, tabs, setValue]);
+    onToggleType(toArrayTabs);
+  }, [onToggleType, name, tabs, setValue]);
 
   const translateError = useMemo(() => {
     if(name in errors){

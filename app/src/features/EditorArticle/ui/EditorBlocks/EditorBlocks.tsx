@@ -21,13 +21,15 @@ interface EditorBlocksProps {
   className?: string,
   label: string,
   theme: BgEnum,
-  control: Control<ArticleFormType>
+  control: Control<ArticleFormType>,
+  onToggleBlocks(block: any): void,
 }
 
-const EditorBlocks: FC<EditorBlocksProps> = memo(({className, label, theme, control}) => {
+const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
+  const {className, label, theme, control, onToggleBlocks} = props;
   const {t} = useTranslation("editor");
   const [blocks, setBlocks] = useState<ArticleBlocks[]>([]);
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove,  } = useFieldArray({
     control,
     name: "blocks"
   });
@@ -52,11 +54,13 @@ const EditorBlocks: FC<EditorBlocksProps> = memo(({className, label, theme, cont
     const getBlock: ArticleBlocks = appendBlocks(name);
 
     append(getBlock);
-  }, [append, appendBlocks]);
+    onToggleBlocks(getBlock);
+  }, [append, appendBlocks, onToggleBlocks]);
 
   const onRemoveBlock = useCallback((index: number) => {
     remove(index);
-  }, [remove]);
+    // onToggleBlocks();
+  }, [remove, onToggleBlocks]);
 
   const renderBlocks = useMemo(() => {
     return blocks.map((block: ArticleBlocks, index: number) => {

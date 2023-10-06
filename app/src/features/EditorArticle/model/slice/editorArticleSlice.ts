@@ -1,6 +1,8 @@
 import {createSlice, Reducer} from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {EditorArticleState} from "../types/EditorArticleState";
+import {ArticleFormImgType} from "../types/ArticleFormType";
+import {ArticleBlocks, ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
 
 const initialState: EditorArticleState = {
   loading: false,
@@ -17,8 +19,20 @@ const editorArticleSlice = createSlice({
     setIdArticle(state: EditorArticleState, action: PayloadAction<string>) {
       state.idArt = action.payload;
     },
-    setTitle(state, action: PayloadAction<string>) {
+    setTitle(state: EditorArticleState, action: PayloadAction<string>) {
       state.record.title = action.payload;
+    },
+    setSubtitle(state: EditorArticleState, action: PayloadAction<string>){
+      state.record.subtitle = action.payload;
+    },
+    setImg(state: EditorArticleState, action: PayloadAction<ArticleFormImgType>) {
+      state.record.img = action.payload;
+    },
+    setType(state: EditorArticleState, action: PayloadAction<ArticleTypesKey[]>) {
+      state.record.type = action.payload;
+    },
+    setBlocks(state: EditorArticleState, action: PayloadAction<ArticleBlocks[]>) {
+      state.record.blocks = action.payload;
     },
   },
 })

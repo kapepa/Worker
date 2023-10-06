@@ -18,7 +18,7 @@ const EditorCode: FC<EditorCodeProps> = memo((props: EditorCodeProps) => {
   const {t} = useTranslation("editor");
   const {className, index, onRemove, theme} = props;
 
-  const onChangeParagraphs = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeCode = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     console.log(e.target)
   }, [])
 
@@ -33,9 +33,9 @@ const EditorCode: FC<EditorCodeProps> = memo((props: EditorCodeProps) => {
           <TextareaDynamic
             theme={theme}
             placeholder={t("placeholder.block-textarea")}
-            name={`blocks.${index}.paragraphs`}
-            validation={{ required: { value: true, message: t("required.paragraphs") } }}
-            onChange={onChangeParagraphs}
+            name={`blocks.${index}.code`}
+            validation={{ required: { value: true, message: t("required.code") } }}
+            onChange={onChangeCode}
           />
         </div>
       </div>
