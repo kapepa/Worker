@@ -22,7 +22,7 @@ interface EditorBlocksProps {
   label: string,
   theme: BgEnum,
   control: Control<ArticleFormType>,
-  onToggleBlocks(block: any): void,
+  onToggleBlocks(): void,
 }
 
 const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
@@ -54,12 +54,12 @@ const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
     const getBlock: ArticleBlocks = appendBlocks(name);
 
     append(getBlock);
-    onToggleBlocks(getBlock);
+    onToggleBlocks();
   }, [append, appendBlocks, onToggleBlocks]);
 
   const onRemoveBlock = useCallback((index: number) => {
     remove(index);
-    // onToggleBlocks();
+    onToggleBlocks();
   }, [remove, onToggleBlocks]);
 
   const renderBlocks = useMemo(() => {

@@ -63,10 +63,9 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
     dispatch(setType(type))
   }, [dispatch, setType]);
 
-  const onToggleBlocks = useCallback((block: any) => {
-    const getBlocks: ArticleBlocks[] | undefined = methods.getValues("blocks");
-    // if(getBlocks) dispatch(setBlocks(getBlocks));
-    if(getBlocks) dispatch(setBlocks([...getBlocks]));
+  const onToggleBlocks = useCallback(() => {
+    const getBlocks: ArticleBlocks[] | undefined = methods.getValues("blocks") as ArticleBlocks[];
+    if(getBlocks) dispatch(setBlocks(getBlocks));
   },[methods, dispatch, setBlocks]);
 
   const onSubmit: SubmitHandler<ArticleFormType> = (data: ArticleFormType) => console.log(data)

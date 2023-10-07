@@ -20,7 +20,6 @@ interface TextareaDynamicProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 }
 
 const TextareaDynamic: FC<TextareaDynamicProps> = memo((props) => {
-  console.log("TextareaDynamic")
   const { className, classText, classLabel, classAlert, validation, theme, name, label, colorLabel, defaultValue,  ...otherProps} = props;
   const { control, clearErrors } = useFormContext();
   const { field: {ref, onChange, ...otherField}, fieldState } = useController({name, control, rules: validation})
@@ -49,7 +48,6 @@ const TextareaDynamic: FC<TextareaDynamicProps> = memo((props) => {
       <div className="textarea-dynamic__board">
         <Textarea
           {...Object.assign(otherField, otherProps)}
-          {...otherProps}
           className={classText}
           theme={theme}
           refs={{ref}}
