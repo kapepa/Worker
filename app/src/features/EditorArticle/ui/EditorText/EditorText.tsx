@@ -7,25 +7,29 @@ import {useTranslation} from "react-i18next";
 import {InputDynamic} from "../../../../widgets/InputDynamic";
 import {BgEnum} from "../../../../shared/const/BgEnum";
 import {TextareaDynamic} from "../../../../widgets/TextareaDynamic";
+import {SetBlocksValueInt} from "../../model/interface/SetBlocksValue.int";
 
 interface EditorTextProps extends Partial<ArticleBlockText>{
   className?: string,
   index: number,
   onRemove: (index: number) => void,
+  setBlocksValue: (props: SetBlocksValueInt) => void,
   theme: BgEnum,
 }
 
 const EditorText: FC<EditorTextProps> = memo((props: EditorTextProps) => {
   const { t} = useTranslation("editor");
-  const { className, index, onRemove, theme} = props;
+  const { className, index, onRemove, theme, setBlocksValue} = props;
 
   const onChangeTitle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target)
-  }, [])
+    const value: string = e.target.value;
+    setBlocksValue({index, name: "title", value});
+  }, [index, setBlocksValue])
 
   const onChangeParagraphs = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target)
-  }, [])
+    const value: string = e.target.value;
+    setBlocksValue({index, name: "paragraphs", value});
+  }, [index, setBlocksValue])
 
   return (
     <div className={ClassNames("editor-text", className)}>

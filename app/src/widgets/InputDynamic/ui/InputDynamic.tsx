@@ -22,7 +22,7 @@ interface InputDynamicProps extends InputHTMLAttributes<HTMLInputElement>{
 const InputDynamic: FC<InputDynamicProps> = memo((props) => {
   const { className, classLabel, classInput, classAlert, themeInput, colorLabel, label, validation, name, defaultValue, ...otherProps } = props;
   const { control, clearErrors } = useFormContext();
-  const { field: {ref, onChange, ...otherField}, fieldState } = useController({name, control, rules: validation})
+  const { field: {ref, onChange, value, ...otherField}, fieldState } = useController({name, control, rules: validation})
 
   useEffect(() => {
     clearErrors(name)
@@ -33,9 +33,10 @@ const InputDynamic: FC<InputDynamicProps> = memo((props) => {
   }, [fieldState.error]);
 
   const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
+    onChange(e)
+    clearErrors(name);
     if(!!otherProps.onChange) otherProps.onChange(e);
-  }, [onChange, otherProps])
+  }, [name, otherProps, onChange, clearErrors]);
 
   return (
     <div className={ClassNames("input-dynamic", className)}>
@@ -52,6 +53,7 @@ const InputDynamic: FC<InputDynamicProps> = memo((props) => {
           theme={themeInput}
           refs={{ref}}
           onChange={onChangeInput}
+          defaultValue={value}
         />
         { !!translateError &&
           <span className={ClassNames("input-dynamic__alert", classAlert)} data-testid="alert">

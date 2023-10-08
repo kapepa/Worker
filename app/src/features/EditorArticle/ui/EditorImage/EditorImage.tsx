@@ -7,24 +7,27 @@ import {useTranslation} from "react-i18next";
 import {ImageDynamic} from "../../../../widgets/ImageDynamic";
 import {InputDynamic} from "../../../../widgets/InputDynamic";
 import {BgEnum} from "../../../../shared/const/BgEnum";
+import {SetBlocksValueInt} from "../../model/interface/SetBlocksValue.int";
 
 interface EditorImageProps extends Partial<ArticleBlocImage>{
   className?: string,
   index: number,
   onRemove: (index: number) => void,
+  setBlocksValue: (props: SetBlocksValueInt) => void,
 }
 
 const EditorImage: FC<EditorImageProps> = memo((props: EditorImageProps) => {
   const {t} = useTranslation("editor");
-  const {className, index, onRemove} = props;
+  const {className, index, onRemove, setBlocksValue} = props;
 
   const loadImageArticle = useCallback((file: File) => {
-    console.log(file)
-  }, [])
+    setBlocksValue({index, name: "src", value: file});
+  }, [index, setBlocksValue])
 
   const onChangeArticle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target)
-  }, [])
+    const value: string = e.target.value;
+    setBlocksValue({index, name: "title", value});
+  }, [index, setBlocksValue])
 
   return (
     <div className={ClassNames("editor-image", className)}>
@@ -35,7 +38,7 @@ const EditorImage: FC<EditorImageProps> = memo((props: EditorImageProps) => {
       <div className="editor-image__main">
         <InputDynamic
           name={`blocks.${index}.title`}
-          type="title"
+          type="text"
           label={t("label.block-image")}
           placeholder={t("placeholder.block-image")}
           classInput="editor-article__input"

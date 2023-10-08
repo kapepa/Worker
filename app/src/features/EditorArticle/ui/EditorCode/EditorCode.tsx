@@ -6,21 +6,25 @@ import {useTranslation} from "react-i18next";
 import XClose from "../../../../shared/ui/XClose/XClose";
 import {BgEnum} from "../../../../shared/const/BgEnum";
 import {TextareaDynamic} from "../../../../widgets/TextareaDynamic";
+import {SetBlocksValueInt} from "../../model/interface/SetBlocksValue.int";
 
 interface EditorCodeProps extends Partial<ArticleBlockCode>{
   className?: string,
   index: number,
   onRemove: (index: number) => void,
+  setBlocksValue: (props: SetBlocksValueInt) => void,
   theme: BgEnum,
 }
 
 const EditorCode: FC<EditorCodeProps> = memo((props: EditorCodeProps) => {
   const {t} = useTranslation("editor");
-  const {className, index, onRemove, theme} = props;
+  const {className, index, setBlocksValue, onRemove, theme} = props;
+  const name = `blocks.${index}.code`
 
   const onChangeCode = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target)
-  }, [])
+    const value: string = e.target.value;
+    setBlocksValue({index, name: "code", value});
+  }, [index, setBlocksValue]);
 
   return (
     <div className={ClassNames("editor-code", className)}>
@@ -33,7 +37,7 @@ const EditorCode: FC<EditorCodeProps> = memo((props: EditorCodeProps) => {
           <TextareaDynamic
             theme={theme}
             placeholder={t("placeholder.block-textarea")}
-            name={`blocks.${index}.code`}
+            name={name}
             validation={{ required: { value: true, message: t("required.code") } }}
             onChange={onChangeCode}
           />

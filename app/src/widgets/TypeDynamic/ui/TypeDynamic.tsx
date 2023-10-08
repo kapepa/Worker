@@ -30,6 +30,10 @@ const TypeDynamic: FC<TypeDynamicProps> = memo((props: TypeDynamicProps) => {
   const {register, formState: { errors }, setValue, getValues, clearErrors } = useFormContext();
   const toHaveError = errors[name];
 
+  useEffect(() => {
+    clearErrors(name)
+  },[name, clearErrors])
+
   const [tabs, setTabs] = useState<TabsState>(
     { [ArticleTypesKey.ECONOMICS] : false, [ArticleTypesKey.IT]: false, [ArticleTypesKey.SCIENCE]: false }
   )
@@ -50,10 +54,11 @@ const TypeDynamic: FC<TypeDynamicProps> = memo((props: TypeDynamicProps) => {
       return accum;
     }, [] as ArticleTypesKey[]);
 
+    clearErrors(name);
     setTabs(setActive);
     setValue(name, toArrayTabs);
     onToggleType(toArrayTabs);
-  }, [onToggleType, name, tabs, setValue]);
+  }, [onToggleType, name, tabs, setValue, clearErrors]);
 
   const translateError = useMemo(() => {
     if(name in errors){

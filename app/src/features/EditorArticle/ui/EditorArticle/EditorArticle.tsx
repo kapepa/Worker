@@ -65,7 +65,8 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
 
   const onToggleBlocks = useCallback(() => {
     const getBlocks: ArticleBlocks[] | undefined = methods.getValues("blocks") as ArticleBlocks[];
-    if(getBlocks) dispatch(setBlocks(getBlocks));
+    const blocks = JSON.parse(JSON.stringify(getBlocks));
+    dispatch(setBlocks(blocks));
   },[methods, dispatch, setBlocks]);
 
   const onSubmit: SubmitHandler<ArticleFormType> = (data: ArticleFormType) => console.log(data)
@@ -77,7 +78,7 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
         <form className="editor-article__form" onSubmit={methods.handleSubmit(onSubmit)}>
           {isEdit && <InputDynamic
             name="id"
-            type="id"
+            type="text"
             className="editor-article__input--hidden"
             validation={{ required: { value: true, message: "" } }}
             onChange={onChangeArticle}
@@ -85,7 +86,7 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
           />}
           <InputDynamic
             name="title"
-            type="title"
+            type="text"
             label={t("label.title")}
             placeholder={t("placeholder.title")}
             classInput="editor-article__input"
@@ -95,7 +96,7 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
           />
           <InputDynamic
             name="subtitle"
-            type="subtitle"
+            type="text"
             label={t("label.subtitle")}
             placeholder={t("placeholder.subtitle")}
             classInput="editor-article__input"

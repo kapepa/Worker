@@ -22,7 +22,8 @@ const ImageDynamic: FC<ImageDynamicProps> = memo((props: ImageDynamicProps) => {
   const onChangeImage = useCallback((file: File) => {
     setValue(name, file);
     loadImage(file);
-  }, [name, loadImage, setValue]);
+    clearErrors(name);
+  }, [name, loadImage, setValue, clearErrors]);
 
   const translateError = useMemo(() => {
     return fieldState.error;
