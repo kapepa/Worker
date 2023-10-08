@@ -34,6 +34,7 @@ const TextareaDynamic: FC<TextareaDynamicProps> = memo((props) => {
 
   const onChangeTextarea = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e);
+    clearErrors(name);
     if(!!otherProps.onChange) otherProps.onChange(e);
   }, [onChange, otherProps])
 

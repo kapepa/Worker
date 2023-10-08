@@ -1,5 +1,5 @@
+import type {PayloadAction} from '@reduxjs/toolkit'
 import {createSlice, Reducer} from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import {EditorArticleState} from "../types/EditorArticleState";
 import {ArticleFormImgType} from "../types/ArticleFormType";
 import {ArticleBlocks, ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
@@ -34,6 +34,10 @@ const editorArticleSlice = createSlice({
     setBlocks(state: EditorArticleState, action: PayloadAction<ArticleBlocks[]>) {
       state.record.blocks = action.payload;
     },
+    setBlocksProperty(state: EditorArticleState, action: PayloadAction<{index: number, block: ArticleBlocks}>) {
+      const { index, block } = action.payload;
+      if(state.record.blocks) state.record.blocks[index] = block;
+    }
   },
 })
 

@@ -13,6 +13,8 @@ import {EditorBlocks} from "./ui/EditorBlocks/EditorBlocks";
 import {EditorImage} from "./ui/EditorImage/EditorImage";
 import {EditorText} from "./ui/EditorText/EditorText";
 import {EditorCode} from "./ui/EditorCode/EditorCode";
+import {SetBlocksValueInt} from "./model/interface/SetBlocksValue.int";
+import {GetEditorArticleBlocks} from "./model/selectors/GetEditorArticleBlocks/GetEditorArticleBlocks";
 
 export {
   EditorArticle,
@@ -29,6 +31,7 @@ export {
   GetEditorArticleError,
   GetEditorArticleRecord,
   GetEditorArticleEdit,
+  GetEditorArticleBlocks,
 };
 
-export type {EditorArticleState, ArticleFormImgType}
+export type {EditorArticleState, ArticleFormImgType, SetBlocksValueInt}

@@ -21,7 +21,7 @@ interface FormCommentProps {
 const FormComment: FC<FormCommentProps> = memo(({className, onSend}) => {
   const dispatch = useDispatch<AppDispatch>();
   const {t} = useTranslation("comments");
-  const { loading, text, error } = useSelector(GetFormComment);
+  const {loading, text, error} = useSelector(GetFormComment);
   const methods = useForm<IFormCommentFormInput>({ defaultValues: {comment: text} });
   const {changeComment} = FormCommentActions;
 

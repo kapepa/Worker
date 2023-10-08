@@ -16,6 +16,11 @@ import {EditorImage} from "../EditorImage/EditorImage";
 import {BgEnum} from "../../../../shared/const/BgEnum";
 import {useFieldArray, Control} from "react-hook-form";
 import {ArticleFormType} from "../../model/types/ArticleFormType";
+import {SetBlocksValueInt} from "../../model/interface/SetBlocksValue.int";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch} from "../../../../app/providers/Store/config/store";
+import {EditorArticleActions} from "../../model/slice/editorArticleSlice";
+import {GetEditorArticleBlocks} from "../../model/selectors/GetEditorArticleBlocks/GetEditorArticleBlocks";
 
 interface EditorBlocksProps {
   className?: string,
@@ -26,9 +31,12 @@ interface EditorBlocksProps {
 }
 
 const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
+  const dispatch = useDispatch<AppDispatch>();
   const {className, label, theme, control, onToggleBlocks} = props;
   const {t} = useTranslation("editor");
+  const getArticleBlocks = useSelector(GetEditorArticleBlocks);
   const [blocks, setBlocks] = useState<ArticleBlocks[]>([]);
+  const {setBlocksProperty} = EditorArticleActions;
   const { fields, append, remove,  } = useFieldArray({
     control,
     name: "blocks"
@@ -62,6 +70,17 @@ const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
     onToggleBlocks();
   }, [remove, onToggleBlocks]);
 
+  const setBlocksValue = useCallback((props: SetBlocksValueInt) => {
+    const {index, name, value} = props;
+
+    if(getArticleBlocks) {
+      const blocks: ArticleBlocks = getArticleBlocks[index];
+      const update = {...blocks, [name]: value};
+      dispatch(setBlocksProperty({ index, block: update }));
+    }
+
+  }, [dispatch, setBlocksProperty, getArticleBlocks]);
+
   const renderBlocks = useMemo(() => {
     return blocks.map((block: ArticleBlocks, index: number) => {
       switch (block.type) {
@@ -70,6 +89,7 @@ const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
             key={`${block.type}-${index}`}
             index={index}
             onRemove={onRemoveBlock}
+            setBlocksValue={setBlocksValue}
             theme={theme}
             {...block}
           />;
@@ -78,6 +98,7 @@ const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
             key={`${block.type}-${index}`}
             index={index}
             onRemove={onRemoveBlock}
+            setBlocksValue={setBlocksValue}
             theme={theme}
             {...block}
           />;
@@ -86,13 +107,14 @@ const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
             key={`${block.type}-${index}`}
             index={index}
             onRemove={onRemoveBlock}
+            setBlocksValue={setBlocksValue}
             {...block}
           />;
         default:
           return undefined;
       }
     })
-  }, [theme, blocks, onRemoveBlock]);
+  }, [theme, blocks, setBlocksValue, onRemoveBlock]);
 
   useEffect(() => {
     setBlocks(fields)
