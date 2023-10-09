@@ -22,7 +22,7 @@ interface TextareaDynamicProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 const TextareaDynamic: FC<TextareaDynamicProps> = memo((props) => {
   const { className, classText, classLabel, classAlert, validation, theme, name, label, colorLabel, defaultValue,  ...otherProps} = props;
   const { control, clearErrors } = useFormContext();
-  const { field: {ref, onChange, ...otherField}, fieldState } = useController({name, control, rules: validation})
+  const { field: {ref, onChange, value, ...otherField}, fieldState } = useController({name, control, rules: validation})
 
   useEffect(() => {
     clearErrors(name)
@@ -53,6 +53,7 @@ const TextareaDynamic: FC<TextareaDynamicProps> = memo((props) => {
           theme={theme}
           refs={{ref}}
           onChange={onChangeTextarea}
+          defaultValue={value}
         />
         { !!translateError &&
           <span className={ClassNames("textarea-dynamic__alert", classAlert)} data-testid="alert">
