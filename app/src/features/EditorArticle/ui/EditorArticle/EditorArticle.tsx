@@ -118,7 +118,6 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
           <EditorBlocks
             label={t("label.blocks")}
             theme={BgEnum.BG_COLOR}
-            control={methods.control}
             onToggleBlocks={onToggleBlocks}
           />
           <Button

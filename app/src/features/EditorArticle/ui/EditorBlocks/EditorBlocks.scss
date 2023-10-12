@@ -7,6 +7,9 @@
     color: var(--primary-color);
     font-size: 18px;
   }
+  &__x-close{
+    position: relative;
+  }
   &__choose{
     display: flex;
     justify-content: center;
