@@ -36,7 +36,7 @@ const TextareaDynamic: FC<TextareaDynamicProps> = memo((props) => {
     onChange(e);
     clearErrors(name);
     if(!!otherProps.onChange) otherProps.onChange(e);
-  }, [onChange, otherProps])
+  }, [name, onChange, otherProps, clearErrors])
 
   return (
     <div className={ClassNames("textarea-dynamic", className)}>

@@ -35,7 +35,13 @@ const EditorText: FC<EditorTextProps> = memo((props: EditorTextProps) => {
     <div className={ClassNames("editor-text", className)}>
       <div className="editor-text__header">
         <label className="editor-text__label">{t(`block.text`)}</label>
-        <XClose color={"PRIMARY_COLOR"} onClick={() => onRemove(index)} type="button" title={t("delete")}/>
+        <XClose
+          color={"PRIMARY_COLOR"}
+          onClick={() => onRemove(index)}
+          type="button"
+          title={t("delete")}
+          className="editor-text__x-close"
+        />
       </div>
       <div className="editor-text__main">
         <InputDynamic

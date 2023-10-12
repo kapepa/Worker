@@ -33,7 +33,13 @@ const EditorImage: FC<EditorImageProps> = memo((props: EditorImageProps) => {
     <div className={ClassNames("editor-image", className)}>
       <div className="editor-image__header">
         <label className="editor-image__label">{t(`block.image`)}</label>
-        <XClose color={"PRIMARY_COLOR"} onClick={() => onRemove(index)} type="button" title={t("delete")}/>
+        <XClose
+          color={"PRIMARY_COLOR"}
+          onClick={() => onRemove(index)}
+          type="button"
+          title={t("delete")}
+          className="editor-image__x-close"
+        />
       </div>
       <div className="editor-image__main">
         <InputDynamic

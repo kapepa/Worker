@@ -31,7 +31,13 @@ const EditorCode: FC<EditorCodeProps> = memo((props: EditorCodeProps) => {
       <div className="input-dynamic__board">
         <div className="editor-code__header">
           <label className="editor-code__label">{t(`block.code`)}</label>
-          <XClose color={"PRIMARY_COLOR"} onClick={() => onRemove(index)} type="button" title={t("delete")}/>
+          <XClose
+            color={"PRIMARY_COLOR"}
+            onClick={() => onRemove(index)}
+            type="button"
+            title={t("delete")}
+            className="editor-code__x-close"
+          />
         </div>
         <div className="editor-code__main">
           <TextareaDynamic

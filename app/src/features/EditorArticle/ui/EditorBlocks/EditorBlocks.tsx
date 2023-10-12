@@ -14,7 +14,7 @@ import {EditorText} from "../EditorText/EditorText";
 import {EditorCode} from "../EditorCode/EditorCode";
 import {EditorImage} from "../EditorImage/EditorImage";
 import {BgEnum} from "../../../../shared/const/BgEnum";
-import {useFieldArray, Control} from "react-hook-form";
+import {useFieldArray, useFormContext} from "react-hook-form";
 import {ArticleFormType} from "../../model/types/ArticleFormType";
 import {SetBlocksValueInt} from "../../model/interface/SetBlocksValue.int";
 import {useDispatch, useSelector} from "react-redux";
@@ -26,17 +26,17 @@ interface EditorBlocksProps {
   className?: string,
   label: string,
   theme: BgEnum,
-  control: Control<ArticleFormType>,
   onToggleBlocks(): void,
 }
 
 const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
   const dispatch = useDispatch<AppDispatch>();
-  const {className, label, theme, control, onToggleBlocks} = props;
+  const {className, label, theme, onToggleBlocks} = props;
   const {t} = useTranslation("editor");
   const getArticleBlocks = useSelector(GetEditorArticleBlocks);
   const [blocks, setBlocks] = useState<ArticleBlocks[]>([]);
   const {setBlocksProperty} = EditorArticleActions;
+  const { control } = useFormContext<ArticleFormType>();
   const { fields, append, remove,  } = useFieldArray({
     control,
     name: "blocks"
