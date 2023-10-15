@@ -3,7 +3,7 @@ import ComponentRender from "../../../../shared/test/componentRender";
 
 describe("<EditorArticle/>", () => {
   test("should be defined", () => {
-    const {getByText} =  ComponentRender(<EditorArticle isEdit={false}/>)
+    const {getByText} =  ComponentRender(<EditorArticle isEdit={false}/>);
 
     expect(getByText("Create an article")).toBeInTheDocument();
     expect(getByText("Title")).toBeInTheDocument();
