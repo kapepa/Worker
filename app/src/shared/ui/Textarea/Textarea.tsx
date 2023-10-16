@@ -16,6 +16,7 @@ const Textarea: FC<TextareaProps> = memo((props: TextareaProps) => {
   return (
     <textarea
       className={ClassNames("textarea", `textarea--${theme}`, className)}
+      data-testid="textarea"
       {...otherProps}
       {...refs}
     >

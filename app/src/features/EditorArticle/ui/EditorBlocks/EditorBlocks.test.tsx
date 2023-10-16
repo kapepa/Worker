@@ -3,8 +3,12 @@ import {EditorBlocks} from "./EditorBlocks";
 import {BgEnum} from "../../../../shared/const/BgEnum";
 import {StateSchema} from "../../../../app/providers/Store";
 import {fireEvent} from "@testing-library/react";
+import ArticleJSON from "../../../../shared/test/mock/article.json";
+import {ArticleType} from "../../../../entities/Article/model/types/articleType";
+import {ArticleBlockCode} from "../../../../entities/Article/model/types/articleBlock";
 
 describe("<EditorBlocks/>", () => {
+  const defaultMock: ArticleType = {...ArticleJSON.article, blocks: [ArticleJSON.code as ArticleBlockCode]} as ArticleType;
   const mockToggleBlocks = jest.fn();
 
   test("should be defined", () => {
@@ -37,5 +41,5 @@ describe("<EditorBlocks/>", () => {
 
     fireEvent.click(blockCode);
     expect(mockToggleBlocks).toHaveBeenCalled();
-  })
+  });
 })

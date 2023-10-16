@@ -36,7 +36,7 @@ const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
   const getArticleBlocks = useSelector(GetEditorArticleBlocks);
   const [blocks, setBlocks] = useState<ArticleBlocks[]>([]);
   const {setBlocksProperty} = EditorArticleActions;
-  const { control } = useFormContext<ArticleFormType>();
+  const { control} = useFormContext<ArticleFormType>();
   const { fields, append, remove,  } = useFieldArray({
     control,
     name: "blocks"
