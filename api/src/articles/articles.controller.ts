@@ -26,15 +26,17 @@ export class ArticlesController {
     private articlesService: ArticlesService
   ) {}
   @UseGuards(AuthGuard)
-  @UseInterceptors(FileFieldsInterceptor([{ name: "img",  maxCount: 1000 }], createMulterOptions()))
+  @UseInterceptors(FileFieldsInterceptor([{ name: "img",  maxCount: 1000 }, {name: "src", maxCount: 1000}], createMulterOptions()))
   @ApiResponse({ status: 201, description: 'Should be create new article'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   @Post("/create/art")
   createArticles(@Req() req: ReqProps, @UploadedFiles() img: Array<Express.Multer.File>, @Body() body: ArticlesInterface): Observable<ArticlesInterface>{
     const toBody = JSON.parse(JSON.stringify(body));
     const toImg = JSON.parse(JSON.stringify(img));
-    if (!!toImg.img?.length) toBody.img = toImg.img[0].filename;
 
+    // this.createBlocks(req, "dasdas", {} as Array<Express.Multer.File>, toBody.blocks)
+    // return {} as Observable<ArticlesInterface>;
+    if (!!toImg.img?.length) toBody.img = toImg.img[0].filename;
     return this.articlesService.saveArticle(Object.assign({users: req.user}, toBody));
   }
 
