@@ -15,14 +15,18 @@ import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {EditorArticleActions} from "../../model/slice/editorArticleSlice";
 import {ArticleBlocks, ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
+import {EditorArticleState} from "../../model/types/EditorArticleState";
 
 interface EditorArticleProps {
   className?: string,
   isEdit: boolean,
+  record: EditorArticleState["record"],
+  sendCallback: () => void,
 }
-const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
+const EditorArticle: FC<EditorArticleProps> = memo((props) => {
   const dispatch = useDispatch<AppDispatch>();
   const {t} = useTranslation("editor");
+  const {className, isEdit, record, sendCallback} = props;
   const {
     setTitle,
     setSubtitle,
@@ -31,7 +35,7 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
     setBlocks,
   } = EditorArticleActions;
   const methods = useForm<ArticleFormType>({
-    defaultValues: {}
+    defaultValues: record
   });
 
   const getTitle: string = useMemo(() => {
@@ -69,7 +73,11 @@ const EditorArticle: FC<EditorArticleProps> = memo(({className, isEdit}) => {
     dispatch(setBlocks(blocks));
   },[methods, dispatch, setBlocks]);
 
-  const onSubmit: SubmitHandler<ArticleFormType> = (data: ArticleFormType) => console.log(data)
+  const onSubmit: SubmitHandler<ArticleFormType> = (data: ArticleFormType) => {
+    //need append reset form;
+    methods.reset()
+    sendCallback()
+  }
 
   return (
     <div className={ClassNames("editor-article", className)}>
