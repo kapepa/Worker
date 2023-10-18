@@ -4,13 +4,14 @@ import {ArticlesEntity} from "./entities/articles.entity";
 import {ArrayContains, ILike, Repository} from "typeorm";
 import {BlocksEntity} from "./entities/blocks.entity";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
-import {from, Observable, of, switchMap, tap, throwError} from "rxjs";
+import {from, Observable, of, switchMap, throwError} from "rxjs";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
 import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
 import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
 import {OrderFieldFind} from "../shared/Types/OrderFieldFind";
 import {ArticlesFilterFields} from "../shared/enum/ArticlesFilterFields";
 import {UsersDto} from "../users/dto/users.dto";
+import {ArticlesBlockType} from "./interfaces/blocks.interface";
 
 @Injectable()
 export class ArticlesService {
@@ -25,7 +26,7 @@ export class ArticlesService {
     return from(this.articlesRepository.save(article));
   }
 
-  saveBlocks( blocks: ArticlesBlocks ): Observable<ArticlesBlocks>{
+  saveBlocks( blocks: ArticlesBlocks ): Observable<ArticlesBlocks | ArticlesBlocks[]>{
     return from(this.blocksRepository.save(blocks));
   }
 
@@ -53,7 +54,7 @@ export class ArticlesService {
     );
   }
 
-  createBlocks(idArt: string, blocks: ArticlesBlocks): Observable<ArticlesBlocks> {
+  createBlocks(idArt: string, blocks: ArticlesBlocks): Observable<ArticlesBlocks | ArticlesBlocks[]> {
     return this.findOneArticle({where: {id: idArt}}).pipe(
       switchMap((article: ArticlesInterface) => {
         blocks.articles = article;
@@ -75,5 +76,16 @@ export class ArticlesService {
 
   getEditArticle(articleID: string, users: UsersDto): Observable<ArticlesInterface> {
     return this.findOneArticle({ where: { id: articleID, users } })
+  }
+
+  createArticles(article: ArticlesInterface): any {
+    const { blocks, ...otherArticles } = article;
+    const toBlocks = !!blocks ? this.blocksRepository.save(blocks) : [];
+
+    return from(toBlocks).pipe(
+      switchMap((blocks: ArticlesBlocks[]) => {
+        return this.saveArticle({...otherArticles, blocks: blocks })
+      })
+    )
   }
 }
