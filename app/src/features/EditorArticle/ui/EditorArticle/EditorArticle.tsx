@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, memo, useCallback, useMemo} from "react";
+import {ChangeEvent, FC, memo, useCallback, useMemo, useRef} from "react";
 import "./EditorArticle.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {useTranslation} from "react-i18next";
@@ -24,6 +24,7 @@ interface EditorArticleProps {
   sendCallback: () => void,
 }
 const EditorArticle: FC<EditorArticleProps> = memo((props) => {
+  const refForm = useRef<HTMLFormElement>(null);
   const dispatch = useDispatch<AppDispatch>();
   const {t} = useTranslation("editor");
   const {className, isEdit, record, sendCallback} = props;
@@ -71,19 +72,19 @@ const EditorArticle: FC<EditorArticleProps> = memo((props) => {
     const getBlocks: ArticleBlocks[] | undefined = methods.getValues("blocks") as ArticleBlocks[];
     const blocks = JSON.parse(JSON.stringify(getBlocks));
     dispatch(setBlocks(blocks));
-  },[methods, dispatch, setBlocks]);
+  }, [dispatch, setBlocks, methods]);
 
-  const onSubmit: SubmitHandler<ArticleFormType> = (data: ArticleFormType) => {
-    //need append reset form;
-    methods.reset()
-    sendCallback()
-  }
+  const onSubmit: SubmitHandler<ArticleFormType> = useCallback((data: ArticleFormType) => {
+    refForm.current?.reset();
+    methods.reset();
+    sendCallback();
+  }, [refForm, methods, sendCallback])
 
   return (
     <div className={ClassNames("editor-article", className)}>
       <Text theme={TextTheme.PRIMARY} title={getTitle} />
       <FormProvider {...methods}>
-        <form className="editor-article__form" onSubmit={methods.handleSubmit(onSubmit)}>
+        <form ref={refForm} className="editor-article__form" onSubmit={methods.handleSubmit(onSubmit)}>
           {isEdit && <InputDynamic
             name="id"
             type="text"

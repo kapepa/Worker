@@ -36,8 +36,8 @@ const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
   const getArticleBlocks = useSelector(GetEditorArticleBlocks);
   const [blocks, setBlocks] = useState<ArticleBlocks[]>([]);
   const {setBlocksProperty} = EditorArticleActions;
-  const { control} = useFormContext<ArticleFormType>();
-  const { fields, append, remove,  } = useFieldArray({
+  const { control, getValues, setValue } = useFormContext<ArticleFormType>();
+  const { fields, append } = useFieldArray({
     control,
     name: "blocks"
   });
@@ -66,9 +66,11 @@ const EditorBlocks: FC<EditorBlocksProps> = memo((props: EditorBlocksProps) => {
   }, [append, appendBlocks, onToggleBlocks]);
 
   const onRemoveBlock = useCallback((index: number) => {
-    remove(index);
+    const getBlocks = getValues("blocks");
+    if(getBlocks) getBlocks.splice(index, 1);
+    setValue("blocks", getBlocks)
     onToggleBlocks();
-  }, [remove, onToggleBlocks]);
+  }, [onToggleBlocks, getValues, setValue]);
 
   const setBlocksValue = useCallback((props: SetBlocksValueInt) => {
     const {index, name, value} = props;

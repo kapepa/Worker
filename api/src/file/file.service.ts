@@ -37,8 +37,4 @@ export class FileService {
 
     return of(true);
   }
-
-  createFile(){
-
-  }
 }

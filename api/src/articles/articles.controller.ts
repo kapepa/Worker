@@ -10,8 +10,8 @@ import {
   UseInterceptors
 } from '@nestjs/common';
 import {AuthGuard} from "../auth/guard/auth.guard";
-import {ApiForbiddenResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {FileFieldsInterceptor, FilesInterceptor} from "@nestjs/platform-express";
+import {ApiConsumes, ApiForbiddenResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {FileFieldsInterceptor} from "@nestjs/platform-express";
 import {createMulterOptions} from "../file/file.service";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
 import {ArticlesService} from "./articles.service";
@@ -25,7 +25,9 @@ export class ArticlesController {
   constructor(
     private articlesService: ArticlesService
   ) {}
+
   @UseGuards(AuthGuard)
+  @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileFieldsInterceptor([{ name: "img",  maxCount: 1000 }], createMulterOptions()))
   @ApiResponse({ status: 201, description: 'Should be create new article'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
@@ -43,7 +45,7 @@ export class ArticlesController {
   @ApiResponse({ status: 201, description: 'Should be create new Block'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   @Post("/create/block/:id")
-  createBlocks(@Req() req: ReqProps, @Param("id") idArt: string, @UploadedFiles() src: Array<Express.Multer.File>, @Body() body: ArticlesBlocks): Observable<ArticlesBlocks | ArticlesBlocks[]>{
+  createBlocks(@Req() req: ReqProps, @Param("id") idArt: string, @UploadedFiles() src: Array<Express.Multer.File>, @Body() body: ArticlesBlocks[]): Observable<ArticlesBlocks | ArticlesBlocks[]>{
     const toBody = JSON.parse(JSON.stringify(body));
     const toSrc =  JSON.parse(JSON.stringify(src));
     if (toSrc.src && !!toSrc.src.length) toBody.src = toSrc.src[0].filename;
