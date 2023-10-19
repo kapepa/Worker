@@ -3,6 +3,7 @@ import {createSlice, Reducer} from '@reduxjs/toolkit'
 import {EditorArticleState} from "../types/EditorArticleState";
 import {ArticleFormImgType} from "../types/ArticleFormType";
 import {ArticleBlocks, ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
+import {CreateEditorArticle} from "../services/CreateEditorArticle/CreateEditorArticle";
 
 const initialState: EditorArticleState = {
   loading: false,
@@ -39,6 +40,21 @@ const editorArticleSlice = createSlice({
       if(state.record.blocks) state.record.blocks[index] = block;
     }
   },
+  extraReducers: builder => {
+    builder
+      .addCase(CreateEditorArticle.pending, (state: EditorArticleState) => {
+        state.loading = true;
+        state.error = undefined;
+      })
+      .addCase(CreateEditorArticle.fulfilled, (state: EditorArticleState) => {
+        state.loading = false;
+        state.record = {};
+      })
+      .addCase(CreateEditorArticle.rejected, (state: EditorArticleState, action) => {
+        state.loading = false;
+        state.error = action.payload
+      })
+  }
 })
 
 const EditorArticleActions = editorArticleSlice.actions;

@@ -80,9 +80,9 @@ export class ArticlesService {
 
   createArticles(article: ArticlesInterface): any {
     const { blocks, ...otherArticles } = article;
-    const toBlocks = !!blocks ? this.blocksRepository.save(blocks) : [];
+    const toBlocks = !!blocks && blocks.length ? from(this.blocksRepository.save(blocks)) : of([]);
 
-    return from(toBlocks).pipe(
+    return toBlocks.pipe(
       switchMap((blocks: ArticlesBlocks[]) => {
         return this.saveArticle({...otherArticles, blocks: blocks })
       })
