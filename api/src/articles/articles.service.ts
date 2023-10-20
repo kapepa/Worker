@@ -75,7 +75,7 @@ export class ArticlesService {
   }
 
   getEditArticle(articleID: string, users: UsersDto): Observable<ArticlesInterface> {
-    return this.findOneArticle({ where: { id: articleID, users } })
+    return this.findOneArticle({ where: { id: articleID, users }, relations: ["blocks"] })
   }
 
   createArticles(article: ArticlesInterface): any {
@@ -87,5 +87,20 @@ export class ArticlesService {
         return this.saveArticle({...otherArticles, blocks: blocks })
       })
     )
+  }
+
+  updateArticle(article: ArticlesInterface): Observable<ArticlesInterface> {
+    const { blocks, ...otherArticle} = article;
+
+    return this.saveArticle(otherArticle).pipe(
+      switchMap((getArticle) => {
+        if(!blocks) return of(getArticle);
+        return from(this.blocksRepository.save(blocks)).pipe(
+          switchMap((blocks) => {
+            return of({...getArticle, blocks});
+          })
+        )
+      })
+    );
   }
 }

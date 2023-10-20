@@ -2,7 +2,7 @@ import {
   Body,
   Controller, Get,
   HttpStatus,
-  Param,
+  Param, Patch,
   Post, Query,
   Req,
   UploadedFiles,
@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from "../auth/guard/auth.guard";
 import {ApiConsumes, ApiForbiddenResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {FileFieldsInterceptor} from "@nestjs/platform-express";
+import {FileFieldsInterceptor, NoFilesInterceptor} from "@nestjs/platform-express";
 import {createMulterOptions} from "../file/file.service";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
 import {ArticlesService} from "./articles.service";
@@ -81,5 +81,15 @@ export class ArticlesController {
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'User is not owner.'})
   getEditArticle(@Param("id") id: string, @Req() red: ReqProps): Observable<ArticlesInterface> {
     return this.articlesService.getEditArticle(id, red.user);
+  }
+
+  @Patch("/update")
+  @UseInterceptors(NoFilesInterceptor())
+  @ApiResponse({ status: 200, description: 'update articles'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'there was an error during the update'})
+  updateArticle(@Body() body: ArticlesInterface): Observable<ArticlesInterface> {
+    const toBody = JSON.parse(JSON.stringify(body));
+
+    return this.articlesService.updateArticle(toBody)
   }
 }

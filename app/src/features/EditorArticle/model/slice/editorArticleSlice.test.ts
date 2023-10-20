@@ -2,6 +2,7 @@ import {EditorArticleActions, EditorArticleReducer} from "./editorArticleSlice";
 import {EditorArticleState} from "../types/EditorArticleState";
 import Article from "../../../../shared/test/mock/article.json";
 import {ArticleBlocks, ArticleType, ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
+import {CreateEditorArticle} from "../services/CreateEditorArticle/CreateEditorArticle";
 
 describe("editorArticleSlice", () => {
   let state: EditorArticleState;
@@ -72,5 +73,22 @@ describe("editorArticleSlice", () => {
 
     expect(EditorArticleReducer(state, EditorArticleActions.setBlocksProperty({index: 0, block: mockBlocks[0]})).record)
       .toEqual({...article, blocks: mockBlocks})
+  })
+
+  test("CreateEditorArticle pending", () => {
+    expect(EditorArticleReducer(state, { type: CreateEditorArticle.pending }).loading )
+      .toBeTruthy();
+  })
+
+  test("CreateEditorArticle fulfilled", () => {
+    const mockState: EditorArticleState = { ...state, record: Article.article as ArticleType };
+    expect(EditorArticleReducer(mockState, { type: CreateEditorArticle.fulfilled }).record )
+      .toEqual(state.record);
+  })
+
+  test("CreateEditorArticle rejected", () => {
+    const mockError = "error-create-article"
+    expect(EditorArticleReducer(state, { type: CreateEditorArticle.rejected, payload: mockError }).error )
+      .toEqual(mockError);
   })
 })

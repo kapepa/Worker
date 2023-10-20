@@ -16,6 +16,7 @@ import {EditorCode} from "./ui/EditorCode/EditorCode";
 import {SetBlocksValueInt} from "./model/interface/SetBlocksValue.int";
 import {GetEditorArticleBlocks} from "./model/selectors/GetEditorArticleBlocks/GetEditorArticleBlocks";
 import {CreateEditorArticle} from "./model/services/CreateEditorArticle/CreateEditorArticle";
+import {UpdateEditorArticle} from "./model/services/UpdateEditorArticle/UpdateEditorArticle";
 
 export {
   EditorArticle,
@@ -34,6 +35,7 @@ export {
   GetEditorArticleEdit,
   GetEditorArticleBlocks,
   CreateEditorArticle,
+  UpdateEditorArticle,
 };
 
 export type {EditorArticleState, ArticleFormImgType, SetBlocksValueInt}
