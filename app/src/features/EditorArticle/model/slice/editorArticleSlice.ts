@@ -1,9 +1,10 @@
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {createSlice, Reducer} from '@reduxjs/toolkit'
 import {EditorArticleState} from "../types/EditorArticleState";
-import {ArticleFormImgType} from "../types/ArticleFormType";
-import {ArticleBlocks, ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
+import {ArticleFormImgType, ArticleFormType} from "../types/ArticleFormType";
+import {ArticleBlocks, ArticleType, ArticleTypesKey} from "../../../../entities/Article/model/types/articleType";
 import {CreateEditorArticle} from "../services/CreateEditorArticle/CreateEditorArticle";
+import {FetchEditorArticle} from "../services/FetchEditorArticle/FetchEditorArticle";
 
 const initialState: EditorArticleState = {
   loading: false,
@@ -52,7 +53,20 @@ const editorArticleSlice = createSlice({
       })
       .addCase(CreateEditorArticle.rejected, (state: EditorArticleState, action) => {
         state.loading = false;
-        state.error = action.payload
+        state.error = action.payload;
+      })
+      .addCase(FetchEditorArticle.pending, (state: EditorArticleState) => {
+        state.loading = true;
+        state.error = undefined;
+      })
+      .addCase(FetchEditorArticle.fulfilled, (state: EditorArticleState, action: PayloadAction<ArticleType | ArticleFormType>) => {
+        state.record = action.payload;
+        state.edit = action.payload;
+        state.loading = false;
+      })
+      .addCase(FetchEditorArticle.rejected, (state: EditorArticleState, action) => {
+        state.loading = false;
+        state.error = action.payload;
       })
   }
 })

@@ -41,5 +41,7 @@
     "image": "Image",
     "text": "Text"
   },
-  "delete": "Delete"
+  "delete": "Delete",
+  "error-create-article": "Error while creating article",
+  "error-editor-article": "Error while edit article"
 }

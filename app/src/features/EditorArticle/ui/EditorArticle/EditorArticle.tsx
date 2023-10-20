@@ -76,7 +76,7 @@ const EditorArticle: FC<EditorArticleProps> = memo((props) => {
 
   const onSubmit: SubmitHandler<ArticleFormType> = useCallback((data: ArticleFormType) => {
     refForm.current?.reset();
-    methods.reset();
+    // methods.reset();
     sendCallback();
   }, [refForm, methods, sendCallback])
 
