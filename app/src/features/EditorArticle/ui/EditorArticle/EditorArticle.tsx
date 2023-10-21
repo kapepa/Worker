@@ -78,7 +78,7 @@ const EditorArticle: FC<EditorArticleProps> = memo((props) => {
     refForm.current?.reset();
     // methods.reset();
     sendCallback();
-  }, [refForm, methods, sendCallback])
+  }, [refForm, sendCallback])
 
   return (
     <div className={ClassNames("editor-article", className)}>

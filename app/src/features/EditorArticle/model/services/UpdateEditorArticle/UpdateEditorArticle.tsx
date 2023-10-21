@@ -28,8 +28,11 @@ const UpdateEditorArticle = createAsyncThunk<ArticleType, undefined, { rejectWit
     }
     const articleImage = async (article: Partial<ArticleType> | Partial<ArticleFormType>, origin: ArticleType | ArticleFormType | undefined) => {
       let img = article.img;
-      if(typeof img !== "string" && origin?.img) img = await Axios.post("/api/file/record", ToForm({file: img, remove: origin.img}));
-      return {...article, img}
+      if(typeof img !== "string" && origin?.img){
+        const response =  await Axios.post("/api/file/record", ToForm({file: img, remove: origin.img}));
+        img = response.data;
+      };
+      return {...article, img};
     }
 
     try {
