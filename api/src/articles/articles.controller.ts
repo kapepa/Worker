@@ -72,7 +72,7 @@ export class ArticlesController {
   @Get("/receive/all")
   @ApiResponse({ status: 200, description: 'All articles on request must be received'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
-  getAllArticles(@Query() query?: QueryArticlesFilter): Observable<ArticlesInterface[]> {
+  getAllArticles(@Query() query?: QueryArticlesFilter): Observable<ArticlesInterface[] | ArticlesInterface> {
     return this.articlesService.getAllArticles(query)
   }
 

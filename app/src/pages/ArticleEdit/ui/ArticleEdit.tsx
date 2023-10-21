@@ -34,7 +34,7 @@ const ArticleEdit: FC = memo(() => {
 
   const sendCallback =  useCallback(() => {
     dispatch(UpdateEditorArticle());
-  }, [dispatch, UpdateEditorArticle]);
+  }, [dispatch]);
 
   if(!!error) {
     return (

@@ -4,7 +4,7 @@ import {ArticlesEntity} from "./entities/articles.entity";
 import {ArrayContains, ILike, Repository} from "typeorm";
 import {BlocksEntity} from "./entities/blocks.entity";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
-import {from, Observable, of, switchMap, throwError} from "rxjs";
+import {from, Observable, of, switchMap, tap, throwError} from "rxjs";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
 import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
 import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
@@ -30,7 +30,7 @@ export class ArticlesService {
     return from(this.blocksRepository.save(blocks));
   }
 
-  findArticles(data: FindManyOptions): Observable<ArticlesInterface[]> {
+  findArticles(data: FindManyOptions): Observable<ArticlesInterface[] | ArticlesInterface> {
     return from(this.articlesRepository.find(data)).pipe(
       switchMap((articles: ArticlesInterface[]) => {
         return !!articles ? of(articles) : throwError(() => new HttpException("Articles not found", HttpStatus.NOT_FOUND))
@@ -63,7 +63,7 @@ export class ArticlesService {
     )
   }
 
-  getAllArticles(query?: QueryArticlesFilter):  Observable<ArticlesInterface[]> {
+  getAllArticles(query?: QueryArticlesFilter):  Observable<ArticlesInterface[] | ArticlesInterface> {
     const take: number = !!query?.take ? Number(query.take) : 8;
     const skip: number = !!query?.skip ? Number(query.skip) : 0;
     const sort: ArticlesFilterFields = query?.sort ?? ArticlesFilterFields.CREATE;
@@ -92,15 +92,29 @@ export class ArticlesService {
   updateArticle(article: ArticlesInterface): Observable<ArticlesInterface> {
     const { blocks, ...otherArticle} = article;
 
-    return this.saveArticle(otherArticle).pipe(
-      switchMap((getArticle) => {
-        if(!blocks) return of(getArticle);
-        return from(this.blocksRepository.save(blocks)).pipe(
-          switchMap((blocks) => {
-            return of({...getArticle, blocks});
-          })
-        )
+    const blocksList = !!blocks && !!blocks.length
+      ? from(this.findOneArticle(({ where: { id: otherArticle.id }, relations: ["blocks"] }))).pipe(
+        switchMap((article: ArticlesInterface) => {
+          return from(this.blocksRepository.save(blocks)).pipe(
+            tap(() => {
+              if(!!blocks && !!blocks.length) {
+                const removeBlocks: ArticlesBlocks[] = blocks.reduce((accum: ArticlesBlocks[], block: ArticlesBlocks) => {
+                  const findIndex: number = accum.findIndex(({id}) => id === block.id);
+                  if(findIndex !== -1) accum.splice(findIndex, 1);
+                  return accum;
+                }, article.blocks);
+                if( !!removeBlocks && !!removeBlocks.length ) this.blocksRepository.remove(removeBlocks as BlocksEntity[])
+              }
+            })
+          )
+        })
+      )
+      : from([]);
+
+    return blocksList.pipe(
+      switchMap((blocksArr) => {
+        return this.saveArticle({...otherArticle, blocks: blocksArr})
       })
-    );
+    )
   }
 }
