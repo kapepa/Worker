@@ -1,0 +1,3 @@
+.login-form{display:flex;flex-direction:column;row-gap:5px;width:100%;max-width:800px;position:relative;padding-top:20px}.login-form__wrapper{padding:30px;display:flex;flex-direction:column;align-items:center}.login-form__h{font-size:25px;padding-bottom:20px}.login-form__basement{display:flex;justify-content:center;padding-top:10px}.login-form__btn{width:100%;max-width:300px}.login-form__error{position:absolute;bottom:100%;-webkit-transform:translateY(100%);transform:translateY(100%);display:flex;justify-content:center;width:100%}
+
+/*# sourceMappingURL=features-AuthByUsername-ui-LoginForm-LoginForm-stories.2dd6ccf1.chunk.css.map*/

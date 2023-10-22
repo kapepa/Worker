@@ -1,0 +1,3 @@
+.switch-view{display:flex;-webkit-column-gap:10px;column-gap:10px}.switch-view__btn{border:none;outline:none;cursor:pointer;width:30px;background-color:rgba(0,0,0,0)}.switch-view__ico{fill:var(--primary-color);transition:fill .25s linear}.switch-view__ico--active{fill:var(--primary-color-inverted)}
+
+/*# sourceMappingURL=widgets-SwitchView-ui-SwitchView-stories.0f7cd105.chunk.css.map*/

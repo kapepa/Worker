@@ -1,0 +1,5 @@
+.details--loader,.details--skeleton{display:flex;justify-content:center;width:100%}.details--skeleton{flex-direction:column;row-gap:30px}.details__avatar{width:200px;height:200px;align-self:center}.details__title{height:50px;max-width:40%;width:100%}.details__subtitle{height:35px;max-width:80%;width:100%}.details__content{height:1200px;width:100%}
+.scroll{overflow-y:auto;position:absolute;top:0;left:0;right:0;bottom:0;padding:20px}.scroll::-webkit-scrollbar{width:10px;border-radius:10px}.scroll::-webkit-scrollbar-thumb{background:var(--primary-color)}.scroll::-webkit-scrollbar-thumb{border-radius:8px}
+.article-header{display:flex;justify-content:space-between;padding-bottom:20px}
+
+/*# sourceMappingURL=pages-Details-ui-Details-stories.75b6e6e7.chunk.css.map*/

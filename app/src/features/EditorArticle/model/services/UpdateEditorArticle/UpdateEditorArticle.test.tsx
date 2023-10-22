@@ -30,7 +30,7 @@ describe("UpdateEditorArticle", () => {
   })
 
   test("should be fulfilled", async () => {
-    mockAxios.post.mockResolvedValue({data: ArticleJSON.article as ArticleType});
+    mockAxios.patch.mockResolvedValue({data: ArticleJSON.article as ArticleType});
     const action = UpdateEditorArticle();
     const result = await action(dispatch, getState, {});
 
