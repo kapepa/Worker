@@ -9,8 +9,12 @@ import {BlocksEntity} from "./entities/blocks.entity";
   imports: [
     TypeOrmModule.forFeature([ArticlesEntity, BlocksEntity]),
   ],
-  controllers: [ArticlesController],
-  providers: [ArticlesService],
+  controllers: [
+    ArticlesController
+  ],
+  providers: [
+    ArticlesService,
+  ],
   exports: [ArticlesService]
 })
 export class ArticlesModule {}

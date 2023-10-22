@@ -1,0 +1,1 @@
+export type TabListType<T> = { text: string, value: T };

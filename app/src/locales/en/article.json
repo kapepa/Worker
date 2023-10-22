@@ -2,5 +2,12 @@
   "comments": "Comments",
   "all-articles-error": "Error getting articles",
   "articles-empty": "List of articles is empty",
-  "read-more": "Read more"
+  "read-more": "Read more",
+  "recommended": "Recommended",
+  "type": {
+    "choose": "Choose",
+    "IT": "IT",
+    "SCIENCE": "Science",
+    "ECONOMICS": "Economy"
+  }
 }

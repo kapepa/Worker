@@ -11,7 +11,7 @@ import {FileModule} from './file/file.module';
 import {ArticlesModule} from './articles/articles.module';
 import {ArticlesEntity} from "./articles/entities/articles.entity";
 import {BlocksEntity} from "./articles/entities/blocks.entity";
-import { CommentsModule } from './comments/comments.module';
+import {CommentsModule} from './comments/comments.module';
 import {CommentsEntity} from "./comments/entities/comments.entity";
 
 dotenv.config();

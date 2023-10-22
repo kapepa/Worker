@@ -12,6 +12,8 @@ import enComments from "../../../locales/en/comments.json";
 import enForm from "../../../locales/en/form.json";
 import enNotification from "../../../locales/en/notification.json";
 import enFilter from "../../../locales/en/filter.json";
+import enEditor from "../../../locales/en/editor.json";
+import enImageLoader from "../../../locales/en/image-loader.json";
 
 import ruTranslation from "../../../locales/ru/translation.json";
 import ruHome from "../../../locales/ru/home.json";
@@ -24,6 +26,8 @@ import ruComments from "../../../locales/ru/comments.json";
 import ruForm from "../../../locales/ru/form.json";
 import ruNotification from "../../../locales/ru/notification.json";
 import ruFilter from "../../../locales/ru/filter.json";
+import ruEditor from "../../../locales/ru/editor.json";
+import ruImageLoader from "../../../locales/ru/image-loader.json";
 
 i18n
   .use(initReactI18next)
@@ -47,6 +51,8 @@ i18n
         form: enForm,
         notification: enNotification,
         filter: enFilter,
+        editor: enEditor,
+        image_loader: enImageLoader,
       },
       ru: {
         translation: ruTranslation,
@@ -60,6 +66,8 @@ i18n
         form: ruForm,
         notification: ruNotification,
         filter: ruFilter,
+        editor: ruEditor,
+        image_loader: ruImageLoader,
       }
     },
 

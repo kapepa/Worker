@@ -28,9 +28,25 @@ export const PrimaryTitle: TextMode = {
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
 
+export const PrimaryTitleInverted: TextMode = {
+  args: {
+    theme: TextTheme.INVERTED,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  },
+  decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
+};
+
 export const PrimaryText: TextMode = {
   args: {
     theme: TextTheme.PRIMARY,
+    text: "Nam nec semper augue. Curabitur ut enim placerat, eleifend lectus nec, varius quam. Duis efficitur, purus non lobortis facilisis, quam lorem finibus eros, sed sollicitudin mauris purus at metus."
+  },
+  decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
+};
+
+export const PrimaryTextInverted: TextMode = {
+  args: {
+    theme: TextTheme.INVERTED,
     text: "Nam nec semper augue. Curabitur ut enim placerat, eleifend lectus nec, varius quam. Duis efficitur, purus non lobortis facilisis, quam lorem finibus eros, sed sollicitudin mauris purus at metus."
   },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],

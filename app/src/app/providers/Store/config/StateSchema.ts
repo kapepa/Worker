@@ -6,9 +6,10 @@ import {NavigateFunction} from "react-router/dist/lib/hooks";
 import {DetailsState} from "../../../../entities/Article/model/types/detailsState";
 import {CommentsState} from "../../../../entities/Comments";
 import {FormCommentState} from "../../../../features/FormComment/model/types/formCommentState";
-import {ArticlesState} from "../../../../entities/Article";
+import {ArticlesState, RecommendedState} from "../../../../entities/Article";
 import {ScrollHistoryState} from "../../../../features/ScrollHistory";
 import {FilterArticlesState} from "../../../../features/FilterArticles";
+import {EditorArticleState} from "../../../../features/EditorArticle";
 
 interface StateSchema {
   counter: CounterState,
@@ -21,6 +22,8 @@ interface StateSchema {
   articles: ArticlesState,
   scroll: ScrollHistoryState,
   filterArticles: FilterArticlesState,
+  recommendedArticle: RecommendedState,
+  editorArticle: EditorArticleState,
 }
 
 interface ThunkExtraArg {

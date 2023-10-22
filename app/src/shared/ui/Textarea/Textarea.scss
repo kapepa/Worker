@@ -1,0 +1,38 @@
+.textarea{
+  resize: none;
+  width: 100%;
+  min-height: 220px;
+  outline: none;
+  padding: 12px 24px;
+  font-size: 20px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+  &--bg-color{
+    color: var(--primary-color-inverted);
+    background-color: var(--bg-color);
+    &::placeholder{
+      color: var(--primary-color-inverted);
+    }
+  }
+  &--bg-color-inverted{
+    color: var(--bg-color);
+    background-color: var(--bg-color-inverted);
+  }
+  &--readonly{
+    opacity: .7;
+  }
+  &::placeholder{
+    color: var(--secondary-color);
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+  }
+  &::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+  }
+}

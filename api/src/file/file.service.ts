@@ -14,7 +14,7 @@ export function createMulterOptions(): MulterModuleOptions {
         const filename = file.originalname;
         const prefix = filename.split(".").pop();
         const newFilename = `${uuid()}.${prefix}`;
-        await cb(null, newFilename);
+        cb(null, newFilename);
       }
     }),
     fileFilter(req, file, callback: (error: (Error | null), acceptFile: boolean) => void) {

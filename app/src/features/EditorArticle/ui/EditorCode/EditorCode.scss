@@ -1,0 +1,32 @@
+.editor-code{
+  border-bottom: 1px solid var(--primary-color-inverted);
+  padding-bottom: 22px;
+  &__header{
+    display: flex;
+    column-gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+  &__label{
+    font-size: 18px;
+    color: var(--primary-color);
+  }
+  &__x-close{
+    position: relative;
+  }
+  &__main{
+
+  }
+  &__board{
+    position: relative;
+  }
+  &__alert{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    color: var(--red-light);
+    text-shadow: 5px 0px 16px #000;
+  }
+}

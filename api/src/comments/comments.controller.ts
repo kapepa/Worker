@@ -55,7 +55,7 @@ export class CommentsController {
   @Delete("/delete/:id")
   @ApiResponse({ status: 204, description: 'Successfully delete user comment'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'The comment was not found or has the wrong owner'})
-  deleteUserComment(@Req() req, @Param() param) {
+  deleteUserComment(@Req() req, @Param() param: {id: string}) {
     return this.commentsService.deleteUserComment(req.user, param.id);
   }
 }

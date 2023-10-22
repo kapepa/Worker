@@ -12,6 +12,14 @@ import {ArticlesItem} from "./ui/ArticlesItem/ArticlesItem";
 import {GetArticlesIds} from "./selectors/GetArticlesIds/GetArticlesIds";
 import {GetArticlesView} from "./selectors/GetArticlesView/GetArticlesView";
 import {GetArticlesHasMore} from "./selectors/GetArticlesHasMore/GetArticlesHasMore";
+import {ArticlesRecommended} from "./ui/ArticlesRecommended/ArticlesRecommended";
+import {RecommendedState} from "./model/types/recommendedState";
+import {RecommendedActions, RecommendedReducer} from "./model/slice/recommendedSlice";
+import {GetRecommended} from "./selectors/GetRecommended/GetRecommended";
+import {GetRecommendedEntities} from "./selectors/GetRecommendedEntities/GetRecommendedEntities";
+import {GetRecommendedIds} from "./selectors/GetRecommendedIds/GetRecommendedIds";
+import {FetchRecommended} from "./service/FetchRecommended/FetchRecommended";
+import {GetRecommendedLoading} from "./selectors/GetRecommendedLoading/GetRecommendedLoading";
 
 export {
   ArticleDetails,
@@ -19,14 +27,23 @@ export {
   ArticlesActions,
   ArticlesList,
   ArticlesItem,
-  DetailsReducers,
+  ArticlesRecommended,
+  RecommendedActions,
   FetchArticleById,
-  GetArticleDetailsData,
+  FetchRecommended,
+  DetailsReducers,
   ArticlesReducer,
+  RecommendedReducer,
   GetArticles,
   GetArticlesData,
   GetArticlesIds,
   GetArticlesView,
-  GetArticlesHasMore
+  GetArticlesHasMore,
+  GetRecommended,
+  GetRecommendedEntities,
+  GetRecommendedIds,
+  GetArticleDetailsData,
+  GetRecommendedLoading,
 };
-export type {ArticleBlocks, ArticlesState};
+
+export type {ArticleBlocks, ArticlesState, RecommendedState};

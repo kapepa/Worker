@@ -10,6 +10,8 @@ import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
 import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
 import {OrderFieldFind} from "../shared/Types/OrderFieldFind";
 import {ArticlesFilterFields} from "../shared/enum/ArticlesFilterFields";
+import {UsersDto} from "../users/dto/users.dto";
+import {ArticlesBlockType} from "./interfaces/blocks.interface";
 
 @Injectable()
 export class ArticlesService {
@@ -24,11 +26,11 @@ export class ArticlesService {
     return from(this.articlesRepository.save(article));
   }
 
-  saveBlocks( blocks: ArticlesBlocks ): Observable<ArticlesBlocks>{
+  saveBlocks( blocks: ArticlesBlocks ): Observable<ArticlesBlocks | ArticlesBlocks[]>{
     return from(this.blocksRepository.save(blocks));
   }
 
-  findArticles(data: FindManyOptions): Observable<ArticlesInterface[]> {
+  findArticles(data: FindManyOptions): Observable<ArticlesInterface[] | ArticlesInterface> {
     return from(this.articlesRepository.find(data)).pipe(
       switchMap((articles: ArticlesInterface[]) => {
         return !!articles ? of(articles) : throwError(() => new HttpException("Articles not found", HttpStatus.NOT_FOUND))
@@ -52,7 +54,7 @@ export class ArticlesService {
     );
   }
 
-  createBlocks(idArt: string, blocks: ArticlesBlocks): Observable<ArticlesBlocks> {
+  createBlocks(idArt: string, blocks: ArticlesBlocks): Observable<ArticlesBlocks | ArticlesBlocks[]> {
     return this.findOneArticle({where: {id: idArt}}).pipe(
       switchMap((article: ArticlesInterface) => {
         blocks.articles = article;
@@ -61,14 +63,58 @@ export class ArticlesService {
     )
   }
 
-  getAllArticles(query?: QueryArticlesFilter):  Observable<ArticlesInterface[]> {
+  getAllArticles(query?: QueryArticlesFilter):  Observable<ArticlesInterface[] | ArticlesInterface> {
     const take: number = !!query?.take ? Number(query.take) : 8;
     const skip: number = !!query?.skip ? Number(query.skip) : 0;
     const sort: ArticlesFilterFields = query?.sort ?? ArticlesFilterFields.CREATE;
     const order: OrderFieldFind = query.order ?? "DESC";
     const type: FindManyOptions | undefined = !!query.type ? { where: { type: ArrayContains([query.type]) } } : undefined;
-    const search: FindManyOptions | undefined = !!query.search.trim() ? { where: { title: ILike(`%${query.search}%`) } } : undefined;
+    const search: FindManyOptions | undefined = !!query.search ? { where: { title: ILike(`%${query.search}%`) } } : undefined;
 
     return this.findArticles({ ...search, ...type, take, skip, order:{ [sort]: order }, relations: ["users", "blocks"]});
+  }
+
+  getEditArticle(articleID: string, users: UsersDto): Observable<ArticlesInterface> {
+    return this.findOneArticle({ where: { id: articleID, users }, relations: ["blocks"] })
+  }
+
+  createArticles(article: ArticlesInterface): any {
+    const { blocks, ...otherArticles } = article;
+    const toBlocks = !!blocks && blocks.length ? from(this.blocksRepository.save(blocks)) : of([]);
+
+    return toBlocks.pipe(
+      switchMap((blocks: ArticlesBlocks[]) => {
+        return this.saveArticle({...otherArticles, blocks: blocks })
+      })
+    )
+  }
+
+  updateArticle(article: ArticlesInterface): Observable<ArticlesInterface> {
+    const { blocks, ...otherArticle} = article;
+
+    const blocksList = !!blocks && !!blocks.length
+      ? from(this.findOneArticle(({ where: { id: otherArticle.id }, relations: ["blocks"] }))).pipe(
+        switchMap((article: ArticlesInterface) => {
+          return from(this.blocksRepository.save(blocks)).pipe(
+            tap(() => {
+              if(!!blocks && !!blocks.length) {
+                const removeBlocks: ArticlesBlocks[] = blocks.reduce((accum: ArticlesBlocks[], block: ArticlesBlocks) => {
+                  const findIndex: number = accum.findIndex(({id}) => id === block.id);
+                  if(findIndex !== -1) accum.splice(findIndex, 1);
+                  return accum;
+                }, article.blocks);
+                if( !!removeBlocks && !!removeBlocks.length ) this.blocksRepository.remove(removeBlocks as BlocksEntity[])
+              }
+            })
+          )
+        })
+      )
+      : from([]);
+
+    return blocksList.pipe(
+      switchMap((blocksArr) => {
+        return this.saveArticle({...otherArticle, blocks: blocksArr})
+      })
+    )
   }
 }

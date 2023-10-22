@@ -1,0 +1,26 @@
+.editor-blocks{
+  padding-bottom: 22px;
+  &__header{
+    padding-bottom: 22px;
+  }
+  &__label{
+    color: var(--primary-color);
+    font-size: 18px;
+  }
+  &__x-close{
+    position: relative;
+  }
+  &__choose{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  &__type{
+    flex: 1 1 350px;
+  }
+  &__body{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+}

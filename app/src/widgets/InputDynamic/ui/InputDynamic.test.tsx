@@ -16,7 +16,7 @@ describe("<InputDynamic/>", () => {
       label={emailMockType.label}
       onChange={ mockChange }
       validation={emailMockType.validation}
-      defaultValue={mockValue}
+      value={mockValue}
     />, {defaultValues: { email: mockValue }})
 
     expect(getByText(emailMockType.label)).toBeInTheDocument();

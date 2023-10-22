@@ -1,0 +1,47 @@
+{
+  "title": {
+    "create": "Create an article",
+    "edit": "Edit an article"
+  },
+  "submit": {
+    "create": "Create",
+    "edit": "Change"
+  },
+  "label": {
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "Image": "Image",
+    "type": "Type",
+    "blocks": "Blocks",
+    "block-image": "Title image",
+    "block-text": "Title text"
+  },
+  "placeholder": {
+    "title": "Title article",
+    "subtitle": "Subtitle article",
+    "code": "Your code",
+    "block-image": "Title for your image",
+    "block-text": "Title for your text",
+    "block-textarea": "Your text for block"
+  },
+  "required": {
+    "title": "Title is required",
+    "subtitle": "Subtitle is required",
+    "img": "Image is required",
+    "type": "Type is required",
+    "code": "Code is required",
+    "paragraphs": "Text is required"
+  },
+  "minLength": {
+    "title": "Short title",
+    "subtitle": "Short subtitle"
+  },
+  "block": {
+    "code": "Code",
+    "image": "Image",
+    "text": "Text"
+  },
+  "delete": "Delete",
+  "error-create-article": "Error while creating article",
+  "error-editor-article": "Error while edit article"
+}

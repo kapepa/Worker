@@ -3,7 +3,7 @@ import "./FilterArticlesSelectors.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {Select} from "../../../../shared/ui/Select/Select";
 import {useTranslation} from "react-i18next";
-import {CountryListType} from "../../../../shared/types/CountryListType";
+import {SelectListType} from "../../../../shared/types/SelectListType";
 import {ArticleOrderField} from "../../../../shared/const/ArticleOrderField";
 import {useDispatch, useSelector} from "react-redux";
 import {GetFilterArticles} from "../../selectors/getFilterArticles/getFilterArticles";
@@ -26,7 +26,7 @@ const FilterArticlesSelectors: FC<FilterArticlesSelectorsProps> = memo(({classNa
   const { sort, order } = useSelector(GetFilterArticles);
   const { setOrderArticles, setSortArticles,  } = filterArticlesActions;
 
-  const sortList: CountryListType<ArticleOrderField>[] = useMemo(() => {
+  const sortList: SelectListType<ArticleOrderField>[] = useMemo(() => {
     return [
       { text: t(`sort.${ArticleOrderField.CREATED}`), value: ArticleOrderField.CREATED },
       { text: t(`sort.${ArticleOrderField.TITLE}`), value: ArticleOrderField.TITLE },
@@ -34,7 +34,7 @@ const FilterArticlesSelectors: FC<FilterArticlesSelectorsProps> = memo(({classNa
     ]
   }, [t])
 
-  const orderList: CountryListType<ArticleOrderSort>[] = useMemo(() => {
+  const orderList: SelectListType<ArticleOrderSort>[] = useMemo(() => {
     return [
       { text: t(`order.${ArticleOrderSort.DESC}`), value: ArticleOrderSort.DESC },
       { text: t(`order.${ArticleOrderSort.ASC}`), value: ArticleOrderSort.ASC },

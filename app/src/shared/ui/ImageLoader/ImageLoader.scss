@@ -1,0 +1,20 @@
+.image-loader{
+  display: grid;
+  grid-auto-columns: minmax(auto, 300px);
+  grid-template-areas: "a a";
+  align-items: center;
+  gap: 12px;
+  height: 190px;
+  width: 100%;
+  &__cell{
+    display: flex;
+    justify-content: center;
+  }
+  &__file{
+    display: none;
+  }
+  &__picture{
+    max-width: 300px;
+    max-height: 190px;
+  }
+}

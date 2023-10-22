@@ -24,8 +24,8 @@ describe("ArticleDetails", () => {
   } as StateSchema
   const articleTypeMock = {...ArticleMock.article, blocks: [ArticleMock.text, ArticleMock.code, ArticleMock.image]} as ArticleType;
 
-  test("should be defined", async () => {
-    const { getByTestId, getByText, debug } = await ComponentRender(<ArticleDetails date={articleTypeMock}/>, {reloadedState: state});
+  test("should be defined", () => {
+    const { getByTestId, getByText, debug } = ComponentRender(<ArticleDetails date={articleTypeMock}/>, {reloadedState: state});
     expect(getByTestId("article-details")).toBeInTheDocument();
     expect(getByText("1022")).toBeInTheDocument();
     expect(getByText("Javascript news")).toBeInTheDocument();

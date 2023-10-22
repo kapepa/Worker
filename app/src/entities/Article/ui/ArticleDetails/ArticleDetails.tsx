@@ -16,10 +16,11 @@ import {CommentsList} from "../../../Comments";
 import {CreateComment, FormComment} from "../../../../features/FormComment";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
+import {ArticlesRecommended} from "../ArticlesRecommended/ArticlesRecommended";
 
 interface ArticleDetailsProps {
   className?: string,
-  date: ArticleType;
+  date: ArticleType,
 }
 
 const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
@@ -64,6 +65,11 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
       <ViewEye quantity={views} theme={ColorView.PrimaryDef}/>
       <ViewDate date={createdAt} theme={ColorView.PrimaryDef}/>
       { !!blocks && blocks.map(renderBlocks) }
+      <Text
+        theme={TextTheme.PRIMARY}
+        title={t("recommended")}
+      />
+      <ArticlesRecommended/>
       <Text
         theme={TextTheme.PRIMARY}
         title={t("comments")}
