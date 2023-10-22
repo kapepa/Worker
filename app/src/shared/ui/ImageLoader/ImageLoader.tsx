@@ -1,4 +1,4 @@
-import {FC, memo, useCallback, useRef, MouseEvent, ChangeEvent, useState, useMemo, useEffect, RefObject} from "react";
+import {FC, memo, useCallback, useRef, MouseEvent, ChangeEvent, useState, useMemo, useEffect} from "react";
 import "./ImageLoader.scss"
 import {ClassNames} from "../../lib/ClassNames";
 import Button, {ThemeButtonEnum} from "../Button/Button";
@@ -11,7 +11,7 @@ interface ImageLoaderProps {
   className?: string,
   entryImage?: string,
   loadImage: (file: File) => void,
-}
+};
 
 const ImageLoader: FC<ImageLoaderProps> = memo((props: ImageLoaderProps) => {
   const {className, name = "file", loadImage, entryImage, ...otherProps} = props;
