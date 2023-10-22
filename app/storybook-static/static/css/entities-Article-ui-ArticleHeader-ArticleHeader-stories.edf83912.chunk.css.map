@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/entities-Article-ui-ArticleHeader-ArticleHeader-stories.edf83912.chunk.css","mappings":"AAAA","sources":["webpack://app/./src/entities/Article/ui/ArticleHeader/ArticleHeader.scss"],"sourcesContent":[".article-header{\r\n  display: flex;\r\n  justify-content: space-between;\r\n  padding-bottom: 20px;\r\n}"],"names":[],"sourceRoot":""}

@@ -1,0 +1,3 @@
+.navbar__nav{display:flex;flex-direction:column;gap:20px}.navbar__link{display:flex;flex-direction:row;align-items:center;-webkit-column-gap:20px;column-gap:20px;flex-wrap:wrap}.navbar__link--squeeze{justify-content:center}.navbar__symbol{font:var(--font-m);flex:1 1 auto;text-align:center}.navbar__ico{max-width:30px}
+
+/*# sourceMappingURL=widgets-Navbar-ui-Navbar-stories.027d4a8c.chunk.css.map*/
