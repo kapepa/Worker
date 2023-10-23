@@ -64,7 +64,7 @@ const LoginForm: FC<LoginFormProps> = memo(({className, onClose}) => {
 
       <FormProvider {...methods} >
         <form ref={refForm} onSubmit={methods.handleSubmit(onSubmit)} className="login-form" data-testid="form">
-          {!!error && <Text className="login-form__error" text={t(`login-form.error-${error}`)} theme={TextTheme.ERROR}/>}
+          {!!error && <Text className="login-form__error" text={t(`error.error-${error}`)} theme={TextTheme.ERROR}/>}
           <InputDynamic
             name="email"
             type="email"
