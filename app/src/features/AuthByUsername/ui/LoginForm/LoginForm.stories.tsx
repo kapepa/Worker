@@ -45,7 +45,7 @@ export const LoginFormError: LoginFormStory = {
   args: {
     onClose: () => {},
   },
-  decorators: [ThemeDecorator(ThemeEnum.DARK), StoreDecorator({auth: { ...mockInitState, error: "error-login" } })],
+  decorators: [ThemeDecorator(ThemeEnum.DARK), StoreDecorator({auth: { ...mockInitState, error: "login" } })],
 };
 
 export const LoginFormLoading: LoginFormStory = {
