@@ -7,10 +7,14 @@ async function bootstrap() {
     .setTitle('Worker').setDescription('The Worker API description')
     .setVersion('1.0').build();
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
   app.setGlobalPrefix('api');
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+  app.enableCors({
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  });
   await app.listen(5000);
 }
 bootstrap();
