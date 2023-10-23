@@ -37,6 +37,7 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start:dev": "npm install --global serve & serve -s build",
     "unit:test": "react-scripts test",
     "unit:coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
