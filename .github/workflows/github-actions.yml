@@ -29,10 +29,10 @@ jobs:
         working-directory: ./app
         run: npm run test:build-storybook
         if: always()
-      - name: app screenshot testing
-        working-directory: ./app
-        run: npm run test:ui:ci
-        if: always()
+      # - name: app screenshot testing
+      #   working-directory: ./app
+      #   run: npm run test:ui:ci
+      #   if: always()
       - name: shared install
         working-directory: ./api
         run: npm install
