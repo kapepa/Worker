@@ -6,12 +6,13 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Worker').setDescription('The Worker API description')
     .setVersion('1.0').build();
-  const app = await NestFactory.create(AppModule,  { cors: true });
+  const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
-  // app.enableCors({
-  //   allowedHeaders:"*",
-  //   origin: "*"
-  // });
+  app.enableCors({
+    allowedHeaders: '*',
+    origin: '*',
+    credentials: true,
+  });
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
   await app.listen(5000);
