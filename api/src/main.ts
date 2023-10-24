@@ -10,6 +10,9 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.enableCors({
     origin: "*",
+    methods: 'GET, PUT, POST, DELETE, OPTIONS, PATCH',
+    credentials: true,
+    allowedHeaders: "*"
   });
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
