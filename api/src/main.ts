@@ -9,8 +9,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   app.enableCors({
-    origin: ['https://worker-drfp-git-main-kapepa.vercel.app', 'http://localhost:3000'],
-    methods: 'GET, HEAD, PUT, POST, DELETE, OPTIONS, PATCH',
+    origin: ['https://worker-drfp.vercel.app', 'http://localhost:3000'],
+    methods: 'GET, PUT, POST, DELETE, OPTIONS, PATCH',
     credentials: true,
     allowedHeaders: "*"
   });
