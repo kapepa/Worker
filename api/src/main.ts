@@ -8,12 +8,15 @@ async function bootstrap() {
     .setVersion('1.0').build();
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+    next();
+  });
   app.enableCors({
-    origin: "*",
-    methods: 'GET, PUT, POST, DELETE, PATCH, OPTIONS',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    credentials: true
+    allowedHeaders: '*',
+    origin: '*',
   });
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
