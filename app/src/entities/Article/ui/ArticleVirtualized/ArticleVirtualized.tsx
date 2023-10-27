@@ -1,8 +1,8 @@
-import {FC, memo, useRef} from "react";
+import {FC, memo, useCallback} from "react";
 import "./ArticleVirtualized.scss"
 import {ClassNames} from "../../../../shared/lib/ClassNames";
 import {ArticlesView} from "../../../../shared/const/ArticlesView";
-import {Column, List, Table, WindowScroller, } from 'react-virtualized';
+import {List} from 'react-virtualized';
 import {Avatar} from "../../../../shared/ui/Avatar/Avatar";
 import {Text, TextTheme} from "../../../../shared/ui/Text/Text";
 import {ViewDate} from "../../../../shared/ui/ViewDate/ViewDate";
@@ -12,13 +12,16 @@ import {ArticleBlockTextComponent} from "../ArticleBlockTextComponent/ArticleBlo
 import Button, {ThemeButtonEnum} from "../../../../shared/ui/Button/Button";
 import {ViewEye} from "../../../../shared/ui/ViewEye/ViewEye";
 import {useTranslation} from "react-i18next";
-import {ArticleBlocks, ArticleType} from "../../model/types/articleType";
+import {ArticleBlocks} from "../../model/types/articleType";
 import {RouterPath} from "../../../../shared/const/Routers";
 import {ArticleBlockType} from "../../model/types/articleBlock";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {GetArticles} from "../../selectors/GetArticles/GetArticles";
-import {UseInfiniteScroll} from "../../../../shared/hooks/UseInfiniteScroll/UseInfiniteScroll";
+import {DummyElement} from "../../../../shared/ui/DummyElement/DummyElement";
+import {FetchAllArticles} from "../../service/FetchAllArticles/FetchAllArticles";
+import {GetArticlesHasMore} from "../../selectors/GetArticlesHasMore/GetArticlesHasMore";
+import {AppDispatch} from "../../../../app/providers/Store/config/store";
 
 interface ArticleVirtualizedProps{
   className?: string,
@@ -29,13 +32,21 @@ interface ArticleVirtualizedProps{
 
 const ArticleVirtualized: FC<ArticleVirtualizedProps> = memo(({className, view, scrollEnd, isEnd}) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const { ids, entities } = useSelector(GetArticles);
   const { t } = useTranslation("article");
+  const articlesHasMore = useSelector(GetArticlesHasMore);
+
+
+  const toEndScroll = useCallback(() => {
+    if(articlesHasMore) dispatch(FetchAllArticles());
+  }, [articlesHasMore, dispatch])
 
   function rowRenderer({key, index, isScrolling, isVisible, style}: any) {
     const article = entities[ids[index]];
     if(!article) return;
     const { id, title, img, createdAt, type, views, users, blocks } = article;
+    const isLast: boolean = index === (ids.length - 1);
 
     const BlockText = () => {
       const block: ArticleBlocks | undefined = blocks?.find((block: ArticleBlocks) => block.type === ArticleBlockType.TEXT);
@@ -78,8 +89,9 @@ const ArticleVirtualized: FC<ArticleVirtualizedProps> = memo(({className, view, 
             <ViewEye className="item-block__eye" quantity={views} theme={ColorView.PrimaryDef} reverse={true}/>
           </div>
         </div>
+        {(isLast && isEnd) && <DummyElement callback={toEndScroll} />}
       </div>
-    );
+    )
   }
 
   return (
@@ -91,7 +103,6 @@ const ArticleVirtualized: FC<ArticleVirtualizedProps> = memo(({className, view, 
         rowCount={ids.length}
         rowHeight={800}
         rowRenderer={rowRenderer}
-        onScroll={() => console.log("end")}
       />
     </div>
   )
