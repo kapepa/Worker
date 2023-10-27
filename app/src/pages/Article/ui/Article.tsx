@@ -4,7 +4,12 @@ import {RouterPath} from "../../../shared/const/Routers";
 import {useDispatch, useSelector} from "react-redux";
 import {GetUsers, MyselfUsers} from "../../../entities/Users";
 import {useNavigate} from "react-router-dom";
-import {ArticlesList, GetArticlesHasMore, GetArticlesView} from "../../../entities/Article";
+import {
+  ArticlesList,
+  // ArticleVirtualized,
+  GetArticlesHasMore,
+  GetArticlesView
+} from "../../../entities/Article";
 import {FetchAllArticles} from "../../../entities/Article/service/FetchAllArticles/FetchAllArticles";
 import {AppDispatch} from "../../../app/providers/Store/config/store";
 import {SwitchView} from "../../../widgets/SwitchView";
@@ -57,21 +62,40 @@ const Article: FC = memo(() => {
   }, []);
 
   return (
-    <InfiniteScroll scrollEnd={onScrollNextArticles} isEnd={articlesHasMore}>
-      <div className="article" data-testid="article">
-        <div className="article__roof">
-          <FilterArticlesSelectors/>
-          <SwitchView/>
+    <>
+      <InfiniteScroll scrollEnd={onScrollNextArticles} isEnd={articlesHasMore}>
+        <div className="article" data-testid="article">
+          <div className="article__roof">
+            <FilterArticlesSelectors/>
+            <SwitchView/>
+          </div>
+          <div className="article__middle">
+            <FilterArticlesSearch/>
+          </div>
+          <div className="article__middle">
+            <FilterArticlesTabs/>
+          </div>
+          <ArticlesList view={articlesView}/>
         </div>
-        <div className="article__middle">
-          <FilterArticlesSearch/>
-        </div>
-        <div className="article__middle">
-          <FilterArticlesTabs/>
-        </div>
-        <ArticlesList view={articlesView}/>
-      </div>
-    </InfiniteScroll>
+      </InfiniteScroll>
+      {/*<div className="article" data-testid="article">*/}
+      {/*  <div className="article__roof">*/}
+      {/*    <FilterArticlesSelectors/>*/}
+      {/*    <SwitchView/>*/}
+      {/*  </div>*/}
+      {/*  <div className="article__middle">*/}
+      {/*    <FilterArticlesSearch/>*/}
+      {/*  </div>*/}
+      {/*  <div className="article__middle">*/}
+      {/*    <FilterArticlesTabs/>*/}
+      {/*  </div>*/}
+      {/*  <ArticleVirtualized*/}
+      {/*    view={articlesView}*/}
+      {/*    scrollEnd={onScrollNextArticles}*/}
+      {/*    isEnd={articlesHasMore}*/}
+      {/*  />*/}
+      {/*</div>*/}
+    </>
   )
 })
 
