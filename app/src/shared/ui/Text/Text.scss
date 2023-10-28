@@ -32,6 +32,9 @@
   &--left{
     text-align: left;
   }
+  &--size-s{
+    font: var(--font-s);
+  }
   &--size-m{
     font: var(--font-m);
   }

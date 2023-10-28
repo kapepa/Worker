@@ -1,11 +1,11 @@
-import {CSSProperties, FC, ReactNode, useMemo} from "react";
+import {CSSProperties, DetailedHTMLProps, FC, HTMLAttributes, ReactNode, useMemo} from "react";
 import "./Flex.scss";
 import {ClassNames} from "../../lib/ClassNames";
 
 type justifyContentType = CSSProperties["justifyContent"];
 type flexDirectionType = CSSProperties["flexDirection"];
 type alignItemsType = CSSProperties["alignItems"];
-interface FlexProps {
+interface FlexProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   className?: string,
   children: ReactNode,
   justifyContent?: justifyContentType,
@@ -23,6 +23,7 @@ const Flex: FC<FlexProps> = (props) => {
     alignItems,
     gap,
     max,
+    ...otherProps
   } = props;
 
   const setJustifyContent = useMemo(() => {
@@ -120,6 +121,7 @@ const Flex: FC<FlexProps> = (props) => {
         )
       }
       data-testid={"flex"}
+      {...otherProps}
     >
       {children}
     </div>
