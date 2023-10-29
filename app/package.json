@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@floating-ui/dom": "^1.5.3",
+    "@floating-ui/react": "^0.26.1",
+    "@headlessui/react": "^1.7.17",
     "@hookform/error-message": "^2.0.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@storybook/types": "^7.0.25",
