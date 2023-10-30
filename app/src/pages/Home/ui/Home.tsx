@@ -22,7 +22,6 @@ function Home() {
   return (
     <div className="home" data-testid="home">
       <Text theme={TextTheme.PRIMARY} headerTag="h1" title={t("home page")} size={TextSize.XL}/>
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
       <ListBox list={people} defaultValue={people[0]} callback={changeListBox}/>
     </div>
   )
