@@ -13,6 +13,10 @@ body{
   font: var(--font-m);
 }
 
+ul li {
+  list-style-type: none;
+}
+
 .app {
   background: var(--bg-color);
   color: var(--primary-color);
