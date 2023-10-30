@@ -1,4 +1,4 @@
-import {ButtonHTMLAttributes, FC, memo, ReactNode} from "react"
+import {ButtonHTMLAttributes, FC, memo, ReactNode, useMemo} from "react"
 import "./Button.scss";
 import {ClassNames} from "../../lib/ClassNames";
 
@@ -18,26 +18,31 @@ export enum SizeButton {
   C = "custom",
 }
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement | HTMLDivElement> {
   className?: string,
   children?: ReactNode,
   theme?: ThemeButtonEnum,
   size?: SizeButton,
   disabled?: boolean,
+  fragment?: boolean,
 }
 
 const Button: FC<ButtonProps> = memo((props) => {
-  const {className, theme = ThemeButtonEnum.CLEAR, disabled = false, size = SizeButton.M, children, ...otherProps} = props;
+  const {className, theme = ThemeButtonEnum.CLEAR, fragment = true, disabled = false, size = SizeButton.M, children, ...otherProps} = props;
+  const ButtonView = useMemo(
+    () => fragment ? "button" : "div",
+    [fragment]
+  )
 
   return (
-    <button
+    <ButtonView
       data-testid="button"
       className={ClassNames(className, "button", `button--${theme}`, `button--${size}`, {"button-disabled": disabled})}
       disabled={disabled}
       {...otherProps}
     >
       {children}
-    </button>
+    </ButtonView>
   )
 })
 
