@@ -4,6 +4,8 @@ import ThemeDecorator from '../../../shared/config/ThemeDecorator/ThemeDecorator
 import { ThemeEnum } from '../../../app/contexts/Theme/lib/ThemeContext';
 import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
 import RouterDecorator from "../../../shared/config/RouterDecorator/RouterDecorator";
+import UserJSON from "../../../shared/test/mock/user.json";
+import {UsersTypes} from "../../../entities/Users";
 
 const meta: Meta<typeof Panel> = {
   component: Panel,
@@ -22,5 +24,5 @@ export const PanelDark: PanelStory = {
 };
 
 export const PanelDarkIsLogin: PanelStory = {
-	decorators: [ThemeDecorator(ThemeEnum.DARK), StoreDecorator({users: {profile: {id: "1", username: "MyName"}}})],
+	decorators: [ThemeDecorator(ThemeEnum.DARK), StoreDecorator({users: {profile: UserJSON as UsersTypes }})],
 };

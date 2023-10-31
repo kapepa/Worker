@@ -1,0 +1,4 @@
+.panel{width:100%;height:var(--navbar-height);background-color:var(--bg-color-inverted);display:flex;justify-content:space-between;align-items:center;padding:20px}.panel__login{text-decoration:none;font-size:var(--font-size-l)}.panel__avatar{width:40px;height:40px}
+.drop-down{position:relative}.drop-down__view{background-color:rgba(0,0,0,0);border:none;outline:none;cursor:pointer}.drop-down__items{display:flex;flex-direction:column;background-color:var(--bg-color);position:absolute;border:1px solid var(--secondary-color);z-index:10}.drop-down__item{padding:10px 20px;text-decoration:none;cursor:pointer;border-bottom:1px solid var(--secondary-color)}.drop-down__item:last-child{border-bottom:none}
+
+/*# sourceMappingURL=widgets-Panel-ui-Panel-stories.b74cb3d2.chunk.css.map*/
