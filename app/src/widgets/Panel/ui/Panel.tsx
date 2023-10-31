@@ -27,16 +27,16 @@ const Panel: FC<PanelProps> = memo(({classNames}) => {
 
 	const onCloseModal = useCallback(() => {
 		if(open) setOpen( false );
-	}, [open])
+	}, [open]);
 
 	const onOpenModal = useCallback(() => {
 		if(!open) setOpen( true );
-	},[open, setOpen])
+	},[open, setOpen]);
 
 	const isLogout = useCallback(() => {
 		logout();
 		navigate(RouterPath.HOME);
-	}, [navigate, logout])
+	}, [navigate, logout]);
 
 	const getAvatar = useMemo(() => {
 		return (
