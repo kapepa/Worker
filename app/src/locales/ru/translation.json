@@ -25,5 +25,9 @@
     "Moldova": "Молдова",
     "Bulgaria": "Болгария",
     "Hungary": "Венгрия"
+  },
+  "drop_down": {
+    "profile": "Профиль",
+    "logout": "Выйти"
   }
 }
