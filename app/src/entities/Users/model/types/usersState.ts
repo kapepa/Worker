@@ -2,6 +2,6 @@ import {UsersTypes} from "./usersTypes";
 
 export interface UsersState{
   loading: boolean,
-  profile?: UsersTypes,
+  profile?: UsersTypes | undefined,
   error?: string | undefined,
 }
