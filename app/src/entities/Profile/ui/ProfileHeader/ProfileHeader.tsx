@@ -18,7 +18,7 @@ interface ProfileHeaderProps {
 const ProfileHeader: FC<ProfileHeaderProps> = memo(({className, onSend}) => {
   const { t } = useTranslation("profile");
   const { readonly, data } = useSelector(GetProfile);
-  const user = useSelector(GetUsersProfile)
+  const user = useSelector(GetUsersProfile);
   const dispatch = useAppDispatch();
 
   const onEdit = useCallback(() => {
