@@ -28,6 +28,7 @@
   },
   "drop_down": {
     "profile": "Profile",
+    "admin": "Admin",
     "logout": "Logout"
   }
 }

@@ -1,4 +1,5 @@
 import {Countries} from "../../../../shared/const/Countries";
+import {Role} from "../../../Users";
 
 export interface ProfileTypes {
   id?: string,
@@ -9,6 +10,7 @@ export interface ProfileTypes {
   password?: string,
   avatar?: string | File,
   country?: Countries,
+  roles?: Role[],
   city?: string,
   isActive?: boolean,
 }

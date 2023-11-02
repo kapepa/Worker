@@ -19,6 +19,7 @@
     text-decoration: none;
     cursor: pointer;
     border-bottom: 1px solid var(--secondary-color);
+    text-align: center;
     &:last-child{
       border-bottom: none;
     }

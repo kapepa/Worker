@@ -1,8 +1,17 @@
-import {UsersReducer, UsersActions, UsersState, MyselfUsers} from "../../../Users";
+import {UsersReducer, UsersActions, UsersState, MyselfUsers, Role} from "../../../Users";
 import {DeepPartial} from "@reduxjs/toolkit";
 
 describe("UsersReducer", () => {
-  const state: UsersState = {loading: false, profile: undefined, error: undefined}
+  const state: UsersState = {
+    loading: false,
+    profile: undefined,
+    error: undefined,
+    roles: {
+      ADMIN: false,
+      MANAGER: false,
+      USER: false,
+    }
+  }
   const mockUser = {id: "MyId", email: "mock@email.com", username: "MyName"}
 
   test("cleanUsers", () => {
