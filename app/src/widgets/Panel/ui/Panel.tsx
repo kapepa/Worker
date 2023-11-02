@@ -6,7 +6,7 @@ import {useTranslation} from "react-i18next";
 import {LoginModal} from "../../../features/AuthByUsername";
 import {UseToken} from "../../../app/contexts/Token";
 import {useSelector} from "react-redux";
-import {GetUsersProfile} from "../../../entities/Users";
+import {GetUsersProfile, GetUsersRoles} from "../../../entities/Users";
 import AppLink, {AppLinkTheme} from "../../../shared/ui/AppLink/AppLink";
 import {RouterPath} from "../../../shared/const/Routers";
 import {useNavigate} from "react-router-dom";
@@ -22,6 +22,7 @@ const Panel: FC<PanelProps> = memo(({classNames}) => {
 	const { logout } = UseToken();
 	const navigate = useNavigate();
 	const userProfile = useSelector(GetUsersProfile);
+	const { ADMIN } = useSelector(GetUsersRoles);
 	const [open, setOpen] = useState<boolean>(false);
 	const { t } = useTranslation();
 
@@ -52,10 +53,11 @@ const Panel: FC<PanelProps> = memo(({classNames}) => {
 
 	const navList: DropDownInt[] = useMemo(
 		() => [
+			...ADMIN ? [{ label: t("drop_down.admin"), href: `${RouterPath.ADMIN}` }] : [],
 			{ label: t("drop_down.profile"), href: `${RouterPath.PROFILE}/${userProfile?.id}` },
 			{ label: t("drop_down.logout"), callback: isLogout }
 		],
-		[t, userProfile?.id, isLogout]
+		[t, userProfile?.id, isLogout, ADMIN]
 		)
 
 	return (

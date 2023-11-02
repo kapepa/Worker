@@ -3,10 +3,16 @@ import type {PayloadAction} from '@reduxjs/toolkit'
 import {UsersState} from "../types/usersState";
 import {MyselfUsers} from "../../services/MyselfUsers/MyselfUsers";
 import {UsersTypes} from "../types/usersTypes";
+import {Role} from "../enum/roleEnum";
 
 const initialState: UsersState = {
   loading: false,
   profile: undefined,
+  roles: {
+    [Role.ADMIN]: false,
+    [Role.MANAGER]: false,
+    [Role.USER]: false,
+  },
   error: undefined,
 }
 
@@ -26,6 +32,7 @@ export const UsersSlice = createSlice({
       .addCase(MyselfUsers.fulfilled, (state, action: PayloadAction<UsersTypes>) => {
         state.loading = false;
         state.profile = action.payload;
+        action.payload.roles?.forEach((role: Role) => state.roles[role] = true);
       })
       .addCase(MyselfUsers.rejected, (state, action) => {
         state.loading = false;

@@ -3,6 +3,7 @@ import {UsersEntityInterfaces} from "../interfaces/users.interfaces";
 import {ArticlesEntity} from "../../articles/entities/articles.entity";
 import {BlocksEntity} from "../../articles/entities/blocks.entity";
 import {CommentsEntity} from "../../comments/entities/comments.entity";
+import {Role} from "../enum/role.enum";
 
 @Entity()
 export class UsersEntity implements UsersEntityInterfaces {
@@ -32,6 +33,9 @@ export class UsersEntity implements UsersEntityInterfaces {
 
   @Column({ default: "" })
   city: string;
+
+  @Column({ type: 'enum', enum: Role, array: true, default: [Role.USER] })
+  roles?: Role[];
 
   @OneToMany(type => ArticlesEntity, (articles) => articles.users)
   articles: ArticlesEntity[];

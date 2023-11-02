@@ -85,15 +85,17 @@ const DropDown: FC<DropDownProps> = memo((props: DropDownProps) => {
                 case !!drop.callback:
                   return <Menu.Item key={`${drop.href}-${index}`}>
                     {({ close }) => (
-                      <Button onClick={() => {
-                        if(drop.callback) drop!.callback(); close();
-                      }} className="drop-down__item">
-                        {drop.label}
-                      </Button>
+                      <div>
+                        <Button onClick={() => {
+                          if(drop.callback) drop!.callback(); close();
+                        }} className="drop-down__item">
+                          {drop.label}
+                        </Button>
+                      </div>
                     )}
                   </Menu.Item>
                 default:
-                  return <Menu.Item/>
+                  return <Menu.Item key={`${drop.href}-${index}`}/>
               }
             })}
           </Menu.Items>
