@@ -3,7 +3,6 @@ import React, {ElementType, lazy, Suspense} from "react";
 import PageLoader from "../../../../widgets/PageLoader";
 import App from "../../../App";
 import {RouterPath} from "../../../../shared/const/Routers";
-import {RoleAuth} from "./RoleAuth";
 
 const Loadable = (Component: ElementType) =>
   function fn(props: any) {
@@ -42,7 +41,7 @@ const routers = createBrowserRouter([
       },
       {
         path: RouterPath.ADMIN,
-        element: <AdminPage />,
+        element: <AdminPage /> ,
       },
       {
         path: RouterPath.ARTICLE,

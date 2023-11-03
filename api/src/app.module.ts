@@ -13,6 +13,8 @@ import {ArticlesEntity} from "./articles/entities/articles.entity";
 import {BlocksEntity} from "./articles/entities/blocks.entity";
 import {CommentsModule} from './comments/comments.module';
 import {CommentsEntity} from "./comments/entities/comments.entity";
+import { NoticeModule } from './notice/notice.module';
+import {NoticeEntity} from "./notice/entities/notice.entity";
 
 dotenv.config();
 
@@ -36,6 +38,7 @@ dotenv.config();
           ArticlesEntity,
           BlocksEntity,
           CommentsEntity,
+          NoticeEntity,
         ],
         synchronize: true,
       }),
@@ -45,7 +48,8 @@ dotenv.config();
     AuthModule,
     FileModule,
     ArticlesModule,
-    CommentsModule
+    CommentsModule,
+    NoticeModule
   ],
   controllers: [],
   providers: [],

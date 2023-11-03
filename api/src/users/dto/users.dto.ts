@@ -3,8 +3,12 @@ import {BlocksDto} from "../../articles/dto/blocks.dto";
 import {IsNotEmpty} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 import {Role} from "../enum/role.enum";
+import {NoticeDto} from "../../notice/dto/notice.dto";
 
 export class UsersDto {
+  @ApiProperty()
+  id?: string
+
   @IsNotEmpty()
   @ApiProperty()
   username?: string
@@ -44,6 +48,9 @@ export class UsersDto {
 
   @ApiProperty()
   blocks?: BlocksDto[]
+
+  @ApiProperty()
+  notice: NoticeDto[]
 
   @ApiProperty()
   isActive?: boolean

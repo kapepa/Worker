@@ -4,6 +4,7 @@ import {ArticlesEntity} from "../../articles/entities/articles.entity";
 import {BlocksEntity} from "../../articles/entities/blocks.entity";
 import {CommentsEntity} from "../../comments/entities/comments.entity";
 import {Role} from "../enum/role.enum";
+import {NoticeEntity} from "../../notice/entities/notice.entity";
 
 @Entity()
 export class UsersEntity implements UsersEntityInterfaces {
@@ -44,7 +45,10 @@ export class UsersEntity implements UsersEntityInterfaces {
   blocks: BlocksEntity[];
 
   @OneToMany(() => CommentsEntity, (comments) => comments.users)
-  comments: CommentsEntity[]
+  comments: CommentsEntity[];
+
+  @OneToMany(() => NoticeEntity, (notice) => notice.users)
+  notice: NoticeEntity[];
 
   @Column({ default: false , select: false})
   isActive: boolean;
