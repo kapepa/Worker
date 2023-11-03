@@ -7,5 +7,5 @@ import {GetUsersProfile} from "./selectors/getUsersProfile/getUsersProfile";
 import {Role} from "./model/enum/roleEnum";
 import {GetUsersRoles} from "./selectors/getUsersRoles/getUsersRoles";
 
-export {UsersReducer, GetUsers, UsersActions, MyselfUsers, GetUsersProfile, GetUsersRoles};
-export type {UsersState, UsersTypes, Role};
+export {UsersReducer, GetUsers, UsersActions, MyselfUsers, GetUsersProfile, GetUsersRoles, Role};
+export type {UsersState, UsersTypes};

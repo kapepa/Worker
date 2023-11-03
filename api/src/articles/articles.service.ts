@@ -11,7 +11,6 @@ import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
 import {OrderFieldFind} from "../shared/Types/OrderFieldFind";
 import {ArticlesFilterFields} from "../shared/enum/ArticlesFilterFields";
 import {UsersDto} from "../users/dto/users.dto";
-import {ArticlesBlockType} from "./interfaces/blocks.interface";
 
 @Injectable()
 export class ArticlesService {
