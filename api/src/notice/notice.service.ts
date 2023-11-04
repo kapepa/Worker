@@ -25,15 +25,16 @@ export class NoticeService {
     return from(this.noticeRepository.find(options));
   }
 
+  deleteOneNotice(noticeID: string) : Observable<DeleteResult> {
+    return from(this.noticeRepository.delete({ id: noticeID }))
+  }
+
   createNotice({userID, body}: {userID: string, body: NoticeInterface}): Observable<NoticeInterface> {
-    return this.usersService.findOne({ where: { id: userID} }).pipe(
+    return this.usersService.findOne({ where: { id: userID } }).pipe(
       switchMap((users: UsersEntityInterfaces) => {
         return this.saveOneNotice({...body, users});
       })
     )
   }
 
-  deleteOneNotice(noticeID: string) : Observable<DeleteResult> {
-    return from(this.noticeRepository.delete({ id: noticeID}))
-  }
 }

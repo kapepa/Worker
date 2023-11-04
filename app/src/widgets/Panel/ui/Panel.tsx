@@ -13,6 +13,8 @@ import {useNavigate} from "react-router-dom";
 import {DropDown} from "../../DropDown";
 import {DropDownInt} from "../../../shared/interface/DropDownInt";
 import {Avatar} from "../../../shared/ui/Avatar/Avatar";
+import {Flex} from "../../../shared/ui/Flex/Flex";
+import {NoticeView} from "../../../features/Notice";
 
 interface PanelProps {
 	classNames?: string,
@@ -63,11 +65,15 @@ const Panel: FC<PanelProps> = memo(({classNames}) => {
 	return (
 		<div data-testid="panel" className={ClassNames(classNames, 'panel')}>
 			<AppLink className="panel__login" theme={AppLinkTheme.SECONDARY} to={RouterPath.HOME}>Login</AppLink>
-			{
-				!!userProfile ?
-					<DropDown viewPrefix={getAvatar} navList={navList} /> :
-					<Button onClick={onOpenModal}>{t('sign_in')}</Button>
-			}
+			<Flex justifyContent={"space-between"} alignItems={"center"} gap={16}>
+				<NoticeView/>
+				{
+					!!userProfile ?
+						<DropDown viewPrefix={getAvatar} navList={navList} /> :
+						<Button onClick={onOpenModal}>{t('sign_in')}</Button>
+				}
+			</Flex>
+
 			<LoginModal isOpen={open} onClose={onCloseModal}/>
 		</div>
 	)

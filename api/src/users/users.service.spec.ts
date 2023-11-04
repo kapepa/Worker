@@ -6,7 +6,7 @@ import {Repository} from "typeorm";
 import {MockUsers} from "../utility/test/mockUsers";
 import {UsersEntityInterfaces} from "./interfaces/users.interfaces";
 import {FileService} from "../file/file.service";
-import {of, throwError} from "rxjs";
+import {of} from "rxjs";
 import {NotFoundException} from "@nestjs/common";
 
 describe('UsersService', () => {
