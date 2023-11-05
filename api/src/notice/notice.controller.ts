@@ -20,7 +20,7 @@ export class NoticeController {
   @ApiResponse({ status: 200, description: 'Should be get all notices'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   allNotice(@Req() req: ReqProps): Observable<NoticeInterface[]> {
-    return  this.noticeService.findMany({ where: { users: req.user } });
+    return this.noticeService.findMany({ where: { users: req.user } });
   }
 
   @UseGuards(AuthGuard)
