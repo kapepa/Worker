@@ -17,6 +17,7 @@ import enNotification from "./locales/en/notification.json";
 import enFilter from "./locales/en/filter.json";
 import enEditor from "./locales/en/editor.json";
 import enImageLoader from "./locales/en/image-loader.json";
+import enNotice from "./locales/en/notice.json";
 
 import ruTranslation from "./locales/ru/translation.json";
 import ruHome from "./locales/ru/home.json";
@@ -31,6 +32,7 @@ import ruNotification from "./locales/ru/notification.json";
 import ruFilter from "./locales/ru/filter.json";
 import ruEditor from "./locales/ru/editor.json";
 import ruImageLoader from "./locales/ru/image-loader.json";
+import ruNotice from "./locales/ru/notice.json";
 
 i18n
   .use(Backend)
@@ -52,7 +54,8 @@ i18n
         notification: enNotification,
         filter: enFilter,
         editor: enEditor,
-        image_loader: enImageLoader
+        image_loader: enImageLoader,
+        notice: enNotice,
       },
       ru: {
         translation: ruTranslation,
@@ -67,7 +70,8 @@ i18n
         notification: ruNotification,
         filter: ruFilter,
         editor: ruEditor,
-        image_loader: ruImageLoader
+        image_loader: ruImageLoader,
+        notice: ruNotice,
       }
     },
     fallbackLng: 'en',

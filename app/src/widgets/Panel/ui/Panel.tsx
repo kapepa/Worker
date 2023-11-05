@@ -60,20 +60,25 @@ const Panel: FC<PanelProps> = memo(({classNames}) => {
 			{ label: t("drop_down.logout"), callback: isLogout }
 		],
 		[t, userProfile?.id, isLogout, ADMIN]
+		);
+
+	const isHaveProfile = useMemo(() => {
+		if(!userProfile) return <Button onClick={onOpenModal}>{t('sign_in')}</Button>;
+
+		return (
+			<>
+				<NoticeView/>
+				<DropDown viewPrefix={getAvatar} navList={navList} />
+			</>
 		)
+	}, [t, userProfile, getAvatar, navList, onOpenModal])
 
 	return (
 		<div data-testid="panel" className={ClassNames(classNames, 'panel')}>
 			<AppLink className="panel__login" theme={AppLinkTheme.SECONDARY} to={RouterPath.HOME}>Login</AppLink>
 			<Flex justifyContent={"space-between"} alignItems={"center"} gap={16}>
-				<NoticeView/>
-				{
-					!!userProfile ?
-						<DropDown viewPrefix={getAvatar} navList={navList} /> :
-						<Button onClick={onOpenModal}>{t('sign_in')}</Button>
-				}
+				{isHaveProfile}
 			</Flex>
-
 			<LoginModal isOpen={open} onClose={onCloseModal}/>
 		</div>
 	)
