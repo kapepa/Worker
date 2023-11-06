@@ -1,0 +1,7 @@
+{
+  "id": "NoticeID",
+  "title": "Notice Title",
+  "description": "Notice Description",
+  "href": "https://www.google.com",
+  "read": false
+}
