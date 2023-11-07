@@ -11,7 +11,8 @@ describe("GetNoticeLoading", () => {
         error: undefined,
         ids: [NoticeJSON.id],
         entities: {[NoticeJSON.id]: NoticeJSON},
-      } as NoticeState
+      } as NoticeState,
+
     } as StateSchema;
 
     expect(GetNoticeLoading(state)).toEqual(state.notice.loading);
