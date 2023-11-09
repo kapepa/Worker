@@ -11,7 +11,7 @@ const Admin: FC = memo(() => {
 
   useEffect(() => {
     if(!ADMIN) navigate(RouterPath.HOME);
-  },[ADMIN])
+  },[navigate, ADMIN])
 
   return (
     <div className="admin">
