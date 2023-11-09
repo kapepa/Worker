@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, InputHTMLAttributes, memo, useCallback, useEffect, useMemo} from "react";
+import {ChangeEvent, FC, InputHTMLAttributes, memo, useCallback, useEffect} from "react";
 import "./InputDynamic.scss";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import {useController, useFormContext} from "react-hook-form";
@@ -6,7 +6,6 @@ import {Input} from "../../../shared/ui/Input/Input";
 import {RegisterOptions} from "react-hook-form/dist/types/validator";
 import {BgEnum} from "../../../shared/const/BgEnum";
 import {ColorEnum} from "../../../shared/const/ColorEnum";
-import {ErrorMessage} from "@hookform/error-message";
 
 interface InputDynamicProps extends InputHTMLAttributes<HTMLInputElement>{
   className?: string,
