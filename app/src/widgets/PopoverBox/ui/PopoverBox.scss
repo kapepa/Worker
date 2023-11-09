@@ -1,0 +1,11 @@
+.popover-box{
+  &__btn{
+    cursor: pointer;
+  }
+  &__panel{
+    z-index: 10;
+    border-radius: 10px;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--bg-color);
+  }
+}

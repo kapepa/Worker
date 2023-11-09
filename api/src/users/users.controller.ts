@@ -2,8 +2,8 @@ import {
   Body,
   Controller,
   Get,
-  HttpStatus, Param, ParseFilePipe, ParseFilePipeBuilder,
-  Post,
+  HttpStatus,
+  Param,
   Put,
   Req,
   UploadedFiles,
@@ -17,6 +17,7 @@ import {UsersEntityInterfaces} from "./interfaces/users.interfaces";
 import {ApiForbiddenResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {createMulterOptions, FileService} from "../file/file.service";
 import {FilesInterceptor, MulterModule} from "@nestjs/platform-express";
+import {ReqProps} from "../shared/interfaces/ReqProps";
 
 
 @ApiTags('users')
@@ -31,7 +32,7 @@ export class UsersController {
   @Get('/profile')
   @ApiResponse({ status: 200, description: 'Get user by token.'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
-  getProfile(@Req() req): Observable<UsersEntityInterfaces> {
+  getProfile(@Req() req: ReqProps): Observable<UsersEntityInterfaces> {
     return this.usersService.findOne({where: { id: req.user.id }});
   }
 
@@ -39,7 +40,7 @@ export class UsersController {
   @Get('/customer/:id')
   @ApiResponse({ status: 200, description: 'Get full user data'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
-  getProfileFull(@Req() req, @Param() param): Observable<UsersEntityInterfaces>{
+  getProfileFull(@Req() req: ReqProps, @Param() param): Observable<UsersEntityInterfaces>{
     return this.usersService.findOne({where: { id: param.id }});
   }
 
@@ -48,7 +49,7 @@ export class UsersController {
   @UseInterceptors(FilesInterceptor("avatar", 1000, createMulterOptions()))
   @ApiResponse({ status: 200, description: 'Update succes user'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'User not found or an error occurred while updating'})
-  updateUser(@Req() req, @UploadedFiles() avatar: Express.Multer.File, @Body() body: UsersEntityInterfaces): Observable<UsersEntityInterfaces> {
+  updateUser(@Req() req: ReqProps, @UploadedFiles() avatar: Express.Multer.File, @Body() body: UsersEntityInterfaces): Observable<UsersEntityInterfaces> {
     const toBody = JSON.parse(JSON.stringify(body));
 
     if(!!avatar?.[0]) toBody.avatar = avatar![0].filename

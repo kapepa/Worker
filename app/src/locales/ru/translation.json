@@ -3,6 +3,7 @@
   "translate-short": "Ru",
   "error-boundary": "Извините.. произошла ошибка.",
   "refresh-page": "Обновите страницу.",
+  "read-more": "Читать далее",
   "nav": {
     "home": "Домой",
     "about": "О нас",
@@ -28,6 +29,7 @@
   },
   "drop_down": {
     "profile": "Профиль",
+    "admin": "Админ",
     "logout": "Выйти"
   }
 }

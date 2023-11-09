@@ -20,6 +20,7 @@ const AboutPage = Loadable(lazy(() => import("../../../../pages/About").then(mod
 const ProfilePage = Loadable(lazy( () => import("../../../../pages/Profile").then(module => ({default: module.Profile})) ));
 const ArticlePage = Loadable(lazy(() => import("../../../../pages/Article").then(module => ({default: module.Article})) ));
 const ArticleEditPage = Loadable(lazy(() => import("../../../../pages/ArticleEdit").then(module => ({default: module.ArticleEdit})) ));
+const AdminPage = Loadable(lazy(() => import("../../../../pages/Admin").then(module => ({default: module.Admin}))));
 const ArticleCreatePage = Loadable(lazy(() => import("../../../../pages/ArticleCreate").then(module => ({default: module.ArticleCreate})) ));
 const DetailsPage = Loadable(lazy(() => import("../../../../pages/Details").then(module => ({default: module.Details})) ));
 const ErrorPage = Loadable(lazy(() => import("../../../../pages/Error")));
@@ -37,6 +38,10 @@ const routers = createBrowserRouter([
       {
         path: RouterPath.ABOUT,
         element: <AboutPage />,
+      },
+      {
+        path: RouterPath.ADMIN,
+        element: <AdminPage /> ,
       },
       {
         path: RouterPath.ARTICLE,

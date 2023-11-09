@@ -1,4 +1,4 @@
-import {FC, memo, useCallback, useState} from "react";
+import {FC, Fragment, memo, useCallback, useState} from "react";
 import "./ListBox.scss";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import {ListBoxInt} from "../../../shared/interface/ListBoxInt";
@@ -23,7 +23,6 @@ interface ListBoxProps {
   defaultValue: ListBoxInt,
   callback: (box: ListBoxInt) => void
 }
-
 const ListBox: FC<ListBoxProps> = memo((props: ListBoxProps) => {
   const {className, list, defaultValue, callback} = props;
   const [selectedBox, setSelectedBox] = useState<ListBoxInt>(defaultValue);
@@ -54,13 +53,18 @@ const ListBox: FC<ListBoxProps> = memo((props: ListBoxProps) => {
     <div className={ClassNames("list-box", className)} >
       <Listbox value={selectedBox} onChange={onChange}>
         <Listbox.Button
-          className="list-box__btn"
+          as={Fragment}
           ref={refs.setReference}
           {...getReferenceProps()}
         >
-          <Button theme={ThemeButtonEnum.BACKGROUND_INVERTED} fragment={false} >
-            {selectedBox.name}
-          </Button>
+          <div>
+            <Button
+              className="list-box__btn"
+              theme={ThemeButtonEnum.OUTLINE}
+            >
+              {selectedBox.name}
+            </Button>
+          </div>
         </Listbox.Button>
         <FloatingFocusManager context={context} modal={false}>
           <Listbox.Options

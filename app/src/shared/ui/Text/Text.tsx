@@ -43,7 +43,17 @@ interface TextProps {
 }
 
 const Text: FC<TextProps> = memo((props: TextProps) => {
-  const {className, classTitle, classText, title, headerTag, text, theme, size, align = TextAlign.LEFT} = props;
+  const {
+    className,
+    classTitle,
+    classText,
+    title,
+    headerTag,
+    text,
+    theme,
+    size,
+    align = TextAlign.LEFT
+  } = props;
   const GetTag = (!!headerTag && size) ? sizeHeaderTag[size] : "p"
 
   return (

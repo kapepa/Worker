@@ -1,0 +1,6 @@
+{
+  "list-empty": "The list is empty",
+  "error": {
+    "error-get-notices": "Error receiving notifications"
+  }
+}
