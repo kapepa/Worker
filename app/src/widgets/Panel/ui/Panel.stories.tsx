@@ -5,11 +5,13 @@ import { ThemeEnum } from '../../../app/contexts/Theme/lib/ThemeContext';
 import StoreDecorator from "../../../shared/config/StoreDecorator/StoreDecorator";
 import RouterDecorator from "../../../shared/config/RouterDecorator/RouterDecorator";
 import UserJSON from "../../../shared/test/mock/user.json";
-import {UsersTypes} from "../../../entities/Users";
+import {Role, UsersTypes} from "../../../entities/Users";
 
 const meta: Meta<typeof Panel> = {
   component: Panel,
-	decorators: [RouterDecorator, StoreDecorator({})],
+	decorators: [RouterDecorator, StoreDecorator({
+		users: { roles: {[Role.ADMIN]: false, [Role.MANAGER]: false, [Role.USER]: false} }
+	})],
 };
 
 export default meta;
@@ -24,5 +26,7 @@ export const PanelDark: PanelStory = {
 };
 
 export const PanelDarkIsLogin: PanelStory = {
-	decorators: [ThemeDecorator(ThemeEnum.DARK), StoreDecorator({users: {profile: UserJSON as UsersTypes }})],
+	decorators: [ThemeDecorator(ThemeEnum.DARK), StoreDecorator({users: {
+		profile: UserJSON as UsersTypes, roles: {[Role.ADMIN]: false, [Role.MANAGER]: false, [Role.USER]: false}
+	}})],
 };
