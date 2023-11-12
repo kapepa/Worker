@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {GetUsersRoles} from "../../../entities/Users";
 import {useNavigate} from "react-router-dom";
 import {RouterPath} from "../../../shared/const/Routers";
+import {Flex} from "../../../shared/ui/Flex/Flex";
 
 const Admin: FC = memo(() => {
   const navigate = useNavigate();
@@ -14,9 +15,14 @@ const Admin: FC = memo(() => {
   },[navigate, ADMIN])
 
   return (
-    <div className="admin">
+    <Flex
+      className="admin"
+      alignItems="center"
+      justifyContent="center"
+      flexDirection="column"
+    >
       Admin
-    </div>
+    </Flex>
   )
 })
 
