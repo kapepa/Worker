@@ -10,6 +10,7 @@ import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {FetchNotices} from "../../model/services/FetchNotices/FetchNotices";
 import {Text, TextTheme} from "../../../../shared/ui/Text/Text";
 import {useTranslation} from "react-i18next";
+import {Drawer} from "../../../../widgets/Drawer";
 // import {useGetNotificationsQuery} from "../../../../shared/api/notice.api";
 
 interface NoticeViewProps {
@@ -57,13 +58,21 @@ const NoticeView: FC<NoticeViewProps> = memo((props) => {
 
   return (
     <div className={ClassNames("notice-view", className)}>
-      <PopoverBox
+      {/*<PopoverBox*/}
+      {/*  onOpen={fetchNotices}*/}
+      {/*  classBtn={ClassNames(classBtn, "notice-view__btn")}*/}
+      {/*  innerBtn={*/}
+      {/*    <IcoImg className={"notice-view__ico"} ico="NotificationIco" color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>*/}
+      {/*  }*/}
+      {/*  children={currentView}*/}
+      {/*/>*/}
+      <Drawer
+        direction="column"
         onOpen={fetchNotices}
-        classBtn={ClassNames(classBtn, "notice-view__btn")}
+        children={currentView}
         innerBtn={
           <IcoImg className={"notice-view__ico"} ico="NotificationIco" color={IcoImgColor.PRIMARY_COLOR_INVERTED}/>
         }
-        children={ currentView }
       />
     </div>
   )
