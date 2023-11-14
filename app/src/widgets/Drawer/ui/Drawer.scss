@@ -5,10 +5,12 @@
   right: 0;
   bottom: 0;
   background-color: var(--overlay-bg);
+  z-index: 10;
   &__btn{
     background: transparent;
     border: none;
     outline: none;
+    cursor: pointer;
   }
   &__inner{
     position: absolute;
@@ -19,5 +21,29 @@
     padding: 15px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    &--normal{
+      animation: floating .1s linear 0s forwards;
+    }
+    &--reverse{
+      animation: sinking .1s linear 0s forwards;
+    }
+  }
+}
+
+@keyframes floating {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes sinking {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
   }
 }
