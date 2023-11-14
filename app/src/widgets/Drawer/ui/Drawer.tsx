@@ -1,4 +1,14 @@
-import {CSSProperties, FC, memo, ReactNode, useCallback, useState} from "react";
+import {
+  CSSProperties,
+  FC,
+  memo,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useState,
+  MouseEvent,
+  AnimationEvent,
+} from "react";
 import "./Drawer.scss";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import {Flex} from "../../../shared/ui/Flex/Flex";
@@ -13,7 +23,7 @@ interface DrawerProps {
   direction: flexDirectionType,
 }
 const Drawer: FC<DrawerProps> = memo((props) => {
-  const [float, setFloat] = useState<boolean>(false);
+  const [float, setFloat] = useState<{open: boolean, view: boolean}>({open: false, view: false});
   const {
     className,
     children,
@@ -22,14 +32,37 @@ const Drawer: FC<DrawerProps> = memo((props) => {
     onOpen
   } = props;
 
-  const hideDrawer = useCallback(() => {
-    setFloat(false);
+  const animationendDrawer = useCallback((e: AnimationEvent<HTMLDivElement>) => {
+    if(float.open && !float.view) setFloat(prevState => ({open: false, view: false}));
+  }, [float])
+
+  const hideDrawer = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    const target = (e.target as HTMLDivElement);
+    if(target.classList.contains("drawer")) setFloat((prevState => ({...prevState, view: false})));
   }, []);
 
   const showDrawer = useCallback(() => {
-    if(!!onOpen)  onOpen();
-    setFloat(true);
-  }, [])
+    setFloat({open: true, view: true});
+    if(!!onOpen) onOpen();
+  }, [onOpen])
+
+  const viewDrawer = useMemo(() => {
+    return (
+      <div
+        className={ClassNames("drawer", className)}
+        onClick={hideDrawer}
+      >
+        <Flex
+          flexDirection={direction}
+          alignItems="center"
+          className={ClassNames("drawer__inner", { "drawer__inner--normal": float.view, "drawer__inner--reverse": !float.view})}
+          onAnimationEnd={animationendDrawer}
+        >
+          {children}
+        </Flex>
+      </div>
+    )
+  }, [float.view, hideDrawer, children, direction, className, animationendDrawer]);
 
   return (
     <>
@@ -39,20 +72,7 @@ const Drawer: FC<DrawerProps> = memo((props) => {
       >
         {innerBtn}
       </button>
-      <PortalModal>
-        <div
-          className={ClassNames("drawer", className)}
-          onClick={hideDrawer}
-        >
-          <Flex
-            flexDirection={direction}
-            alignItems="center"
-            className="drawer__inner"
-          >
-            {children}
-          </Flex>
-        </div>
-      </PortalModal>
+      {float.open && <PortalModal>{viewDrawer}</PortalModal>}
     </>
   )
 });
