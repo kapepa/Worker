@@ -12,21 +12,31 @@
     outline: none;
     cursor: pointer;
   }
+  &__sheet{
+    z-index: 100;
+    position: fixed;
+    left: 2vw;
+    height: calc(100vh + 100px);
+    width: 96vw;
+    border-radius: 12px 12px 0px;
+    background: #fff;
+    touch-action: none;
+  }
   &__inner{
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--bg-color);
-    padding: 15px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    &--normal{
-      animation: floating .1s linear 0s forwards;
-    }
-    &--reverse{
-      animation: sinking .1s linear 0s forwards;
-    }
+    //position: absolute;
+    //left: 0;
+    //right: 0;
+    //bottom: 0;
+    //background-color: var(--bg-color);
+    //padding: 15px;
+    //border-top-left-radius: 10px;
+    //border-top-right-radius: 10px;
+    //&--normal{
+    //  animation: floating .1s linear 0s forwards;
+    //}
+    //&--reverse{
+    //  animation: sinking .1s linear 0s forwards;
+    //}
   }
 }
 
