@@ -1,4 +1,12 @@
-import {CSSProperties, DetailedHTMLProps, FC, HTMLAttributes, ReactNode, useMemo} from "react";
+import {
+  CSSProperties,
+  DetailedHTMLProps,
+  FC,
+  HTMLAttributes,
+  ReactNode,
+  RefObject,
+  useMemo
+} from "react";
 import "./Flex.scss";
 import {ClassNames} from "../../lib/ClassNames";
 
@@ -12,7 +20,8 @@ interface FlexProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HT
   flexDirection?: flexDirectionType,
   alignItems?: alignItemsType,
   gap?: 0 | 8 | 16 | 24 | 32 | 40,
-  max?: boolean
+  max?: boolean,
+  refDiv?: RefObject<HTMLDivElement>
 }
 const Flex: FC<FlexProps> = (props) => {
   const {
@@ -23,6 +32,7 @@ const Flex: FC<FlexProps> = (props) => {
     alignItems,
     gap,
     max,
+    refDiv,
     ...otherProps
   } = props;
 
@@ -120,6 +130,7 @@ const Flex: FC<FlexProps> = (props) => {
           setMax,
         )
       }
+      ref={refDiv}
       data-testid={"flex"}
       {...otherProps}
     >

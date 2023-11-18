@@ -5,7 +5,7 @@ describe("PopoverBox", () => {
   test("should be defined", () => {
     const mockTextInner: string = "Any html element";
     const mockTextChildren: string = "Some children";
-    const {getByText, debug} = render(<PopoverBox innerBtn={<p>{mockTextInner}</p>} children={<div>{mockTextChildren}</div>}/>);
+    const {getByText} = render(<PopoverBox innerBtn={<p>{mockTextInner}</p>} children={<div>{mockTextChildren}</div>}/>);
 
     expect(getByText(mockTextInner)).toBeInTheDocument();
     fireEvent.click(getByText(mockTextInner));

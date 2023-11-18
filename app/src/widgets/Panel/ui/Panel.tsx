@@ -71,7 +71,7 @@ const Panel: FC<PanelProps> = memo(({classNames}) => {
 				<DropDown viewPrefix={getAvatar} navList={navList} />
 			</>
 		)
-	}, [t, userProfile, getAvatar, navList, onOpenModal])
+	}, [t, userProfile, getAvatar, navList, onOpenModal]);
 
 	return (
 		<div data-testid="panel" className={ClassNames(classNames, 'panel')}>
