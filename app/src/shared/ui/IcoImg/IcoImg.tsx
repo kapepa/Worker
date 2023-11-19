@@ -1,4 +1,4 @@
-import React, {FC, memo} from "react";
+import React, {FC, HTMLAttributes, memo} from "react";
 import "./IcoImg.scss";
 import { ClassNames } from "../../lib/ClassNames";
 
@@ -37,7 +37,7 @@ export enum IcoImgColor {
   SECONDARY_COLOR_INVERTED = "secondary-color-inverted",
 }
 
-interface IcoImgProps {
+interface IcoImgProps extends HTMLAttributes<HTMLDivElement>{
   className?: string,
   ico: keyof typeof IcoNameEnum,
   fill?: string,
@@ -45,7 +45,7 @@ interface IcoImgProps {
   stroke?: boolean,
 }
 
-const IcoImg: FC<IcoImgProps> = memo(({ className, ico,  fill, color, stroke }) => {
+const IcoImg: FC<IcoImgProps> = memo(({ className, ico,  fill, color, stroke, ...otherProps }) => {
   const icoList: Record<keyof typeof IcoNameEnum, React.FunctionComponent<React.SVGProps<SVGSVGElement> & {title?: string | undefined}> > = {  
     "HomeIco": HomeIco,
     "AboutIco": AboutIco,
@@ -62,7 +62,7 @@ const IcoImg: FC<IcoImgProps> = memo(({ className, ico,  fill, color, stroke }) 
   }
 
   return (
-    <div className={ClassNames("ico-img", className)} data-testid="ico-img">
+    <div className={ClassNames("ico-img", className)} data-testid="ico-img" {...otherProps}>
       {React.createElement(
         icoList[ico],
         {
