@@ -1,11 +1,19 @@
 .rating-stars{
-
+  &__space{
+    &:hover {
+      & > * {
+        fill: var(--primary-color);
+      }
+    }
+  }
   &__unit{
     fill: transparent;
     transition: fill .2s linear;
     cursor: pointer;
     &:hover{
-      fill: var(--primary-color);
+      & ~ * {
+        fill: transparent;
+      }
     }
   }
   &__fill{

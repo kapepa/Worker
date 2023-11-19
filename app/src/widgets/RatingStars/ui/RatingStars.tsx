@@ -7,16 +7,27 @@ import Button, {ThemeButtonEnum} from "../../../shared/ui/Button/Button";
 
 interface RatingStarsProps {
   className?: string,
-  fill?: string
+  isFill?: number,
+  countStars?: (count: number) => void,
 }
 
 const RatingStars: FC<RatingStarsProps> = memo((props) => {
-  const [starsFill, setStarsFill] = useState<number>(0)
-  const {className} = props;
+  const {className, isFill = 0, countStars} = props;
+  const [starsFill, setStarsFill] = useState<number>(isFill);
+
+  const sendStars = useCallback((count: number) => {
+    if(!!countStars) countStars(count);
+  }, [countStars]);
 
   const selectStars = useCallback((positionStar: number) => {
+    if(positionStar === starsFill){
+      sendStars(0);
+      setStarsFill(0);
+      return ;
+    }
+    sendStars(positionStar);
     setStarsFill(positionStar);
-  }, [starsFill])
+  }, [starsFill, sendStars])
 
   const BoxStars = useMemo(() => {
     return Array(5)
@@ -24,7 +35,7 @@ const RatingStars: FC<RatingStarsProps> = memo((props) => {
       .map((_: null, index: number) => (
         <IcoImg
           key={`star-${index}`}
-          className={ClassNames("rating-stars__unit", {"rating-stars__fill": index + 1 < starsFill + 1} )}
+          className={ClassNames("rating-stars__unit", {"rating-stars__fill": index + 1 <= starsFill} )}
           ico={"StarIco"}
           onClick={() => selectStars(index + 1)}
         />
@@ -33,7 +44,7 @@ const RatingStars: FC<RatingStarsProps> = memo((props) => {
 
   return (
     <Flex className="rating-stars" flexDirection={"column"} gap={16}>
-      <Flex className={ClassNames("rating-stars", className)}>{BoxStars}</Flex>
+      <Flex className={ClassNames("rating-stars__space", className)}>{BoxStars}</Flex>
       <Flex justifyContent="center" gap={16}>
         <Button theme={ThemeButtonEnum.OUTLINE_INVERTED}>asda</Button>
       </Flex>
