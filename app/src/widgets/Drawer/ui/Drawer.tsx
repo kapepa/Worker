@@ -23,7 +23,7 @@ type flexDirectionType = CSSProperties["flexDirection"];
 interface DrawerProps {
   className?: string,
   children: ReactNode,
-  innerBtn: ReactNode,
+  innerBtn?: ReactNode,
   onOpen?: () => void,
   direction: flexDirectionType,
 }
@@ -39,11 +39,12 @@ const Drawer: FC<DrawerProps> = memo((props) => {
 
   const [{ y }, api] = useSpring(() => ({ y: height }))
 
-  const open = ({ canceled }: any) => {
+  const open = useCallback(({ canceled }: any) => {
     setFloat({open: true, view: true});
     if(!!onOpen) onOpen();
     api.start({ y: 0, immediate: false, config: canceled ? config.wobbly : config.stiff })
-  }
+  }, [api, onOpen]);
+
   const close = useCallback((velocity = 0) => {
     api.start({ y: height, immediate: false, config: { ...config.stiff, velocity } })
     setFloat((prevState => ({...prevState, view: false, open: false})));
@@ -104,14 +105,20 @@ const Drawer: FC<DrawerProps> = memo((props) => {
     )
   }, [float.view, hideDrawer, children, direction, className, animationendDrawer, bind, display, y])
 
-  return (
-    <>
+  const hasInnerBtn = useMemo(() => {
+    return (
       <button
         className="drawer__btn"
         onClick={open}
       >
         {innerBtn}
       </button>
+    )
+  }, [open, innerBtn])
+
+  return (
+    <>
+      {!!innerBtn && hasInnerBtn}
       {float.open && <PortalModal>{viewDrawer}</PortalModal>}
     </>
   )
