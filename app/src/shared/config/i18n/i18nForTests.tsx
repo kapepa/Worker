@@ -15,6 +15,8 @@ import enFilter from "../../../locales/en/filter.json";
 import enEditor from "../../../locales/en/editor.json";
 import enImageLoader from "../../../locales/en/image-loader.json";
 import enNotice from "../../../locales/en/notice.json";
+import enStars from "../../../locales/en/stars.json";
+import enRating from "../../../locales/en/rating.json";
 
 import ruTranslation from "../../../locales/ru/translation.json";
 import ruHome from "../../../locales/ru/home.json";
@@ -30,6 +32,8 @@ import ruFilter from "../../../locales/ru/filter.json";
 import ruEditor from "../../../locales/ru/editor.json";
 import ruImageLoader from "../../../locales/ru/image-loader.json";
 import ruNotice from "../../../locales/ru/notice.json";
+import ruStars from "../../../locales/ru/stars.json";
+import ruRating from "../../../locales/ru/rating.json";
 
 i18n
   .use(initReactI18next)
@@ -56,6 +60,8 @@ i18n
         editor: enEditor,
         image_loader: enImageLoader,
         notice: enNotice,
+        stars: enStars,
+        rating: enRating,
       },
       ru: {
         translation: ruTranslation,
@@ -72,6 +78,8 @@ i18n
         editor: ruEditor,
         image_loader: ruImageLoader,
         notice: ruNotice,
+        stars: ruStars,
+        rating: ruRating,
       }
     },
 

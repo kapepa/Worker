@@ -1,36 +1,36 @@
-import {FC, memo, useCallback, useMemo, useState} from "react";
+import {FC, memo, useCallback, useEffect, useMemo, useState} from "react";
 import "./RatingStars.scss";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import IcoImg from "../../../shared/ui/IcoImg/IcoImg";
 import {Flex} from "../../../shared/ui/Flex/Flex";
-import Button, {ThemeButtonEnum} from "../../../shared/ui/Button/Button";
 
 interface RatingStarsProps {
+  stars?: number,
   className?: string,
   isFill?: number,
   countStars?: (count: number) => void,
 }
 
 const RatingStars: FC<RatingStarsProps> = memo((props) => {
-  const {className, isFill = 0, countStars} = props;
+  const {className, stars = 5, isFill = 0, countStars} = props;
   const [starsFill, setStarsFill] = useState<number>(isFill);
 
   const sendStars = useCallback((count: number) => {
-    if(!!countStars) countStars(count);
+    countStars?.(count);
   }, [countStars]);
 
   const selectStars = useCallback((positionStar: number) => {
     if(positionStar === starsFill){
       sendStars(0);
-      setStarsFill(0);
+      // setStarsFill(0);
       return ;
     }
     sendStars(positionStar);
-    setStarsFill(positionStar);
+    // setStarsFill(positionStar);
   }, [starsFill, sendStars])
 
   const BoxStars = useMemo(() => {
-    return Array(5)
+    return Array(stars)
       .fill(null)
       .map((_: null, index: number) => (
         <IcoImg
@@ -40,14 +40,18 @@ const RatingStars: FC<RatingStarsProps> = memo((props) => {
           onClick={() => selectStars(index + 1)}
         />
       ))
-  }, [starsFill, selectStars])
+  }, [stars, starsFill, selectStars]);
+
+  useEffect(() => {
+    setStarsFill(isFill)
+  }, [isFill]);
 
   return (
-    <Flex className="rating-stars" flexDirection={"column"} gap={16}>
-      <Flex className={ClassNames("rating-stars__space", className)}>{BoxStars}</Flex>
-      <Flex justifyContent="center" gap={16}>
-        <Button theme={ThemeButtonEnum.OUTLINE_INVERTED}>asda</Button>
-      </Flex>
+    <Flex
+      className={ClassNames("rating-stars", className)}
+      gap={16}
+    >
+      {BoxStars}
     </Flex>
   )
 });
