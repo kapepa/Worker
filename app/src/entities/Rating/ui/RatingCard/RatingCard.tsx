@@ -9,6 +9,8 @@ import {useTranslation} from "react-i18next";
 import {Textarea} from "../../../../shared/ui/Textarea/Textarea";
 import {BgEnum} from "../../../../shared/const/BgEnum";
 import Button, {ThemeButtonEnum} from "../../../../shared/ui/Button/Button";
+import {BrowserView, MobileView} from "react-device-detect";
+import {Drawer} from "../../../../widgets/Drawer";
 
 export type RatingType = {stars?: number, text?: string}
 
@@ -63,47 +65,42 @@ const RatingCard: FC<RatingCardProps> = memo((props) => {
 
   const modalRating = useMemo(() => {
     return (
-      <Modal
-        isOpen={openModal}
-        onClose={onCloseModal}
+      <Flex
+        flexDirection="column"
+        gap={16}
       >
+        <Text
+          theme={TextTheme.INVERTED}
+          title={t("title")}
+          align={TextAlign.CENTER}
+          className="rating-card__modal-title"
+        />
+        <Textarea
+          theme={BgEnum.BG_COLOR_INVERTED}
+          placeholder={t("placeholder")}
+          onChange={onChangeText}
+        />
         <Flex
-          flexDirection="column"
+          justifyContent="flex-end"
+          alignItems="stretch"
           gap={16}
         >
-          <Text
-            theme={TextTheme.INVERTED}
-            title={t("title")}
-            align={TextAlign.CENTER}
-            className="rating-card__modal-title"
+          <Button
+            className="rating-card__modal-btn"
+            theme={ThemeButtonEnum.OUTLINE_RED}
+            children={t("cancel")}
+            onClick={onCancelRating}
           />
-          <Textarea
-            theme={BgEnum.BG_COLOR_INVERTED}
-            placeholder={t("placeholder")}
-            onChange={onChangeText}
+          <Button
+            className="rating-card__modal-btn"
+            theme={ThemeButtonEnum.OUTLINE_INVERTED}
+            children={t("send")}
+            onClick={onSendRating}
           />
-          <Flex
-            justifyContent="flex-end"
-            alignItems="stretch"
-            gap={16}
-          >
-            <Button
-              className="rating-card__modal-btn"
-              theme={ThemeButtonEnum.OUTLINE_RED}
-              children={t("cancel")}
-              onClick={onCancelRating}
-            />
-            <Button
-              className="rating-card__modal-btn"
-              theme={ThemeButtonEnum.OUTLINE_INVERTED}
-              children={t("send")}
-              onClick={onSendRating}
-            />
-          </Flex>
         </Flex>
-      </Modal>
+      </Flex>
     )
-  }, [t, openModal, onCloseModal, onChangeText, onSendRating, onCancelRating])
+  }, [t, onChangeText, onSendRating, onCancelRating])
 
   return (
     <>
@@ -119,7 +116,21 @@ const RatingCard: FC<RatingCardProps> = memo((props) => {
           countStars={onChangeStars}
         />
       </Flex>
-      {modalRating}
+      <BrowserView>
+        <Modal
+          isOpen={openModal}
+          onClose={onCloseModal}
+          children={modalRating}
+        />
+      </BrowserView>
+      <MobileView>
+        <Drawer
+          direction={"column"}
+          isOpen={openModal}
+          onClose={onCancelRating}
+          children={modalRating}
+        />
+      </MobileView>
     </>
   )
 })

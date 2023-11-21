@@ -6,7 +6,7 @@ import {
   useCallback,
   useMemo,
   useState,
-  MouseEvent,
+  MouseEvent, useEffect,
   // AnimationEvent,
 } from "react";
 import "./Drawer.scss";
@@ -25,7 +25,9 @@ interface DrawerProps {
   children: ReactNode,
   innerBtn?: ReactNode,
   onOpen?: () => void,
+  onClose?: () => void,
   direction: flexDirectionType,
+  isOpen?: boolean
 }
 const Drawer: FC<DrawerProps> = memo((props) => {
   const [float, setFloat] = useState<{open: boolean, view: boolean}>({open: false, view: false});
@@ -34,21 +36,24 @@ const Drawer: FC<DrawerProps> = memo((props) => {
     children,
     direction,
     innerBtn,
-    onOpen
+    onOpen,
+    onClose,
+    isOpen,
   } = props;
 
-  const [{ y }, api] = useSpring(() => ({ y: height }))
+  const [{ y }, api] = useSpring(() => ({ y: height }));
 
   const open = useCallback(({ canceled }: any) => {
     setFloat({open: true, view: true});
-    if(!!onOpen) onOpen();
     api.start({ y: 0, immediate: false, config: canceled ? config.wobbly : config.stiff })
+    if(!!onOpen) onOpen();
   }, [api, onOpen]);
 
   const close = useCallback((velocity = 0) => {
     api.start({ y: height, immediate: false, config: { ...config.stiff, velocity } })
     setFloat((prevState => ({...prevState, view: false, open: false})));
-  }, [api]);
+    if(onClose) onClose();
+  }, [api, onClose]);
 
   const bind = useDrag(
     ({ last, velocity: [, vy], direction: [, dy], offset: [, oy], cancel, canceled }) => {
@@ -77,7 +82,6 @@ const Drawer: FC<DrawerProps> = memo((props) => {
     setFloat({open: false, view: false});
     close(0);
   }, [close])
-
 
   // const showDrawer = useCallback(() => {
   //   setFloat({open: true, view: true});
@@ -115,6 +119,10 @@ const Drawer: FC<DrawerProps> = memo((props) => {
       </button>
     )
   }, [open, innerBtn])
+
+  useEffect(() => {
+    if (!innerBtn) open({});
+  }, [innerBtn, open, isOpen]);
 
   return (
     <>
