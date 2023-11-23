@@ -3,6 +3,7 @@ import {ArticlesInterface, ArticlesTypeKey} from "../interfaces/articles.interfa
 import {UsersEntity} from "../../users/entities/users.entity";
 import {BlocksEntity} from "./blocks.entity";
 import {CommentsEntity} from "../../comments/entities/comments.entity";
+import {RatingEntity} from "../../rating/entities/rating.entity";
 
 @Entity()
 export class ArticlesEntity implements ArticlesInterface {
@@ -32,6 +33,9 @@ export class ArticlesEntity implements ArticlesInterface {
 
   @OneToMany(() => CommentsEntity, (comments) => comments.articles)
   comments: CommentsEntity[];
+
+  @OneToMany(() => RatingEntity, (rating) => rating.articles)
+  rating: RatingEntity[];
 
   @CreateDateColumn()
   createdAt: Date;

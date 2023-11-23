@@ -58,7 +58,7 @@ export class ArticlesController {
   @ApiResponse({ status: 200, description: 'Should be receive article on id'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   getArticles(@Param("id") id: string) {
-    return this.articlesService.findOneArticle({where: {id}, relations: ["blocks", "comments", "users"] })
+    return this.articlesService.findOneArticle({where: {id}, relations: ["blocks", "comments", "users", "rating"] })
   }
 
   @UseGuards(AuthGuard)
