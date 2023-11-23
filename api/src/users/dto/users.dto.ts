@@ -4,6 +4,8 @@ import {IsNotEmpty} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 import {Role} from "../enum/role.enum";
 import {NoticeDto} from "../../notice/dto/notice.dto";
+import {RatingInterface} from "../../rating/interfaces/rating.interface";
+import {RatingDto} from "../../rating/dto/rating.dto";
 
 export class UsersDto {
   @ApiProperty()
@@ -51,6 +53,12 @@ export class UsersDto {
 
   @ApiProperty()
   notice: NoticeDto[]
+
+  @ApiProperty()
+  rating?: RatingDto[]
+
+  @ApiProperty()
+  ratingProfile?: RatingDto[]
 
   @ApiProperty()
   isActive?: boolean

@@ -2,6 +2,7 @@ import {ArticlesBlocks, ArticlesInterface} from "../../articles/interfaces/artic
 import {CommentsInterfaces} from "../../comments/interfaces/comments.interfaces";
 import {Role} from "../enum/role.enum";
 import {NoticeInterface} from "../../notice/interfaces/notice.interface";
+import {RatingInterface} from "../../rating/interfaces/rating.interface";
 
 export interface UsersEntityInterfaces {
   id?: string,
@@ -18,5 +19,7 @@ export interface UsersEntityInterfaces {
   blocks?: ArticlesBlocks[]
   comments?: CommentsInterfaces[],
   notice?: NoticeInterface[],
+  rating?: RatingInterface[],
+  ratingProfile?: RatingInterface[],
   isActive?: boolean,
 }
