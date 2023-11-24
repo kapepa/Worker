@@ -9,6 +9,8 @@ import {MockUsers} from "../utility/test/mockUsers";
 import {JwtService} from "@nestjs/jwt";
 import {FileService} from "../file/file.service";
 import {NotFoundException} from "@nestjs/common";
+import {ReqProps} from "../shared/interfaces/ReqProps";
+import {UsersEntityInterfaces} from "./interfaces/users.interfaces";
 
 describe('UsersController', () => {
   let controller: UsersController;
@@ -37,9 +39,9 @@ describe('UsersController', () => {
   });
 
   it('getProfile', () => {
-    const findOne = jest.spyOn(usersService, 'findOne').mockImplementation(() => of(MockUsers));
+    const findOne = jest.spyOn(usersService, 'findOne').mockReturnValue(of(MockUsers as UsersEntity));
 
-    controller.getProfile({user: MockUsers}).subscribe((data) => {
+    controller.getProfile({ user: MockUsers } as any).subscribe((data: UsersEntityInterfaces) => {
       expect(data).toEqual(MockUsers);
       expect(findOne).toHaveBeenCalledWith({where: {id: MockUsers.id}});
     })
@@ -48,7 +50,7 @@ describe('UsersController', () => {
   it('getProfileFull', () => {
     const findOne = jest.spyOn(usersService, "findOne").mockReturnValue(of(MockUsers));
 
-    controller.getProfile({user: MockUsers}).subscribe({
+    controller.getProfile({user: MockUsers} as any).subscribe({
       next: (data) => {
         expect(data).toEqual(MockUsers);
         expect(findOne).toHaveBeenCalledWith({where: {id: MockUsers.id}});
@@ -59,7 +61,7 @@ describe('UsersController', () => {
   it('updateUser', () => {
     const findOne = jest.spyOn(usersService, "updateUser").mockReturnValue(of(MockUsers));
 
-    controller.updateUser({user: MockUsers}, {} as Express.Multer.File, MockUsers).subscribe({
+    controller.updateUser({user: MockUsers} as any, {} as Express.Multer.File, MockUsers).subscribe({
       next: (data) => {
         expect(findOne).toHaveBeenCalledWith(MockUsers.id, MockUsers);
       }
@@ -72,7 +74,7 @@ describe('UsersController', () => {
     const mockAvatar = "filename.png";
     const avatar: Express.Multer.File = { filename: mockAvatar } as Express.Multer.File
 
-    controller.updateUser({user: MockUsers}, avatar , {...MockUsers, avatar: mockAvatar}).subscribe({
+    controller.updateUser({user: MockUsers } as any, avatar , {...MockUsers, avatar: mockAvatar}).subscribe({
       error: (err) => {
         expect(findOne).toHaveBeenCalledWith(MockUsers.id, {...MockUsers, avatar: mockAvatar});
         expect(removeFile).toHaveBeenCalledWith(mockAvatar);

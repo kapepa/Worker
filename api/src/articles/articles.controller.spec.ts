@@ -12,6 +12,7 @@ import {ReqProps} from "../shared/interfaces/ReqProps";
 
 describe('ArticlesController', () => {
   let controller: ArticlesController;
+
   let articlesService: ArticlesService;
 
   beforeEach(async () => {
@@ -26,7 +27,7 @@ describe('ArticlesController', () => {
             findOneBlocks: jest.fn(),
             findArticles: jest.fn(),
             getAllArticles: jest.fn(),
-            createArticles: jest.fn(() => of({})),
+            createArticles: jest.fn(),
         }}
       ],
     }).compile();
@@ -40,7 +41,7 @@ describe('ArticlesController', () => {
   });
 
   it("createArticles", () => {
-    let createArticles = jest.spyOn(articlesService, "saveArticle").mockReturnValue(of(MockArticles));
+    let createArticles = jest.spyOn(articlesService, "createArticles").mockReturnValue(of(MockArticles));
 
     controller.createArticles({user: MockUsers as UsersDto} as ReqProps, [], MockArticles).subscribe({
       next: (art) => {
@@ -53,7 +54,7 @@ describe('ArticlesController', () => {
   it("createBlocks", () => {
     let createBlocks = jest.spyOn(articlesService, "createBlocks").mockReturnValue(of(MockBlocks));
 
-    controller.createBlocks({user: MockUsers as UsersDto} as ReqProps, MockArticles.id, [], [MockBlocks]).subscribe({
+    controller.createBlocks({user: MockUsers as UsersDto} as ReqProps, MockArticles.id, [], {...MockBlocks, users: MockUsers}).subscribe({
       next: (block) => {
         expect(block).toEqual(MockBlocks);
         expect(createBlocks).toHaveBeenCalledWith(MockArticles.id, {...MockBlocks, users: MockUsers});
@@ -67,7 +68,7 @@ describe('ArticlesController', () => {
     controller.getArticles(MockArticles.id).subscribe({
       next: (art) => {
         expect(art).toEqual(MockArticles);
-        expect(findOneArticle).toHaveBeenCalledWith({where: {id: MockArticles.id}, relations: ["blocks", "comments", "users"] });
+        expect(findOneArticle).toHaveBeenCalledWith({where: {id: MockArticles.id}, relations: ["blocks", "comments", "users", "rating"] });
       }
     })
   })
