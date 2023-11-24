@@ -45,12 +45,12 @@ export class ArticlesController {
   @ApiResponse({ status: 201, description: 'Should be create new Block'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   @Post("/create/block/:id")
-  createBlocks(@Req() req: ReqProps, @Param("id") idArt: string, @UploadedFiles() src: Array<Express.Multer.File>, @Body() body: ArticlesBlocks[]): Observable<ArticlesBlocks | ArticlesBlocks[]>{
+  createBlocks(@Req() req: ReqProps, @Param("id") idArt: string, @UploadedFiles() src: Array<Express.Multer.File>, @Body() body: ArticlesBlocks): Observable<ArticlesBlocks | ArticlesBlocks[]>{
     const toBody = JSON.parse(JSON.stringify(body));
     const toSrc =  JSON.parse(JSON.stringify(src));
     if (toSrc.src && !!toSrc.src.length) toBody.src = toSrc.src[0].filename;
 
-    return this.articlesService.createBlocks(idArt, Object.assign({users: req.user}, toBody));
+    return this.articlesService.createBlocks(idArt, Object.assign(toBody, {users: req.user}));
   }
 
   @UseGuards(AuthGuard)

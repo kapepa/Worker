@@ -40,7 +40,7 @@ export class RatingController {
   @UseInterceptors(NoFilesInterceptor())
   @ApiCreatedResponse({description: 'The rating has been successfully update.', type: RatingDto})
   @ApiForbiddenResponse({ description: 'it was an error during creation created'})
-  updateRating (@Req() req: ReqProps,  @Body() body: RatingDto, @Param() param: {id: string}): Observable<RatingInterface> {
+  updateRating (@Req() req: ReqProps,  @Body() body: RatingDto, @Param() param: {id: string}): Observable<RatingInterface>{
     const toBody: RatingInterface = JSON.parse(JSON.stringify(body));
     return this.ratingService.updateRating(Object.assign(toBody, {users: req.user}), param.id);
   }

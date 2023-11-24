@@ -11,6 +11,7 @@ import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
 import {ArticlesService} from "../articles/articles.service";
 import {ArticlesInterface} from "../articles/interfaces/articles.interface";
 import {UsersService} from "../users/users.service";
+import {UsersEntityInterfaces} from "../users/interfaces/users.interfaces";
 
 @Injectable()
 export class RatingService {
@@ -51,11 +52,11 @@ export class RatingService {
     )
   }
 
-  createProfile (rating: RatingInterface, articleID: string): Observable<RatingInterface> {
-    return this.usersService.findOne({where: {id: articleID}}).pipe(
-      switchMap((article: ArticlesInterface) => {
-        if(!article) throw new NotFoundException({ error: "this user was not found!" });
-        rating.articles = article;
+  createProfile (rating: RatingInterface, userID: string): Observable<RatingInterface> {
+    return this.usersService.findOne({where: {id: userID}}).pipe(
+      switchMap((users: UsersEntityInterfaces) => {
+        if(!users) throw new NotFoundException({ error: "this user was not found!" });
+        rating.profile = users;
         return this.saveOne(rating);
       })
     )

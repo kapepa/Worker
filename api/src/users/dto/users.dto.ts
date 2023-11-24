@@ -52,7 +52,7 @@ export class UsersDto {
   blocks?: BlocksDto[]
 
   @ApiProperty()
-  notice: NoticeDto[]
+  notice?: NoticeDto[]
 
   @ApiProperty()
   rating?: RatingDto[]

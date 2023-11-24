@@ -3,7 +3,7 @@ import {ArticlesInterface} from "../../articles/interfaces/articles.interface";
 
 export interface RatingInterface {
   id?: string,
-  rate: number,
+  rate?: number,
   text?: string,
   users?: UsersEntityInterfaces,
   articles?: ArticlesInterface,

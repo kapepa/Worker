@@ -6,7 +6,7 @@ import {ArticlesEntity} from "../../articles/entities/articles.entity";
 @Entity()
 export class RatingEntity implements RatingInterface {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  id?: string;
 
   @Column()
   rate: number;
