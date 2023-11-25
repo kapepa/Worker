@@ -1,4 +1,4 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {forwardRef, HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {ArticlesEntity} from "./entities/articles.entity";
 import {ArrayContains, ILike, Repository} from "typeorm";
@@ -11,6 +11,8 @@ import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
 import {OrderFieldFind} from "../shared/Types/OrderFieldFind";
 import {ArticlesFilterFields} from "../shared/enum/ArticlesFilterFields";
 import {UsersDto} from "../users/dto/users.dto";
+import {RatingService} from "../rating/rating.service";
+import {RatingInterface} from "../rating/interfaces/rating.interface";
 
 @Injectable()
 export class ArticlesService {
@@ -19,6 +21,8 @@ export class ArticlesService {
     private articlesRepository: Repository<ArticlesEntity>,
     @InjectRepository(BlocksEntity)
     private blocksRepository: Repository<BlocksEntity>,
+    @Inject(forwardRef(() => RatingService))
+    private ratingService: RatingService
   ) {}
 
   saveArticle( article: ArticlesInterface ): Observable<ArticlesInterface>{
@@ -60,6 +64,19 @@ export class ArticlesService {
         return this.saveBlocks(blocks);
       })
     )
+  }
+
+  getArticles(articleID: string, users: UsersDto): Observable<ArticlesInterface> {
+    return this.findOneArticle({where: { id: articleID }, relations: ["blocks", "comments", "users"] }).pipe(
+      switchMap((articles: ArticlesInterface) => {
+        return this.ratingService.findOne({where: {articles: { id: articles.id }, users: {id: users.id} }}).pipe(
+          switchMap((rating: RatingInterface) => {
+            articles.rating = !!rating ? [rating] : [];
+            return of(articles);
+          })
+        )
+      })
+    );
   }
 
   getAllArticles(query?: QueryArticlesFilter):  Observable<ArticlesInterface[] | ArticlesInterface> {

@@ -28,6 +28,7 @@ describe('ArticlesController', () => {
             findArticles: jest.fn(),
             getAllArticles: jest.fn(),
             createArticles: jest.fn(),
+            getArticles: jest.fn(),
         }}
       ],
     }).compile();
@@ -63,12 +64,12 @@ describe('ArticlesController', () => {
   })
 
   it("getArticles", () => {
-    let findOneArticle = jest.spyOn(articlesService, "findOneArticle").mockReturnValue(of(MockArticles));
+    let getArticles = jest.spyOn(articlesService, "getArticles").mockReturnValue(of(MockArticles));
 
-    controller.getArticles(MockArticles.id).subscribe({
+    controller.getArticles({user: MockUsers as UsersDto} as ReqProps, MockArticles.id).subscribe({
       next: (art) => {
         expect(art).toEqual(MockArticles);
-        expect(findOneArticle).toHaveBeenCalledWith({where: {id: MockArticles.id}, relations: ["blocks", "comments", "users", "rating"] });
+        expect(getArticles).toHaveBeenCalledWith(MockArticles.id, MockUsers);
       }
     })
   })

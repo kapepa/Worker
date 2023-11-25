@@ -11,7 +11,7 @@ jest.mock(
   })
 
 describe("<RatingCard/>", () => {
-  const mockTitle: string = "Rating";
+  const mockTitle: string = "RatingDisplay";
   test("should be defined", () => {
     const {getAllByTestId, getByText} = RenderWithPortal(<RatingCard title={mockTitle}/>);
 
