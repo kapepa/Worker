@@ -5,12 +5,18 @@ import {ArticlesEntity} from "./entities/articles.entity";
 import {getRepositoryToken} from "@nestjs/typeorm";
 import {BlocksEntity} from "./entities/blocks.entity";
 import {MockArticles} from "../utility/test/mockArticles";
-import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
+import {MockRating} from "../utility/test/mockRating";
 import {MockBlocks} from "../utility/test/mockBlocks";
+import {MockUsers} from "../utility/test/mockUsers";
+import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
 import {HttpException, HttpStatus} from "@nestjs/common";
+import {RatingService} from "../rating/rating.service";
+import {UsersDto} from "../users/dto/users.dto";
+import {of} from "rxjs";
 
 describe('ArticlesService', () => {
   let serviceArticles: ArticlesService;
+  let ratingService: RatingService;
   let repositoryArticles: Repository<ArticlesEntity>;
   let repositoryBlocks: Repository<BlocksEntity>;
 
@@ -18,6 +24,12 @@ describe('ArticlesService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ArticlesService,
+        {
+          provide: RatingService,
+          useValue: {
+            findOne: jest.fn(),
+          }
+        },
         {
           provide: getRepositoryToken(ArticlesEntity),
           useClass: Repository
@@ -30,6 +42,7 @@ describe('ArticlesService', () => {
     }).compile();
 
     serviceArticles = module.get<ArticlesService>(ArticlesService);
+    ratingService = module.get<RatingService>(RatingService);
     repositoryArticles = module.get<Repository<ArticlesEntity>>(getRepositoryToken(ArticlesEntity));
     repositoryBlocks = module.get<Repository<BlocksEntity>>(getRepositoryToken(BlocksEntity));
   });
@@ -116,6 +129,19 @@ describe('ArticlesService', () => {
     })
   })
 
+  it("getArticles", () => {
+    const ArticlesFindOneMock = jest.spyOn(repositoryArticles, "findOne").mockResolvedValue(MockArticles as ArticlesEntity);
+    const RatingFindOneMock = jest.spyOn(ratingService, "findOne").mockImplementation(() => of(MockRating));
+
+    serviceArticles.getArticles(MockArticles.id, MockUsers as UsersDto).subscribe({
+      next: (articles: ArticlesInterface) => {
+        expect(articles).toEqual(Object.assign(MockArticles, {rating: MockRating}));
+        expect(ArticlesFindOneMock).toHaveBeenCalledWith({where: { id: MockArticles.id }, relations: ["blocks", "comments", "users"] });
+        expect(RatingFindOneMock).toHaveBeenCalledWith({where: {articles: { id: MockArticles.id }, users: {id: MockUsers.id} }})
+      }
+    })
+  })
+
   it("createBlocks resolve", () => {
     const mockMerge = {...MockBlocks, articles: MockArticles};
     const findOneArticle = jest.spyOn(repositoryArticles, "findOne").mockResolvedValue(MockArticles as ArticlesEntity);
@@ -140,5 +166,4 @@ describe('ArticlesService', () => {
       }
     })
   })
-
 });

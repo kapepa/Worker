@@ -57,8 +57,8 @@ export class ArticlesController {
   @Get("/receive/art/:id")
   @ApiResponse({ status: 200, description: 'Should be receive article on id'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
-  getArticles(@Param("id") id: string) {
-    return this.articlesService.findOneArticle({where: {id}, relations: ["blocks", "comments", "users", "rating"] })
+  getArticles(@Req() req: ReqProps, @Param("id") id: string): Observable<ArticlesInterface> {
+    return this.articlesService.getArticles(id, req.user);
   }
 
   @UseGuards(AuthGuard)

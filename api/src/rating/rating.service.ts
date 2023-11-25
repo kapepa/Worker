@@ -1,4 +1,4 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {forwardRef, Inject, Injectable, NotFoundException} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {RatingEntity} from "./entities/rating.entity";
 import {Repository} from "typeorm";
@@ -17,6 +17,7 @@ import {UsersEntityInterfaces} from "../users/interfaces/users.interfaces";
 export class RatingService {
   constructor(
     private usersService: UsersService,
+    @Inject(forwardRef(() => ArticlesService))
     private articlesService: ArticlesService,
     @InjectRepository(RatingEntity)
     private ratingRepository: Repository<RatingEntity>,

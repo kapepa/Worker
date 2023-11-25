@@ -1,4 +1,4 @@
-import {Module} from '@nestjs/common';
+import {forwardRef, Module} from '@nestjs/common';
 import {RatingController} from './rating.controller';
 import {RatingService} from './rating.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
@@ -9,10 +9,11 @@ import {UsersModule} from "../users/users.module";
 @Module({
   imports: [
     UsersModule,
-    ArticlesModule,
+    forwardRef(() => ArticlesModule),
     TypeOrmModule.forFeature([RatingEntity]),
   ],
   controllers: [RatingController],
-  providers: [RatingService]
+  providers: [RatingService],
+  exports: [RatingService],
 })
 export class RatingModule {}
