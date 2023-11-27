@@ -17,6 +17,7 @@ import {CreateComment, FormComment} from "../../../../features/FormComment";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {ArticlesRecommended} from "../ArticlesRecommended/ArticlesRecommended";
+import {ArticleRating} from "../../../../features/RatingDisplay";
 
 interface ArticleDetailsProps {
   className?: string,
@@ -65,6 +66,7 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
       <ViewEye quantity={views} theme={ColorView.PrimaryDef}/>
       <ViewDate date={createdAt} theme={ColorView.PrimaryDef}/>
       { !!blocks && blocks.map(renderBlocks) }
+      {date.id && <ArticleRating id={date.id}/>}
       <Text
         theme={TextTheme.PRIMARY}
         title={t("recommended")}

@@ -1,12 +1,18 @@
 import {FC, memo} from "react";
 import {BasicRating} from "../BasicRating/BasicRating";
 import {RatingCard} from "../../../../entities/Rating";
+import {useGetArticlesQuery} from "../../api/rating.api";
 
-const ArticleRating: FC = memo(() => {
+interface ArticleRatingProps {
+  id: string,
+}
+
+const ArticleRating: FC<ArticleRatingProps> = memo(({id}) => {
+  const { data, isLoading, isError } = useGetArticlesQuery(id);
 
   return (
-    <BasicRating loading={false} error={"asdas"}>
-      <RatingCard />
+    <BasicRating loading={isLoading} error={undefined}>
+      <RatingCard isFill={data?.rate ?? 0} />
     </BasicRating>
   )
 })
