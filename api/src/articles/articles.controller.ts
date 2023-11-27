@@ -18,6 +18,7 @@ import {ArticlesService} from "./articles.service";
 import {Observable} from "rxjs";
 import {ReqProps} from "../shared/interfaces/ReqProps";
 import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
+import {RatingInterface} from "../rating/interfaces/rating.interface";
 
 @ApiTags('articles')
 @Controller('articles')
@@ -91,5 +92,13 @@ export class ArticlesController {
     const toBody = JSON.parse(JSON.stringify(body));
 
     return this.articlesService.updateArticle(toBody)
+  }
+
+  @Get("/rating/:id")
+  @UseGuards(AuthGuard)
+  @ApiResponse({ status: 200, description: 'should be get rating to acrticle'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'there was an error during finds'})
+  getRating(@Req() req: ReqProps, @Param() param: {id: string}): Observable<RatingInterface> {
+    return this.articlesService.getRating(req.user, param.id);
   }
 }

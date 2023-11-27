@@ -133,4 +133,8 @@ export class ArticlesService {
       })
     )
   }
+
+  getRating(user: UsersDto, articleID: string): Observable<RatingInterface> {
+    return this.ratingService.findOne({where: {users: {id: user.id}, articles: { id: articleID }}});
+  }
 }

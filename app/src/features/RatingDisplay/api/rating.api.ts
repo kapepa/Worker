@@ -1,12 +1,17 @@
 import {RtkApi} from "../../../shared/api/rtk.api";
+import {RatingType} from "../model/types/rating.type";
 
-const RatingApi = RtkApi.enhanceEndpoints({
-  endpoints: {
-    getArticles () {
-      console.log("aaaaaa")
-      return ""
-    }
-  }
+const RatingApi = RtkApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getArticles: builder.query<RatingType, string>({
+      query: (id: string) => ({
+        url: `/api/articles/rating/${id}`,
+        method: "GET",
+      }),
+    }),
+  }),
 })
 
-export {RatingApi};
+const {useGetArticlesQuery} = RatingApi;
+
+export {useGetArticlesQuery};
