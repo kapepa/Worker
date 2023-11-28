@@ -1,7 +1,7 @@
 import {ArticleBlocImage, ArticleBlockCode, ArticleBlockText} from "./articleBlock";
 import {UsersTypes} from "../../../Users";
 import {CommentsTypes} from "../../../Comments";
-import {RatingType} from "../../../Rating";
+import {RatingType} from "../../../../features/RatingDisplay";
 
 export enum ArticleTypesKey {
   IT = "IT",

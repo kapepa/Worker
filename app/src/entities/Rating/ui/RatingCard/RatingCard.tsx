@@ -11,20 +11,21 @@ import {BgEnum} from "../../../../shared/const/BgEnum";
 import Button, {ThemeButtonEnum} from "../../../../shared/ui/Button/Button";
 import {BrowserView, MobileView} from "react-device-detect";
 import {Drawer} from "../../../../widgets/Drawer";
+import {RatingType} from "../../../../features/RatingDisplay";
 
-export type RatingType = {stars?: number, text?: string}
+export type RatingTypeCard = Pick<RatingType, "rate" | "text">
 
 interface RatingCardProps {
   className?: string,
   title?: string,
   isFill?: number,
-  callback?: (data: RatingType) => void;
+  callback?: (data: RatingTypeCard) => void;
 }
 
 const RatingCard: FC<RatingCardProps> = memo((props) => {
   const {className, title, isFill, callback} = props;
   const {t} = useTranslation("rating");
-  const [rating, setRating] = useState<RatingType>({});
+  const [rating, setRating] = useState<RatingTypeCard>({});
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const hasTitle = useMemo(
@@ -35,8 +36,8 @@ const RatingCard: FC<RatingCardProps> = memo((props) => {
     [title]
   )
 
-  const onChangeStars = useCallback((stars: number) => {
-    setRating(prev => ({...prev, stars}));
+  const onChangeStars = useCallback((rate: number) => {
+    setRating(prev => ({...prev, rate}));
     setOpenModal(true);
   }, []);
 
@@ -55,13 +56,13 @@ const RatingCard: FC<RatingCardProps> = memo((props) => {
   },[rating, callback, onCloseModal])
 
   const onCancelRating = useCallback(() => {
-    setRating(prev => ({...prev, stars: isFill}));
+    setRating(prev => ({...prev, rate: isFill}));
     onCloseModal();
   }, [isFill, onCloseModal])
 
   const currentFillStars = useMemo(() => {
-    return rating.stars ?? isFill;
-  }, [isFill, rating.stars])
+    return rating.rate ?? isFill;
+  }, [isFill, rating.rate])
 
   const modalRating = useMemo(() => {
     return (
