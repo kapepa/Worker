@@ -2,7 +2,7 @@ import {Countries} from "../../../../shared/const/Countries";
 import {ArticleBlocks, ArticleType} from "../../../Article/model/types/articleType";
 import {CommentsTypes} from "../../../Comments";
 import {Role} from "../enum/roleEnum";
-import {RatingType} from "../../../Rating";
+import {RatingType} from "../../../../features/RatingDisplay";
 
 export interface UsersTypes {
   id: string,
