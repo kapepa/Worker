@@ -1,7 +1,7 @@
 import {FC, memo, useCallback, useEffect, useState} from "react";
 import {BasicRating} from "../BasicRating/BasicRating";
 import {RatingCard, RatingTypeCard} from "../../../../entities/Rating";
-import {useGetArticlesQuery, useUpdateArticlesMutation} from "../../api/rating.api";
+import {useCreateRatingMutation, useGetArticlesQuery, useUpdateRatingMutation} from "../../api/rating.api";
 import {useTranslation} from "react-i18next";
 
 interface ArticleRatingProps {
@@ -12,21 +12,27 @@ const ArticleRating: FC<ArticleRatingProps> = memo(({id}) => {
   const { t } = useTranslation("rating");
   const [ ratingID, setRatingID ] = useState<string | undefined>(undefined);
   const { data, isLoading, isError,  } = useGetArticlesQuery(id);
-  const [ updateArticle, result ] = useUpdateArticlesMutation();
+  const [ updateArticle ] = useUpdateRatingMutation();
+  const [ createRating, result ] = useCreateRatingMutation();
 
   const sendChanges = useCallback( (data: RatingTypeCard) => {
     try {
-      updateArticle(Object.assign(data, {id: ratingID}));
+      if(!!ratingID) updateArticle(Object.assign(data, {id: ratingID}));
+      if(!ratingID) createRating({body: data, articlesID: id});
     } catch (e) {
       // handle error
       console.log(e);
     }
-  }, [ratingID, updateArticle]);
+  }, [id, ratingID, updateArticle, createRating]);
 
 
   useEffect(() => {
     if(!!data?.id) setRatingID(data.id)
   }, [data?.id]);
+
+  useEffect(() => {
+    if(!!result.data) setRatingID(result.data!.id);
+  }, [result.data]);
 
   return (
     <BasicRating loading={isLoading} error={ isError ? t("error.article") : undefined} >

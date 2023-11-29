@@ -49,7 +49,7 @@ const RatingStars: FC<RatingStarsProps> = memo((props) => {
   return (
     <Flex
       className={ClassNames("rating-stars", className)}
-      gap={16}
+      gap={0}
     >
       {BoxStars}
     </Flex>
