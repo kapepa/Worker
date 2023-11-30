@@ -11,7 +11,7 @@ interface ArticleRatingProps {
 const ArticleRating: FC<ArticleRatingProps> = memo(({id}) => {
   const { t } = useTranslation("rating");
   const [ ratingID, setRatingID ] = useState<string | undefined>(undefined);
-  const { data, isLoading, isError,  } = useGetArticlesQuery(id);
+  const { data, isLoading, isError } = useGetArticlesQuery(id);
   const [ updateArticle ] = useUpdateRatingMutation();
   const [ createRating, result ] = useCreateRatingMutation();
 
