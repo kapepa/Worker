@@ -33,7 +33,7 @@ const FormComment: FC<FormCommentProps> = memo(({className, onSend}) => {
 
   const onSubmit: SubmitHandler<IFormCommentFormInput> = useCallback(
     (data: IFormCommentFormInput) => {
-      onSend(data.comment);
+      // onSend(data.comment);
       methods.reset();
     },
     [onSend, methods]
