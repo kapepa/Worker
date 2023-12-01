@@ -5,21 +5,10 @@ import ThemeDecorator from "../../../../shared/config/ThemeDecorator/ThemeDecora
 import {ThemeEnum} from "../../../../app/contexts/Theme/lib/ThemeContext";
 import StoreDecorator from "../../../../shared/config/StoreDecorator/StoreDecorator";
 import I18nDecorator from "../../../../shared/config/i18nDecorator/i18nDecorator";
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
 
-
-const RtkApiDecorator = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery(),
-  endpoints: (builder) => ({
-    getArticles: builder.query<any, any>({
-      queryFn: () => ({data: undefined, isLoading: false, isError: false})
-    })
-  }),
-});
 const meta: Meta<typeof ArticleRating> = {
   component: ArticleRating,
-  decorators: [I18nDecorator, StoreDecorator({  })]
+  decorators: [I18nDecorator, StoreDecorator( {} ) ]
 };
 
 export default meta;

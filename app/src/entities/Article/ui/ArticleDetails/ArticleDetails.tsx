@@ -29,9 +29,8 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
   const dispatch = useDispatch<AppDispatch>();
   const {img, title, subtitle, views, createdAt, blocks} = date;
 
-  const onSend = useCallback(
-    (str: string) => {
-      if(!!CreateComment) dispatch(CreateComment(str));
+  const onSend = useCallback((str: string) => {
+      if(!!str) dispatch(CreateComment(str))
     },
     [dispatch]
   );
