@@ -14,6 +14,11 @@ describe("ArticleDetails", () => {
       error: undefined,
       loading: false
     },
+    details: {
+      loading: false,
+      error: undefined,
+      data: ArticleMock.article as ArticleType,
+    },
     comments: {
       data: [{...CommentsMock, users: UsersMock }],
       loading: false,

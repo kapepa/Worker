@@ -6,8 +6,8 @@ import Axios from "../../../../utils/axios";
 const ProfileUpdate = createAsyncThunk<ProfileTypes, undefined, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
   'profile/ProfileUpdate',
   async (data: undefined, {rejectWithValue, extra, getState}) => {
-    const { profile } = getState();
-    const form = extra.toForm && extra.toForm(profile.edit);
+    const { edit } = getState().profile;
+    const form = extra.toForm && extra.toForm(edit);
 
     try {
       const result = await Axios.put<ProfileTypes>("/api/users/update", form);

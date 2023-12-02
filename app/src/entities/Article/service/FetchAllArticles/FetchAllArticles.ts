@@ -2,8 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import Axios from "../../../../utils/axios";
 import {StateSchema, ThunkExtraArg} from "../../../../app/providers/Store/config/StateSchema";
 import {GetArticlesIds} from "../../selectors/GetArticlesIds/GetArticlesIds";
-import {GetArticlesHasMore} from "../../selectors/GetArticlesHasMore/GetArticlesHasMore";
-import {FetchAllArticlesRes, GetFilterArticles, GetFilterArticlesTab} from "../../../../features/FilterArticles";
+import {FetchAllArticlesRes} from "../../../../features/FilterArticles";
 import {ArticleTypesAdditionName} from "../../../../shared/const/ArticleTypesTabs";
 
 type replaceType = boolean | undefined;
@@ -13,10 +12,10 @@ const FetchAllArticles = createAsyncThunk<FetchAllArticlesRes, replaceType, { re
   async (replace = false , thunkAPI) => {
     try {
       const articles = GetArticlesIds(thunkAPI.getState());
-      const hasMore = GetArticlesHasMore(thunkAPI.getState());
-      const tab = GetFilterArticlesTab(thunkAPI.getState());
+      const hasMore = thunkAPI.getState().articles.hasMore;
+      const tab = thunkAPI.getState().filterArticles.tab;
       const type = tab === ArticleTypesAdditionName.ALL ? undefined : { type: tab };
-      const { skip, take, order, sort, search } = GetFilterArticles(thunkAPI.getState());
+      const { skip, take, order, sort, search } = thunkAPI.getState().filterArticles;
       const skipVal = replace ? skip : articles?.length ?? skip;
 
       if(!hasMore) return {articles: [], replace, hasMore: true};

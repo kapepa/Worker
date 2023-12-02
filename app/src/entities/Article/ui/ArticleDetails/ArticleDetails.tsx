@@ -65,7 +65,7 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
       <ViewEye quantity={views} theme={ColorView.PrimaryDef}/>
       <ViewDate date={createdAt} theme={ColorView.PrimaryDef}/>
       { !!blocks && blocks.map(renderBlocks) }
-      {date.id && <ArticleRating id={date.id}/>}
+      <ArticleRating id={date.id}/>
       <Text
         theme={TextTheme.PRIMARY}
         title={t("recommended")}

@@ -33,4 +33,5 @@ export const ArticleRatingDARK: Story = {
     id: undefined,
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
+
 };
