@@ -28,8 +28,8 @@ interface DrawerProps {
   onClose?: () => void,
   direction: flexDirectionType,
   isOpen?: boolean
-
 }
+  
 const Drawer: FC<DrawerProps> = memo((props) => {
   const [float, setFloat] = useState<{open: boolean, view: boolean}>({open: false, view: false});
   const {
@@ -109,7 +109,6 @@ const Drawer: FC<DrawerProps> = memo((props) => {
       </div>
     )
   }, [float.view, hideDrawer, children, direction, className, animationendDrawer, bind, display, y])
-
 
   const hasInnerBtn = useMemo(() => {
     return (

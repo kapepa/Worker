@@ -6,7 +6,6 @@ import {ListBoxInt} from "../../../shared/interface/ListBoxInt";
 import {useCallback} from "react";
 // import {RatingCard} from "../../../entities/Rating";
 
-
 function Home() {
   const { t } = useTranslation("home");
   const people: ListBoxInt[] = [

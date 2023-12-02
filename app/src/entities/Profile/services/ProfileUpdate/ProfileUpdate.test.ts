@@ -3,6 +3,7 @@ import Axios from "../../../../utils/axios";
 import {Dispatch} from "@reduxjs/toolkit";
 import {StateSchema} from "../../../../app/providers/Store";
 import {NavigateFunction} from "react-router/dist/lib/hooks";
+import UserJSON from "../../../../shared/test/mock/user.json"
 
 jest.mock("../../../../utils/axios");
 
@@ -16,7 +17,9 @@ describe("ProfileUpdate", () => {
 
   beforeEach(() => {
     dispatch = jest.fn();
-    getState = jest.fn(() => { return {} as StateSchema });
+    getState = jest.fn(() => { return {
+      profile: { edit: UserJSON }
+    } as StateSchema });
     navigate = jest.fn();
   })
 

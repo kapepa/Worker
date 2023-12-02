@@ -12,6 +12,7 @@ const meta: Meta<typeof Admin> = {
     RouterDecorator,
     StoreDecorator({})
   ],
+};
 
 export default meta;
 type Story = StoryObj<typeof Admin>;
