@@ -27,7 +27,7 @@ const RatingStars: FC<RatingStarsProps> = memo((props) => {
     }
     sendStars(positionStar);
     // setStarsFill(positionStar);
-  }, [starsFill, sendStars])
+  }, [sendStars, starsFill]);
 
   const BoxStars = useMemo(() => {
     return Array(stars)
