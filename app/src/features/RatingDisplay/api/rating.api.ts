@@ -10,8 +10,8 @@ interface CreateRatingInt {
 
 const RatingApi = RtkApi.injectEndpoints({
   endpoints: (builder) => ({
-    getArticles: builder.query<RatingType, string>({
-      query: (id: string) => ({
+    getArticles: builder.query<RatingType, string | undefined>({
+      query: (id: string | undefined) => ({
         url: `/api/articles/rating/${id}`,
         method: "GET",
       }),

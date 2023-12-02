@@ -5,20 +5,20 @@ import {useCreateRatingMutation, useGetArticlesQuery, useUpdateRatingMutation} f
 import {useTranslation} from "react-i18next";
 
 interface ArticleRatingProps {
-  id: string,
+  id: string | undefined,
 }
 
 const ArticleRating: FC<ArticleRatingProps> = memo(({id}) => {
   const { t } = useTranslation("rating");
   const [ ratingID, setRatingID ] = useState<string | undefined>(undefined);
-  const { data, isLoading, isError } = useGetArticlesQuery(id);
+  const { data, isLoading, isError } = useGetArticlesQuery(id, {skip: !id});
   const [ updateArticle ] = useUpdateRatingMutation();
   const [ createRating, result ] = useCreateRatingMutation();
 
   const sendChanges = useCallback( (data: RatingTypeCard) => {
     try {
       if(!!ratingID) updateArticle(Object.assign(data, {id: ratingID}));
-      if(!ratingID) createRating({body: data, articlesID: id});
+      if(!ratingID && !!id) createRating({body: data, articlesID: id});
     } catch (e) {
       // handle error
       console.log(e);

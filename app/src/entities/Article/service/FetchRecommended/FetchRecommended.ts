@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {GetFilterArticles} from "../../../../features/FilterArticles";
+// import {GetFilterArticles} from "../../../../features/FilterArticles";
 import {StateSchema, ThunkExtraArg} from "../../../../app/providers/Store/config/StateSchema";
 import Axios from "../../../../utils/axios";
 import {ArticleType} from "../../model/types/articleType";
@@ -9,7 +9,7 @@ const FetchRecommended = createAsyncThunk<ArticleType[], undefined, { rejectValu
   'recommendedArticle/FetchRecommended',
   async (props , thunkAPI) => {
     try {
-      const { order } = GetFilterArticles(thunkAPI.getState());
+      const { order } = thunkAPI.getState().filterArticles;
 
       const params = { order, take: ArticlesRecommendedQuery.Take };
       const result = await Axios.get(`/api/articles/receive/all`, {params});
