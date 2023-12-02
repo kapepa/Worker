@@ -17,7 +17,7 @@ function Home() {
   ];
 
   const changeListBox = useCallback((box: ListBoxInt) => {
-    console.log(box)
+    console.log(box);
   }, []);
 
   return (
