@@ -29,6 +29,10 @@ jobs:
         working-directory: ./app
         run: npm run test:build-storybook
         if: always()
+      - name: app approve
+        working-directory: ./app
+        run: npm run loki:approve
+        if: always()
       - name: app screenshot testing
         working-directory: ./app
         run: npm run test:ui:ci
