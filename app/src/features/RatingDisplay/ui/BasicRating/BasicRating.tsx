@@ -1,7 +1,6 @@
 import {FC, memo, ReactNode} from "react";
 import "./BasicRating.scss";
 import {ClassNames} from "../../../../shared/lib/ClassNames";
-import {RatingCard} from "../../../../entities/Rating";
 import {Flex} from "../../../../shared/ui/Flex/Flex";
 import Loader from "../../../../shared/ui/Loader/Loader";
 import {Text, TextTheme} from "../../../../shared/ui/Text/Text";
