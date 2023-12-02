@@ -31,6 +31,7 @@ const RatingStars: FC<RatingStarsProps> = memo((props) => {
 
   const BoxStars = useMemo(() => {
     return Array(stars)
+
       .fill(null)
       .map((_: null, index: number) => (
         <IcoImg
