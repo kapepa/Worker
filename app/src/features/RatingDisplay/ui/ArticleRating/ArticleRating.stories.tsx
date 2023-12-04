@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ArticleRating } from './ArticleRating';
+import {ArticleRating} from './ArticleRating';
 import ThemeDecorator from "../../../../shared/config/ThemeDecorator/ThemeDecorator";
 import {ThemeEnum} from "../../../../app/contexts/Theme/lib/ThemeContext";
 import StoreDecorator from "../../../../shared/config/StoreDecorator/StoreDecorator";
@@ -33,5 +33,11 @@ export const ArticleRatingDARK: Story = {
     id: undefined,
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
-
 };
+
+
+
+
+
+
+

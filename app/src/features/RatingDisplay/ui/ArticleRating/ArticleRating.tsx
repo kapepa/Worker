@@ -25,7 +25,6 @@ const ArticleRating: FC<ArticleRatingProps> = memo(({id}) => {
     }
   }, [id, ratingID, updateArticle, createRating]);
 
-
   useEffect(() => {
     if(!!data?.id) setRatingID(data.id)
   }, [data?.id]);
