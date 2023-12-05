@@ -12,7 +12,8 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [I18nDecorator]
+  decorators: [I18nDecorator],
 };
+
 
 export default preview;
