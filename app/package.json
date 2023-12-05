@@ -98,8 +98,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.12",
     "json-server": "^0.17.3",
-    "msw": "^2.0.10",
-    "msw-storybook-addon": "^1.10.0",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.25",
     "webpack": "^5.88.1"
