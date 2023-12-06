@@ -31,5 +31,8 @@
     "profile": "Профиль",
     "admin": "Админ",
     "logout": "Выйти"
+  },
+  "error": {
+    "avatar-loading": "Ошибка загрузки"
   }
 }
