@@ -15,7 +15,7 @@ const ComponentRender = (component: ReactNode, option: ComponentRenderOption = {
   const { route = "/" } = option;
 
   return render(
-    <MemoryRouter initialEntries={[route]}>
+    <MemoryRouter initialEntries={["/"]}>
       <StoreProvider preloadedState={option?.reloadedState as StateSchema}>
         <I18nextProvider i18n={i18n}>
           {component}
