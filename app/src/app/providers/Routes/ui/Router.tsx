@@ -1,4 +1,5 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import type {RouteObject} from "react-router";
 import React, {ElementType, lazy, Suspense} from "react";
 import PageLoader from "../../../../widgets/PageLoader";
 import App from "../../../App";
@@ -25,7 +26,7 @@ const ArticleCreatePage = Loadable(lazy(() => import("../../../../pages/ArticleC
 const DetailsPage = Loadable(lazy(() => import("../../../../pages/Details").then(module => ({default: module.Details})) ));
 const ErrorPage = Loadable(lazy(() => import("../../../../pages/Error")));
 
-const routers = createBrowserRouter([
+const routeConfig: RouteObject[] = [
   {
     path: RouterPath.HOME,
     element:  <App />,
@@ -69,7 +70,8 @@ const routers = createBrowserRouter([
       },
     ]
   },
-]);
+]
+ const routers = createBrowserRouter(routeConfig);
 
 export function Router() {
   return (
@@ -77,4 +79,4 @@ export function Router() {
   )
 }
 
-export {routers};
+export {routers, routeConfig};

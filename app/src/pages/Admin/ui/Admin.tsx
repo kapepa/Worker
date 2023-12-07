@@ -1,4 +1,4 @@
-import {FC, memo, useEffect} from "react";
+import {FC, memo, useLayoutEffect} from "react";
 import "./Admin.scss"
 import {useSelector} from "react-redux";
 import {GetUsersRoles} from "../../../entities/Users";
@@ -10,12 +10,13 @@ const Admin: FC = memo(() => {
   const navigate = useNavigate();
   const { ADMIN } = useSelector(GetUsersRoles);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(!ADMIN) navigate(RouterPath.HOME);
   },[navigate, ADMIN])
 
   return (
     <Flex
+      data-testid="admin"
       className="admin"
       alignItems="center"
       justifyContent="center"
