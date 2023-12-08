@@ -1,4 +1,4 @@
-import {FC, memo, useCallback, useEffect} from "react";
+import {FC, memo, useCallback, useEffect, useLayoutEffect} from "react";
 import "./Details.scss";
 import {RouterPath} from "../../../shared/const/Routers";
 import {useDispatch, useSelector} from "react-redux";
@@ -35,7 +35,7 @@ const Details: FC = memo(() => {
     if(!profile?.id && !loading) navigate(RouterPath.HOME);
   }, [profile, loading, navigate]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(params.id) {
       dispatch(FetchArticleById(params.id));
       dispatch(FetchRecommended());

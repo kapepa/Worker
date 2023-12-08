@@ -1,4 +1,4 @@
-import {FC, memo, useCallback, useEffect} from "react";
+import {FC, memo, useCallback, useEffect, useLayoutEffect} from "react";
 import "./Article.scss";
 import {RouterPath} from "../../../shared/const/Routers";
 import {useDispatch, useSelector} from "react-redux";
@@ -56,9 +56,8 @@ const Article: FC = memo(() => {
     if(!profile?.id) navigate(RouterPath.HOME);
   }, [profile, navigate, dispatch]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     firstLoading();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
