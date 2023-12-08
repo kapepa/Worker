@@ -1,4 +1,4 @@
-import {FC, memo, useCallback, useEffect} from "react";
+import {FC, memo, useCallback, useEffect, useLayoutEffect} from "react";
 import "./ArticleEdit.scss";
 import {Scroll} from "../../../shared/ui/Scroll/Scroll";
 import {useDispatch, useSelector} from "react-redux";
@@ -24,12 +24,11 @@ const ArticleEdit: FC = memo(() => {
   const loading = useSelector(GetEditorArticleLoading);
   const record = useSelector(GetEditorArticleRecord);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
    if(!!id){
      dispatch(setIdArticle(id));
      dispatch(FetchEditorArticle());
    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sendCallback =  useCallback(() => {
@@ -55,13 +54,15 @@ const ArticleEdit: FC = memo(() => {
   }
 
   return (
-    <Scroll>
-      <EditorArticle
-        isEdit={true}
-        record={record}
-        sendCallback={sendCallback}
-      />
-    </Scroll>
+    <div data-testid="article-edit">
+      <Scroll>
+        <EditorArticle
+          isEdit={true}
+          record={record}
+          sendCallback={sendCallback}
+        />
+      </Scroll>
+    </div>
   )
 })
 

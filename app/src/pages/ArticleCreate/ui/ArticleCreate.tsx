@@ -44,13 +44,15 @@ const ArticleCreate: FC = memo(() => {
   }
 
   return (
-    <Scroll>
-      <EditorArticle
-        isEdit={false}
-        record={record}
-        sendCallback={sendCallback}
-      />
-    </Scroll>
+    <div data-testid="article-create">
+      <Scroll>
+        <EditorArticle
+          isEdit={false}
+          record={record}
+          sendCallback={sendCallback}
+        />
+      </Scroll>
+    </div>
   )
 });
 

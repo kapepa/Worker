@@ -72,6 +72,6 @@ function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunc
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export type AppState = ReturnType<typeof storeReducers>;
 export type AppDispatch = ReturnType<typeof CreateReduxStore>["dispatch"];
-export {CreateReduxStore};
+export {CreateReduxStore, storeReducers};
 
 
