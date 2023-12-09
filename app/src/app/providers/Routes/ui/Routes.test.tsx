@@ -15,8 +15,6 @@ import {EditorArticleState} from "../../../../features/EditorArticle";
 import React from "react";
 import {DetailsState} from "../../../../entities/Article/model/types/detailsState";
 import {ProfileState} from "../../../../entities/Profile";
-import Error from "../../../../pages/Error";
-
 
 describe("<Routers/>",  () => {
   let userMock = UserJSON as UsersTypes;

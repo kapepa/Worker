@@ -1,4 +1,4 @@
-import {FC, memo, useCallback, useEffect, useLayoutEffect} from "react";
+import {FC, memo, useCallback, useLayoutEffect} from "react";
 import "./ArticleEdit.scss";
 import {Scroll} from "../../../shared/ui/Scroll/Scroll";
 import {useDispatch, useSelector} from "react-redux";
