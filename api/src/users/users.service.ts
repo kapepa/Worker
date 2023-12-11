@@ -6,6 +6,8 @@ import {from, Observable, of, switchMap, tap, throwError} from "rxjs";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
 import {UsersEntityInterfaces} from "./interfaces/users.interfaces";
 import {FileService} from "../file/file.service";
+import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
+import {FindOptionsWhere} from "typeorm/find-options/FindOptionsWhere";
 
 @Injectable()
 export class UsersService {
@@ -44,5 +46,9 @@ export class UsersService {
 
   saveUser(data:UsersEntityInterfaces): Observable<UsersEntityInterfaces> {
     return from(this.usersRepository.save(data));
+  }
+
+  deleteUser(user: FindOptionsWhere<UsersEntityInterfaces>): Observable<DeleteResult> {
+    return from(this.usersRepository.delete(user))
   }
 }
