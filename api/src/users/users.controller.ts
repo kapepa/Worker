@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller,
+  Controller, Delete,
   Get,
   HttpStatus,
   Param,
@@ -59,5 +59,14 @@ export class UsersController {
         return err;
       })
     );
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete("/delete/:id")
+  @ApiResponse({ status: 200, description: 'Success delete user data'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong when delete user.'})
+  deleteUser(@Param() param: {id: string}){
+    const { id } = param;
+    return this.usersService.deleteUser({id})
   }
 }

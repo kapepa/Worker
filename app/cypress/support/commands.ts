@@ -35,3 +35,18 @@
 //     }
 //   }
 // }
+import config from "../../src/config";
+
+Cypress.Commands.add<any>(
+  'loginByAuth0Api',
+  () => {
+    cy.request({
+      method: "POST",
+      url: `${config.api}/api/auth/login`,
+      body: {  email: "myemail@gmail.com", password: "123456" },
+    }).then((res:Cypress.Response<{access_token: string}>) => {
+      const token: string = res.body.access_token;
+      window.localStorage.setItem("token", token)
+    })
+  }
+)
