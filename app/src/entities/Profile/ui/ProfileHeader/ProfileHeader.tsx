@@ -32,12 +32,25 @@ const ProfileHeader: FC<ProfileHeaderProps> = memo(({className, onSend}) => {
   const SelectBtn = useMemo(() => {
     if(data?.id === user?.id) {
       if(readonly){
-        return <Button onClick={onEdit} theme={ThemeButtonEnum.OUTLINE}>{t("edit")}</Button>
+        return <Button
+          onClick={onEdit}
+          className="profile-header__edit"
+          theme={ThemeButtonEnum.OUTLINE}
+        >{t("edit")}</Button>
       };
 
       return <>
-        <Button onClick={onCancel} theme={ThemeButtonEnum.OUTLINE_RED}>{t("cancel")}</Button>
-        <Button onClick={onSend} type="submit" theme={ThemeButtonEnum.OUTLINE}>{t("send")}</Button>
+        <Button
+          onClick={onCancel}
+          className="profile-header__cancel"
+          theme={ThemeButtonEnum.OUTLINE_RED}
+        >{t("cancel")}</Button>
+        <Button
+          onClick={onSend}
+          type="submit"
+          className="profile-header__submit"
+          theme={ThemeButtonEnum.OUTLINE}
+        >{t("send")}</Button>
       </>;
     }
   }, [readonly, onEdit, onCancel, onSend, t, data?.id, user?.id]);

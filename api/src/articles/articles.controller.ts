@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller, Get,
+  Controller, Delete, Get,
   HttpStatus,
   Param, Patch,
   Post, Query,
@@ -19,6 +19,7 @@ import {Observable} from "rxjs";
 import {ReqProps} from "../shared/interfaces/ReqProps";
 import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
 import {RatingInterface} from "../rating/interfaces/rating.interface";
+import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
 
 @ApiTags('articles')
 @Controller('articles')
@@ -100,5 +101,13 @@ export class ArticlesController {
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'there was an error during finds'})
   getRating(@Req() req: ReqProps, @Param() param: {id: string}): Observable<RatingInterface> {
     return this.articlesService.getRating(req.user, param.id);
+  }
+
+  @Delete("/delete/:id")
+  @UseGuards(AuthGuard)
+  @ApiResponse({ status: 200, description: 'should be delete article'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'there was an error during delete'})
+  deleteArticle(@Param() param: {id: string}): Observable<DeleteResult> {
+    return this.articlesService.deleteArticle(param.id);
   }
 }
