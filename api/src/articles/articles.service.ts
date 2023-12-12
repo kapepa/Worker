@@ -13,6 +13,7 @@ import {ArticlesFilterFields} from "../shared/enum/ArticlesFilterFields";
 import {UsersDto} from "../users/dto/users.dto";
 import {RatingService} from "../rating/rating.service";
 import {RatingInterface} from "../rating/interfaces/rating.interface";
+import {FindOptionsWhere} from "typeorm/find-options/FindOptionsWhere";
 
 @Injectable()
 export class ArticlesService {
@@ -136,5 +137,11 @@ export class ArticlesService {
 
   getRating(user: UsersDto, articleID: string): Observable<RatingInterface> {
     return this.ratingService.findOne({where: {users: {id: user.id}, articles: { id: articleID }}});
+  }
+
+
+
+  deleteArticle(article: FindOptionsWhere<ArticlesInterface>) {
+    return from(this.articlesRepository.delete(article))
   }
 }

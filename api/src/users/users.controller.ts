@@ -55,7 +55,7 @@ export class UsersController {
     if(!!avatar?.[0]) toBody.avatar = avatar![0].filename
     return this.usersService.updateUser(req.user.id, toBody).pipe(
       catchError((err) => {
-        if( toBody.avatar && !!avatar ) this.fileService.removeFile(toBody.avatar).subscribe();
+        if( !toBody.avatar && !!avatar ) this.fileService.removeFile(toBody.avatar).subscribe();
         return err;
       })
     );
@@ -67,6 +67,6 @@ export class UsersController {
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong when delete user.'})
   deleteUser(@Param() param: {id: string}){
     const { id } = param;
-    return this.usersService.deleteUser({id})
+    return this.usersService.deleteUser({id});
   }
 }
