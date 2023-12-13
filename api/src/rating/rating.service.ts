@@ -12,6 +12,7 @@ import {ArticlesService} from "../articles/articles.service";
 import {ArticlesInterface} from "../articles/interfaces/articles.interface";
 import {UsersService} from "../users/users.service";
 import {UsersEntityInterfaces} from "../users/interfaces/users.interfaces";
+import {CommentsService} from "../comments/comments.service";
 
 @Injectable()
 export class RatingService {
@@ -19,6 +20,8 @@ export class RatingService {
     private usersService: UsersService,
     @Inject(forwardRef(() => ArticlesService))
     private articlesService: ArticlesService,
+    @Inject(forwardRef(() => CommentsService))
+    private commentsService: CommentsService,
     @InjectRepository(RatingEntity)
     private ratingRepository: Repository<RatingEntity>,
   ) {}

@@ -1,6 +1,6 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {forwardRef, HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
-import {FindOptionsWhere, Repository} from "typeorm";
+import {Repository} from "typeorm";
 import {CommentsEntity} from "./entities/comments.entity";
 import {from, Observable, of, switchMap, throwError} from "rxjs";
 import {CommentsInterfaces} from "./interfaces/comments.interfaces";
@@ -11,12 +11,14 @@ import {ArticlesInterface} from "../articles/interfaces/articles.interface";
 import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
 import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
 import {UsersDto} from "../users/dto/users.dto";
+import {FindOptionsWhere} from "typeorm/find-options/FindOptionsWhere";
 
 @Injectable()
 export class CommentsService {
   constructor(
     @InjectRepository(CommentsEntity)
     private commentsRepository: Repository<CommentsEntity>,
+    @Inject(forwardRef(() => ArticlesService))
     private articlesService: ArticlesService,
   ) {}
 
@@ -49,7 +51,7 @@ export class CommentsService {
     );
   }
 
-  deleteComments(props: FindOneOptions): Observable<DeleteResult> {
+  deleteCommentsCheck(props: FindOneOptions): Observable<DeleteResult> {
     return this.findOneComments(props).pipe(
       switchMap((comment: CommentsInterfaces) => {
         if(!comment) return throwError(() => new HttpException("Comments not found", HttpStatus.NOT_FOUND));
@@ -58,11 +60,15 @@ export class CommentsService {
     )
   }
 
+  deleteComments(comments: FindOptionsWhere<CommentsInterfaces>): Observable<DeleteResult> {
+    return from(this.commentsRepository.delete(comments));
+  }
+
   deleteUserComment(users: UsersDto, commentID: string): Observable<DeleteResult> {
     return this.findOneComments({ where: {id: commentID, users} }).pipe(
       switchMap((comment: CommentsInterfaces) => {
         if(!comment) return throwError(() => new HttpException("You do not own this comment", HttpStatus.NOT_FOUND));
-        return this.deleteComments({where: {id: comment.id}})
+        return this.deleteCommentsCheck({where: {id: comment.id}})
       })
     )
   }

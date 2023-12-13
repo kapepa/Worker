@@ -26,7 +26,7 @@ Cypress.Commands.add<any>(
     const form = InForm(block);
     const token = window.localStorage.getItem("token");
 
-    cy.request({
+    return cy.request({
       method: 'POST',
       url: `${config.api}/api/create/block/${articleID}`,
       body: form,
@@ -34,8 +34,8 @@ Cypress.Commands.add<any>(
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       }
-    }).then(({ body }) => {
-
+    }).then(({ body }: {body: ArticleBlocks}) => {
+      return body
     })
   }
 )
@@ -61,17 +61,14 @@ Cypress.Commands.add<any>(
 )
 
 Cypress.Commands.add<any>(
-  'createArticle',
-  (article: ArticleType = articleMock) => {
-    const form = InForm(article);
+  'deleteArticleByID',
+  (articleID: string) => {
     const token = window.localStorage.getItem("token");
 
     cy.request({
-      method: 'POST',
-      url: `${config.api}/api/articles/art`,
-      body: form,
+      method: 'DELETE',
+      url: `${config.api}/api/articles/delete/${articleID}`,
       headers: {
-        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       }
     }).then(({ body }) => {

@@ -5,10 +5,12 @@ import {TypeOrmModule} from "@nestjs/typeorm";
 import {ArticlesEntity} from "./entities/articles.entity";
 import {BlocksEntity} from "./entities/blocks.entity";
 import {RatingModule} from "../rating/rating.module";
+import {CommentsModule} from "../comments/comments.module";
 
 @Module({
   imports: [
     forwardRef(() => RatingModule),
+    forwardRef(() => CommentsModule),
     TypeOrmModule.forFeature([ArticlesEntity, BlocksEntity]),
   ],
   controllers: [
