@@ -4,7 +4,15 @@ import {ArticlesEntity} from "./entities/articles.entity";
 import {ArrayContains, ILike, Repository} from "typeorm";
 import {BlocksEntity} from "./entities/blocks.entity";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
-import {from, Observable, of, switchMap, tap, throwError} from "rxjs";
+import {
+  concat,
+  from, map,
+  Observable,
+  of,
+  switchMap,
+  tap,
+  throwError
+} from "rxjs";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
 import {FindManyOptions} from "typeorm/find-options/FindManyOptions";
 import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
@@ -14,6 +22,8 @@ import {UsersDto} from "../users/dto/users.dto";
 import {RatingService} from "../rating/rating.service";
 import {RatingInterface} from "../rating/interfaces/rating.interface";
 import {FindOptionsWhere} from "typeorm/find-options/FindOptionsWhere";
+import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
+import {CommentsService} from "../comments/comments.service";
 
 @Injectable()
 export class ArticlesService {
@@ -23,7 +33,9 @@ export class ArticlesService {
     @InjectRepository(BlocksEntity)
     private blocksRepository: Repository<BlocksEntity>,
     @Inject(forwardRef(() => RatingService))
-    private ratingService: RatingService
+    private ratingService: RatingService,
+    @Inject(forwardRef(() => CommentsService))
+    private commentsService: CommentsService,
   ) {}
 
   saveArticle( article: ArticlesInterface ): Observable<ArticlesInterface>{
@@ -34,7 +46,11 @@ export class ArticlesService {
     return from(this.blocksRepository.save(blocks));
   }
 
-  findArticles(data: FindManyOptions): Observable<ArticlesInterface[] | ArticlesInterface> {
+  deleteBlocks(blocks: FindOptionsWhere<ArticlesBlocks>): Observable<DeleteResult> {
+    return from(this.blocksRepository.delete(blocks));
+  }
+
+  findArticles(data?: FindManyOptions): Observable<ArticlesInterface[] | ArticlesInterface> {
     return from(this.articlesRepository.find(data)).pipe(
       switchMap((articles: ArticlesInterface[]) => {
         return !!articles ? of(articles) : throwError(() => new HttpException("Articles not found", HttpStatus.NOT_FOUND))
@@ -56,6 +72,10 @@ export class ArticlesService {
         return !!block ? of(block) : throwError(() => new HttpException("Block not found", HttpStatus.NOT_FOUND));
       })
     );
+  }
+
+  deleteArticle(article: FindOptionsWhere<ArticlesInterface>): Observable<DeleteResult> {
+    return from(this.articlesRepository.delete(article))
   }
 
   createBlocks(idArt: string, blocks: ArticlesBlocks): Observable<ArticlesBlocks | ArticlesBlocks[]> {
@@ -139,9 +159,14 @@ export class ArticlesService {
     return this.ratingService.findOne({where: {users: {id: user.id}, articles: { id: articleID }}});
   }
 
-
-
-  deleteArticle(article: FindOptionsWhere<ArticlesInterface>) {
-    return from(this.articlesRepository.delete(article))
+  deleteArticleID(articleID: string): Observable<DeleteResult> {
+    return concat(
+      this.deleteBlocks({articles: { id: articleID }}),
+      this.ratingService.deleteOne({articles: {id: articleID }}),
+      this.commentsService.deleteComments({articles: {id: articleID }}),
+    ).pipe(
+      switchMap(() => this.deleteArticle({id: articleID})),
+    )
   }
+
 }

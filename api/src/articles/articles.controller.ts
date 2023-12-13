@@ -107,7 +107,7 @@ export class ArticlesController {
   @UseGuards(AuthGuard)
   @ApiResponse({ status: 200, description: 'should be delete article'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'there was an error during delete'})
-  deleteArticle(@Param() param: {id: string}): Observable<DeleteResult> {
-    return this.articlesService.deleteArticle(param.id);
+  deleteArticleID(@Param() param: {id: string}): Observable<DeleteResult> {
+    return this.articlesService.deleteArticleID(param.id);
   }
 }
