@@ -24,10 +24,13 @@ import {RatingInterface} from "../rating/interfaces/rating.interface";
 import {FindOptionsWhere} from "typeorm/find-options/FindOptionsWhere";
 import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
 import {CommentsService} from "../comments/comments.service";
+import {FileService} from "../file/file.service";
+import {ArticlesBlockType} from "./interfaces/blocks.interface";
 
 @Injectable()
 export class ArticlesService {
   constructor(
+    private fileService: FileService,
     @InjectRepository(ArticlesEntity)
     private articlesRepository: Repository<ArticlesEntity>,
     @InjectRepository(BlocksEntity)
@@ -66,6 +69,10 @@ export class ArticlesService {
     );
   }
 
+  findBlocks(blocks: FindManyOptions): Observable<ArticlesBlocks[]> {
+    return from(this.blocksRepository.find(blocks));
+  }
+
   findOneBlocks(data: FindOneOptions):Observable<ArticlesBlocks> {
     return from(this.blocksRepository.findOne(data)).pipe(
       switchMap((block: ArticlesBlocks) => {
@@ -78,6 +85,19 @@ export class ArticlesService {
     return from(this.articlesRepository.delete(article))
   }
 
+  deleteArticleImage(articleID: string): Observable<ArticlesInterface> {
+    return this.findOneArticle({where: {id: articleID}}).pipe(
+      switchMap((articles: ArticlesInterface) => {
+        const { img } = articles;
+        return  this.fileService.removeFile(img).pipe(
+          switchMap((progress: boolean) => {
+            return of(Object.assign(articles,{ img: progress ? "" : img }))
+          })
+        )
+      })
+    )
+  }
+
   createBlocks(idArt: string, blocks: ArticlesBlocks): Observable<ArticlesBlocks | ArticlesBlocks[]> {
     return this.findOneArticle({where: {id: idArt}}).pipe(
       switchMap((article: ArticlesInterface) => {
@@ -85,6 +105,20 @@ export class ArticlesService {
         return this.saveBlocks(blocks);
       })
     )
+  }
+
+  deleteBlocksImagesAll(articleID: string): Observable<DeleteResult> {
+    return this.deleteBlocks({articles: { id: articleID }});
+    // return this.findBlocks({where: { type: ArticlesBlockType.IMAGE, articles: { id: articleID } }}).pipe(
+    //   // map((blocks: ArticlesBlocks[]) => {
+    //   //   from(blocks).pipe(
+    //   //     map((block: ArticlesBlocks) => this.fileService.removeFile(block["src"]))
+    //   //   )
+    //   // }),
+    //   switchMap(() => {
+    //     return this.deleteBlocks({articles: { id: articleID }});
+    //   })
+    // );
   }
 
   getArticles(articleID: string, users: UsersDto): Observable<ArticlesInterface> {
@@ -115,7 +149,7 @@ export class ArticlesService {
     return this.findOneArticle({ where: { id: articleID, users }, relations: ["blocks"] })
   }
 
-  createArticles(article: ArticlesInterface): any {
+  createArticles(article: ArticlesInterface): Observable<ArticlesInterface> {
     const { blocks, ...otherArticles } = article;
     const toBlocks = !!blocks && blocks.length ? from(this.blocksRepository.save(blocks)) : of([]);
 
@@ -161,11 +195,15 @@ export class ArticlesService {
 
   deleteArticleID(articleID: string): Observable<DeleteResult> {
     return concat(
+      // this.deleteBlocksImagesAll(articleID),
       this.deleteBlocks({articles: { id: articleID }}),
       this.ratingService.deleteOne({articles: {id: articleID }}),
       this.commentsService.deleteComments({articles: {id: articleID }}),
+      // this.deleteArticleImage(articleID),
     ).pipe(
-      switchMap(() => this.deleteArticle({id: articleID})),
+      switchMap(() => {
+        return this.deleteArticle({id: articleID})
+      }),
     )
   }
 
