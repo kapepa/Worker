@@ -15,7 +15,7 @@ import {FileFieldsInterceptor, NoFilesInterceptor} from "@nestjs/platform-expres
 import {createMulterOptions} from "../file/file.service";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
 import {ArticlesService} from "./articles.service";
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {ReqProps} from "../shared/interfaces/ReqProps";
 import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
 import {RatingInterface} from "../rating/interfaces/rating.interface";
@@ -25,7 +25,7 @@ import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
 @Controller('articles')
 export class ArticlesController {
   constructor(
-    private articlesService: ArticlesService
+    private articlesService: ArticlesService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -36,10 +36,10 @@ export class ArticlesController {
   @Post("/create/art")
   createArticles(@Req() req: ReqProps, @UploadedFiles() img: Array<Express.Multer.File>, @Body() body: ArticlesInterface): Observable<ArticlesInterface>{
     const toBody = JSON.parse(JSON.stringify(body));
-    const toImg = JSON.parse(JSON.stringify(img));
+    const toImg = !!img && JSON.parse(JSON.stringify(img));
 
-    if (!!toImg.img?.length) toBody.img = toImg.img[0].filename;
-    return this.articlesService.createArticles(Object.assign({users: req.user}, toBody))
+    if ( toImg.hasOwnProperty("img") && !!toImg.img?.length) toBody.img = toImg.img[0].filename;
+    return this.articlesService.createArticles(Object.assign({users: req.user}, toBody));
   }
 
   @UseGuards(AuthGuard)

@@ -13,10 +13,14 @@ describe("Details", () => {
   })
 
   after(() => {
-    cy.deleteArticleByID()
+    cy.deleteArticleByID(article.id)
   })
 
   beforeEach(function () {
     // cy.visit(`/`);
+  })
+
+  it("aaaaaa", () => {
+
   })
 })

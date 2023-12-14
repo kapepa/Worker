@@ -5,7 +5,7 @@ export enum ArticleBlockType {
 }
 
 interface ArticleBlockBase {
-  id: string,
+  id?: string,
   type: ArticleBlockType,
 }
 
