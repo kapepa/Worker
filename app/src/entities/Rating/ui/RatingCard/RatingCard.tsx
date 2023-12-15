@@ -87,13 +87,13 @@ const RatingCard: FC<RatingCardProps> = memo((props) => {
           gap={16}
         >
           <Button
-            className="rating-card__modal-btn"
+            className="rating-card__modal-btn rating-card__btn-cancel"
             theme={ThemeButtonEnum.OUTLINE_RED}
             children={t("cancel")}
             onClick={onCancelRating}
           />
           <Button
-            className="rating-card__modal-btn"
+            className="rating-card__modal-btn rating-card__btn-send"
             theme={ThemeButtonEnum.OUTLINE_INVERTED}
             children={t("send")}
             onClick={onSendRating}

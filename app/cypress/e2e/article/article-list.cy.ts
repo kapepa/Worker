@@ -12,4 +12,8 @@ describe("ArticlesList", () => {
   it("should be list article", () => {
     cy.get('.articles-item, .articles-item--block').eq(3)
   })
+
+  it.skip("should be list article", () => {
+    cy.get('.articles-item, .articles-item--block').eq(3)
+  })
 })

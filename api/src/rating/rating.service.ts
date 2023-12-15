@@ -13,6 +13,7 @@ import {ArticlesInterface} from "../articles/interfaces/articles.interface";
 import {UsersService} from "../users/users.service";
 import {UsersEntityInterfaces} from "../users/interfaces/users.interfaces";
 import {CommentsService} from "../comments/comments.service";
+import {RemoveOptions} from "typeorm/repository/RemoveOptions";
 
 @Injectable()
 export class RatingService {
@@ -44,6 +45,10 @@ export class RatingService {
 
   deleteOne (rating: FindOptionsWhere<RatingInterface>): Observable<DeleteResult> {
     return from(this.ratingRepository.delete(rating));
+  }
+
+  remove (entities: RatingInterface[], options?: RemoveOptions): Observable<RatingEntity[]> {
+    return from(this.ratingRepository.remove(entities as RatingEntity[], options));
   }
 
   createArticle (rating: RatingInterface, articleID: string): Observable<RatingInterface> {
