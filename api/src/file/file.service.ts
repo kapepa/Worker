@@ -37,4 +37,13 @@ export class FileService {
 
     return of(true);
   }
+
+  removeImage(filename: string): Observable<boolean> {
+    const pathToFile = path.join(__dirname, "..", "..", "static");
+    const exist = fs.existsSync( `${pathToFile}/${filename}` )
+    if(!exist) return of(false);
+    fs.unlinkSync(`${pathToFile}/${filename}`);
+
+    return of(true);
+  }
 }

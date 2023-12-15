@@ -56,11 +56,13 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
         theme={TextTheme.PRIMARY}
         title={title}
         size={TextSize.XL}
+        className={"article-details__title"}
       />
       <Text
         theme={TextTheme.PRIMARY}
         title={subtitle}
         size={TextSize.L}
+        className={"article-details__subtitle"}
       />
       <ViewEye quantity={views} theme={ColorView.PrimaryDef}/>
       <ViewDate date={createdAt} theme={ColorView.PrimaryDef}/>

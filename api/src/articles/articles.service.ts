@@ -26,6 +26,7 @@ import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
 import {CommentsService} from "../comments/comments.service";
 import {FileService} from "../file/file.service";
 import {ArticlesBlockType} from "./interfaces/blocks.interface";
+import {RemoveOptions} from "typeorm/repository/RemoveOptions";
 
 @Injectable()
 export class ArticlesService {
@@ -47,6 +48,10 @@ export class ArticlesService {
 
   saveBlocks( blocks: ArticlesBlocks ): Observable<ArticlesBlocks | ArticlesBlocks[]>{
     return from(this.blocksRepository.save(blocks));
+  }
+
+  removeBlocks(entities: ArticlesBlocks[], options?: RemoveOptions): Observable<BlocksEntity[]> {
+    return from(this.blocksRepository.remove(entities as BlocksEntity[], options))
   }
 
   deleteBlocks(blocks: FindOptionsWhere<ArticlesBlocks>): Observable<DeleteResult> {
@@ -89,7 +94,8 @@ export class ArticlesService {
     return this.findOneArticle({where: {id: articleID}}).pipe(
       switchMap((articles: ArticlesInterface) => {
         const { img } = articles;
-        return  this.fileService.removeFile(img).pipe(
+
+        return  this.fileService.removeImage(img).pipe(
           switchMap((progress: boolean) => {
             return of(Object.assign(articles,{ img: progress ? "" : img }))
           })
@@ -108,17 +114,16 @@ export class ArticlesService {
   }
 
   deleteBlocksImagesAll(articleID: string): Observable<DeleteResult> {
-    return this.deleteBlocks({articles: { id: articleID }});
-    // return this.findBlocks({where: { type: ArticlesBlockType.IMAGE, articles: { id: articleID } }}).pipe(
-    //   // map((blocks: ArticlesBlocks[]) => {
-    //   //   from(blocks).pipe(
-    //   //     map((block: ArticlesBlocks) => this.fileService.removeFile(block["src"]))
-    //   //   )
-    //   // }),
-    //   switchMap(() => {
-    //     return this.deleteBlocks({articles: { id: articleID }});
-    //   })
-    // );
+    return this.findBlocks({where: { type: ArticlesBlockType.IMAGE, articles: { id: articleID } }}).pipe(
+      map((blocks: ArticlesBlocks[]) => {
+        from(blocks).pipe(
+          map((block: ArticlesBlocks) => this.fileService.removeFile(block["src"]))
+        )
+      }),
+      switchMap(() => {
+        return this.deleteBlocks({articles: { id: articleID }});
+      })
+    );
   }
 
   getArticles(articleID: string, users: UsersDto): Observable<ArticlesInterface> {
@@ -194,17 +199,34 @@ export class ArticlesService {
   }
 
   deleteArticleID(articleID: string): Observable<DeleteResult> {
-    return concat(
-      // this.deleteBlocksImagesAll(articleID),
-      this.deleteBlocks({articles: { id: articleID }}),
-      this.ratingService.deleteOne({articles: {id: articleID }}),
-      this.commentsService.deleteComments({articles: {id: articleID }}),
-      // this.deleteArticleImage(articleID),
-    ).pipe(
-      switchMap(() => {
-        return this.deleteArticle({id: articleID})
-      }),
+    return this.findOneArticle({ where: { id: articleID }, relations: ["blocks", "comments", "rating"]}).pipe(
+      switchMap((article: ArticlesInterface) => {
+        return concat(
+          this.deleteBlocksImagesAll(articleID),
+          // this.removeBlocks(article.blocks),
+          // this.ratingService.deleteOne({id: articleID }),
+          this.fileService.removeImage(article.img),
+          // this.ratingService.remove(article.rating),
+          // this.commentsService.deleteComments({articles: {id: articleID }}),
+          this.deleteBlocks({articles: { id: articleID }}),
+        ).pipe(
+          switchMap(() =>  this.deleteArticle({id: articleID}) )
+        )
+      })
     )
+    // return concat(
+    //   this.deleteBlocksImagesAll(articleID),
+    //   this.deleteBlocks({articles: { id: articleID }}),
+    //   // this.ratingService.deleteOne({articles: {id: articleID }}),
+    //   // this.commentsService.deleteComments({articles: {id: articleID }}),
+    // ).pipe(
+    //   switchMap(() => {
+    //     return this.deleteArticle({id: articleID});
+    //     // return this.deleteArticleImage(articleID).pipe(
+    //     //   switchMap(() => this.deleteArticle({id: articleID}))
+    //     // )
+    //   }),
+    // )
   }
 
 }
