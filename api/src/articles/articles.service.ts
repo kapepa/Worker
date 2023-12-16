@@ -199,34 +199,22 @@ export class ArticlesService {
   }
 
   deleteArticleID(articleID: string): Observable<DeleteResult> {
-    return this.findOneArticle({ where: { id: articleID }, relations: ["blocks", "comments", "rating"]}).pipe(
+    return this.findOneArticle({ where: { id: articleID }}).pipe(
       switchMap((article: ArticlesInterface) => {
         return concat(
           this.deleteBlocksImagesAll(articleID),
-          // this.removeBlocks(article.blocks),
-          // this.ratingService.deleteOne({id: articleID }),
-          this.fileService.removeImage(article.img),
-          // this.ratingService.remove(article.rating),
-          // this.commentsService.deleteComments({articles: {id: articleID }}),
           this.deleteBlocks({articles: { id: articleID }}),
+          this.fileService.removeImage(article.img),
         ).pipe(
-          switchMap(() =>  this.deleteArticle({id: articleID}) )
+          switchMap(() => concat(
+            this.ratingService.deleteOne({articles: {id: articleID }}),
+            this.commentsService.deleteComments({articles: {id: articleID }})
+            ).pipe(
+            switchMap(() => this.deleteArticle({id: articleID}) ))
+          )
         )
       })
     )
-    // return concat(
-    //   this.deleteBlocksImagesAll(articleID),
-    //   this.deleteBlocks({articles: { id: articleID }}),
-    //   // this.ratingService.deleteOne({articles: {id: articleID }}),
-    //   // this.commentsService.deleteComments({articles: {id: articleID }}),
-    // ).pipe(
-    //   switchMap(() => {
-    //     return this.deleteArticle({id: articleID});
-    //     // return this.deleteArticleImage(articleID).pipe(
-    //     //   switchMap(() => this.deleteArticle({id: articleID}))
-    //     // )
-    //   }),
-    // )
   }
 
 }

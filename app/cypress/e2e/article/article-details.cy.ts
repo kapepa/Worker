@@ -26,12 +26,8 @@ describe("Details", () => {
     cy.get(".rating-stars__unit").last().click();
     cy.get(".rating-card__btn-send").click();
 
-    // cy.get(".form-comment__input").scrollIntoView();
-    // cy.get(".form-comment__input").clear().type('val', 'Test comment!!!');
-    // cy.get(".form-comment__btn").click()
+    cy.get(".form-comment__input").scrollIntoView();
+    cy.get(".form-comment__input").clear().type('val', 'Test comment!!!');
+    cy.get(".form-comment__btn").click()
   })
-
-  // it("intercept", () => {
-  //   cy.intercept('POST', `/api/articles/receive/art/${article.id}`, )
-  // })
 })
