@@ -52,7 +52,7 @@ const CommentsList: FC<CommentsListProps> = memo( ({className}) => {
   }, [dispatch, getCommentRemove])
 
   const ShowComments = useCallback(( data: CommentsTypes, index: number ) => {
-    const isOwner = profile?.id === data.users.id;
+    const isOwner = profile?.id === data.users?.id;
     return (
       <CommentsCard
         index={index}

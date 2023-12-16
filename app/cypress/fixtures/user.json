@@ -6,5 +6,6 @@
   "email": "user@mail.com",
   "avatar": "https://cdn-icons-png.flaticon.com/512/1088/1088537.png",
   "country": "America",
-  "city": "Loa Angeles"
+  "city": "Loa Angeles",
+  "roles": ["USER", "ADMIN"]
 }
