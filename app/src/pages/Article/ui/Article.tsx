@@ -58,7 +58,7 @@ const Article: FC = memo(() => {
 
   useLayoutEffect(() => {
     firstLoading();
-  }, []);
+  }, [firstLoading]);
 
   return (
     <>

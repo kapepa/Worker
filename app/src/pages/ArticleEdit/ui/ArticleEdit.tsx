@@ -29,7 +29,7 @@ const ArticleEdit: FC = memo(() => {
      dispatch(setIdArticle(id));
      dispatch(FetchEditorArticle());
    }
-  }, []);
+  }, [dispatch, setIdArticle, id]);
 
   const sendCallback =  useCallback(() => {
     dispatch(UpdateEditorArticle());

@@ -13,6 +13,8 @@ import {HttpException, HttpStatus} from "@nestjs/common";
 import {RatingService} from "../rating/rating.service";
 import {UsersDto} from "../users/dto/users.dto";
 import {of} from "rxjs";
+import {FileService} from "../file/file.service";
+import {CommentsService} from "../comments/comments.service";
 
 describe('ArticlesService', () => {
   let serviceArticles: ArticlesService;
@@ -24,6 +26,14 @@ describe('ArticlesService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ArticlesService,
+        {
+          provide: FileService,
+          useValue: {}
+        },
+        {
+          provide: CommentsService,
+          useValue: {}
+        },
         {
           provide: RatingService,
           useValue: {
