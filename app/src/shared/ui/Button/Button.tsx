@@ -1,4 +1,4 @@
-import {ButtonHTMLAttributes, FC, memo, ReactNode} from "react"
+import {ButtonHTMLAttributes, FC, ForwardedRef, memo, ReactNode} from "react";
 import "./Button.scss";
 import {ClassNames} from "../../lib/ClassNames";
 
@@ -24,16 +24,26 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: ThemeButtonEnum,
   size?: SizeButton,
   disabled?: boolean,
+  innerRef?: ForwardedRef<HTMLButtonElement>
 }
 
 const Button: FC<ButtonProps> = memo((props) => {
-  const {className, theme = ThemeButtonEnum.CLEAR, disabled = false, size = SizeButton.M, children, ...otherProps} = props;
+  const {
+    className,
+    theme = ThemeButtonEnum.CLEAR,
+    disabled = false,
+    size = SizeButton.M,
+    children,
+    innerRef,
+    ...otherProps
+  } = props;
 
   return (
     <button
       data-testid="button"
       className={ClassNames(className, "button", `button--${theme}`, `button--${size}`, {"button-disabled": disabled})}
       disabled={disabled}
+      ref={innerRef}
       {...otherProps}
     >
       {children}

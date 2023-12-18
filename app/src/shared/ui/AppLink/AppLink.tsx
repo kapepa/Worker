@@ -1,4 +1,4 @@
-import {FC, memo} from "react";
+import {FC, ForwardedRef, memo} from "react";
 import "./AppLink.scss";
 import {LinkProps, NavLink} from "react-router-dom";
 import {ClassNames} from "../../lib/ClassNames";
@@ -13,10 +13,28 @@ interface AppLinkProps extends LinkProps {
   to: string,
   className?: string,
   theme?: AppLinkTheme,
+  innerRef?: ForwardedRef<HTMLAnchorElement>
 }
 
-const AppLink: FC<AppLinkProps> = memo(({to, children, theme = AppLinkTheme.PRIMARY,  className = undefined, ...otherProps}) => {
-  return <NavLink className={ClassNames(`AppLink`, theme, className)} to={to} {...otherProps} data-testid="nav-link">{children}</NavLink>
+const AppLink: FC<AppLinkProps> = memo((props) => {
+  const {
+    to,
+    children,
+    theme = AppLinkTheme.PRIMARY,
+    innerRef,
+    className = undefined,
+    ...otherProps
+  } = props;
+
+  return (
+    <NavLink
+      to={to}
+      ref={innerRef}
+      className={ClassNames(`AppLink`, theme, className)}
+      data-testid="nav-link"
+      {...otherProps}
+    >{children}</NavLink>
+  )
 })
 
 export default AppLink;

@@ -11,7 +11,6 @@ interface CodeProps {
 }
 
 const Code: FC<CodeProps> = memo(({className, children, text}) => {
-
   const onCopy = useCallback(async () => {
     await navigator.clipboard.writeText(text);
   }, [text]);

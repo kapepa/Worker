@@ -1,0 +1,20 @@
+.rating-stars{
+  &:hover {
+    & > * {
+      fill: var(--primary-color);
+    }
+  }
+  &__unit{
+    fill: transparent;
+    transition: fill .2s linear;
+    cursor: pointer;
+    &:hover{
+      & ~ * {
+        fill: transparent;
+      }
+    }
+  }
+  &__fill{
+    fill: var(--primary-color);
+  }
+}

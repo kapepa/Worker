@@ -3,6 +3,7 @@
   "translate-short": "Ru",
   "error-boundary": "Извините.. произошла ошибка.",
   "refresh-page": "Обновите страницу.",
+  "read-more": "Читать далее",
   "nav": {
     "home": "Домой",
     "about": "О нас",
@@ -25,5 +26,13 @@
     "Moldova": "Молдова",
     "Bulgaria": "Болгария",
     "Hungary": "Венгрия"
+  },
+  "drop_down": {
+    "profile": "Профиль",
+    "admin": "Админ",
+    "logout": "Выйти"
+  },
+  "error": {
+    "avatar-loading": "Ошибка загрузки"
   }
 }

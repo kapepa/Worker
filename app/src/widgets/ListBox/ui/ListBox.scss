@@ -1,0 +1,32 @@
+.list-box{
+  position: relative;
+  &__btn{
+    background-color: transparent;
+    border: none;
+  }
+  &__wrapp{
+    position: relative;
+  }
+  &__options{
+    background-color: var(--bg-color-inverted);
+    color: var(--primary-color-inverted);
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: absolute;
+    &--top{
+      top: 100%;
+    }
+    &--bottom{
+      bottom: 100%;
+    }
+  }
+  &__option{
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    &--active{
+      background-color: var(--bg-color);
+    }
+  }
+}

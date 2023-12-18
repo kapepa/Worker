@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller, Get,
+  Controller, Delete, Get,
   HttpStatus,
   Param, Patch,
   Post, Query,
@@ -15,15 +15,17 @@ import {FileFieldsInterceptor, NoFilesInterceptor} from "@nestjs/platform-expres
 import {createMulterOptions} from "../file/file.service";
 import {ArticlesBlocks, ArticlesInterface} from "./interfaces/articles.interface";
 import {ArticlesService} from "./articles.service";
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {ReqProps} from "../shared/interfaces/ReqProps";
 import {QueryArticlesFilter} from "../shared/interfaces/QueryArticlesFilter";
+import {RatingInterface} from "../rating/interfaces/rating.interface";
+import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
 
 @ApiTags('articles')
 @Controller('articles')
 export class ArticlesController {
   constructor(
-    private articlesService: ArticlesService
+    private articlesService: ArticlesService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -34,10 +36,10 @@ export class ArticlesController {
   @Post("/create/art")
   createArticles(@Req() req: ReqProps, @UploadedFiles() img: Array<Express.Multer.File>, @Body() body: ArticlesInterface): Observable<ArticlesInterface>{
     const toBody = JSON.parse(JSON.stringify(body));
-    const toImg = JSON.parse(JSON.stringify(img));
+    const toImg = !!img && JSON.parse(JSON.stringify(img));
 
-    if (!!toImg.img?.length) toBody.img = toImg.img[0].filename;
-    return this.articlesService.createArticles(Object.assign({users: req.user}, toBody))
+    if ( toImg.hasOwnProperty("img") && !!toImg.img?.length) toBody.img = toImg.img[0].filename;
+    return this.articlesService.createArticles(Object.assign({users: req.user}, toBody));
   }
 
   @UseGuards(AuthGuard)
@@ -45,20 +47,20 @@ export class ArticlesController {
   @ApiResponse({ status: 201, description: 'Should be create new Block'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
   @Post("/create/block/:id")
-  createBlocks(@Req() req: ReqProps, @Param("id") idArt: string, @UploadedFiles() src: Array<Express.Multer.File>, @Body() body: ArticlesBlocks[]): Observable<ArticlesBlocks | ArticlesBlocks[]>{
+  createBlocks(@Req() req: ReqProps, @Param("id") idArt: string, @UploadedFiles() src: Array<Express.Multer.File>, @Body() body: ArticlesBlocks): Observable<ArticlesBlocks | ArticlesBlocks[]>{
     const toBody = JSON.parse(JSON.stringify(body));
     const toSrc =  JSON.parse(JSON.stringify(src));
     if (toSrc.src && !!toSrc.src.length) toBody.src = toSrc.src[0].filename;
 
-    return this.articlesService.createBlocks(idArt, Object.assign({users: req.user}, toBody));
+    return this.articlesService.createBlocks(idArt, Object.assign(toBody, {users: req.user}));
   }
 
   @UseGuards(AuthGuard)
   @Get("/receive/art/:id")
   @ApiResponse({ status: 200, description: 'Should be receive article on id'})
   @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'Something went wrong.'})
-  getArticles(@Param("id") id: string) {
-    return this.articlesService.findOneArticle({where: {id}, relations: ["blocks", "comments", "users"] })
+  getArticles(@Req() req: ReqProps, @Param("id") id: string): Observable<ArticlesInterface> {
+    return this.articlesService.getArticles(id, req.user);
   }
 
   @UseGuards(AuthGuard)
@@ -91,5 +93,21 @@ export class ArticlesController {
     const toBody = JSON.parse(JSON.stringify(body));
 
     return this.articlesService.updateArticle(toBody)
+  }
+
+  @Get("/rating/:id")
+  @UseGuards(AuthGuard)
+  @ApiResponse({ status: 200, description: 'should be get rating to acrticle'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'there was an error during finds'})
+  getRating(@Req() req: ReqProps, @Param() param: {id: string}): Observable<RatingInterface> {
+    return this.articlesService.getRating(req.user, param.id);
+  }
+
+  @Delete("/delete/:id")
+  @UseGuards(AuthGuard)
+  @ApiResponse({ status: 200, description: 'should be delete article'})
+  @ApiForbiddenResponse({ status: HttpStatus.FORBIDDEN, description: 'there was an error during delete'})
+  deleteArticleID(@Param() param: {id: string}): Observable<DeleteResult> {
+    return this.articlesService.deleteArticleID(param.id);
   }
 }

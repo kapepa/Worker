@@ -1,7 +1,9 @@
-import {ArticlesBlocks, ArticlesTypeKey} from "../interfaces/articles.interface";
+import {ArticlesTypeKey} from "../interfaces/articles.interface";
 import {ApiProperty} from "@nestjs/swagger";
 import {IsNotEmpty} from "class-validator";
 import {BlocksDto} from "./blocks.dto";
+import {RatingInterface} from "../../rating/interfaces/rating.interface";
+import {RatingDto} from "../../rating/dto/rating.dto";
 
 export class ArticlesDto {
   @IsNotEmpty()
@@ -30,4 +32,7 @@ export class ArticlesDto {
   @IsNotEmpty()
   @ApiProperty()
   blocks: BlocksDto[];
+
+  @ApiProperty()
+  rating?: RatingDto[]
 }

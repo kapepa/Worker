@@ -1,0 +1,27 @@
+.drop-down{
+  position: relative;
+  &__view{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  &__items{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    position: absolute;
+    border: 1px solid var(--secondary-color);
+    z-index: 10;
+  }
+  &__item{
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 1px solid var(--secondary-color);
+    text-align: center;
+    &:last-child{
+      border-bottom: none;
+    }
+  }
+}

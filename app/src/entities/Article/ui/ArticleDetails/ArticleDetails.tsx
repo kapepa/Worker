@@ -17,6 +17,7 @@ import {CreateComment, FormComment} from "../../../../features/FormComment";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../../../app/providers/Store/config/store";
 import {ArticlesRecommended} from "../ArticlesRecommended/ArticlesRecommended";
+import {ArticleRating} from "../../../../features/RatingDisplay";
 
 interface ArticleDetailsProps {
   className?: string,
@@ -28,9 +29,8 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
   const dispatch = useDispatch<AppDispatch>();
   const {img, title, subtitle, views, createdAt, blocks} = date;
 
-  const onSend = useCallback(
-    (str: string) => {
-      if(!!CreateComment) dispatch(CreateComment(str));
+  const onSend = useCallback((str: string) => {
+      if(!!str) dispatch(CreateComment(str))
     },
     [dispatch]
   );
@@ -56,15 +56,18 @@ const ArticleDetails: FC<ArticleDetailsProps> = memo(({className, date}) => {
         theme={TextTheme.PRIMARY}
         title={title}
         size={TextSize.XL}
+        className={"article-details__title"}
       />
       <Text
         theme={TextTheme.PRIMARY}
         title={subtitle}
         size={TextSize.L}
+        className={"article-details__subtitle"}
       />
       <ViewEye quantity={views} theme={ColorView.PrimaryDef}/>
       <ViewDate date={createdAt} theme={ColorView.PrimaryDef}/>
       { !!blocks && blocks.map(renderBlocks) }
+      <ArticleRating id={date.id}/>
       <Text
         theme={TextTheme.PRIMARY}
         title={t("recommended")}

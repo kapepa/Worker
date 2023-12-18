@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@floating-ui/dom": "^1.5.3",
+    "@floating-ui/react": "^0.26.1",
+    "@headlessui/react": "^1.7.17",
     "@hookform/error-message": "^2.0.1",
+    "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^1.9.5",
     "@storybook/types": "^7.0.25",
     "@testing-library/jest-dom": "^5.16.5",
@@ -14,12 +18,14 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/react-router-dom": "^5.3.3",
+    "@use-gesture/react": "^10.3.0",
     "axios": "^1.4.0",
     "concurrently": "^8.2.0",
     "i18next": "^23.2.6",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.2.1",
     "react": "^18.2.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-error-overlay": "^6.0.11",
     "react-hook-form": "^7.45.2",
@@ -27,6 +33,7 @@
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.0",
     "react-scripts": "5.0.1",
+    "react-virtualized": "^9.22.5",
     "sass": "^1.63.6",
     "source-map-explorer": "^2.5.3",
     "styled-components": "^6.0.2",
@@ -39,6 +46,7 @@
     "build": "react-scripts build",
     "unit:test": "react-scripts test",
     "unit:coverage": "react-scripts test --coverage",
+    "cypress:open": "cypress open",
     "eject": "react-scripts eject",
     "server": "npm --prefix ../api run start:dev",
     "json:server": "node ./json-server/server.js",
@@ -86,7 +94,9 @@
     "@storybook/react-webpack5": "^7.0.25",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/enzyme": "^3.10.13",
+    "@types/react-virtualized": "^9.21.26",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "cypress": "^13.6.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.12",
     "json-server": "^0.17.3",
@@ -117,5 +127,8 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

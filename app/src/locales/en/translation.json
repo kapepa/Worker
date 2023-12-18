@@ -3,6 +3,7 @@
   "translate-short": "En",
   "error-boundary": "Sorry.. there was an error.",
   "refresh-page": "Refresh the page.",
+  "read-more": "Read more",
   "nav": {
     "home": "Home",
     "about": "About",
@@ -25,5 +26,13 @@
     "Moldova": "Moldova",
     "Bulgaria": "Bulgaria",
     "Hungary": "Hungary"
+  },
+  "drop_down": {
+    "profile": "Profile",
+    "admin": "Admin",
+    "logout": "Logout"
+  },
+  "error": {
+    "avatar-loading": "Error loading"
   }
 }

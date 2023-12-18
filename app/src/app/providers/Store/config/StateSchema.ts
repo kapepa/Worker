@@ -10,6 +10,8 @@ import {ArticlesState, RecommendedState} from "../../../../entities/Article";
 import {ScrollHistoryState} from "../../../../features/ScrollHistory";
 import {FilterArticlesState} from "../../../../features/FilterArticles";
 import {EditorArticleState} from "../../../../features/EditorArticle";
+import {NoticeState} from "../../../../features/Notice";
+import {RtkApi} from "../../../../shared/api/rtk.api";
 
 interface StateSchema {
   counter: CounterState,
@@ -24,6 +26,8 @@ interface StateSchema {
   filterArticles: FilterArticlesState,
   recommendedArticle: RecommendedState,
   editorArticle: EditorArticleState,
+  notice: NoticeState,
+  [RtkApi.reducerPath]: ReturnType<typeof RtkApi.reducer>
 }
 
 interface ThunkExtraArg {

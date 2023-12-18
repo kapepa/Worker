@@ -1,6 +1,7 @@
 import {BlocksCodeInterface, BlocksImageInterface, BlocksTextInterface} from "./blocks.interface";
 import {UsersEntityInterfaces} from "../../users/interfaces/users.interfaces";
 import {CommentsInterfaces} from "../../comments/interfaces/comments.interfaces";
+import {RatingInterface} from "../../rating/interfaces/rating.interface";
 
 export enum ArticlesTypeKey {
   IT = "IT",
@@ -21,4 +22,5 @@ export interface ArticlesInterface {
   users?: UsersEntityInterfaces,
   blocks?: ArticlesBlocks[],
   comments?: CommentsInterfaces[],
+  rating?: RatingInterface[]
 }

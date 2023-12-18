@@ -147,4 +147,58 @@ export const PrimaryDarkRight: TextMode = {
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };
 
+export const TextHeaderH1NORMAL: TextMode = {
+  args: {
+    theme: TextTheme.PRIMARY,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    headerTag: "h1",
+  },
+  decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
+};
+
+export const TextHeaderH1DARK: TextMode = {
+  args: {
+    theme: TextTheme.PRIMARY,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    headerTag: "h1",
+  },
+  decorators: [ThemeDecorator(ThemeEnum.DARK)],
+};
+
+export const TextHeaderH1ORANGE: TextMode = {
+  args: {
+    theme: TextTheme.PRIMARY,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    headerTag: "h1",
+  },
+  decorators: [ThemeDecorator(ThemeEnum.ORANGE)],
+};
+
+export const TextHeaderH3NORMAL: TextMode = {
+  args: {
+    theme: TextTheme.PRIMARY,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    headerTag: "h3",
+  },
+  decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
+};
+
+export const TextHeaderH3DARK: TextMode = {
+  args: {
+    theme: TextTheme.PRIMARY,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    headerTag: "h3",
+  },
+  decorators: [ThemeDecorator(ThemeEnum.DARK)],
+};
+
+export const TextHeaderH3ORANGE: TextMode = {
+  args: {
+    theme: TextTheme.PRIMARY,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    headerTag: "h3",
+  },
+  decorators: [ThemeDecorator(ThemeEnum.ORANGE)],
+};
+
 

@@ -133,6 +133,7 @@ const EditorArticle: FC<EditorArticleProps> = memo((props) => {
             theme={ThemeButtonEnum.OUTLINE}
             type="submit"
             role="submit"
+            className={"editor-article__submit"}
             // disabled={loading}
           >{getBtnText}</Button>
         </form>

@@ -121,25 +121,12 @@ describe('CommentsService', () => {
 
   it("deleteComments resolve", () => {
     const result: DeleteResult = { raw: 1, affected: 204 }
-    const findOne = jest.spyOn(repositoryComments, "findOne").mockResolvedValue(MockComments as CommentsEntity);
     const deleteOne = jest.spyOn(repositoryComments, "delete").mockResolvedValue(result);
 
-    serviceComments.deleteComments({ where: MockComments }).subscribe({
+    serviceComments.deleteComments({id: MockComments.id}).subscribe({
       next: (del: DeleteResult) => {
         expect(del).toEqual(result);
-        expect(findOne).toHaveBeenCalledWith({ where: MockComments });
-        expect(deleteOne).toHaveBeenCalledWith(MockComments.id);
-      }
-    })
-  })
-
-  it("deleteComments reject", () => {
-    const findOne = jest.spyOn(repositoryComments, "findOne").mockResolvedValue(undefined);
-
-    serviceComments.deleteComments({ where: MockComments }).subscribe({
-      error: (err) => {
-        expect(err).toEqual(new HttpException("Comment not found", HttpStatus.NOT_FOUND));
-        expect(findOne).toHaveBeenCalledWith({ where: MockComments });
+        expect(deleteOne).toHaveBeenCalledWith({id: MockComments.id});
       }
     })
   })

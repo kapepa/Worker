@@ -13,23 +13,31 @@ import {UsersTypes} from "../../../Users";
 
 const meta: Meta<typeof ArticleDetails> = {
   component: ArticleDetails,
-  decorators: [RouterDecorator, StoreDecorator({
-    users: {
-      profile: {id: "profileID"} as UsersTypes,
-    },
-    formComment: {
-      text: undefined,
-      error: undefined,
-      loading: false
-    },
-    comments: {
-      data: [{...CommentsMock, users: UsersMock }],
-      loading: false,
-      error: undefined,
-      ids: [CommentsMock.id],
-      entities: { [CommentsMock.id]: {...CommentsMock, users: UsersMock } }
-    } as CommentsState
-  })]
+  decorators: [
+    StoreDecorator({
+      users: {
+        profile: {id: "profileID"} as UsersTypes,
+      },
+      formComment: {
+        text: undefined,
+        error: undefined,
+        loading: false
+      },
+      details: {
+        loading: false,
+        error: undefined,
+        data: ArticleMock.article as ArticleType,
+      },
+      comments: {
+        data: [{...CommentsMock, users: UsersMock }],
+        loading: false,
+        error: undefined,
+        ids: [CommentsMock.id],
+        entities: { [CommentsMock.id]: {...CommentsMock, users: UsersMock } }
+      } as CommentsState
+    }),
+    RouterDecorator,
+  ]
 };
 
 export default meta;
@@ -37,21 +45,21 @@ type Story = StoryObj<typeof ArticleDetails>;
 
 export const ArticleDetailsNORMAL: Story = {
   args: {
-    date: {...ArticleMock.article, blocks: [ArticleMock.text, ArticleMock.code, ArticleMock.image]} as ArticleType,
+    date: {...ArticleMock.article, id: undefined, blocks: [ArticleMock.text, ArticleMock.code, ArticleMock.image]} as ArticleType,
   },
   decorators: [ThemeDecorator(ThemeEnum.NORMAL)],
 };
 
 export const ArticleDetailsDARK: Story = {
   args: {
-    date: {...ArticleMock.article, blocks: [ArticleMock.text, ArticleMock.code, ArticleMock.image]} as ArticleType,
+    date: {...ArticleMock.article, id: undefined, blocks: [ArticleMock.text, ArticleMock.code, ArticleMock.image]} as ArticleType,
   },
   decorators: [ThemeDecorator(ThemeEnum.DARK)],
 };
 
 export const ArticleDetailsORANGE: Story = {
   args: {
-    date: {...ArticleMock.article, blocks: [ArticleMock.text, ArticleMock.code, ArticleMock.image]} as ArticleType,
+    date: {...ArticleMock.article, id: undefined, blocks: [ArticleMock.text, ArticleMock.code, ArticleMock.image]} as ArticleType,
   },
   decorators: [ThemeDecorator(ThemeEnum.ORANGE)],
 };

@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, InputHTMLAttributes, memo, useCallback, useEffect, useMemo} from "react";
+import {ChangeEvent, FC, InputHTMLAttributes, memo, useCallback, useEffect} from "react";
 import "./InputDynamic.scss";
 import {ClassNames} from "../../../shared/lib/ClassNames";
 import {useController, useFormContext} from "react-hook-form";
@@ -21,16 +21,12 @@ interface InputDynamicProps extends InputHTMLAttributes<HTMLInputElement>{
 
 const InputDynamic: FC<InputDynamicProps> = memo((props) => {
   const { className, classLabel, classInput, classAlert, themeInput, colorLabel, label, validation, name, defaultValue, ...otherProps } = props;
-  const { control, clearErrors } = useFormContext();
-  const { field: {ref, onChange, value, ...otherField}, fieldState } = useController({name, control, rules: validation})
+  const { control, clearErrors} = useFormContext();
+  const { field: {ref, onChange, value, ...otherField}, fieldState: {error} } = useController({name, control, rules: validation})
 
   useEffect(() => {
     clearErrors(name)
   },[defaultValue, name, clearErrors])
-
-  const translateError = useMemo(() => {
-    return fieldState.error;
-  }, [fieldState.error]);
 
   const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     onChange(e)
@@ -55,9 +51,9 @@ const InputDynamic: FC<InputDynamicProps> = memo((props) => {
           onChange={onChangeInput}
           defaultValue={value}
         />
-        { !!translateError &&
+        { !!error?.message &&
           <span className={ClassNames("input-dynamic__alert", classAlert)} data-testid="alert">
-            {translateError.message}
+            {error?.message}
           </span>
         }
       </div>

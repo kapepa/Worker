@@ -20,6 +20,7 @@ import {GetRecommendedEntities} from "./selectors/GetRecommendedEntities/GetReco
 import {GetRecommendedIds} from "./selectors/GetRecommendedIds/GetRecommendedIds";
 import {FetchRecommended} from "./service/FetchRecommended/FetchRecommended";
 import {GetRecommendedLoading} from "./selectors/GetRecommendedLoading/GetRecommendedLoading";
+import {ArticleVirtualized} from "./ui/ArticleVirtualized/ArticleVirtualized";
 
 export {
   ArticleDetails,
@@ -29,6 +30,7 @@ export {
   ArticlesItem,
   ArticlesRecommended,
   RecommendedActions,
+  ArticleVirtualized,
   FetchArticleById,
   FetchRecommended,
   DetailsReducers,

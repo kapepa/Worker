@@ -1,0 +1,12 @@
+{
+  "title": "Are you sure you want to leave a rating?",
+  "placeholder": "You can leave your message!",
+  "cancel": "Cancel",
+  "send": "Send",
+  "header": {
+    "article": "Your rating of the article"
+  },
+  "error": {
+    "article": "It was an invalid request"
+  }
+}

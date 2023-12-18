@@ -3,6 +3,9 @@ import {UsersEntityInterfaces} from "../interfaces/users.interfaces";
 import {ArticlesEntity} from "../../articles/entities/articles.entity";
 import {BlocksEntity} from "../../articles/entities/blocks.entity";
 import {CommentsEntity} from "../../comments/entities/comments.entity";
+import {Role} from "../enum/role.enum";
+import {NoticeEntity} from "../../notice/entities/notice.entity";
+import {RatingEntity} from "../../rating/entities/rating.entity";
 
 @Entity()
 export class UsersEntity implements UsersEntityInterfaces {
@@ -33,6 +36,9 @@ export class UsersEntity implements UsersEntityInterfaces {
   @Column({ default: "" })
   city: string;
 
+  @Column({ type: 'enum', enum: Role, array: true, default: [Role.USER] })
+  roles?: Role[];
+
   @OneToMany(type => ArticlesEntity, (articles) => articles.users)
   articles: ArticlesEntity[];
 
@@ -40,7 +46,16 @@ export class UsersEntity implements UsersEntityInterfaces {
   blocks: BlocksEntity[];
 
   @OneToMany(() => CommentsEntity, (comments) => comments.users)
-  comments: CommentsEntity[]
+  comments: CommentsEntity[];
+
+  @OneToMany(() => NoticeEntity, (notice) => notice.users)
+  notice: NoticeEntity[];
+
+  @OneToMany(() => RatingEntity, (rating) => rating.users)
+  rating: RatingEntity[];
+
+  @OneToMany(() => RatingEntity, (rating) => rating.profile)
+  ratingProfile: RatingEntity[];
 
   @Column({ default: false , select: false})
   isActive: boolean;

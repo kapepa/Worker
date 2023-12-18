@@ -17,6 +17,8 @@ import {FormCommentReducer} from "../../../../features/FormComment";
 import {ScrollReducer} from "../../../../features/ScrollHistory";
 import {filterArticlesReducer} from "../../../../features/FilterArticles";
 import {EditorArticleReducer} from "../../../../features/EditorArticle";
+import {NoticeReducer} from "../../../../features/Notice";
+import {RtkApi} from "../../../../shared/api/rtk.api";
 
 // const store = configureStore<StateSchema>({
 //   reducer: {
@@ -49,6 +51,8 @@ const storeReducers = combineReducers<StateSchema>({
   filterArticles: filterArticlesReducer,
   recommendedArticle: RecommendedReducer,
   editorArticle: EditorArticleReducer,
+  notice: NoticeReducer,
+  [RtkApi.reducerPath]: RtkApi.reducer,
 });
 
 function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunction) {
@@ -61,13 +65,13 @@ function CreateReduxStore (preloadedState?: StateSchema, navigate?: NavigateFunc
         extraArgument: { navigate, toForm: ToForm },
       },
       serializableCheck: false
-    })
+    }).concat(RtkApi.middleware),
   });
 }
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export type AppState = ReturnType<typeof storeReducers>;
 export type AppDispatch = ReturnType<typeof CreateReduxStore>["dispatch"];
-export {CreateReduxStore};
+export {CreateReduxStore, storeReducers};
 
 

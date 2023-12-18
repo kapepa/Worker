@@ -9,7 +9,7 @@ interface AvatarProps {
   classImage?: string,
   size: number,
   src: string | undefined | File,
-  alt: string,
+  alt: string | undefined,
   symbol: string | undefined,
 }
 

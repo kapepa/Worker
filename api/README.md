@@ -43,6 +43,23 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# concurrently api and app
+$ npm run dev
+```
+
+## Running the client
+
+```bash
+# client start
+$ npm run app:start
+```
+
+## Build the api
+
+```bash
+# build an app
+$ npm run build
 ```
 
 ## Test
@@ -56,6 +73,9 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+
+# test lint
+$ npm run lint
 ```
 
 ## Support

@@ -1,0 +1,4 @@
+.article-text__title{padding-bottom:16px}.article-text__paragraphs{padding-bottom:8px}
+.text__title{font:var(--font-l)}.text__title--primary{color:var(--primary-color)}.text__title--inverted{color:var(--primary-color-inverted)}.text__title--error{color:var(--red-light)}.text__p{font:var(--font-m)}.text__p--primary{color:var(--secondary-color)}.text__p--inverted{color:var(--secondary-color-inverted)}.text__p--error{color:var(--red-dark)}.text--right{text-align:right}.text--center{text-align:center}.text--left{text-align:left}.text--size-s{font:var(--font-s)}.text--size-m{font:var(--font-m)}.text--size-l{font:var(--font-l)}.text--size-xl{font:var(--font-xl)}
+
+/*# sourceMappingURL=entities-Article-ui-ArticleBlockTextComponent-ArticleBlockTextComponent-stories.86748e34.chunk.css.map*/
