@@ -2,8 +2,9 @@ import {profileMock} from "../../support/user";
 
 describe("intercept", () => {
 
-  before(() => {
-    cy.loginByAuthApi({ email: profileMock.email, password: profileMock.password })
+  beforeEach(() => {
+    window.localStorage.setItem("token", "SomeToken");
+    cy.intercept('GET', `/api/users/profile`, {fixture: "user.json"})
   })
 
   it("article", () => {

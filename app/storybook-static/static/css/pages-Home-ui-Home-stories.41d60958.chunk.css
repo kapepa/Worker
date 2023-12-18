@@ -1,4 +1,5 @@
 .home__sidebar{flex:1 1 auto}.home__main{flex:1 1 auto}
 .list-box{position:relative}.list-box__btn{background-color:rgba(0,0,0,0);border:none}.list-box__wrapp{position:relative}.list-box__options{background-color:var(--bg-color-inverted);color:var(--primary-color-inverted);border-radius:10px;margin:10px 0;overflow:hidden;position:absolute}.list-box__options--top{top:100%}.list-box__options--bottom{bottom:100%}.list-box__option{padding:10px 20px;cursor:pointer;white-space:nowrap}.list-box__option--active{background-color:var(--bg-color)}
+.pre-loader-avatar{max-width:100px}.pre-loader-avatar__circle{width:100px;height:100px}
 
-/*# sourceMappingURL=pages-Home-ui-Home-stories.98e15187.chunk.css.map*/
+/*# sourceMappingURL=pages-Home-ui-Home-stories.41d60958.chunk.css.map*/

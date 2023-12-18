@@ -55,7 +55,7 @@ export class UsersController {
     if(!!avatar?.[0]) toBody.avatar = avatar![0].filename
     return this.usersService.updateUser(req.user.id, toBody).pipe(
       catchError((err) => {
-        if( !toBody.avatar && !!avatar ) this.fileService.removeFile(toBody.avatar).subscribe();
+        if( !!avatar ) this.fileService.removeFile(toBody.avatar).subscribe();
         return err;
       })
     );

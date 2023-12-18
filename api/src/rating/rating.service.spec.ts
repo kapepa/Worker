@@ -15,6 +15,7 @@ import {FindOptionsWhere} from "typeorm/find-options/FindOptionsWhere";
 import {DeleteResult} from "typeorm/query-builder/result/DeleteResult";
 import {of} from "rxjs";
 import {NotFoundException} from "@nestjs/common";
+import {CommentsService} from "../comments/comments.service";
 describe('RatingService', () => {
   let service: RatingService;
   let usersService: UsersService;
@@ -31,6 +32,10 @@ describe('RatingService', () => {
           useValue : {
             findOne: jest.fn(),
           },
+        },
+        {
+          provide: CommentsService,
+          useValue: {}
         },
         {
           provide: ArticlesService,
